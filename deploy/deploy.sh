@@ -7,10 +7,12 @@ cd "$(dirname "$0")/.."
 HOST=fc@85.31.233.192
 SSH="ssh -i $HOME/.ssh/fungalcharacters_deploy -o BatchMode=yes"
 COMPOSE="docker compose -f docker-compose.prod.yml"
-rsync -az --delete --chmod=D755,F644 -e "$SSH" \
+# macOS's rsync (openrsync) has no --chmod; standard permissions are set on the server after copying.
+rsync -az --delete -e "$SSH" \
   --exclude .git --exclude .env --exclude node_modules --exclude __pycache__ --exclude staticfiles \
   ./ $HOST:/home/fc/app/
-$SSH $HOST "chmod +x /home/fc/app/deploy/*.sh"
+$SSH $HOST 'cd /home/fc/app && find . -path ./.env -prune -o -type d -exec chmod 755 {} + -o -type f -exec chmod 644 {} + && chmod +x deploy/*.sh && chmod 600 .env'
+
 if [ "${1:-}" = "--restore" ]; then
   DUMP="$2"
   $SSH $HOST "cd /home/fc/app && $COMPOSE up -d db && sleep 5"
