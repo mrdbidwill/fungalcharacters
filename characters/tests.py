@@ -179,3 +179,43 @@ class EditingRulesTests(TestCase):
         self.login(self.alice)
         for name in ["list", "value_type_list", "source_list", "recent_changes", "create", "value_type_create", "source_create"]:
             self.assertEqual(self.client.get(reverse(f"characters:{name}")).status_code, 200, name)
+
+
+class SitePagesTests(TestCase):
+    def test_home_explains_site_and_links(self):
+        r = self.client.get("/")
+        self.assertContains(r, "publicly maintained")
+        self.assertContains(r, "747 characters")
+        self.assertContains(r, "Where people disagree")
+        self.assertContains(r, "No advice about consumption")
+        self.assertContains(r, 'href="/characters/"')
+
+    def test_characters_list_moved_and_menu_marks_current_page(self):
+        r = self.client.get("/characters/")
+        self.assertContains(r, "Showing 747 of 747 characters")
+        self.assertContains(r, '<a href="/characters/" aria-current="page">Characters</a>', html=True)
+
+    def test_thanks_page(self):
+        r = self.client.get("/thanks/")
+        self.assertContains(r, "<h1>Thanks!</h1>", html=True)
+        self.assertContains(r, "Gastón Guzmán (1932–2016)")
+
+    def test_downloads_list_and_serve_release_files(self):
+        r = self.client.get("/downloads/")
+        self.assertContains(r, "Release 1.0.0")
+        self.assertContains(r, "fungal_characters_v1.0.0.xlsx")
+        self.assertContains(r, "csv/characters_flat.csv")
+        f = self.client.get("/downloads/1.0.0/csv/characters_flat.csv")
+        self.assertEqual(f.status_code, 200)
+        self.assertIn("attachment", f["Content-Disposition"])
+        self.assertIn(b"FCC00019", b"".join(f.streaming_content))
+
+    def test_downloads_reject_other_paths(self):
+        for bad in ["/downloads/1.0.0/../../../config/settings.py", "/downloads/1.0.0/nothing.txt", "/downloads/9.9.9/README.md"]:
+            self.assertEqual(self.client.get(bad).status_code, 404, bad)
+
+    def test_theme_assets_linked(self):
+        r = self.client.get("/")
+        for asset in ["site.css", "favicon.ico", "favicon.svg", "apple-touch-icon.png"]:
+            self.assertContains(r, asset)
+        self.assertContains(r, 'class="skip" href="#main"')

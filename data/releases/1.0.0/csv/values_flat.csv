@@ -1,0 +1,591 @@
+﻿value_code,character_code,character,value,definition
+FCV00001,FCC00002,Synonyms,Epigeous,above-ground 
+FCV00002,FCC00002,Synonyms,Hypogeous,underground
+FCV00003,FCC00002,Synonyms,Mushroom,fruiting body of a fungus
+FCV00004,FCC00002,Synonyms,Basidiocarp,fruiting body
+FCV00005,FCC00002,Synonyms,Thallus,soma
+FCV00006,FCC00002,Synonyms,Sporocarp,fruiting body
+FCV00007,FCC00002,Synonyms,Cap,cap
+FCV00008,FCC00002,Synonyms,Stem,Stalk
+FCV00009,FCC00002,Synonyms,Gills,Gills
+FCV00010,FCC00002,Synonyms,Volva,cup
+FCV00011,FCC00002,Synonyms,Annulus,ring
+FCV00012,FCC00002,Synonyms,Cone,conical
+FCV00013,FCC00002,Synonyms,Conic,conical
+FCV00014,FCC00002,Synonyms,Disc,center
+FCV00015,FCC00002,Synonyms,Margin,edge
+FCV00016,FCC00002,Synonyms,Ring,annulus
+FCV00017,FCC00002,Synonyms,Convex,evenly rounded
+FCV00018,FCC00002,Synonyms,Ovoid,egg
+FCV00019,FCC00002,Synonyms,Campanulate,bell-shaped
+FCV00020,FCC00002,Synonyms,Parabolic,half-egg
+FCV00021,FCC00002,Synonyms,Pulvinate,cushion
+FCV00022,FCC00002,Synonyms,Cylindric,bullet
+FCV00023,FCC00002,Synonyms,Plane,flat
+FCV00024,FCC00009,Specimen Storage Location,Observation Only - No specimen collected,
+FCV00025,FCC00009,Specimen Storage Location,Specimen Collector,"This is you, if you collected this specimen"
+FCV00026,FCC00009,Specimen Storage Location,Herbarium,
+FCV00027,FCC00012,Abundance,None,
+FCV00028,FCC00012,Abundance,Low,
+FCV00029,FCC00012,Abundance,Moderate,
+FCV00030,FCC00012,Abundance,High,
+FCV00031,FCC00013,Mushroom Age,Button,very young
+FCV00032,FCC00013,Mushroom Age,Young,
+FCV00033,FCC00013,Mushroom Age,Mature,
+FCV00034,FCC00013,Mushroom Age,Past Prime,
+FCV00035,FCC00014,Toxic,Not Toxic,
+FCV00036,FCC00014,Toxic,Toxic,
+FCV00037,FCC00015,Growth Pattern,Gregarious,growing in a group
+FCV00038,FCC00015,Growth Pattern,Solitary,
+FCV00039,FCC00015,Growth Pattern,Caespitose,"clustered, not joined"
+FCV00040,FCC00015,Growth Pattern,Connate,fused at base
+FCV00041,FCC00015,Growth Pattern,Imbricate,overlapping
+FCV00042,FCC00015,Growth Pattern,Troops,
+FCV00043,FCC00015,Growth Pattern,Rings,
+FCV00044,FCC00015,Growth Pattern,Other,
+FCV00045,FCC00015,Growth Pattern,"Single, solitary",
+FCV00046,FCC00015,Growth Pattern,Scattered (1-2 feet apart),
+FCV00047,FCC00015,Growth Pattern,In troops or rings,
+FCV00048,FCC00016,Cap Shape,Convex,evenly rounded
+FCV00049,FCC00016,Cap Shape,Hemispherical,From XDE
+FCV00050,FCC00016,Cap Shape,Spherical,
+FCV00051,FCC00016,Cap Shape,Ovoid,egg
+FCV00052,FCC00016,Cap Shape,Conical,
+FCV00053,FCC00016,Cap Shape,Cylindric,bullet
+FCV00054,FCC00016,Cap Shape,Flat,
+FCV00055,FCC00016,Cap Shape,Depressed,Saucer-shaped; The center is lower than the cap margin.
+FCV00056,FCC00016,Cap Shape,Funnel-Shaped,
+FCV00057,FCC00016,Cap Shape,Campanulate,bell-shaped.
+FCV00058,FCC00016,Cap Shape,Cuspidate,Umbonate with a pointy conical apex; Witch-hat shaped. also known as eye-tooth.
+FCV00059,FCC00016,Cap Shape,Umbonate,w/bump
+FCV00060,FCC00016,Cap Shape,Papillate,w/nipple
+FCV00061,FCC00016,Cap Shape,Umbilicate,a navel-like depression in the center.
+FCV00062,FCC00016,Cap Shape,Uplifted,From XDE
+FCV00063,FCC00016,Cap Shape,Parabolic,half-egg
+FCV00064,FCC00016,Cap Shape,Pulvinate,cushion
+FCV00065,FCC00016,Cap Shape,Plane,flat
+FCV00066,FCC00016,Cap Shape,Infundibuliform,funnel-shaped
+FCV00067,FCC00016,Cap Shape,Other,
+FCV00068,FCC00016,Cap Shape,Conic,cone
+FCV00069,FCC00016,Cap Shape,Conchate,sea-shell
+FCV00070,FCC00017,Cap Shape Top View,Petaloid,petal
+FCV00071,FCC00017,Cap Shape Top View,Spathulate,spatula
+FCV00072,FCC00017,Cap Shape Top View,Dimidiate,1/2 circle
+FCV00073,FCC00017,Cap Shape Top View,Flabelliform,fan-shaped
+FCV00074,FCC00031,Cap Surface Wetness,Dry,
+FCV00075,FCC00031,Cap Surface Wetness,Moist,
+FCV00076,FCC00031,Cap Surface Wetness,Glutinous,slimy
+FCV00077,FCC00031,Cap Surface Wetness,Gelatinous,
+FCV00078,FCC00031,Cap Surface Wetness,Viscid,
+FCV00079,FCC00031,Cap Surface Wetness,Subviscid,
+FCV00080,FCC00031,Cap Surface Wetness,Other,
+FCV00081,FCC00031,Cap Surface Wetness,Lubricous (greasy),
+FCV00082,FCC00034,Cap Center Indentation,None,
+FCV00083,FCC00034,Cap Center Indentation,Indented,
+FCV00084,FCC00034,Cap Center Indentation,Nearly perforated,
+FCV00085,FCC00034,Cap Center Indentation,Perforated,
+FCV00086,FCC00036,Cap Central Disc Tone,Darker,
+FCV00087,FCC00036,Cap Central Disc Tone,Lighter,
+FCV00088,FCC00040,Cap Surface Texture,Downy-Wooly,
+FCV00089,FCC00040,Cap Surface Texture,Matted-Fibrillose,
+FCV00090,FCC00040,Cap Surface Texture,Furfuraceous,A surface covered in flaky bran-like particles; dandruff-like.
+FCV00091,FCC00040,Cap Surface Texture,Granulose,A surface covered in salt-like granulates.
+FCV00092,FCC00040,Cap Surface Texture,Pruinose,A surface covered with a white powdery frostlike substance.
+FCV00093,FCC00040,Cap Surface Texture,Squamose,A surface covered with scales.
+FCV00094,FCC00040,Cap Surface Texture,Squamulose,
+FCV00095,FCC00040,Cap Surface Texture,Scaly,
+FCV00096,FCC00040,Cap Surface Texture,Hairy,
+FCV00097,FCC00040,Cap Surface Texture,Shaggy,
+FCV00098,FCC00040,Cap Surface Texture,Bristled/Bristly,
+FCV00099,FCC00040,Cap Surface Texture,Strigose,
+FCV00100,FCC00040,Cap Surface Texture,Warted,
+FCV00101,FCC00040,Cap Surface Texture,Appressed,
+FCV00102,FCC00040,Cap Surface Texture,Appressed-Fibrillose,
+FCV00103,FCC00040,Cap Surface Texture,Tomentose,
+FCV00104,FCC00040,Cap Surface Texture,Virgate,A streaked surface.
+FCV00105,FCC00040,Cap Surface Texture,Scrobiculate,A pitted or furrowed surface.
+FCV00106,FCC00040,Cap Surface Texture,Alveolate,
+FCV00107,FCC00040,Cap Surface Texture,Lacunose,
+FCV00108,FCC00040,Cap Surface Texture,Lacinate,
+FCV00109,FCC00040,Cap Surface Texture,Areolate,A cracked surface resembling dried-mud or paint.
+FCV00110,FCC00040,Cap Surface Texture,Atomate,
+FCV00111,FCC00040,Cap Surface Texture,Micaceous,
+FCV00112,FCC00040,Cap Surface Texture,Superficial,
+FCV00113,FCC00040,Cap Surface Texture,Innate,
+FCV00114,FCC00040,Cap Surface Texture,Venose,
+FCV00115,FCC00040,Cap Surface Texture,Other,
+FCV00116,FCC00040,Cap Surface Texture,Smooth,No defining features found on the surface.
+FCV00117,FCC00040,Cap Surface Texture,Uneven,A bumpy surface.
+FCV00118,FCC00040,Cap Surface Texture,Rugose,A wrinkled or rough surface.
+FCV00119,FCC00040,Cap Surface Texture,Rugulose,A slightly wrinkled surface.
+FCV00120,FCC00040,Cap Surface Texture,Rivulose,A thinly wrinkled surface of branching wavy or crooked lines.
+FCV00121,FCC00040,Cap Surface Texture,Warty,Remnants of the universal veil remain on the surface in small patches.
+FCV00122,FCC00040,Cap Surface Texture,Hygrophanous,A surface that is transparent when wet and opaque when dry.
+FCV00123,FCC00040,Cap Surface Texture,Sericeous,A silky surface.
+FCV00124,FCC00040,Cap Surface Texture,Fibrillose,A surface covered in thread-like filaments.
+FCV00125,FCC00040,Cap Surface Texture,Squarrose,A ragged surface covered with small scales.
+FCV00126,FCC00040,Cap Surface Texture,Pulverulent,A surface covered with fine dust or powder.
+FCV00127,FCC00040,Cap Surface Texture,Zonate,A surface containing zones or bands that are distinguished by texture or color.
+FCV00128,FCC00040,Cap Surface Texture,Rimose,A surface covered in cracks and crevices.
+FCV00129,FCC00040,Cap Surface Texture,Laccate,A waxy or lacquered surface texture.
+FCV00130,FCC00040,Cap Surface Texture,Viscid,A sticky glue-like surface texture.
+FCV00131,FCC00040,Cap Surface Texture,Glutinous,A slimy surface.
+FCV00132,FCC00040,Cap Surface Texture,Glabrous - Hairy,Hairy - a bald surface.
+FCV00133,FCC00040,Cap Surface Texture,Velvety - Hairy,Hairy - A surface covered with very fine and soft hairs.
+FCV00134,FCC00040,Cap Surface Texture,Pubescent - Hairy,Hairy - A surface cover with fuzz or fine hairs.
+FCV00135,FCC00040,Cap Surface Texture,Canescent - Hairy,Hairy - A surface covered in dense white or gray down-like hairs. Giving a frosted appearance.
+FCV00136,FCC00040,Cap Surface Texture,Floccose - Hairy,Hairy - A surface covered in Wooly or cotton-like hairs.
+FCV00137,FCC00040,Cap Surface Texture,Tomentose - Hairy,Hairy - A surface covered densely with matted hairs.
+FCV00138,FCC00040,Cap Surface Texture,Hispid - Hairy,Hairy - A surface covered with straight bristle-like hairs.
+FCV00139,FCC00040,Cap Surface Texture,Hirsute - Hairy,Hairy - A surface covered with slightly stiff and shaggy hairs.
+FCV00140,FCC00040,Cap Surface Texture,Villose - Hairy,Hairy - A surface covered with long soft hairs.
+FCV00141,FCC00040,Cap Surface Texture,Strigose - Hairy,Hairy - A surface covered with long bristle-like hairs.
+FCV00142,FCC00041,Cap Margin Shape,Straight,The margins remain uniform and do not curve.
+FCV00143,FCC00041,Cap Margin Shape,Decurved,The margins curve slightly downwards.
+FCV00144,FCC00041,Cap Margin Shape,Incurved,The margins curve down and inwards.
+FCV00145,FCC00041,Cap Margin Shape,Involute,The margins curve downwards and roll inwards. Also known as inrolled.
+FCV00146,FCC00041,Cap Margin Shape,Arched,The margins curve upwards between the edge and stem.
+FCV00147,FCC00041,Cap Margin Shape,Uplifted,The margins curve upwards. Also known as elevated.
+FCV00148,FCC00041,Cap Margin Shape,Revolute,The margins curve inwards and also rolled back..
+FCV00149,FCC00041,Cap Margin Shape,Exceeding,The margins extend past the gills.
+FCV00150,FCC00042,Cap Margin Form,Straight,
+FCV00151,FCC00042,Cap Margin Form,Undulating,Also called: Wavy
+FCV00152,FCC00042,Cap Margin Form,Appendiculate,Remnants of a partial veil hang from the edge of the cap.
+FCV00153,FCC00042,Cap Margin Form,Incurved,Also called: Encurved
+FCV00154,FCC00042,Cap Margin Form,Decurved,
+FCV00155,FCC00042,Cap Margin Form,Involute,Also called: Inrolled
+FCV00156,FCC00042,Cap Margin Form,Ciliate,Also called: Fringed
+FCV00157,FCC00042,Cap Margin Form,Arched,
+FCV00158,FCC00042,Cap Margin Form,Uplifted,
+FCV00159,FCC00042,Cap Margin Form,Revolute,Also called: Rolled Back
+FCV00160,FCC00042,Cap Margin Form,Split,The edges of the cap are split apart or full of large crevices. Also referred to as cracked or rimose.
+FCV00161,FCC00042,Cap Margin Form,Exceeding Gills,
+FCV00162,FCC00042,Cap Margin Form,Serrate,
+FCV00163,FCC00042,Cap Margin Form,Other,
+FCV00164,FCC00042,Cap Margin Form,Entire,"There is a smooth transition from the top of the cap to its underside. No irregular attributes should be present on the edges. Also referred to as Smooth, Even, Seamless, Flush, or Regular."
+FCV00165,FCC00042,Cap Margin Form,Striate,"Fine and narrow stripes run parallel on the cap margins. The lines will often coincide with the gills underneath the cap. In some cases, the lines are only visible when the cap is wet. Also referred to as striped, furrowed, streaked, ribbed, lined,"
+FCV00166,FCC00042,Cap Margin Form,Sulcate,Narrow parallel grooves that line the margins of the cap. Sulcate margins are more defined than striate but less ridged than plicated. Also referred to as plicate-striate.
+FCV00167,FCC00042,Cap Margin Form,Plicate,Parallel pleated margins. They are best described as fan-like or umbrella-like as if the surface of the cap were folded. Plicate margins are more defined and ridged than Striate or Sulcate. Also referred to as pleated or ridged.
+FCV00168,FCC00042,Cap Margin Form,Eroded,"Deteriorated, gnawed, or eaten away. The disfigured margins are usually found in older specimens and are the result of insects or deliquescence (common with Ink Caps). Also referred to as gnawed or ragged."
+FCV00169,FCC00042,Cap Margin Form,Lacerate,"Many tears mark the edge of the cap. Similar to split margins, however, the cuts are smaller and more frequent. Also referred to as torn."
+FCV00170,FCC00042,Cap Margin Form,Undulating - Hairy,Hairy - The edges of the cap form a wave-like pattern as they rise and fall. Also referred to as wavy irregular or festoony.
+FCV00171,FCC00042,Cap Margin Form,Crenate - Hairy,Hairy - Semi-circle notches or round-toothed edges that are more blunted than serrate margins. Also referred to as scalloped.
+FCV00172,FCC00042,Cap Margin Form,Serrate - Hairy,Hairy - The edges of the cap appear jagged and saw-toothed. More pronounced than crenate margins.
+FCV00173,FCC00044,Cap Margin Cleft Fold Width,Tight,
+FCV00174,FCC00044,Cap Margin Cleft Fold Width,Broadly opened,
+FCV00175,FCC00061,Cap Flesh Texture,Soft,
+FCV00176,FCC00061,Cap Flesh Texture,Spongy,
+FCV00177,FCC00061,Cap Flesh Texture,Firm,
+FCV00178,FCC00061,Cap Flesh Texture,Compact,
+FCV00179,FCC00061,Cap Flesh Texture,Rigid,
+FCV00180,FCC00061,Cap Flesh Texture,Brittle,
+FCV00181,FCC00061,Cap Flesh Texture,Corky,
+FCV00182,FCC00061,Cap Flesh Texture,Other,
+FCV00183,FCC00078,Gill Spacing,Close,
+FCV00184,FCC00078,Gill Spacing,Crowded,
+FCV00185,FCC00078,Gill Spacing,Distant,
+FCV00186,FCC00078,Gill Spacing,Sub-Distant,
+FCV00187,FCC00078,Gill Spacing,Other,
+FCV00188,FCC00079,Gill Thickness,Average,
+FCV00189,FCC00079,Gill Thickness,Thick,
+FCV00190,FCC00079,Gill Thickness,Tapering,
+FCV00191,FCC00079,Gill Thickness,Other,
+FCV00192,FCC00080,Gill Breadth,Narrow,
+FCV00193,FCC00080,Gill Breadth,Broad,
+FCV00194,FCC00080,Gill Breadth,Ventricose,
+FCV00195,FCC00080,Gill Breadth,Other,
+FCV00196,FCC00082,Gill Attachment,Adnate,
+FCV00197,FCC00082,Gill Attachment,Adnexed,almost free
+FCV00198,FCC00082,Gill Attachment,Sinuate,
+FCV00199,FCC00082,Gill Attachment,Decurrent,
+FCV00200,FCC00082,Gill Attachment,Collared,Gills are attached to a collar or ring that encircles the stem.
+FCV00201,FCC00082,Gill Attachment,Free,
+FCV00202,FCC00082,Gill Attachment,Other,
+FCV00203,FCC00082,Gill Attachment,Free - remote,
+FCV00204,FCC00082,Gill Attachment,Free - close,
+FCV00205,FCC00082,Gill Attachment,Adnate - horizontal,
+FCV00206,FCC00082,Gill Attachment,Adnate - ascending,
+FCV00207,FCC00082,Gill Attachment,Emarginate (notched),
+FCV00208,FCC00082,Gill Attachment,Decurrent - long,
+FCV00209,FCC00082,Gill Attachment,Decurrent - short,
+FCV00210,FCC00082,Gill Attachment,Seceding (breaking away),
+FCV00211,FCC00082,Gill Attachment,Uncinate (w/decurrent tooth),
+FCV00212,FCC00084,Spore Print Deposit Heaviness,Light,
+FCV00213,FCC00084,Spore Print Deposit Heaviness,Moderate,
+FCV00214,FCC00084,Spore Print Deposit Heaviness,Heavy,
+FCV00215,FCC00091,Short Gill Arrangement,Random,
+FCV00216,FCC00091,Short Gill Arrangement,In tiers,
+FCV00217,FCC00091,Short Gill Arrangement,Other,
+FCV00218,FCC00097,Gill Edge Texture,Serrated,
+FCV00219,FCC00097,Gill Edge Texture,Eroded,"""gnawed"""
+FCV00220,FCC00097,Gill Edge Texture,Sinuate,
+FCV00221,FCC00097,Gill Edge Texture,Wrinkled,
+FCV00222,FCC00097,Gill Edge Texture,Other,
+FCV00223,FCC00097,Gill Edge Texture,Even - entire,
+FCV00224,FCC00097,Gill Edge Texture,Serrate,
+FCV00225,FCC00097,Gill Edge Texture,Serrulate,
+FCV00226,FCC00097,Gill Edge Texture,Fimbriate (fringed),
+FCV00227,FCC00097,Gill Edge Texture,Marginate (diff. color),
+FCV00228,FCC00097,Gill Edge Texture,Crenate (scalloped),
+FCV00229,FCC00097,Gill Edge Texture,Acute,
+FCV00230,FCC00097,Gill Edge Texture,Obtuse (blunt),
+FCV00231,FCC00097,Gill Edge Texture,Crisped (crinkled),
+FCV00232,FCC00101,Gill Edge Pigmented (Not Cystidia),None,
+FCV00233,FCC00101,Gill Edge Pigmented (Not Cystidia),Partially,
+FCV00234,FCC00101,Gill Edge Pigmented (Not Cystidia),Completely,
+FCV00235,FCC00110,Annulus or Annular Zone,Annulus,
+FCV00236,FCC00110,Annulus or Annular Zone,Annular zone,
+FCV00237,FCC00110,Annulus or Annular Zone,Absent,
+FCV00238,FCC00115,Annulus Persistence,Persistent,
+FCV00239,FCC00115,Annulus Persistence,Disappearing with age,
+FCV00240,FCC00117,Annulus Position,Superior,Near the cap
+FCV00241,FCC00117,Annulus Position,Apical,upper half
+FCV00242,FCC00117,Annulus Position,Median,in the middle
+FCV00243,FCC00117,Annulus Position,Inferior,Lower half
+FCV00244,FCC00117,Annulus Position,Basal,Near the base
+FCV00245,FCC00117,Annulus Position,None,Does not have annulus ring
+FCV00246,FCC00119,Partial Veil Texture,Membranous (skin-like),
+FCV00247,FCC00119,Partial Veil Texture,Cortinate (cobwebby),
+FCV00248,FCC00119,Partial Veil Texture,Fibrillose (thready),
+FCV00249,FCC00119,Partial Veil Texture,Gelatinous (slimy),
+FCV00250,FCC00120,Partial Veil Fate,Disappearing - Evanescent,can only be detected in button stage
+FCV00251,FCC00120,Partial Veil Fate,Persistent,leaving remnants on cap
+FCV00252,FCC00121,Partial Veil Appearance,Two Rings (from 2 veils),
+FCV00253,FCC00121,Partial Veil Appearance,Doubly-flared Ring,
+FCV00254,FCC00121,Partial Veil Appearance,Cogwheel Stellate,
+FCV00255,FCC00121,Partial Veil Appearance,Floccose (downy tufts),
+FCV00256,FCC00121,Partial Veil Appearance,Cortinate PV & Fibrillose Annular Zone,
+FCV00257,FCC00121,Partial Veil Appearance,Single Ring thick on edge,
+FCV00258,FCC00121,Partial Veil Appearance,Pendant (hanging),
+FCV00259,FCC00121,Partial Veil Appearance,Subperonate,
+FCV00260,FCC00121,Partial Veil Appearance,"Peronate (w/""boot"")",
+FCV00261,FCC00122,Veil Type,Flaring,The annulus is flaring upwards.
+FCV00262,FCC00122,Veil Type,Pendant,The veil is hanging downward from the stem.
+FCV00263,FCC00122,Veil Type,Double Rings,Two visible veils..
+FCV00264,FCC00122,Veil Type,Ring Zone,The stem is marked with the remnants of the annulus
+FCV00265,FCC00122,Veil Type,Cortinate,The partial veil is cobweb-like or tread-like (Fibrillose)..
+FCV00266,FCC00122,Veil Type,Stellate,The partial veil resembles a cogwheel.
+FCV00267,FCC00122,Veil Type,Floccose,The partial veil is fluffy and down-like.
+FCV00268,FCC00122,Veil Type,Peronate,The stem resembles a sheath-like boot or stocking
+FCV00269,FCC00124,Veil Relative Strength,Weak,
+FCV00270,FCC00124,Veil Relative Strength,Moderate,
+FCV00271,FCC00124,Veil Relative Strength,Strong,
+FCV00272,FCC00129,Universal Veil Appearance,Two Rings (from 2 veils),
+FCV00273,FCC00129,Universal Veil Appearance,Doubly-flared Ring,
+FCV00274,FCC00129,Universal Veil Appearance,Cogwheel Stellate,
+FCV00275,FCC00129,Universal Veil Appearance,Floccose (downy tufts),
+FCV00276,FCC00129,Universal Veil Appearance,Cortinate PV & Fibrillose Annular Zone,
+FCV00277,FCC00129,Universal Veil Appearance,Single Ring thick on edge,
+FCV00278,FCC00129,Universal Veil Appearance,Pendant (hanging),
+FCV00279,FCC00129,Universal Veil Appearance,Subperonate,
+FCV00280,FCC00129,Universal Veil Appearance,"Peronate (w/""boot"")",
+FCV00281,FCC00130,Universal Veil Fate,Disappearing,
+FCV00282,FCC00130,Universal Veil Fate,Leaving fragments on cap,
+FCV00283,FCC00131,Universal Veil Texture,Membranous (skin-like),
+FCV00284,FCC00131,Universal Veil Texture,Cortinate (cobwebby),
+FCV00285,FCC00131,Universal Veil Texture,Fibrillose (thready),
+FCV00286,FCC00131,Universal Veil Texture,Gelatinous (slimy),
+FCV00287,FCC00135,Volva Persistence,Evanescent,
+FCV00288,FCC00135,Volva Persistence,Persistent,
+FCV00289,FCC00138,Stem Location,Central,
+FCV00290,FCC00138,Stem Location,Eccentric - off-center,
+FCV00291,FCC00138,Stem Location,Lateral - attached at margin,
+FCV00292,FCC00138,Stem Location,Sessile - missing,
+FCV00293,FCC00146,Stem Shape,Terete (round),
+FCV00294,FCC00146,Stem Shape,Compressed (flattened),
+FCV00295,FCC00146,Stem Shape,Equal,
+FCV00296,FCC00146,Stem Shape,Clavate (club),
+FCV00297,FCC00146,Stem Shape,"Radicating (w/""root"")",
+FCV00298,FCC00146,Stem Shape,Flexuous,
+FCV00299,FCC00146,Stem Shape,Ventricose Fusiform,
+FCV00300,FCC00146,Stem Shape,Tapering,
+FCV00301,FCC00146,Stem Shape,Abruptly bulbous,
+FCV00302,FCC00146,Stem Shape,Rounded,
+FCV00303,FCC00146,Stem Shape,Oblique (angle),
+FCV00304,FCC00146,Stem Shape,Marginate,
+FCV00305,FCC00155,Stem Surface Texture,Smooth,No defining features found on the surface.
+FCV00306,FCC00155,Stem Surface Texture,Banded,
+FCV00307,FCC00155,Stem Surface Texture,Peronate,
+FCV00308,FCC00155,Stem Surface Texture,Fibrose,
+FCV00309,FCC00155,Stem Surface Texture,Lacunose,w/dp.grooves
+FCV00310,FCC00155,Stem Surface Texture,Longitudinally Striate,
+FCV00311,FCC00155,Stem Surface Texture,Ribbed,Also called: Costate; Costate
+FCV00312,FCC00155,Stem Surface Texture,Scabrous,scabby
+FCV00313,FCC00155,Stem Surface Texture,Pruinose,Also called: Powdery; Powdery
+FCV00314,FCC00155,Stem Surface Texture,Speckled,
+FCV00315,FCC00155,Stem Surface Texture,Punctate,w/small dots
+FCV00316,FCC00155,Stem Surface Texture,Glandular-Dotted,w/dark sticky dots
+FCV00317,FCC00155,Stem Surface Texture,Reticulate,fishnet
+FCV00318,FCC00155,Stem Surface Texture,Other,
+FCV00319,FCC00155,Stem Surface Texture,Uneven,A bumpy surface.
+FCV00320,FCC00155,Stem Surface Texture,Rugose,A wrinkled or rough surface.
+FCV00321,FCC00155,Stem Surface Texture,Rugulose,A slightly wrinkled surface.
+FCV00322,FCC00155,Stem Surface Texture,Rivulose,A thinly wrinkled surface of branching wavy or crooked lines.
+FCV00323,FCC00155,Stem Surface Texture,Scrobiculate,A pitted or furrowed surface.
+FCV00324,FCC00155,Stem Surface Texture,Warty,Remnants of the universal veil remain on the surface in small patches.
+FCV00325,FCC00155,Stem Surface Texture,Virgate,A streaked surface.
+FCV00326,FCC00155,Stem Surface Texture,Hygrophanous,A surface that is transparent when wet and opaque when dry.
+FCV00327,FCC00155,Stem Surface Texture,Sericeous,A silky surface.
+FCV00328,FCC00155,Stem Surface Texture,Fibrillose,A surface covered in thread-like filaments.
+FCV00329,FCC00155,Stem Surface Texture,Squamose,A surface covered with scales.
+FCV00330,FCC00155,Stem Surface Texture,Squarrose,A ragged surface covered with small scales.
+FCV00331,FCC00155,Stem Surface Texture,Pulverulent,A surface covered with fine dust or powder.
+FCV00332,FCC00155,Stem Surface Texture,Granulose,A surface covered in salt-like granulates.
+FCV00333,FCC00155,Stem Surface Texture,Furfuraceous,A surface covered in flaky bran-like particles; dandruff-like.
+FCV00334,FCC00155,Stem Surface Texture,Zonate,A surface containing zones or bands that are distinguished by texture or color.
+FCV00335,FCC00155,Stem Surface Texture,Areolate,A cracked surface resembling dried-mud or paint.
+FCV00336,FCC00155,Stem Surface Texture,Rimose,A surface covered in cracks and crevices.
+FCV00337,FCC00155,Stem Surface Texture,Laccate,A waxy or lacquered surface texture.
+FCV00338,FCC00155,Stem Surface Texture,Viscid,A sticky glue-like surface texture.
+FCV00339,FCC00155,Stem Surface Texture,Glutinous,A slimy surface.
+FCV00340,FCC00155,Stem Surface Texture,Glabrous - Hairy,Hairy - a bald surface.
+FCV00341,FCC00155,Stem Surface Texture,Velvety - Hairy,Hairy - A surface covered with very fine and soft hairs.
+FCV00342,FCC00155,Stem Surface Texture,Pubescent - Hairy,Hairy - A surface cover with fuzz or fine hairs.
+FCV00343,FCC00155,Stem Surface Texture,Canescent - Hairy,Hairy - A surface covered in dense white or gray down-like hairs. Giving a frosted appearance.
+FCV00344,FCC00155,Stem Surface Texture,Floccose - Hairy,Hairy - A surface covered in Wooly or cotton-like hairs.
+FCV00345,FCC00155,Stem Surface Texture,Tomentose - Hairy,Hairy - A surface covered densely with matted hairs.
+FCV00346,FCC00155,Stem Surface Texture,Hispid - Hairy,Hairy - A surface covered with straight bristle-like hairs.
+FCV00347,FCC00155,Stem Surface Texture,Hirsute - Hairy,Hairy - A surface covered with slightly stiff and shaggy hairs.
+FCV00348,FCC00155,Stem Surface Texture,Villose - Hairy,Hairy - A surface covered with long soft hairs.
+FCV00349,FCC00155,Stem Surface Texture,Strigose - Hairy,Hairy - A surface covered with long bristle-like hairs.
+FCV00350,FCC00155,Stem Surface Texture,Fibrous,
+FCV00351,FCC00155,Stem Surface Texture,Ribbed/Costate,
+FCV00352,FCC00156,Stem Texture (Consistency),Fragile,
+FCV00353,FCC00156,Stem Texture (Consistency),Pliable,
+FCV00354,FCC00156,Stem Texture (Consistency),Chalky,
+FCV00355,FCC00156,Stem Texture (Consistency),Rigid,
+FCV00356,FCC00156,Stem Texture (Consistency),Fibrous (Fleshy-Fibrous),"usually rather thick, and when broken in two, leaves a ragged edge."
+FCV00357,FCC00156,Stem Texture (Consistency),Cartilaginous,"Common stem, usually thin and breaks with a firm split when bent in two, similar to cartilage."
+FCV00358,FCC00156,Stem Texture (Consistency),Firm,
+FCV00359,FCC00156,Stem Texture (Consistency),Woody,
+FCV00360,FCC00156,Stem Texture (Consistency),Corky,
+FCV00361,FCC00156,Stem Texture (Consistency),Leathery (coriaceous),
+FCV00362,FCC00156,Stem Texture (Consistency),Breaking with a snap,
+FCV00363,FCC00159,Stem Interior,Centrally solid,
+FCV00364,FCC00159,Stem Interior,Stuffed (with hyphae),
+FCV00365,FCC00159,Stem Interior,Hollow,
+FCV00366,FCC00159,Stem Interior,Fistulose,
+FCV00367,FCC00159,Stem Interior,Broadly fistulose,
+FCV00368,FCC00159,Stem Interior,Partially stuffed/partially hollow,
+FCV00369,FCC00159,Stem Interior,Chambered,
+FCV00370,FCC00159,Stem Interior,Stuffed (w/hyphae),
+FCV00371,FCC00163,Stem Base Shape,Napiform (turnip),
+FCV00372,FCC00163,Stem Base Shape,Saccate,
+FCV00373,FCC00163,Stem Base Shape,Sheathing,
+FCV00374,FCC00163,Stem Base Shape,Collar,
+FCV00375,FCC00163,Stem Base Shape,Granular,
+FCV00376,FCC00163,Stem Base Shape,Concentric rings or scales,
+FCV00377,FCC00163,Stem Base Shape,"Friable, disappearing",
+FCV00378,FCC00163,Stem Base Shape,Fusiform,
+FCV00379,FCC00163,Stem Base Shape,Marginate-depressed,
+FCV00380,FCC00163,Stem Base Shape,Cleft,
+FCV00381,FCC00175,Basal Mycelium Amyloidity,Amyloid,
+FCV00382,FCC00175,Basal Mycelium Amyloidity,Inamyloid,Also called: Nonamyloid
+FCV00383,FCC00175,Basal Mycelium Amyloidity,Dextrinoid,
+FCV00384,FCC00178,Stem Form,Flexuose,
+FCV00385,FCC00178,Stem Form,Straight,
+FCV00386,FCC00178,Stem Form,Multiple forms,
+FCV00387,FCC00178,Stem Form,Extremely flexuose,
+FCV00388,FCC00178,Stem Form,Somewhat flexuose,
+FCV00389,FCC00178,Stem Form,Consistently straight,
+FCV00390,FCC00178,Stem Form,Other,
+FCV00391,FCC00185,Stem Longitudinal Lines,Strict,
+FCV00392,FCC00185,Stem Longitudinal Lines,Relaxed,
+FCV00393,FCC00185,Stem Longitudinal Lines,Absent,
+FCV00394,FCC00189,Stem Surface Tissue Peeling,Peeling up,
+FCV00395,FCC00189,Stem Surface Tissue Peeling,Peeling down,
+FCV00396,FCC00189,Stem Surface Tissue Peeling,None,
+FCV00397,FCC00196,Stem Taper,Tapered upward,
+FCV00398,FCC00196,Stem Taper,Tapered downward,
+FCV00399,FCC00196,Stem Taper,Equal,
+FCV00400,FCC00206,Habitat,Terrestrial (on soil - bare),
+FCV00401,FCC00206,Habitat,Terrestrial (on soil - burned),
+FCV00402,FCC00206,Habitat,Terrestrial (on soil - disturbed),
+FCV00403,FCC00206,Habitat,Lignicolous (on wood) - what kind of tree?,
+FCV00404,FCC00206,Habitat,"Humicolous (on humus, duff) - conifer, other?",
+FCV00405,FCC00206,Habitat,Coprophilous (on dung) what kind?,
+FCV00406,FCC00206,Habitat,"In grassy area - lawn, pasture, etc?",
+FCV00407,FCC00206,Habitat,"In forest - conifer, hardwood, mixed?",
+FCV00408,FCC00206,Habitat,Fungicolous,mushroom mycelia grow in other mushrooms
+FCV00409,FCC00208,Substrate,On Soil,
+FCV00410,FCC00208,Substrate,Decaying Wood,
+FCV00411,FCC00208,Substrate,Humus,
+FCV00412,FCC00208,Substrate,Duff,
+FCV00413,FCC00208,Substrate,Bryophytes,
+FCV00414,FCC00208,Substrate,Dung,
+FCV00415,FCC00208,Substrate,Grass,
+FCV00416,FCC00208,Substrate,Tree Cones,
+FCV00417,FCC00208,Substrate,Tree Needles,
+FCV00418,FCC00208,Substrate,Leaves,
+FCV00419,FCC00208,Substrate,Other,
+FCV00420,FCC00211,Nutrition Mode,Saprophytic,
+FCV00421,FCC00211,Nutrition Mode,Parasitic,
+FCV00422,FCC00211,Nutrition Mode,Endophytic,
+FCV00423,FCC00211,Nutrition Mode,Ectomycorrhizal,
+FCV00424,FCC00211,Nutrition Mode,Symbiotic,
+FCV00425,FCC00211,Nutrition Mode,Other,
+FCV00426,FCC00220,Soil Type,Unknown,
+FCV00427,FCC00220,Soil Type,Loam,
+FCV00428,FCC00225,Natural Fruiting Time of Year,January,
+FCV00429,FCC00225,Natural Fruiting Time of Year,February,
+FCV00430,FCC00225,Natural Fruiting Time of Year,March,
+FCV00431,FCC00225,Natural Fruiting Time of Year,April,
+FCV00432,FCC00225,Natural Fruiting Time of Year,May,
+FCV00433,FCC00225,Natural Fruiting Time of Year,June,
+FCV00434,FCC00225,Natural Fruiting Time of Year,July,
+FCV00435,FCC00225,Natural Fruiting Time of Year,August,
+FCV00436,FCC00225,Natural Fruiting Time of Year,September,
+FCV00437,FCC00225,Natural Fruiting Time of Year,October,
+FCV00438,FCC00225,Natural Fruiting Time of Year,November,
+FCV00439,FCC00225,Natural Fruiting Time of Year,December,
+FCV00440,FCC00233,Fruitbody Build,Fragile,
+FCV00441,FCC00233,Fruitbody Build,Normal,
+FCV00442,FCC00233,Fruitbody Build,Tough,
+FCV00443,FCC00234,Handling Color Change,None,
+FCV00444,FCC00234,Handling Color Change,Subtle,
+FCV00445,FCC00234,Handling Color Change,Drastic,
+FCV00446,FCC00260,Commonness or Rarity,Common,
+FCV00447,FCC00260,Commonness or Rarity,Occasional,
+FCV00448,FCC00260,Commonness or Rarity,Rare,
+FCV00449,FCC00261,Fleshiness When Fresh,Thin,
+FCV00450,FCC00261,Fleshiness When Fresh,Moderately fleshy,
+FCV00451,FCC00261,Fleshiness When Fresh,Very fleshy,
+FCV00452,FCC00281,Field Chemical Reaction Test (General),"Ammonia (NH4OH, Ammonium Hydroxide)",
+FCV00453,FCC00281,Field Chemical Reaction Test (General),KOH (Potassium Hydroxide) - 3%,
+FCV00454,FCC00282,Aroma,Almond-like,
+FCV00455,FCC00282,Aroma,Bakery-like,
+FCV00456,FCC00282,Aroma,Dark cacao chocolate-like,
+FCV00457,FCC00282,Aroma,Apricot-like,
+FCV00458,FCC00282,Aroma,Frozen orange juice-like,
+FCV00459,FCC00282,Aroma,Normal/common,
+FCV00460,FCC00282,Aroma,Cucumber-like,
+FCV00461,FCC00282,Aroma,Anise-like,
+FCV00462,FCC00282,Aroma,Garlic-like,
+FCV00463,FCC00282,Aroma,Coal-tar-like,
+FCV00464,FCC00282,Aroma,Radish-like,
+FCV00465,FCC00282,Aroma,Cedar-like,
+FCV00466,FCC00282,Aroma,Bleach-like,
+FCV00467,FCC00282,Aroma,Spermatic,
+FCV00468,FCC00282,Aroma,Shrimp-like,
+FCV00469,FCC00282,Aroma,Maraschino-cherry-like,
+FCV00470,FCC00282,Aroma,Acrid,
+FCV00471,FCC00282,Aroma,Other,
+FCV00472,FCC00282,Aroma,None,
+FCV00473,FCC00282,Aroma,Fruity,
+FCV00474,FCC00282,Aroma,Lemony,
+FCV00475,FCC00282,Aroma,Anise (licorice),
+FCV00476,FCC00282,Aroma,Farinaceous (like fresh meal),
+FCV00477,FCC00282,Aroma,Pungent,
+FCV00478,FCC00282,Aroma,Nauseous,
+FCV00479,FCC00282,Aroma,Nitrous,
+FCV00480,FCC00282,Aroma,Earthy,
+FCV00481,FCC00282,Aroma,Garlic,
+FCV00482,FCC00282,Aroma,Maraschino cherries,
+FCV00483,FCC00282,Aroma,Sewer gas,
+FCV00484,FCC00282,Aroma,Spicy - red hots - dirty socks,
+FCV00485,FCC00285,Taste,Mildly bitter,
+FCV00486,FCC00285,Taste,Acrid,
+FCV00487,FCC00285,Taste,Gourmet,
+FCV00488,FCC00285,Taste,Spicy,
+FCV00489,FCC00285,Taste,None,"I tasted it, but no noticeable taste"
+FCV00490,FCC00285,Taste,Common,
+FCV00491,FCC00285,Taste,Other,
+FCV00492,FCC00285,Taste,Mild,
+FCV00493,FCC00285,Taste,Bitter,
+FCV00494,FCC00285,Taste,Acrid (= puckery? astringent)/Peppery,
+FCV00495,FCC00285,Taste,Agreeable,
+FCV00496,FCC00285,Taste,Farinaceous (like fresh meal),
+FCV00497,FCC00285,Taste,Mushroom,
+FCV00498,FCC00285,Taste,I did not taste,Not the same as 'None'.
+FCV00499,FCC00287,Pileipellis Pattern,Cutis,
+FCV00500,FCC00287,Pileipellis Pattern,Dry Cutis,
+FCV00501,FCC00287,Pileipellis Pattern,Ixocutis,
+FCV00502,FCC00287,Pileipellis Pattern,Hymeniderm,
+FCV00503,FCC00287,Pileipellis Pattern,Pluristratous Hymeniderm,
+FCV00504,FCC00287,Pileipellis Pattern,Hymeniform,
+FCV00505,FCC00287,Pileipellis Pattern,Trichoderm,
+FCV00506,FCC00287,Pileipellis Pattern,Other,
+FCV00507,FCC00313,Spore Measurement Method,Manual,
+FCV00508,FCC00313,Spore Measurement Method,"Software-assisted (e.g. Piximètre, ImageJ)",
+FCV00509,FCC00313,Spore Measurement Method,Other,
+FCV00510,FCC00358,Gill Trama Pattern,Parallel,
+FCV00511,FCC00358,Gill Trama Pattern,Subregular,
+FCV00512,FCC00358,Gill Trama Pattern,Interwoven,
+FCV00513,FCC00358,Gill Trama Pattern,Divergent,Also called: Bilateral; Bilateral
+FCV00514,FCC00358,Gill Trama Pattern,Divergent (Bilateral) & Multi-Sized,
+FCV00515,FCC00358,Gill Trama Pattern,Convergent,
+FCV00516,FCC00358,Gill Trama Pattern,Subcellular,
+FCV00517,FCC00358,Gill Trama Pattern,Other,
+FCV00518,FCC00397,Cell Reaction Melzer's,Amyloid,
+FCV00519,FCC00397,Cell Reaction Melzer's,Inamyloid,Also called: Nonamyloid
+FCV00520,FCC00397,Cell Reaction Melzer's,Dextrinoid,
+FCV00521,FCC00407,Spore Reaction Melzer's,Amyloid,
+FCV00522,FCC00407,Spore Reaction Melzer's,Inamyloid,Also called: Nonamyloid
+FCV00523,FCC00407,Spore Reaction Melzer's,Dextrinoid,
+FCV00524,FCC00408,Lab Analysis Method,LC-MS,
+FCV00525,FCC00408,Lab Analysis Method,GC,
+FCV00526,FCC00408,Lab Analysis Method,HPLC,
+FCV00527,FCC00408,Lab Analysis Method,Other,
+FCV00528,FCC00409,Tissue Tested,Cap,
+FCV00529,FCC00409,Tissue Tested,Stem,
+FCV00530,FCC00409,Tissue Tested,Gill Tissue,
+FCV00531,FCC00409,Tissue Tested,Mycelium,
+FCV00532,FCC00419,Mating Compatibility (Agar),Compatible,
+FCV00533,FCC00419,Mating Compatibility (Agar),Incompatible,
+FCV00534,FCC00426,Hyphal Wall Thickness,Thin-walled,
+FCV00535,FCC00426,Hyphal Wall Thickness,Thick-walled,
+FCV00536,FCC00426,Hyphal Wall Thickness,Both,
+FCV00537,FCC00437,Colony Shape,Circular,
+FCV00538,FCC00437,Colony Shape,Filamentous,
+FCV00539,FCC00437,Colony Shape,Rhizomorphic,
+FCV00540,FCC00437,Colony Shape,Other,
+FCV00541,FCC00447,Mycelium Tropisms,Gravitropism,
+FCV00542,FCC00447,Mycelium Tropisms,Phototropism,
+FCV00543,FCC00447,Mycelium Tropisms,Thigmotropism,
+FCV00544,FCC00447,Mycelium Tropisms,Aerotropism,
+FCV00545,FCC00447,Mycelium Tropisms,Galvanotropism,
+FCV00546,FCC00447,Mycelium Tropisms,Other,
+FCV00547,FCC00452,Additional Region Sequences,RPB1,
+FCV00548,FCC00452,Additional Region Sequences,RPB2,
+FCV00549,FCC00452,Additional Region Sequences,LSU,
+FCV00550,FCC00452,Additional Region Sequences,SSU,
+FCV00551,FCC00452,Additional Region Sequences,tef1-α,
+FCV00552,FCC00452,Additional Region Sequences,Other,
+FCV00553,FCC00720,Perennial or Annual,Perennial,
+FCV00554,FCC00720,Perennial or Annual,Annual,
+FCV00555,FCC00732,Flesh Layer Uniform or Duplex,Uniform,
+FCV00556,FCC00732,Flesh Layer Uniform or Duplex,Duplex,
+FCV00557,FCC00736,Tube Layer Single or Stratified,Single,
+FCV00558,FCC00736,Tube Layer Single or Stratified,Stratified,
+FCV00559,FCC00738,Upper Surface Features,Smooth,
+FCV00560,FCC00738,Upper Surface Features,Wrinkled,
+FCV00561,FCC00738,Upper Surface Features,Concentrically Zoned,
+FCV00562,FCC00738,Upper Surface Features,Sulcate,
+FCV00563,FCC00738,Upper Surface Features,Soft,
+FCV00564,FCC00738,Upper Surface Features,Hard,
+FCV00565,FCC00738,Upper Surface Features,Encrusted,
+FCV00566,FCC00739,Upper Surface Texture,Tufted,
+FCV00567,FCC00739,Upper Surface Texture,Glabrous,
+FCV00568,FCC00739,Upper Surface Texture,Tomentose,
+FCV00569,FCC00739,Upper Surface Texture,Hirsute,
+FCV00570,FCC00091,Short Gill Arrangement,Only near the cap margin,
+FCV00571,FCC00437,Colony Shape,Aerial,
+FCV00572,FCC00437,Colony Shape,Appressed,
+FCV00573,FCC00437,Colony Shape,Cottony,
+FCV00574,FCC00441,Colony Surface,Smooth,
+FCV00575,FCC00441,Colony Surface,Glistening,
+FCV00576,FCC00441,Colony Surface,Rough,
+FCV00577,FCC00441,Colony Surface,Wrinkled,
+FCV00578,FCC00441,Colony Surface,Dull,
+FCV00579,FCC00441,Colony Surface,Other,
+FCV00580,FCC00442,Colony Opacity,Transparent,
+FCV00581,FCC00442,Colony Opacity,Translucent,
+FCV00582,FCC00442,Colony Opacity,Opaque,
+FCV00583,FCC00442,Colony Opacity,Other,
+FCV00584,FCC00452,Additional Region Sequences,CO1,
+FCV00585,FCC00452,Additional Region Sequences,COX1,
+FCV00586,FCC00452,Additional Region Sequences,RPB1-intron 2,
+FCV00587,FCC00452,Additional Region Sequences,18S,
+FCV00588,FCC00452,Additional Region Sequences,25S,
+FCV00589,FCC00452,Additional Region Sequences,β-tubulin II (TUB2),
+FCV00590,FCC00452,Additional Region Sequences,γ-actin (ACT),

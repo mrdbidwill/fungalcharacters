@@ -1,75 +1,63 @@
-<!doctype html>
+{% load static %}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}Fungal Characters{% endblock %}</title>
-<style>
-  :root { --fg:#1d1d1b; --muted:#666; --line:#ddd; --bg:#fff; --accent:#7a4b1e; --warn:#fff4e0; }
-  @media (prefers-color-scheme: dark) { :root { --fg:#e8e6e1; --muted:#9a978f; --line:#3a3a38; --bg:#181817; --accent:#d9a56b; --warn:#3a2e1a; } }
-  body { font: 16px/1.5 system-ui, sans-serif; color:var(--fg); background:var(--bg); margin:0 auto; max-width:72rem; padding:1rem; }
-  a { color:var(--accent); }
-  header { border-bottom:1px solid var(--line); margin-bottom:1rem; padding-bottom:.5rem; }
-  header .brand { text-decoration:none; font-weight:600; font-size:1.2rem; }
-  nav { display:flex; flex-wrap:wrap; gap:.25rem 1rem; margin-top:.25rem; }
-  nav .account { margin-left:auto; }
-  form.inline { display:inline; }
-  button.link { background:none; border:0; padding:0; color:var(--accent); text-decoration:underline; cursor:pointer; }
-  .note { background:var(--warn); padding:.5rem .75rem; border-radius:4px; }
-  .actions { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; }
-  .errorlist { color:#b00020; margin:.25rem 0; padding-left:1.2rem; }
-  @media (prefers-color-scheme: dark) { .errorlist { color:#ff8a80; } }
-  .form div { margin-bottom:.75rem; }
-  .form label { display:block; font-weight:600; }
-  .form input[type=text], .form input[type=password], .form input[type=number], .form textarea, .form select { width:100%; max-width:40rem; box-sizing:border-box; }
-  .form input[type=checkbox] + label, .form label:has(input[type=checkbox]) { display:inline; }
-  .helptext { color:var(--muted); font-size:.85rem; display:block; }
-  del { color:var(--muted); }
-  table { border-collapse:collapse; width:100%; }
-  th, td { text-align:left; padding:.35rem .5rem; border-bottom:1px solid var(--line); vertical-align:top; }
-  th { font-weight:600; }
-  .muted { color:var(--muted); font-size:.9rem; }
-  .warn { background:var(--warn); padding:.5rem .75rem; border-radius:4px; }
-  dl { display:grid; grid-template-columns:max-content 1fr; gap:.25rem 1rem; }
-  dt { font-weight:600; }
-  dd { margin:0; white-space:pre-line; }
-  form.filter { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1rem; }
-  input, select, button { font:inherit; padding:.25rem .5rem; }
-  .table-wrap { overflow-x:auto; }
-  footer { margin-top:2rem; border-top:1px solid var(--line); padding-top:.5rem; }
-  footer p { margin:.25rem 0; }
-  code { font-size:.9em; }
-</style>
+<meta name="description" content="A free, publicly maintained list of the characters used to describe and identify fungi.">
+<link rel="icon" href="{% static 'characters/favicon.ico' %}" sizes="any">
+<link rel="icon" href="{% static 'characters/favicon.svg' %}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{% static 'characters/apple-touch-icon.png' %}">
+<meta name="theme-color" content="#1F4D2E">
+<link rel="stylesheet" href="{% static 'characters/site.css' %}">
 </head>
 <body>
-<header>
-  <a class="brand" href="{% url 'characters:list' %}">Fungal Characters</a> <span class="muted">· local development</span>
-  <nav>
-    <a href="{% url 'characters:list' %}">Characters</a>
-    <a href="{% url 'characters:value_type_list' %}">Value types</a>
-    <a href="{% url 'characters:source_list' %}">Sources</a>
-    <a href="{% url 'characters:recent_changes' %}">Recent changes</a>
-    <span>Names:
-      {% if scientific_names %}<a href="{% url 'characters:set_name_mode' 'english' %}?next={{ request.get_full_path|urlencode }}">English</a> · <strong>Scientific</strong>
-      {% else %}<strong>English</strong> · <a href="{% url 'characters:set_name_mode' 'scientific' %}?next={{ request.get_full_path|urlencode }}">Scientific</a>{% endif %}
-    </span>
-    <span class="account">
-    {% if user.is_authenticated %}
-      Signed in as <strong>{{ user.username }}</strong>{% if user.is_superuser %} (admin) · <a href="{% url 'admin:index' %}">Admin</a>{% endif %}
-      · <a href="{% url 'password_change' %}">Password</a>
-      · <form class="inline" method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="link" type="submit">Log out</button></form>
-    {% else %}
-      <a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">Log in</a> · <a href="{% url 'characters:signup' %}">Sign up</a>
-    {% endif %}
-    </span>
-  </nav>
+<a class="skip" href="#main">Skip to content</a>
+{% with here=request.resolver_match.url_name %}
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="{% url 'characters:home' %}">
+      <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 34 A24 26 0 0 1 56 34 Z"/><path fill="currentColor" d="M27 37 H37 L39 52 A7 4 0 0 1 25 52 Z"/></svg>
+      Fungal Characters
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="{% url 'characters:home' %}"{% if here == 'home' %} aria-current="page"{% endif %}>Home</a></li>
+        <li><a href="{% url 'characters:list' %}"{% if here == 'list' or here == 'by_code' or here == 'create' %} aria-current="page"{% endif %}>Characters</a></li>
+        <li><a href="{% url 'characters:value_type_list' %}"{% if here == 'value_type_list' or here == 'value_type_detail' %} aria-current="page"{% endif %}>Value types</a></li>
+        <li><a href="{% url 'characters:source_list' %}"{% if here == 'source_list' or here == 'source_detail' %} aria-current="page"{% endif %}>Sources</a></li>
+        <li><a href="{% url 'characters:downloads' %}"{% if here == 'downloads' %} aria-current="page"{% endif %}>Downloads</a></li>
+        <li><a href="{% url 'characters:recent_changes' %}"{% if here == 'recent_changes' %} aria-current="page"{% endif %}>Recent changes</a></li>
+        <li><a href="{% url 'characters:thanks' %}"{% if here == 'thanks' %} aria-current="page"{% endif %}>Thanks</a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <span>Names:
+        {% if scientific_names %}<a href="{% url 'characters:set_name_mode' 'english' %}?next={{ request.get_full_path|urlencode }}">English</a> · <strong>Scientific</strong>
+        {% else %}<strong>English</strong> · <a href="{% url 'characters:set_name_mode' 'scientific' %}?next={{ request.get_full_path|urlencode }}">Scientific</a>{% endif %}
+      </span>
+      {% if user.is_authenticated %}
+        <span>Signed in as <strong>{{ user.username }}</strong>{% if user.is_superuser %} (admin) · <a href="{% url 'admin:index' %}">Admin</a>{% endif %}</span>
+        <a href="{% url 'password_change' %}">Password</a>
+        <form class="inline" method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="link" type="submit">Log out</button></form>
+      {% else %}
+        <a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">Log in</a>
+        <a href="{% url 'characters:signup' %}">Sign up</a>
+      {% endif %}
+    </div>
+  </div>
 </header>
-{% if messages %}{% for m in messages %}<p class="note">{{ m }}</p>{% endfor %}{% endif %}
+{% endwith %}
+<main id="main" class="wrap">
+{% if messages %}<ul class="messages" role="status">{% for m in messages %}<li class="note">{{ m }}</li>{% endfor %}</ul>{% endif %}
 {% block content %}{% endblock %}
-<footer class="muted">
-  <p>Character data{% if data_release %}: Fungal Characters release {{ data_release.version }} ({{ data_release.released_at|date:"Y-m-d" }}){% endif %}.
-  Dedicated to the public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>: free to use in any way. Code: MIT.</p>
-  <p>Please cite as: Fungal Characters{% if data_release %}, release {{ data_release.version }}{% endif %}, https://fungalcharacters.org/</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Character data{% if data_release %}: Fungal Characters release {{ data_release.version }} ({{ data_release.released_at|date:"Y-m-d" }}){% endif %}.
+    Dedicated to the public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>: free to use in any way. Code: MIT.</p>
+    <p>Please cite as: Fungal Characters{% if data_release %}, release {{ data_release.version }}{% endif %}, https://fungalcharacters.org/</p>
+  </div>
 </footer>
 </body>
 </html>

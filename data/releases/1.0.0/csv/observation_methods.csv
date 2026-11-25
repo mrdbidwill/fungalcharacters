@@ -1,0 +1,14 @@
+﻿id,name,description,comments,created_at,updated_at
+1,Macro,,,2025-10-25 20:03:38,2026-11-25 00:00:00
+2,Low Magnification,,,2025-10-25 20:03:38,2026-11-25 00:00:00
+3,Chemosystematics and Laboratory Chemical Tests,,,2025-10-25 20:03:38,2026-11-25 00:00:00
+4,Micro,,,2025-10-25 20:03:38,2026-11-25 00:00:00
+6,Mating Compatibility,,,2025-10-25 20:03:38,2026-11-25 00:00:00
+8,DNA,,,2025-10-25 20:03:38,2026-11-25 00:00:00
+9,Admin,,,2025-10-25 20:03:38,2026-11-25 00:00:00
+23,Field Chemical Test,,,2025-10-26 19:15:18,2026-11-25 00:00:00
+25,Common,Common to all. Use for a starter group of characters that should be available for most specimens.,"Starter-set flag, not a method. New data uses properties.common = true instead.",2025-11-18 11:40:28.116567,2026-11-25 00:00:00
+26,Aroma and Taste,Organoleptic tests,,2026-11-25 00:00:00,2026-11-25 00:00:00
+27,Micro Chemical Test,"Reagent mounts under the microscope (Melzer's, KOH, Lugol's, sulfovanillin)",,2026-11-25 00:00:00,2026-11-25 00:00:00
+28,Culture,Lab-grown mycelium,,2026-11-25 00:00:00,2026-11-25 00:00:00
+29,Photo and Video,Photographic and time-lapse documentation,,2026-11-25 00:00:00,2026-11-25 00:00:00

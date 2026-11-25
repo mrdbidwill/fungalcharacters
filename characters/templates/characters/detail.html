@@ -13,7 +13,7 @@
   <a href="{% url 'characters:history_by_code' c.code %}">Edit history</a>
 </p>
 {% if c.needs_review %}<p class="warn">Marked as needing review.</p>{% endif %}
-<dl>
+<dl class="fields">
   <dt>Name</dt><dd>{{ c.name|default:"—" }}</dd>
   <dt>Scientific name</dt><dd>{{ scientific|default:"—" }}</dd>
   <dt>Definition</dt><dd>{{ c.description|default:"—" }}</dd>
@@ -40,11 +40,11 @@
       <td>{{ v.name }}{% if v.hidden %} <strong>(hidden)</strong>{% endif %}</td>
       <td>{{ v.description|default:"" }}</td><td>{{ v.comments|default:"" }}</td><td>{{ v.source|default:"" }}</td>
       <td class="muted">{{ v.created_by_name|default:"release" }}</td>
-      <td class="actions">
+      <td><div class="actions">
         {% if v|editable_by:user %}<a href="{% url 'characters:edit' v.code %}">Edit</a> <a href="{% url 'characters:delete' v.code %}">Delete</a>{% endif %}
         {% include "characters/_admin_hide.html" with kind="value" obj_pk=v.pk hidden=v.hidden %}
         <a href="{% url 'characters:history_by_code' v.code %}">History</a>
-      </td>
+      </div></td>
     </tr>
   {% endfor %}
   </tbody>

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -5,7 +6,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db import transaction
 from django.db.models import Count, Q
-from django.http import Http404
+from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -17,7 +18,7 @@ from .forms import (
 )
 from .models import (
     CHARACTER_TYPE, VALUE_TYPE, Character, CharacterFungusType, DisplayOption, FungusType, ItemMeta,
-    Label, Part, Source, ValueOption,
+    Label, Part, Release, Source, ValueOption,
 )
 from .permissions import can_edit, delete_blockers, is_admin
 
@@ -150,6 +151,65 @@ def _delete(request, obj, label, after_url):
         "obj": obj, "label": label, "blockers": blockers, "form": form, "cancel_url": item_url(obj),
         "extra_values": obj.value_options.count() if isinstance(obj, Character) else 0,
     })
+
+
+# ---------- home, thanks, downloads ----------
+
+def home(request):
+    return render(request, "characters/home.html", {
+        "n_characters": visible(Character, request.user).count(),
+        "n_values": visible(ValueOption, request.user).count(),
+    })
+
+
+def thanks(request):
+    return render(request, "characters/thanks.html")
+
+
+RELEASES_DIR = settings.BASE_DIR / "data" / "releases"
+# What each release file is for (from the release README). Anything else is listed under "Other files".
+DOWNLOAD_KINDS = [
+    (".xlsx", "Excel workbook", "Browse in Excel or Numbers."),
+    ("csv/characters_flat.csv", "CSV: characters", "One row per character."),
+    ("csv/value_options_flat.csv", "CSV: value options", "One row per value option."),
+    ("csv/values_flat.csv", "CSV: value options", "One row per value option (called “values” in this release)."),
+    (".json", "JSON", "For programmers."),
+    ("_postgresql.sql", "SQL for PostgreSQL 16/17", "Creates the tables and loads all data."),
+    (".sql", "SQL for MySQL 8", "Creates the tables and loads all data."),
+    ("_skos.ttl", "SKOS vocabulary (Turtle)", "For vocabulary tools (W3C SKOS)."),
+    ("_sdd.xml", "SDD 1.1 (TDWG XML)", "For identification-key tools."),
+    ("README.md", "Release notes", "What is in the release, and how to cite it."),
+    ("CHANGELOG.md", "Changelog", "What changed in each release."),
+]
+
+
+def release_files(version):
+    folder = RELEASES_DIR / version
+    if not folder.is_dir():
+        return {}
+    return {p.relative_to(folder).as_posix(): p for p in folder.rglob("*") if p.is_file()}
+
+
+def downloads(request):
+    release = Release.objects.order_by("-released_at", "-id").first()
+    main, other = [], []
+    if release:
+        files = release_files(release.version)
+        used = set()
+        for suffix, title, note in DOWNLOAD_KINDS:
+            for name in sorted(files):
+                if name not in used and name.endswith(suffix) and (suffix.startswith(("csv/", "README", "CHANGELOG")) or "/" not in name):
+                    used.add(name)
+                    main.append({"name": name, "title": title, "note": note, "size": files[name].stat().st_size})
+        other = [{"name": n, "size": files[n].stat().st_size} for n in sorted(files) if n not in used]
+    return render(request, "characters/downloads.html", {"release": release, "main": main, "other": other})
+
+
+def download_file(request, version, name):
+    path = release_files(version).get(name)
+    if path is None:
+        raise Http404
+    return FileResponse(path.open("rb"), as_attachment=True, filename=path.name)
 
 
 # ---------- characters and values ----------

@@ -1,0 +1,35 @@
+{% extends "characters/base.html" %}
+{% block content %}
+<div class="prose">
+<h1>Fungal Characters</h1>
+<p class="tagline">A free, publicly maintained list of the characters used to describe and identify fungi.</p>
+<p class="lead">Characters are the features recorded when describing a fungus, such as Cap Width or Gill Attachment. For each one, this site gives its name and scientific name, definition, value type and, where there is a list to choose from, its value options. The goal is data that anyone can use and everyone can help maintain.</p>
+</div>
+
+<div class="card-grid">
+  <section class="card">
+    <h2>View it here</h2>
+    <p>Browse and search all {{ n_characters }} characters and {{ n_values }} value options, with their sources and the public history of every change.</p>
+    <p><a class="button" href="{% url 'characters:list' %}">Browse characters</a></p>
+  </section>
+  <section class="card">
+    <h2>Get the data</h2>
+    <p>Download the complete set as a dated release: Excel, CSV, JSON, SQL, SKOS and SDD. Free to use in any way (CC0).</p>
+    <p><a class="button" href="{% url 'characters:downloads' %}">Downloads</a></p>
+  </section>
+  <section class="card">
+    <h2>Add and edit</h2>
+    <p>Sign up and log in to add characters, value options, value types and sources, and to edit what you added. Every change is public, showing who made it and why.</p>
+    <p>{% if user.is_authenticated %}<a class="button" href="{% url 'characters:create' %}">Add a character</a>{% else %}<a class="button" href="{% url 'characters:signup' %}">Sign up</a> <a href="{% url 'login' %}">Log in</a>{% endif %}</p>
+  </section>
+</div>
+
+<div class="prose">
+<h2>Where people disagree</h2>
+<p>Mycologists and collectors do not always agree on terms or on values. fungalcharacters.org keeps every sourced statement side by side and never lets one replace another. Ultimately, users decide which characters and values live on. Thanks on the <a href="{% url 'characters:thanks' %}">Thanks</a> page does not mean anyone named there endorses any value on the site.</p>
+<p><strong>Open tools and public data to improve the accuracy of fungal data.</strong></p>
+
+<h2>No advice about consumption</h2>
+<p>fungalcharacters.org records how sources describe fungi. It is not a guide to eating, using or handling any fungus, and nothing here says whether any fungus is safe. Values about chemistry or toxicity are reported only as their source states them.</p>
+</div>
+{% endblock %}

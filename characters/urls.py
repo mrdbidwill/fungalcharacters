@@ -17,7 +17,11 @@ register_converter(CodeConverter, "code")
 
 app_name = "characters"
 urlpatterns = [
-    path("", views.character_list, name="list"),
+    path("", views.home, name="home"),
+    path("characters/", views.character_list, name="list"),
+    path("thanks/", views.thanks, name="thanks"),
+    path("downloads/", views.downloads, name="downloads"),
+    path("downloads/<str:version>/<path:name>", views.download_file, name="download_file"),
     path("characters/new/", views.character_create, name="create"),
     path("id/<code:code>", views.by_code, name="by_code"),
     path("id/<code:code>/edit/", views.edit_by_code, name="edit"),

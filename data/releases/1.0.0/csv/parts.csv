@@ -1,0 +1,17 @@
+﻿id,name,description,comments,created_at,updated_at
+1,Admin,,,2025-10-25 20:03:41,2026-11-25 00:00:00
+2,Whole Fungus,Scientific term: Basidiocarp / Ascocarp,,2025-10-25 20:03:41,2026-11-25 00:00:00
+3,Cap,Scientific term: Pileus,,2025-10-25 20:03:41,2026-11-25 00:00:00
+4,Gills,Scientific term: Lamellae,,2025-10-25 20:03:41,2026-11-25 00:00:00
+5,Stem,Scientific term: Stipe,,2025-10-25 20:03:41,2026-11-25 00:00:00
+6,Veil,Scientific term: Velum,,2025-10-25 20:03:41,2026-11-25 00:00:00
+7,Mycelium,Scientific term: Mycelium,,2025-10-25 20:03:41,2026-11-25 00:00:00
+8,Spores,Scientific term: Spores,,2025-10-25 20:03:41,2026-11-25 00:00:00
+12,Rhizomorph,Scientific term: Rhizomorph,,2025-10-25 20:03:41,2026-11-25 00:00:00
+18,Primordia,Scientific term: Primordia,,2025-10-26 20:34:47,2026-11-25 00:00:00
+19,Chemosystematics,From Simple & Advanced Characters With Taxonomic Value For Stipitate-Lamellate Mushroom,"Not used in new data: chemistry is an observation method, not a part.",2025-11-09 16:37:37.313159,2026-11-25 00:00:00
+20,Habitat and Ecology,"Substrate, associations, locality, environment",,2026-11-25 00:00:00,2026-11-25 00:00:00
+21,Pores and Tubes,Scientific term: Hymenophore (poroid),,2026-11-25 00:00:00,2026-11-25 00:00:00
+22,Gasteroid Structures,"Peridium, gleba, receptacle and related structures of gasteroid fungi and stinkhorns",,2026-11-25 00:00:00,2026-11-25 00:00:00
+23,Sclerotia,Sclerotia and pseudosclerotia,,2026-11-25 00:00:00,2026-11-25 00:00:00
+24,Latex,Scientific term: Lactiferous fluid,,2026-11-25 00:00:00,2026-11-25 00:00:00

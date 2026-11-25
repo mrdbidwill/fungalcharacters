@@ -20,12 +20,16 @@ See [docs/DECISIONS.md](docs/DECISIONS.md), the authority for this project.
 
 The data is the `fungal_characters` release 1.0.0 (747 characters, 590 value options), loaded exactly as released from [data/releases/1.0.0/](data/releases/1.0.0/). Every character has a permanent code (FCC#####) and every value option one too (FCV#####); codes are never changed or reused. Permanent address: https://fungalcharacters.org/id/FCC00019
 
+## Downloads
+
+The release files are in [data/releases/](data/releases/) and on the site's Downloads page.
+
 ## Status
 
 Local only so far. Accounts (sign up, log in); adding and editing characters, value options, value types and sources; duplicate and similar-name checks; ownership rules; public edit history and recent changes; English / scientific name toggle.
 
 ## Running locally
 
-- `docker compose up -d`, then open http://localhost:8000/
+- `docker compose up -d`, then open http://localhost:8000/ (home) or http://localhost:8000/characters/
 - On an empty database, `migrate` (run automatically on start) loads the release file.
 - Tests: `docker compose exec web python manage.py test characters`

@@ -17,7 +17,8 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - Not included: user mushrooms, specimens, genera/species (no MBList), images (deferred).
 - Colors appear only as characters ("cap color", "stem color", "spore color"). A fuller color design is a separate later discussion.
 - Every term can be shown in English or in scientific/Latin form, switched by a site-wide toggle.
-- A "Thanks" page, content supplied by Will later.
+- A "Thanks" page (2026-11-25): first draft from Will is on the site; Will edits it later. Facts checked: Gastón Guzmán 1932–2016; Flora Agaricina Neerlandica vol. 1 (1988, eds Bas, Kuyper, Noordeloos & Vellinga) with Vellinga's glossary section; nolo_mode's iNaturalist guide "Intro To Identifying Fungi". Not checkable online: nolo_mode's permission (Nov 2026), myceliome.com, the 2019 Mushroom Observer date.
+- Home page (2026-11-25): says what the site is for, how to view the data here, how to download it, and that registered users can add and edit; plus Will's "Where people disagree" and "No advice about consumption" texts. The character list moved to /characters/ (menu: Characters).
 
 ## Users and editing
 - Sign-up open to anyone. Everything public.
@@ -29,7 +30,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - No censorship of character data. The community decides which characters survive by using them.
 
 ## Admin
-- Will is the only admin.
+- Will is the only admin. Django's "Groups" (permission bundles for several users) are not used and are hidden from the admin pages (2026-11-25).
 - Admin acts only on inappropriate material or behavior: hide or delete it, block users.
 - Items from a data release (2026-11-25, replaces the 2026-11-24 `mrdbid-import` rule): credited to the release, no user owner. Only Will, as admin, edits or deletes them.
 - "Needs review" button, usable by anyone (logged in or not), adds an entry to a list in the admin section. No email. A hidden per-visitor rate limit stops automated flooding.
@@ -39,6 +40,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 ## Data access and licensing
 - Permanent codes (2026-11-25): FCC##### for characters, FCV##### for value options, from release 1.0.0. Never changed or reused; new items get the next number. Permanent web address: https://fungalcharacters.org/id/<code>. A deleted item's address says the code is retired.
 - Downloads in CSV and JSON; open read-only API; dated releases in the GitHub repository.
+- Downloads page (2026-11-25): serves the files of the latest release from `data/releases/<version>/` in the repository (Excel, CSV, JSON, SQL for MySQL and PostgreSQL, SKOS, SDD, README, CHANGELOG). The site may hold newer edits than the latest release. The read-only API is not built yet.
 - SDD (TDWG Structured Descriptive Data) export after the core site works.
 - Data: CC0. Code: MIT. Site and repository state plainly that everything is free to use in any way.
 - CC0 confirmed (2026-11-25) over CC BY 4.0, with a request (not a requirement) to cite: "Fungal Characters, release <version>, https://fungalcharacters.org/".
@@ -60,11 +62,19 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - Work location (2026-11-24): planning here until the repository exists; then all work moves to VS Code with Claude Code. This file then moves into the repository and the Claude_AI copy becomes a one-line pointer.
 - Git/GitHub: Claude Code commits and pushes; Will only signs in to GitHub once. GitHub Desktop stays available for viewing history.
 
+## Look and accessibility (2026-11-25)
+- Readability and accessibility come first: WCAG 2.2, with AAA contrast (at least 7:1) for all text in light and dark modes; links always underlined; visible amber focus ring; skip-to-content link; large click targets; follows the reader's light/dark, contrast, motion and text-size settings.
+- Typeface: Atkinson Hyperlegible (Braille Institute, for low-vision readers; SIL Open Font License), served from the site itself.
+- Colours: forest green (#1F4D2E) header and buttons, warm off-white background, near-black text.
+- Logo and browser icon: a plain mushroom outline (domed cap, short stem); the icon is cream on a dark-green rounded square.
+
 ## Domains
 - fungalcharacters.org is the main address; fungalcharacters.com forwards to it.
 - mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires.
 
 ## Open
+- "Where people disagree" (2026-11-25) says the site "keeps every sourced statement side by side and never lets one replace another". The site does not yet do this: each character and value option has one definition and one source, and an edit replaces the text (the old text stays in the public history). Will to decide: build side-by-side sourced statements, or adjust the wording.
+- Core order (2026-11-25): in release 1.0.0, five characters appear twice in the Boletes core order (Cap Surface Texture #11/#12, Gill Breadth #17/#20, Gill Attachment #16/#26, Stem Length #36/#44, Stem Surface Texture #39/#41), left over from merging old duplicate characters. Will to decide which position each keeps.
 - Email (2026-11-25): to be added soon, for password resets. Provider and sending address not yet chosen.
 - Deployment: own nginx entry, certificate, containers, database and port (gulfcoastfungi uses 8010); own deploy user or extended rights (current `gcf` user is limited to gulfcoastfungi); mrdbid.com's nginx entry changed to redirect.
 - Old shared WORKSPACE.md and DECISIONS.md stay in place: they still govern other projects (gulfcoastfungi, Website Admin). fungalcharacters ignores them. Cleanup is a separate decision for those projects.

@@ -1,0 +1,32 @@
+{% extends "characters/base.html" %}
+{% block title %}Downloads · Fungal Characters{% endblock %}
+{% block content %}
+<div class="prose">
+<h1>Downloads</h1>
+{% if release %}
+<p class="lead">Release {{ release.version }}, {{ release.released_at|date:"j F Y" }}. The complete data set in several formats.</p>
+<p>A release is a dated snapshot. The pages on this site may already include newer additions and edits, which will appear in the next release.</p>
+<p>Free to use in any way: dedicated to the public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>. Please cite as: Fungal Characters, release {{ release.version }}, https://fungalcharacters.org/</p>
+{% else %}
+<p>No release is available yet.</p>
+{% endif %}
+</div>
+{% if main %}
+<div class="table-wrap">
+<table>
+  <thead><tr><th scope="col">Format</th><th scope="col">For</th><th scope="col">File</th><th scope="col" class="num">Size</th></tr></thead>
+  <tbody>
+  {% for f in main %}
+    <tr><td><strong>{{ f.title }}</strong></td><td>{{ f.note }}</td>
+      <td><a href="{% url 'characters:download_file' release.version f.name %}" download>{{ f.name }}</a></td>
+      <td class="num">{{ f.size|filesizeformat }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+{% if other %}
+<h2>One CSV file per database table</h2>
+<ul>{% for f in other %}<li><a href="{% url 'characters:download_file' release.version f.name %}" download>{{ f.name }}</a> <span class="muted small">({{ f.size|filesizeformat }})</span></li>{% endfor %}</ul>
+{% endif %}
+{% endblock %}

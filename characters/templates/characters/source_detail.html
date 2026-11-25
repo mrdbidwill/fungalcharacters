@@ -9,7 +9,7 @@
   {% include "characters/_admin_hide.html" with kind="source" obj_pk=obj.pk %}
   <a href="{% url 'characters:history' 'source' obj.pk %}">Edit history</a>
 </p>
-<dl>
+<dl class="fields">
   <dt>Author</dt><dd>{{ obj.author|default:"—" }}</dd>
   <dt>Reference / URL</dt><dd>{{ obj.ref|default:"—" }}</dd>
   <dt>Item code</dt><dd>{{ obj.item_code|default:"—" }}</dd>

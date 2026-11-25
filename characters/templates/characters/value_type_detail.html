@@ -9,7 +9,7 @@
   {% include "characters/_admin_hide.html" with kind="value-type" obj_pk=obj.pk %}
   <a href="{% url 'characters:history' 'value-type' obj.pk %}">Edit history</a>
 </p>
-<dl><dt>Description</dt><dd>{{ obj.description|default:"—" }}</dd><dt>Comments</dt><dd>{{ obj.comments|default:"—" }}</dd></dl>
+<dl class="fields"><dt>Description</dt><dd>{{ obj.description|default:"—" }}</dd><dt>Comments</dt><dd>{{ obj.comments|default:"—" }}</dd></dl>
 <h2>Characters with this value type ({{ characters|length }})</h2>
 <ul>{% for c in characters %}<li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>{% empty %}<li class="muted">None.</li>{% endfor %}</ul>
 {% endblock %}
