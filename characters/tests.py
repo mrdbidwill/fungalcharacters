@@ -198,7 +198,8 @@ class SitePagesTests(TestCase):
     def test_thanks_page(self):
         r = self.client.get("/thanks/")
         self.assertContains(r, "<h1>Thanks!</h1>", html=True)
-        self.assertContains(r, "Gastón Guzmán (1932–2016)")
+        self.assertContains(r, '<strong class="thanks-name">Gastón Guzmán</strong> (1932–2016)')
+        self.assertEqual(r.content.decode().count("<strong>nolo_mode</strong>"), 5)
 
     def test_downloads_list_and_serve_release_files(self):
         r = self.client.get("/downloads/")
