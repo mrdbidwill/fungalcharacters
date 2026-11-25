@@ -4,5 +4,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
+RUN useradd --system --uid 10001 --home /app app && chmod +x deploy/entrypoint.sh \
+    && mkdir -p /app/staticfiles && chown -R app /app/staticfiles
 EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Development (docker-compose.yml) overrides this with runserver.
+CMD ["deploy/entrypoint.sh"]

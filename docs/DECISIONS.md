@@ -79,5 +79,5 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 
 ## Open
 - Email (2026-11-25): development uses Mailpit (a local inbox at http://localhost:8025/; nothing is delivered). Production sending service and sending address not yet chosen; the site reads its SMTP settings from the server's environment, so any provider works.
-- Deployment: own nginx entry, certificate, containers, database and port (gulfcoastfungi uses 8010); own deploy user or extended rights (current `gcf` user is limited to gulfcoastfungi); mrdbid.com's nginx entry changed to redirect.
+- Deployment (2026-11-25): prepared and tested locally in production mode; see docs/DEPLOY.md. Own deploy user `fc` (limited, like gulfcoastfungi's `gcf`), Docker with gunicorn on 127.0.0.1:8020, own nginx block and Let's Encrypt certificate, nightly database backups. Email through Resend (sending domain mail.fungalcharacters.org, added 2026-11-25, waiting for its DNS records). Waiting for Will: SSH key in hPanel; DNS records. mrdbid.com's redirect is not part of this (mrdbid.com is still live for the MRDBID project); Will to say when.
 - Old shared WORKSPACE.md and DECISIONS.md stay in place: they still govern other projects (gulfcoastfungi, Website Admin). fungalcharacters ignores them. Cleanup is a separate decision for those projects.

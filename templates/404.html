@@ -1,0 +1,9 @@
+{% extends "characters/base.html" %}
+{% block title %}Page not found · Fungal Characters{% endblock %}
+{% block content %}
+<div class="prose">
+<h1>Page not found</h1>
+<p>There is no page at this address. It may have been mistyped, or the item may be hidden.</p>
+<p>You can <a href="{% url 'characters:list' %}">search all characters</a> or go to the <a href="{% url 'characters:home' %}">home page</a>.</p>
+</div>
+{% endblock %}
