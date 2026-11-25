@@ -9,6 +9,7 @@
   {% include "characters/_admin_hide.html" with kind="source" obj_pk=obj.pk %}
   <a href="{% url 'characters:history' 'source' obj.pk %}">Edit history</a>
 </p>
+{% if obj|consumption_note %}{% include "characters/_disclaimer_near.html" %}{% endif %}
 <dl class="fields">
   <dt>Author</dt><dd>{{ obj.author|default:"—" }}</dd>
   <dt>Reference / URL</dt><dd>{{ obj.ref|default:"—" }}</dd>

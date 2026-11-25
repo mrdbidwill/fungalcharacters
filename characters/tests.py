@@ -314,3 +314,35 @@ class AccountTests(TestCase):
         self.assertContains(r, "Two-factor sign-in")
         for name in ["account_email", "account_change_password", "mfa_index", "usersessions_list"]:
             self.assertEqual(self.client.get(reverse(name)).status_code, 200, name)
+
+
+class DisclaimerTests(TestCase):
+    """Shared disclaimer (Claude_AI/shared_reference/disclaimer/): top and bottom of every page, and beside
+    items about eating, using or handling fungi."""
+
+    LEAD = "<strong>No advice about consumption.</strong>"
+
+    def test_top_and_bottom_of_every_page(self):
+        for url in ["/", "/characters/", "/id/FCC00019", "/thanks/", "/downloads/", "/sources/", "/value-types/",
+                    "/changes/", "/accounts/login/", "/accounts/signup/", "/no-such-page/"]:
+            r = self.client.get(url)
+            body = r.content.decode()
+            opening = '<main id="main" class="wrap">'
+            main = body[body.index(opening) + len(opening):body.index('</main>')].strip()
+            self.assertTrue(main.startswith('<p class="disclaimer">' + self.LEAD), url)          # first thing on the page
+            last = main.rsplit('<p class="disclaimer">', 1)[1]
+            self.assertTrue(last.startswith(self.LEAD) and last.rstrip().endswith('</p>') and last.count('<') == 3, url)  # last thing
+            self.assertGreaterEqual(body.count('<p class="disclaimer">'), 2, url)
+
+    def test_note_beside_chemistry_and_toxicity_items_only(self):
+        chem = Character.objects.filter(observation_method__name="Field Chemical Test").first()
+        self.assertContains(self.client.get(chem.get_absolute_url()), '<p class="disclaimer near">')
+        self.assertNotContains(self.client.get("/id/FCC00019"), '<p class="disclaimer near">')  # Cap Width
+        toxic = Character.objects.get(name="Toxic")
+        self.assertContains(self.client.get(toxic.get_absolute_url()), '<p class="disclaimer near">')
+
+    def test_note_beside_sources_about_eating_or_medicine(self):
+        s = Source.objects.get(title__startswith="The Fungal Pharmacy")
+        self.assertContains(self.client.get(reverse("characters:source_detail", args=[s.pk])), '<p class="disclaimer near">')
+        plain = Source.objects.get(title__startswith="Introductory Mycology")
+        self.assertNotContains(self.client.get(reverse("characters:source_detail", args=[plain.pk])), '<p class="disclaimer near">')

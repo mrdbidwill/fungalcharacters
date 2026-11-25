@@ -6,33 +6,33 @@ other sites is changed.
 
 | Piece | Where |
 |---|---|
-| Deploy user | `fc` (key-only SSH, limited sudo: nginx test/reload, certbot, installing this site's nginx file) |
+| Deploy user | set up by the Website Administrator (assumed `fc`, key-only SSH, in the docker group) |
 | Code | `/home/fc/app/` (copied from the Mac by `deploy/deploy.sh`) |
 | Secrets | `/home/fc/app/.env` (only on the server; template `.env.example`) |
-| App | Docker: `docker-compose.prod.yml`, gunicorn on `127.0.0.1:8020` (gulfcoastfungi uses 8010) |
+| App | Docker: `docker-compose.prod.yml`, gunicorn on `127.0.0.1:8030` (gulfcoastfungi uses 8010, mrdbid.com 8020) |
 | Database | PostgreSQL 17 in Docker, volume `app_pgdata` |
-| Web server | nginx block `/etc/nginx/sites-available/fungalcharacters` (copy: `deploy/nginx_fungalcharacters.conf`) |
-| Certificate | Let's Encrypt `fungalcharacters.org` (+ www, .com, www.com), webroot `/var/www/html`, auto-renewed |
+| Web server | nginx, set up by the Website Administrator (proposed block: `deploy/nginx_fungalcharacters.conf`) |
+| Certificate | Let's Encrypt for fungalcharacters.org, www, .com, www.com — Website Administrator |
 | Backups | nightly `deploy/backup.sh` → `/home/fc/backups/` (30 days), plus copies pulled to the Mac |
 | Email | Resend, sending domain `mail.fungalcharacters.org`, SMTP `smtp.resend.com:465` |
 | SSH key (Mac) | `~/.ssh/fungalcharacters_deploy` (comment `fungalcharacters-deploy`) |
 
-## First launch (in order)
-1. **Will:** add the public key in hPanel › VPS › SSH keys (it lands in root's keys).
-2. **Claude:** run `deploy/server_setup_root.sh` as root (creates `fc`, docker group, folders, limited sudo),
-   then remove the key from root and confirm root login with it is refused.
-3. **Will:** in hPanel › Domains › DNS for fungalcharacters.org and fungalcharacters.com: A records `@` and `www`
-   → 85.31.233.192 (replacing the parking records). For fungalcharacters.org also the four Resend email records
-   and the DMARC record.
-4. **Claude:** when DNS answers with 85.31.233.192: install `nginx_fungalcharacters_http.conf`, get the certificate
-   (`certbot certonly --webroot -w /var/www/html -d fungalcharacters.org -d www.fungalcharacters.org
-   -d fungalcharacters.com -d www.fungalcharacters.com`), then install the full `nginx_fungalcharacters.conf`.
-5. **Claude:** write `.env` on the server (new secret key and database password; Resend API key created for this
-   domain only, sending access), back up the local database, and run
-   `deploy/deploy.sh --restore <dump>` so the live site starts from the local database (your review edits included).
-6. **Claude:** add the nightly backup to fc's crontab; check pages, email (a real password-reset message),
-   two-factor sign-in, certificate, redirects; run the accessibility audit against the live site.
-7. **Will:** sign in on the live site and confirm.
+## Who does what (2026-11-25)
+- **Website Administrator project:** server setup (deploy user, docker group, folders), nginx, DNS and the
+  certificate. Its input from this project: the proposed nginx block `deploy/nginx_fungalcharacters.conf`
+  (app on 127.0.0.1:8030; 8020 is the live mrdbid.com app) and the table above.
+- **This project (Claude in VS Code):** deploys the app after that, with `deploy/deploy.sh`.
+
+## First launch (after the Website Administrator's setup)
+1. Confirm with the Website Administrator: deploy user and folders (assumed `fc`, `/home/fc/app`,
+   `/home/fc/backups`), and the SSH key to use (assumed `~/.ssh/fungalcharacters_deploy`). Adjust `deploy/deploy.sh`
+   and `deploy/backup.sh` if they differ.
+2. Write `.env` on the server (new secret key and database password; a Resend API key created for this domain only,
+   sending access), back up the local database, and run `deploy/deploy.sh --restore <dump>` so the live site
+   starts from the local database (Will's review edits included).
+3. Add the nightly backup to the deploy user's crontab.
+4. Check: pages, email (a real password-reset message), two-factor sign-in, the accessibility audit against the live
+   site. Then Will signs in and confirms.
 
 ## Updates after launch
 `deploy/deploy.sh` (copies the code, rebuilds, restarts; migrations run at start). Claude runs it after tests pass.

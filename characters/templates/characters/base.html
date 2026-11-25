@@ -50,8 +50,10 @@
 </header>
 {% endwith %}
 <main id="main" class="wrap">
+{% include "characters/_disclaimer.html" %}
 {% if messages %}<ul class="messages" role="status">{% for m in messages %}<li class="note">{{ m }}</li>{% endfor %}</ul>{% endif %}
 {% block content_before %}{% endblock %}{% block content %}{% endblock %}{% block content_after %}{% endblock %}
+{% include "characters/_disclaimer.html" %}
 </main>
 <footer class="site-footer">
   <div class="wrap">

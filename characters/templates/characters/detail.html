@@ -12,6 +12,7 @@
   {% include "characters/_admin_hide.html" with kind="character" obj_pk=c.pk %}
   <a href="{% url 'characters:history_by_code' c.code %}">Edit history</a>
 </p>
+{% if c|consumption_note %}{% include "characters/_disclaimer_near.html" %}{% endif %}
 {% if c.needs_review %}<p class="warn">Marked as needing review.</p>{% endif %}
 <dl class="fields">
   <dt>Name</dt><dd>{{ c.name|default:"—" }}</dd>
