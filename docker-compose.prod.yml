@@ -1,5 +1,8 @@
 # Production (on the VPS): docker compose -f docker-compose.prod.yml up -d --build
 # Secrets come from .env (never in git; see .env.example).
+# The project name must be explicit: the code folder is /home/fc/app, and gulfcoastfungi already runs as
+# Compose project "app" on the same server. Without this name, `up` would replace gulfcoastfungi's containers.
+name: fungalcharacters
 services:
   db:
     image: postgres:17

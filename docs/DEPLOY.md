@@ -10,7 +10,7 @@ other sites is changed.
 | Code | `/home/fc/app/` (copied from the Mac by `deploy/deploy.sh`) |
 | Secrets | `/home/fc/app/.env` (only on the server; template `.env.example`) |
 | App | Docker: `docker-compose.prod.yml`, gunicorn on `127.0.0.1:8030` (gulfcoastfungi uses 8010, mrdbid.com 8020) |
-| Database | PostgreSQL 17 in Docker, volume `app_pgdata` |
+| Database | PostgreSQL 17 in Docker, Compose project `fungalcharacters`, volume `fungalcharacters_pgdata` |
 | Web server | nginx, set up by the Website Administrator (proposed block: `deploy/nginx_fungalcharacters.conf`) |
 | Certificate | Let's Encrypt for fungalcharacters.org, www, .com, www.com — Website Administrator |
 | Backups | nightly `deploy/backup.sh` → `/home/fc/backups/` (30 days), plus copies pulled to the Mac |
