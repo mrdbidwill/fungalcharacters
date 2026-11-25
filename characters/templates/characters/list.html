@@ -1,50 +1,52 @@
 {% extends "characters/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Characters" %} · Fungal Characters{% endblock %}
 {% block content %}
-<h1>Characters</h1>
-{% if user.is_authenticated %}<p><a href="{% url 'characters:create' %}">+ Add a character</a></p>{% endif %}
+<h1>{% translate "Characters" %}</h1>
+{% if user.is_authenticated %}<p><a href="{% url 'characters:create' %}">+ {% translate "Add a character" %}</a></p>{% endif %}
 <form class="filter" method="get">
-  <label class="visually-hidden" for="f-q">Search characters</label>
-  <input id="f-q" type="search" name="q" value="{{ q }}" placeholder="Search name, scientific name, definition or code">
-  <label class="visually-hidden" for="f-part">Part</label>
+  <label class="visually-hidden" for="f-q">{% translate "Search characters" %}</label>
+  <input id="f-q" type="search" name="q" value="{{ q }}" placeholder="{% translate "Search name, scientific name, definition or code" %}">
+  <label class="visually-hidden" for="f-part">{% translate "Part" %}</label>
   <select id="f-part" name="part">
-    <option value="">All parts</option>
+    <option value="">{% translate "All parts" %}</option>
     {% for p in parts %}<option value="{{ p.id }}"{% if part == p.id|stringformat:"s" %} selected{% endif %}>{{ p.name }}</option>{% endfor %}
   </select>
-  <label class="visually-hidden" for="f-fungus">Fungus type</label>
+  <label class="visually-hidden" for="f-fungus">{% translate "Fungus type" %}</label>
   <select id="f-fungus" name="fungus">
-    <option value="">Any fungus type</option>
-    <option value="all"{% if fungus == "all" %} selected{% endif %}>Applies to all fungi</option>
+    <option value="">{% translate "Any fungus type" %}</option>
+    <option value="all"{% if fungus == "all" %} selected{% endif %}>{% translate "Applies to all fungi" %}</option>
     {% for f in fungus_types %}<option value="{{ f.id }}"{% if fungus == f.id|stringformat:"s" %} selected{% endif %}>{{ f.name }}</option>{% endfor %}
   </select>
-  <button type="submit">Filter</button>
+  <button type="submit">{% translate "Filter" %}</button>
 </form>
-<p class="muted">Showing {{ page.paginator.count }} of {{ total }} characters.</p>
+<p class="muted">{% blocktranslate trimmed with shown=page.paginator.count %}Showing {{ shown }} of {{ total }} characters.{% endblocktranslate %}</p>
 <div class="table-wrap">
 <table>
-  <thead><tr><th>Code</th><th>{% if scientific %}Scientific name{% else %}Name{% endif %}</th><th>{% if scientific %}Name{% else %}Scientific name{% endif %}</th><th>Part</th><th>Observation</th><th>Value type</th><th>Value options</th><th>By</th></tr></thead>
+  <thead><tr><th>{% translate "Code" %}</th><th>{% if scientific %}{% translate "Scientific name" %}{% else %}{% translate "Name" %}{% endif %}</th><th>{% if scientific %}{% translate "Name" %}{% else %}{% translate "Scientific name" %}{% endif %}</th><th>{% translate "Part" %}</th><th>{% translate "Observation" %}</th><th>{% translate "Value type" %}</th><th>{% translate "Value options" %}</th><th>{% translate "By" %}</th></tr></thead>
   <tbody>
   {% for c in page %}
     <tr>
       <td><code>{{ c.code }}</code></td>
-      <td><a href="{{ c.get_absolute_url }}">{% if scientific %}{{ c.scientific|default:c.name }}{% else %}{{ c.name }}{% endif %}</a></td>
-      <td class="muted">{% if scientific %}{{ c.name }}{% else %}{{ c.scientific }}{% endif %}</td>
+      <td><a href="{{ c.get_absolute_url }}"{% if not scientific and c.name_lang %} lang="{{ c.name_lang }}"{% endif %}>{% if scientific %}{{ c.scientific|default:c.name }}{% else %}{{ c.display_name }}{% endif %}</a></td>
+      <td class="muted">{% if scientific %}{{ c.display_name }}{% else %}{{ c.scientific }}{% endif %}</td>
       <td>{{ c.part|default:"" }}</td>
       <td>{{ c.observation_method|default:"" }}</td>
       <td>{{ c.display_option|default:"" }}</td>
       <td>{{ c.n_values|default:"" }}</td>
-      <td class="muted">{{ c.created_by_name|default:"release" }}</td>
+      <td class="muted">{% if c.created_by_name %}{{ c.created_by_name }}{% else %}{% translate "release" %}{% endif %}</td>
     </tr>
   {% empty %}
-    <tr><td colspan="8">No characters found.</td></tr>
+    <tr><td colspan="8">{% translate "No characters found." %}</td></tr>
   {% endfor %}
   </tbody>
 </table>
 </div>
 {% if page.has_other_pages %}
 <p>
-  {% if page.has_previous %}<a href="?q={{ q|urlencode }}&part={{ part }}&fungus={{ fungus }}&page={{ page.previous_page_number }}">← Previous</a>{% endif %}
-  Page {{ page.number }} of {{ page.paginator.num_pages }}
-  {% if page.has_next %}<a href="?q={{ q|urlencode }}&part={{ part }}&fungus={{ fungus }}&page={{ page.next_page_number }}">Next →</a>{% endif %}
+  {% if page.has_previous %}<a href="?q={{ q|urlencode }}&part={{ part }}&fungus={{ fungus }}&page={{ page.previous_page_number }}">← {% translate "Previous" %}</a>{% endif %}
+  {% blocktranslate trimmed with number=page.number pages=page.paginator.num_pages %}Page {{ number }} of {{ pages }}{% endblocktranslate %}
+  {% if page.has_next %}<a href="?q={{ q|urlencode }}&part={{ part }}&fungus={{ fungus }}&page={{ page.next_page_number }}">{% translate "Next" %} →</a>{% endif %}
 </p>
 {% endif %}
 {% endblock %}

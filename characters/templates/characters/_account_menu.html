@@ -1,13 +1,13 @@
-{% with here=request.resolver_match.url_name %}
-<nav class="account-menu" aria-label="Account">
-  <h2 class="small">Your account</h2>
+{% load i18n %}{% with here=request.resolver_match.url_name %}
+<nav class="account-menu" aria-label="{% translate "Account" %}">
+  <h2 class="small">{% translate "Your account" %}</h2>
   <ul>
-    <li><a href="{% url 'characters:account' %}"{% if here == 'account' %} aria-current="page"{% endif %}>Overview</a></li>
-    <li><a href="{% url 'account_email' %}"{% if here == 'account_email' %} aria-current="page"{% endif %}>Email addresses</a></li>
-    <li><a href="{% url 'account_change_password' %}"{% if here == 'account_change_password' or here == 'account_set_password' %} aria-current="page"{% endif %}>Password</a></li>
-    <li><a href="{% url 'mfa_index' %}"{% if here == 'mfa_index' or here == 'mfa_activate_totp' or here == 'mfa_view_recovery_codes' or here == 'mfa_deactivate_totp' or here == 'mfa_generate_recovery_codes' %} aria-current="page"{% endif %}>Two-factor sign-in</a></li>
-    <li><a href="{% url 'usersessions_list' %}"{% if here == 'usersessions_list' %} aria-current="page"{% endif %}>Signed-in devices</a></li>
-    <li><form class="inline" method="post" action="{% url 'account_logout' %}">{% csrf_token %}<button class="link" type="submit">Sign out</button></form></li>
+    <li><a href="{% url 'characters:account' %}"{% if here == 'account' %} aria-current="page"{% endif %}>{% translate "Overview" %}</a></li>
+    <li><a href="{% url 'account_email' %}"{% if here == 'account_email' %} aria-current="page"{% endif %}>{% translate "Email addresses" %}</a></li>
+    <li><a href="{% url 'account_change_password' %}"{% if here == 'account_change_password' or here == 'account_set_password' %} aria-current="page"{% endif %}>{% translate "Password" %}</a></li>
+    <li><a href="{% url 'mfa_index' %}"{% if here == 'mfa_index' or here == 'mfa_activate_totp' or here == 'mfa_view_recovery_codes' or here == 'mfa_deactivate_totp' or here == 'mfa_generate_recovery_codes' %} aria-current="page"{% endif %}>{% translate "Two-factor sign-in" %}</a></li>
+    <li><a href="{% url 'usersessions_list' %}"{% if here == 'usersessions_list' %} aria-current="page"{% endif %}>{% translate "Signed-in devices" %}</a></li>
+    <li><form class="inline" method="post" action="{% url 'account_logout' %}">{% csrf_token %}<button class="link" type="submit">{% translate "Sign out" %}</button></form></li>
   </ul>
 </nav>
 {% endwith %}

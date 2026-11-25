@@ -1,0 +1,10 @@
+{% load i18n %}<div class="translate-field">
+  <label for="{{ f.name }}">{% if f.label_type == "name" %}{% translate "Name" %}{% else %}{% translate "Definition" %}{% endif %} ({{ lang_name }})</label>
+  <span class="helptext">{% translate "English:" %} <span lang="en">{{ f.english|default:"—" }}</span></span>
+  {% if f.editable %}
+    {% if f.multiline %}<textarea id="{{ f.name }}" name="{{ f.name }}" rows="2" lang="{{ lang }}">{{ f.value }}</textarea>
+    {% else %}<input id="{{ f.name }}" type="text" name="{{ f.name }}" value="{{ f.value }}" maxlength="255" lang="{{ lang }}">{% endif %}
+  {% else %}
+    <p id="{{ f.name }}" lang="{{ lang }}"><strong>{{ f.value }}</strong> <span class="muted small">{% translate "(written by someone else; only they or the admin can change it)" %}</span></p>
+  {% endif %}
+</div>

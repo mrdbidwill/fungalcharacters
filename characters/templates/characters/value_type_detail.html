@@ -1,15 +1,15 @@
 {% extends "characters/base.html" %}
-{% load charperms %}
+{% load i18n charperms %}
 {% block content %}
-<p><a href="{% url 'characters:value_type_list' %}">← All value types</a></p>
-<h1>Value type: {{ obj.name }}</h1>
-<p class="muted">ID {{ obj.id }} · {% if created_by_name %}added by {{ created_by_name }}{% else %}from release {{ data_release.version }}{% endif %}{% if hidden %} · <strong>HIDDEN</strong>{% endif %}</p>
+<p><a href="{% url 'characters:value_type_list' %}">← {% translate "All value types" %}</a></p>
+<h1>{% blocktranslate trimmed with name=obj.name %}Value type: {{ name }}{% endblocktranslate %}</h1>
+<p class="muted">ID {{ obj.id }} · {% if created_by_name %}{% blocktranslate trimmed %}added by {{ created_by_name }}{% endblocktranslate %}{% else %}{% blocktranslate trimmed with version=data_release.version %}from release {{ version }}{% endblocktranslate %}{% endif %}{% if hidden %} · <strong>{% translate "HIDDEN" %}</strong>{% endif %}</p>
 <p class="actions">
-  {% if obj|editable_by:user %}<a href="{% url 'characters:value_type_edit' obj.pk %}">Edit</a> <a href="{% url 'characters:value_type_delete' obj.pk %}">Delete</a>{% endif %}
+  {% if obj|editable_by:user %}<a href="{% url 'characters:value_type_edit' obj.pk %}">{% translate "Edit" %}</a> <a href="{% url 'characters:value_type_delete' obj.pk %}">{% translate "Delete" %}</a>{% endif %}
   {% include "characters/_admin_hide.html" with kind="value-type" obj_pk=obj.pk %}
-  <a href="{% url 'characters:history' 'value-type' obj.pk %}">Edit history</a>
+  <a href="{% url 'characters:history' 'value-type' obj.pk %}">{% translate "Edit history" %}</a>
 </p>
-<dl class="fields"><dt>Description</dt><dd>{{ obj.description|default:"—" }}</dd><dt>Comments</dt><dd>{{ obj.comments|default:"—" }}</dd></dl>
-<h2>Characters with this value type ({{ characters|length }})</h2>
-<ul>{% for c in characters %}<li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>{% empty %}<li class="muted">None.</li>{% endfor %}</ul>
+<dl class="fields"><dt>{% translate "Description" %}</dt><dd>{{ obj.description|default:"—" }}</dd><dt>{% translate "Comments" %}</dt><dd>{{ obj.comments|default:"—" }}</dd></dl>
+<h2>{% blocktranslate trimmed with count=characters|length %}Characters with this value type ({{ count }}){% endblocktranslate %}</h2>
+<ul>{% for c in characters %}<li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>{% empty %}<li class="muted">{% translate "None." %}</li>{% endfor %}</ul>
 {% endblock %}

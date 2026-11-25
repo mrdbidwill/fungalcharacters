@@ -1,10 +1,12 @@
 {% extends "characters/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Recent changes" %} · Fungal Characters{% endblock %}
 {% block content %}
-<h1>Recent changes</h1>
-<p class="muted">The latest 100 changes across the site.</p>
+<h1>{% translate "Recent changes" %}</h1>
+<p class="muted">{% translate "The latest 100 changes across the site." %}</p>
 <div class="table-wrap">
 <table>
-  <thead><tr><th>When (UTC)</th><th>Who</th><th>Change</th><th>Item</th><th>Reason</th></tr></thead>
+  <thead><tr><th>{% translate "When (UTC)" %}</th><th>{% translate "Who" %}</th><th>{% translate "Change" %}</th><th>{% translate "Item" %}</th><th>{% translate "Reason" %}</th></tr></thead>
   <tbody>
   {% for r in rows %}
     <tr>

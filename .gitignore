@@ -56,3 +56,6 @@ pgdata/
 
 # Node tools
 node_modules/
+
+# Compiled translations (built from the .po files)
+*.mo

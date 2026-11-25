@@ -346,3 +346,80 @@ class DisclaimerTests(TestCase):
         self.assertContains(self.client.get(reverse("characters:source_detail", args=[s.pk])), '<p class="disclaimer near">')
         plain = Source.objects.get(title__startswith="Introductory Mycology")
         self.assertNotContains(self.client.get(reverse("characters:source_detail", args=[plain.pk])), '<p class="disclaimer near">')
+
+
+class LanguageTests(TestCase):
+    """Interface language choice and translating the character data (docs/I18N_PLAN.md)."""
+
+    def setUp(self):
+        self.alice = User.objects.create_user("alice", email="alice@example.org", password="pw-alice-123")
+        self.bob = User.objects.create_user("bob", email="bob@example.org", password="pw-bob-123")
+
+    def test_unpublished_language_is_not_picked_from_the_browser(self):
+        r = self.client.get("/", HTTP_ACCEPT_LANGUAGE="es")
+        self.assertContains(r, '<html lang="en"')
+
+    def test_visitor_can_preview_a_language_being_translated(self):
+        self.client.post(reverse("set_language"), {"language": "es", "next": "/"})
+        self.assertContains(self.client.get("/"), '<html lang="es"')
+
+    def test_published_language_is_picked_from_the_browser(self):
+        from django.test import override_settings
+        with override_settings(PUBLISHED_LANGUAGES=["en", "es"]):
+            self.assertContains(self.client.get("/", HTTP_ACCEPT_LANGUAGE="es-MX,es;q=0.9"), '<html lang="es"')
+
+    def test_languages_page_lists_progress_and_previews(self):
+        r = self.client.get(reverse("characters:languages"))
+        for name in ["Español", "ไทย", "Português (Brasil)", "Français"]:
+            self.assertContains(r, name)
+        self.assertContains(r, "/747)")
+        self.assertContains(r, 'name="language" value="th"')
+
+    def translate_cap_width(self, user, name, definition=""):
+        self.client.force_login(user)
+        c = Character.objects.get(code="FCC00019")
+        return self.client.post(reverse("characters:translate", args=["FCC00019"]), {
+            "lang": "es", f"MrCharacter-{c.pk}-name": name, f"MrCharacter-{c.pk}-definition": definition,
+            "reason": "traducción", "then": "stay"})
+
+    def test_translating_a_character(self):
+        r = self.translate_cap_width(self.alice, "Anchura del sombrero", "Diámetro del píleo")
+        self.assertEqual(r.status_code, 302)
+        c = Character.objects.get(code="FCC00019")
+        label = Label.objects.get(labelable_type="MrCharacter", labelable_id=c.pk, language="es", label_type="name")
+        self.assertEqual(label.text, "Anchura del sombrero")
+        self.assertEqual(ItemMeta.objects.get(item_type="Label", item_id=label.pk).created_by, self.alice)
+        self.assertEqual(label.history.first().history_user, self.alice)
+        # Shown to Spanish readers, with the English name kept below.
+        self.client.post(reverse("set_language"), {"language": "es", "next": "/"})
+        r = self.client.get("/id/FCC00019")
+        self.assertContains(r, "<h1>Anchura del sombrero</h1>", html=True)
+        self.assertContains(r, '<p class="tagline" lang="en">Cap Width</p>', html=True)
+        # Not shown in English.
+        self.client.post(reverse("set_language"), {"language": "en", "next": "/"})
+        self.assertContains(self.client.get("/id/FCC00019"), "<h1>Cap Width</h1>", html=True)
+
+    def test_others_cannot_overwrite_a_translation_but_admin_can(self):
+        self.translate_cap_width(self.alice, "Anchura del sombrero")
+        self.translate_cap_width(self.bob, "Ancho del píleo")
+        c = Character.objects.get(code="FCC00019")
+        get = lambda: Label.objects.get(labelable_type="MrCharacter", labelable_id=c.pk, language="es", label_type="name").text
+        self.assertEqual(get(), "Anchura del sombrero")
+        self.translate_cap_width(make_admin(), "Ancho del sombrero")
+        self.assertEqual(get(), "Ancho del sombrero")
+
+    def test_next_character_to_translate(self):
+        self.client.force_login(self.alice)
+        r = self.client.get(reverse("characters:translate_next", args=["fr"]))
+        self.assertEqual(r.status_code, 302)
+        self.assertIn("/translate/?lang=fr", r["Location"])
+        self.assertEqual(self.client.get(r["Location"]).status_code, 200)
+        self.assertEqual(self.client.get(reverse("characters:translate_next", args=["xx"])).status_code, 404)
+
+    def test_translation_files_cover_every_language(self):
+        from django.conf import settings
+        for code, _name in settings.LANGUAGES:
+            if code == "en":
+                continue
+            d = {"pt-br": "pt_BR"}.get(code, code)
+            self.assertTrue((settings.BASE_DIR / "locale" / d / "LC_MESSAGES" / "django.po").exists(), code)

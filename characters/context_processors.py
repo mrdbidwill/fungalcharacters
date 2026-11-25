@@ -1,3 +1,4 @@
+from django.conf import settings
 from .models import Release
 
 
@@ -6,4 +7,5 @@ def data_release(request):
     return {
         "data_release": release,
         "scientific_names": request.session.get("names") == "scientific",
+        "published_languages": [(c, n) for c, n in settings.LANGUAGES if c in settings.PUBLISHED_LANGUAGES],
     }

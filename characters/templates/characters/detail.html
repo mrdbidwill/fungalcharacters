@@ -1,50 +1,55 @@
 {% extends "characters/base.html" %}
-{% load charperms %}
+{% load i18n charperms %}
 {% block title %}{{ c.name }} · Fungal Characters{% endblock %}
 {% block content %}
-<p><a href="{% url 'characters:list' %}">← All characters</a></p>
-<h1>{% if scientific_mode and scientific %}{{ scientific }}{% else %}{{ c.name }}{% endif %}</h1>
-<p class="muted"><code>{{ c.code }}</code> · permanent address https://fungalcharacters.org/id/{{ c.code }}
-  · {% if created_by_name %}added by {{ created_by_name }}{% else %}from release {{ data_release.version }}{% endif %}
-  · updated {{ c.updated_at|date:"Y-m-d" }}{% if hidden %} · <strong>HIDDEN</strong>{% endif %}</p>
+<p><a href="{% url 'characters:list' %}">← {% translate "All characters" %}</a></p>
+<h1{% if heading_lang %} lang="{{ heading_lang }}"{% endif %}>{{ heading }}</h1>
+{% if heading != c.name %}<p class="tagline" lang="en">{{ c.name }}</p>{% endif %}
+<p class="muted"><code>{{ c.code }}</code> · {% translate "permanent address" %} https://fungalcharacters.org/id/{{ c.code }}
+  · {% if created_by_name %}{% blocktranslate trimmed %}added by {{ created_by_name }}{% endblocktranslate %}{% else %}{% blocktranslate trimmed with version=data_release.version %}from release {{ version }}{% endblocktranslate %}{% endif %}
+  · {% blocktranslate trimmed with date=c.updated_at|date:"Y-m-d" %}updated {{ date }}{% endblocktranslate %}{% if hidden %} · <strong>{% translate "HIDDEN" %}</strong>{% endif %}</p>
 <p class="actions">
-  {% if c|editable_by:user %}<a href="{% url 'characters:edit' c.code %}">Edit</a> <a href="{% url 'characters:delete' c.code %}">Delete</a>{% endif %}
+  {% if c|editable_by:user %}<a href="{% url 'characters:edit' c.code %}">{% translate "Edit" %}</a> <a href="{% url 'characters:delete' c.code %}">{% translate "Delete" %}</a>{% endif %}
   {% include "characters/_admin_hide.html" with kind="character" obj_pk=c.pk %}
-  <a href="{% url 'characters:history_by_code' c.code %}">Edit history</a>
+  <a href="{% url 'characters:history_by_code' c.code %}">{% translate "Edit history" %}</a>
+  {% if user.is_authenticated %}<a href="{% url 'characters:translate' c.code %}">{% translate "Translate" %}</a>{% endif %}
 </p>
 {% if c|consumption_note %}{% include "characters/_disclaimer_near.html" %}{% endif %}
-{% if c.needs_review %}<p class="warn">Marked as needing review.</p>{% endif %}
+{% if c.needs_review %}<p class="warn">{% translate "Marked as needing review." %}</p>{% endif %}
 <dl class="fields">
-  <dt>Name</dt><dd>{{ c.name|default:"—" }}</dd>
-  <dt>Scientific name</dt><dd>{{ scientific|default:"—" }}</dd>
-  <dt>Definition</dt><dd>{{ c.description|default:"—" }}</dd>
-  {% if c.props.unit %}<dt>Unit</dt><dd>{{ c.props.unit }}</dd>{% endif %}
-  <dt>Part</dt><dd>{{ c.part|default:"—" }}</dd>
-  <dt>Observation method</dt><dd>{{ c.observation_method|default:"—" }}</dd>
-  <dt>Value type</dt><dd>{% if c.display_option %}<a href="{% url 'characters:value_type_detail' c.display_option.pk %}">{{ c.display_option }}</a>{% else %}—{% endif %}</dd>
-  <dt>Applies to</dt><dd>{% for f in applies_to %}{{ f }}{% if not forloop.last %}, {% endif %}{% empty %}All fungi{% endfor %}</dd>
-  <dt>Source</dt><dd>{% if c.source %}<a href="{% url 'characters:source_detail' c.source.pk %}">{{ c.source.title }}</a>{% if c.source.author %} — {{ c.source.author }}{% endif %}{% else %}—{% endif %}</dd>
-  <dt>Comments</dt><dd>{{ c.comments|default:"—" }}</dd>
-  {% for s in core_sequences %}<dt>Core order</dt><dd>{{ s.fungus_type }}: #{{ s.sequence }}</dd>{% endfor %}
+  <dt>{% translate "Name" %}</dt><dd lang="en">{{ c.name|default:"—" }}</dd>
+  {% if translated_name %}<dt>{% blocktranslate trimmed with language=current_language_name %}Name in {{ language }}{% endblocktranslate %}</dt><dd>{{ translated_name }}</dd>{% endif %}
+  <dt>{% translate "Scientific name" %}</dt><dd>{{ scientific|default:"—" }}</dd>
+  <dt>{% translate "Definition" %}</dt><dd lang="en">{{ c.description|default:"—" }}</dd>
+  {% if translated_definition %}<dt>{% blocktranslate trimmed with language=current_language_name %}Definition in {{ language }}{% endblocktranslate %}</dt><dd>{{ translated_definition }}</dd>{% endif %}
+  {% if c.props.unit %}<dt>{% translate "Unit" %}</dt><dd>{{ c.props.unit }}</dd>{% endif %}
+  <dt>{% translate "Part" %}</dt><dd>{{ c.part|default:"—" }}</dd>
+  <dt>{% translate "Observation method" %}</dt><dd>{{ c.observation_method|default:"—" }}</dd>
+  <dt>{% translate "Value type" %}</dt><dd>{% if c.display_option %}<a href="{% url 'characters:value_type_detail' c.display_option.pk %}">{{ c.display_option }}</a>{% else %}—{% endif %}</dd>
+  <dt>{% translate "Applies to" %}</dt><dd>{% for f in applies_to %}{{ f }}{% if not forloop.last %}, {% endif %}{% empty %}{% translate "All fungi" %}{% endfor %}</dd>
+  <dt>{% translate "Source" %}</dt><dd>{% if c.source %}<a href="{% url 'characters:source_detail' c.source.pk %}">{{ c.source.title }}</a>{% if c.source.author %} — {{ c.source.author }}{% endif %}{% else %}—{% endif %}</dd>
+  <dt>{% translate "Comments" %}</dt><dd>{{ c.comments|default:"—" }}</dd>
+  {% for s in core_sequences %}<dt>{% translate "Core order" %}</dt><dd>{{ s.fungus_type }}: #{{ s.sequence }}</dd>{% endfor %}
+  <dt>{% translate "Translations" %}</dt><dd>{% for code, name in translations %}{{ name }}{% if not forloop.last %}, {% endif %}{% empty %}{% translate "None yet." %}{% endfor %}</dd>
 </dl>
 
-<h2>Value options ({{ values|length }})</h2>
-{% if user.is_authenticated %}<p><a href="{% url 'characters:value_create' c.code %}">+ Add a value option</a></p>{% endif %}
+<h2>{% blocktranslate trimmed with count=values|length %}Value options ({{ count }}){% endblocktranslate %}</h2>
+{% if user.is_authenticated %}<p><a href="{% url 'characters:value_create' c.code %}">+ {% translate "Add a value option" %}</a></p>{% endif %}
 {% if values %}
 <div class="table-wrap">
 <table>
-  <thead><tr><th>Code</th><th>Value option</th><th>Definition</th><th>Comments</th><th>Source</th><th>By</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+  <thead><tr><th>{% translate "Code" %}</th><th>{% translate "Value option" %}</th><th>{% translate "Definition" %}</th><th>{% translate "Comments" %}</th><th>{% translate "Source" %}</th><th>{% translate "By" %}</th><th><span class="visually-hidden">{% translate "Actions" %}</span></th></tr></thead>
   <tbody>
   {% for v in values %}
     <tr id="{{ v.code }}">
       <td><code>{{ v.code }}</code></td>
-      <td>{{ v.name }}{% if v.hidden %} <strong>(hidden)</strong>{% endif %}</td>
-      <td>{{ v.description|default:"" }}</td><td>{{ v.comments|default:"" }}</td><td>{{ v.source|default:"" }}</td>
-      <td class="muted">{{ v.created_by_name|default:"release" }}</td>
+      <td>{% if v.translated %}<span>{{ v.translated }}</span><br><span class="muted small" lang="en">{{ v.name }}</span>{% else %}<span{% if not_english %} lang="en"{% endif %}>{{ v.name }}</span>{% endif %}{% if v.hidden %} <strong>({% translate "hidden" %})</strong>{% endif %}</td>
+      <td{% if not_english and not v.translated_definition %} lang="en"{% endif %}>{{ v.translated_definition|default:v.description|default:"" }}</td><td>{{ v.comments|default:"" }}</td><td>{{ v.source|default:"" }}</td>
+      <td class="muted">{% if v.created_by_name %}{{ v.created_by_name }}{% else %}{% translate "release" %}{% endif %}</td>
       <td><div class="actions">
-        {% if v|editable_by:user %}<a href="{% url 'characters:edit' v.code %}">Edit</a> <a href="{% url 'characters:delete' v.code %}">Delete</a>{% endif %}
+        {% if v|editable_by:user %}<a href="{% url 'characters:edit' v.code %}">{% translate "Edit" %}</a> <a href="{% url 'characters:delete' v.code %}">{% translate "Delete" %}</a>{% endif %}
         {% include "characters/_admin_hide.html" with kind="value" obj_pk=v.pk hidden=v.hidden %}
-        <a href="{% url 'characters:history_by_code' v.code %}">History</a>
+        <a href="{% url 'characters:history_by_code' v.code %}">{% translate "History" %}</a>
       </div></td>
     </tr>
   {% endfor %}
@@ -52,6 +57,6 @@
 </table>
 </div>
 {% else %}
-<p class="muted">None.</p>
+<p class="muted">{% translate "None." %}</p>
 {% endif %}
 {% endblock %}

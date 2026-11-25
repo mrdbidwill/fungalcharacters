@@ -27,7 +27,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.locale.LocaleMiddleware",
+    "characters.middleware.SiteLocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -79,8 +79,20 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = "en"
-# Interface languages (docs/I18N_PLAN.md). Add a language here once its translation is complete.
-LANGUAGES = [("en", "English")]
+# Interface languages (docs/I18N_PLAN.md, docs/TRANSLATING.md).
+# LANGUAGES: every language being translated (translators can preview it from the "Help translate" page).
+# PUBLISHED_LANGUAGES: the ones offered in the language menu and matched to visitors' browsers.
+# Add a code to PUBLISHED_LANGUAGES when Will decides its translation is ready.
+LANGUAGES = [
+    ("en", "English"),
+    ("es", "Español"),
+    ("th", "ไทย"),
+    ("pt-br", "Português (Brasil)"),
+    ("fr", "Français"),
+]
+PUBLISHED_LANGUAGES = [c for c in os.environ.get("PUBLISHED_LANGUAGES", "en").split(",") if c]
+# Where volunteers translate the website's words (e.g. a Weblate project). Empty until it is set up.
+TRANSLATION_PLATFORM_URL = os.environ.get("TRANSLATION_PLATFORM_URL", "")
 LOCALE_PATHS = [BASE_DIR / "locale"]
 TIME_ZONE = "UTC"
 USE_I18N = True

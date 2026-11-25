@@ -20,6 +20,10 @@ See [docs/DECISIONS.md](docs/DECISIONS.md), the authority for this project.
 
 The data is the `fungal_characters` release 1.0.0 (747 characters, 590 value options), loaded exactly as released from [data/releases/1.0.0/](data/releases/1.0.0/). Every character has a permanent code (FCC#####) and every value option one too (FCV#####); codes are never changed or reused. Permanent address: https://fungalcharacters.org/id/FCC00019
 
+## Translating
+
+Volunteers translate the site and the character data: see [docs/TRANSLATING.md](docs/TRANSLATING.md).
+
 ## Downloads
 
 The release files are in [data/releases/](data/releases/) and on the site's Downloads page.

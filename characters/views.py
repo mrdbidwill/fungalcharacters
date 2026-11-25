@@ -9,6 +9,7 @@ from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.translation import get_language, get_language_info, gettext as _, gettext_lazy, pgettext_lazy
 from django.views.decorators.http import require_POST
 
 from .forms import (
@@ -25,7 +26,10 @@ from .permissions import can_edit, delete_blockers, is_admin
 KINDS = {"character": Character, "value": ValueOption, "value-type": DisplayOption, "source": Source}
 KIND_OF = {model: kind for kind, model in KINDS.items()}
 HISTORY_HIDDEN_FIELDS = ["updated_at"]
-LABEL_NAMES = {"name": "Name", "scientific_name": "Scientific name", "definition": "Definition"}
+LABEL_NAMES = {"name": gettext_lazy("Name"), "scientific_name": gettext_lazy("Scientific name"), "definition": gettext_lazy("Definition")}
+# What each kind of item is called on pages.
+KIND_LABELS = {"character": gettext_lazy("character"), "value option": gettext_lazy("value option"),
+               "value type": gettext_lazy("value type"), "source": gettext_lazy("source")}
 
 
 # ---------- helpers ----------
@@ -64,6 +68,21 @@ def labels_for(item_type, ids, label_type, language="en"):
     )
 
 
+def data_language():
+    """Language code used for data translations in the labels table (same codes as the interface)."""
+    return (get_language() or "en").lower()
+
+
+def language_name(code):
+    try:
+        return get_language_info(code)["name_local"]
+    except KeyError:
+        return code
+
+
+TRANSLATION_LANGUAGES = [code for code, _name in settings.LANGUAGES if code != "en"]
+
+
 def scientific_mode(request):
     return request.session.get("names") == "scientific"
 
@@ -86,7 +105,7 @@ def find_code(code):
 def _save(request, form, title, cancel_url):
     if request.method == "POST" and form.is_valid():
         obj = form.save()
-        messages.success(request, "Saved.")
+        messages.success(request, _("Saved."))
         return redirect(item_url(obj))
     return render(request, "characters/form.html", {"form": form, "title": title, "cancel_url": cancel_url})
 
@@ -95,9 +114,9 @@ def _edit(request, obj, form_class, label):
     if not visible(type(obj), request.user).filter(pk=obj.pk).exists():
         raise Http404
     if not can_edit(request.user, obj):
-        raise PermissionDenied("You can edit only your own work.")
+        raise PermissionDenied(_("You can edit only your own work."))
     form = form_class(posted(request), instance=obj, user=request.user)
-    return _save(request, form, f"Edit {label}: {obj}", item_url(obj))
+    return _save(request, form, _("Edit %(kind)s: %(name)s") % {"kind": KIND_LABELS.get(label, label), "name": obj}, item_url(obj))
 
 
 def posted(request):
@@ -119,7 +138,7 @@ def _delete(request, obj, label, after_url):
     if not visible(type(obj), request.user).filter(pk=obj.pk).exists():
         raise Http404
     if not can_edit(request.user, obj):
-        raise PermissionDenied("You can delete only your own work.")
+        raise PermissionDenied(_("You can delete only your own work."))
     blockers = delete_blockers(request.user, obj)
     form = ReasonForm(posted(request))
     if request.method == "POST" and not blockers and form.is_valid():
@@ -147,10 +166,10 @@ def _delete(request, obj, label, after_url):
                 obj._change_reason = reason
                 obj.delete()
             ItemMeta.objects.filter(item_type=item_type_of(obj), item_id=obj.pk).delete()
-        messages.success(request, f"Deleted {label} “{obj}”.")
+        messages.success(request, _("Deleted %(kind)s “%(name)s”.") % {"kind": KIND_LABELS.get(label, label), "name": obj})
         return redirect(after)
     return render(request, "characters/confirm_delete.html", {
-        "obj": obj, "label": label, "blockers": blockers, "form": form, "cancel_url": item_url(obj),
+        "obj": obj, "label": KIND_LABELS.get(label, label), "blockers": blockers, "form": form, "cancel_url": item_url(obj),
         "extra_values": obj.value_options.count() if isinstance(obj, Character) else 0,
     })
 
@@ -171,17 +190,17 @@ def thanks(request):
 RELEASES_DIR = settings.BASE_DIR / "data" / "releases"
 # What each release file is for (from the release README). Anything else is listed under "Other files".
 DOWNLOAD_KINDS = [
-    (".xlsx", "Excel workbook", "Browse in Excel or Numbers."),
-    ("csv/characters_flat.csv", "CSV: characters", "One row per character."),
-    ("csv/value_options_flat.csv", "CSV: value options", "One row per value option."),
-    ("csv/values_flat.csv", "CSV: value options", "One row per value option (called “values” in this release)."),
-    (".json", "JSON", "For programmers."),
-    ("_postgresql.sql", "SQL for PostgreSQL 16/17", "Creates the tables and loads all data."),
-    (".sql", "SQL for MySQL 8", "Creates the tables and loads all data."),
-    ("_skos.ttl", "SKOS vocabulary (Turtle)", "For vocabulary tools (W3C SKOS)."),
-    ("_sdd.xml", "SDD 1.1 (TDWG XML)", "For identification-key tools."),
-    ("README.md", "Release notes", "What is in the release, and how to cite it."),
-    ("CHANGELOG.md", "Changelog", "What changed in each release."),
+    (".xlsx", gettext_lazy("Excel workbook"), gettext_lazy("Browse in Excel or Numbers.")),
+    ("csv/characters_flat.csv", gettext_lazy("CSV: characters"), gettext_lazy("One row per character.")),
+    ("csv/value_options_flat.csv", gettext_lazy("CSV: value options"), gettext_lazy("One row per value option.")),
+    ("csv/values_flat.csv", gettext_lazy("CSV: value options"), gettext_lazy("One row per value option (called “values” in this release).")),
+    (".json", "JSON", gettext_lazy("For programmers.")),
+    ("_postgresql.sql", gettext_lazy("SQL for PostgreSQL 16/17"), gettext_lazy("Creates the tables and loads all data.")),
+    (".sql", gettext_lazy("SQL for MySQL 8"), gettext_lazy("Creates the tables and loads all data.")),
+    ("_skos.ttl", gettext_lazy("SKOS vocabulary (Turtle)"), gettext_lazy("For vocabulary tools (W3C SKOS).")),
+    ("_sdd.xml", gettext_lazy("SDD 1.1 (TDWG XML)"), gettext_lazy("For identification-key tools.")),
+    ("README.md", gettext_lazy("Release notes"), gettext_lazy("What is in the release, and how to cite it.")),
+    ("CHANGELOG.md", gettext_lazy("Changelog"), gettext_lazy("What changed in each release.")),
 ]
 
 
@@ -239,9 +258,13 @@ def character_list(request):
     ids = [c.pk for c in page]
     sci = labels_for(CHARACTER_TYPE, ids, "scientific_name")
     by = creators(Character, ids)
+    lang = data_language()
+    translated = labels_for(CHARACTER_TYPE, ids, "name", lang) if lang != "en" else {}
     for c in page:
         c.scientific = sci.get(c.pk, "")
         c.created_by_name = by.get(c.pk)
+        c.display_name = translated.get(c.pk) or c.name
+        c.name_lang = "en" if lang != "en" and c.pk not in translated else ""
     return render(request, "characters/list.html", {
         "page": page, "q": q, "part": part, "fungus": fungus,
         "parts": Part.objects.order_by("name"), "fungus_types": FungusType.objects.order_by("name"),
@@ -271,8 +294,29 @@ def character_detail(request, c):
         v.created_by_name = value_by.get(v.pk)
         v.hidden = v.pk in hidden_values
     sci = labels_for(CHARACTER_TYPE, [c.pk], "scientific_name").get(c.pk, "")
+    lang = data_language()
+    translated_name = translated_definition = ""
+    if lang != "en":
+        translated_name = labels_for(CHARACTER_TYPE, [c.pk], "name", lang).get(c.pk, "")
+        translated_definition = labels_for(CHARACTER_TYPE, [c.pk], "definition", lang).get(c.pk, "")
+        v_names = labels_for(VALUE_TYPE, [v.pk for v in values], "name", lang)
+        v_defs = labels_for(VALUE_TYPE, [v.pk for v in values], "definition", lang)
+        for v in values:
+            v.translated = v_names.get(v.pk, "")
+            v.translated_definition = v_defs.get(v.pk, "")
+    if scientific_mode(request) and sci:
+        heading, heading_lang = sci, ""
+    else:
+        heading = translated_name or c.name
+        heading_lang = "en" if lang != "en" and not translated_name else ""
+    langs_with_name = (Label.objects.filter(labelable_type=CHARACTER_TYPE, labelable_id=c.pk, label_type="name")
+                       .exclude(language="en").values_list("language", flat=True))
     return render(request, "characters/detail.html", {
         "c": c, "scientific": sci, "values": values,
+        "heading": heading, "heading_lang": heading_lang, "not_english": lang != "en",
+        "translated_name": translated_name, "translated_definition": translated_definition,
+        "current_language_name": language_name(lang),
+        "translations": [(code, language_name(code)) for code in sorted(set(langs_with_name))],
         "applies_to": c.applies_to.order_by("name"),
         "core_sequences": c.core_sequences.select_related("fungus_type"),
         "created_by_name": creators(Character, [c.pk]).get(c.pk),
@@ -283,7 +327,7 @@ def character_detail(request, c):
 @login_required
 def character_create(request):
     form = CharacterForm(posted(request), user=request.user)
-    return _save(request, form, "Add a character", reverse("characters:list"))
+    return _save(request, form, _("Add a character"), reverse("characters:list"))
 
 
 @login_required
@@ -310,7 +354,7 @@ def delete_by_code(request, code):
 def value_create(request, code):
     character = get_object_or_404(visible(Character, request.user), code=code)
     form = ValueOptionForm(posted(request), instance=ValueOption(character=character), user=request.user)
-    return _save(request, form, f"Add a value option to “{character}”", character.get_absolute_url())
+    return _save(request, form, _("Add a value option to “%(name)s”") % {"name": character}, character.get_absolute_url())
 
 
 # ---------- value types ----------
@@ -334,7 +378,7 @@ def value_type_detail(request, pk):
 @login_required
 def value_type_create(request):
     form = DisplayOptionForm(posted(request), user=request.user)
-    return _save(request, form, "Add a value type", reverse("characters:value_type_list"))
+    return _save(request, form, _("Add a value type"), reverse("characters:value_type_list"))
 
 
 @login_required
@@ -372,7 +416,7 @@ def source_detail(request, pk):
 @login_required
 def source_create(request):
     form = SourceForm(posted(request), user=request.user)
-    return _save(request, form, "Add a source", reverse("characters:source_list"))
+    return _save(request, form, _("Add a source"), reverse("characters:source_list"))
 
 
 @login_required
@@ -395,10 +439,10 @@ def toggle_hidden(request, kind, pk):
     if model is None:
         raise Http404
     obj = get_object_or_404(model, pk=pk)
-    meta, _ = ItemMeta.objects.get_or_create(item_type=item_type_of(obj), item_id=obj.pk)
+    meta, _created = ItemMeta.objects.get_or_create(item_type=item_type_of(obj), item_id=obj.pk)
     meta.is_hidden = not meta.is_hidden
     meta.save()
-    messages.success(request, f"{'Hidden' if meta.is_hidden else 'Shown again'}: {obj}.")
+    messages.success(request, (_("Hidden: %(name)s.") if meta.is_hidden else _("Shown again: %(name)s.")) % {"name": obj})
     return redirect(item_url(obj))
 
 
@@ -467,14 +511,14 @@ def _history_page(request, model, pk, current):
     if model is Character:
         for rec in CharacterFungusType.history.filter(character_id=pk).select_related("history_user", "fungus_type"):
             ft = FungusType.objects.filter(pk=rec.fungus_type_id).first()
-            sign = "added" if rec.history_type == "+" else "removed" if rec.history_type == "-" else "changed"
-            rows.append({"rec": rec, "changes": [("Applies to", "", f"{ft} {sign}")]})
+            sign = _("added") if rec.history_type == "+" else _("removed") if rec.history_type == "-" else _("changed")
+            rows.append({"rec": rec, "changes": [(_("Applies to"), "", f"{ft} {sign}")]})
         for rec in CoreSequence.history.filter(character_id=pk).select_related("history_user"):
             if rec.history_change_reason == "As released":
                 continue
             ft = FungusType.objects.filter(pk=rec.fungus_type_id).first()
-            sign = "added" if rec.history_type == "+" else "removed" if rec.history_type == "-" else "changed"
-            rows.append({"rec": rec, "changes": [("Core order", "", f"{ft} #{rec.sequence} {sign}")]})
+            sign = _("added") if rec.history_type == "+" else _("removed") if rec.history_type == "-" else _("changed")
+            rows.append({"rec": rec, "changes": [(_("Core order"), "", f"{ft} #{rec.sequence} {sign}")]})
     if not rows and current is None:
         raise Http404
     rows.sort(key=lambda r: (r["rec"].history_date, r["rec"].history_id), reverse=True)
@@ -550,4 +594,116 @@ def account(request):
         "my_value_types": DisplayOption.objects.filter(pk__in=ids("DisplayOption")).order_by("name"),
         "my_sources": Source.objects.filter(pk__in=ids("SourceData")).order_by("title"),
         "my_changes": sum(model.history.filter(history_user=request.user).count() for model in KINDS.values()),
+        "my_translations": mine.filter(item_type="Label").count(),
     })
+
+
+# ---------- languages and translation ----------
+
+LOCALE_DIRS = {"pt-br": "pt_BR"}
+
+
+def website_words_progress(code):
+    """(translated, total) messages in the website's translation file for this language."""
+    import polib
+    path = settings.BASE_DIR / "locale" / LOCALE_DIRS.get(code, code) / "LC_MESSAGES" / "django.po"
+    if not path.exists():
+        return 0, 0
+    po = polib.pofile(str(path))
+    entries = [e for e in po if not e.obsolete]
+    return len([e for e in entries if e.translated()]), len(entries)
+
+
+def languages(request):
+    """Choose the site's language, and the starting point for translators."""
+    total = visible(Character, request.user).count()
+    rows = []
+    for code, name in settings.LANGUAGES:
+        if code == "en":
+            continue
+        done, words = website_words_progress(code)
+        n_chars = (Label.objects.filter(labelable_type=CHARACTER_TYPE, label_type="name", language=code)
+                   .values("labelable_id").distinct().count())
+        rows.append({
+            "code": code, "name": name, "published": code in settings.PUBLISHED_LANGUAGES,
+            "words_done": done, "words_total": words, "words_pct": round(100 * done / words) if words else 0,
+            "chars_done": n_chars, "chars_pct": round(100 * n_chars / total) if total else 0,
+        })
+    return render(request, "characters/languages.html", {
+        "published": [(c, n) for c, n in settings.LANGUAGES if c in settings.PUBLISHED_LANGUAGES],
+        "rows": rows, "total_characters": total, "platform_url": settings.TRANSLATION_PLATFORM_URL,
+        "current": get_language(),
+    })
+
+
+def _label_owner_ids(item_type, ids, lang):
+    """{(item_id, label_type): (label, owner id or None)} for one language."""
+    labels = Label.objects.filter(labelable_type=item_type, labelable_id__in=list(ids), language=lang)
+    owners = dict(ItemMeta.objects.filter(item_type="Label", item_id__in=[l.pk for l in labels])
+                  .values_list("item_id", "created_by_id"))
+    return {(l.labelable_id, l.label_type): (l, owners.get(l.pk)) for l in labels}
+
+
+@login_required
+def translate(request, code):
+    """Translate one character (name, definition and its value options) into one language."""
+    from .forms import set_label
+    character = get_object_or_404(visible(Character, request.user), code=code)
+    lang = request.GET.get("lang") or request.POST.get("lang") or data_language()
+    if lang not in TRANSLATION_LANGUAGES:
+        lang = TRANSLATION_LANGUAGES[0]
+    values = list(visible(ValueOption, request.user).filter(character=character))
+    existing = _label_owner_ids(CHARACTER_TYPE, [character.pk], lang)
+    existing.update({("v", k[0], k[1]): v for k, v in _label_owner_ids(VALUE_TYPE, [v.pk for v in values], lang).items()})
+
+    def field(key, item_type, item_id, label_type, english, multiline=False):
+        label, owner = existing.get(key, (None, None))
+        editable = label is None or is_admin(request.user) or owner == request.user.id
+        return {"name": f"{item_type}-{item_id}-{label_type}", "item_type": item_type, "item_id": item_id,
+                "label_type": label_type, "english": english or "", "value": label.text if label else "",
+                "editable": editable, "multiline": multiline}
+
+    fields = [field((character.pk, "name"), CHARACTER_TYPE, character.pk, "name", character.name),
+              field((character.pk, "definition"), CHARACTER_TYPE, character.pk, "definition", character.description, True)]
+    value_fields = []
+    for v in values:
+        value_fields.append((v, field(("v", v.pk, "name"), VALUE_TYPE, v.pk, "name", v.name),
+                             field(("v", v.pk, "definition"), VALUE_TYPE, v.pk, "definition", v.description, True)))
+
+    if request.method == "POST":
+        reason = request.POST.get("reason", "").strip() or f"Translation ({lang})"
+        changed = 0
+        with transaction.atomic():
+            for f in fields + [f for _v, n, d in value_fields for f in (n, d)]:
+                if not f["editable"]:
+                    continue
+                new = request.POST.get(f["name"], "").strip()
+                if new == f["value"]:
+                    continue
+                label, created = set_label(f["item_type"], f["item_id"], f["label_type"], new, reason, language=lang)
+                if created:
+                    ItemMeta.objects.create(item_type="Label", item_id=label.pk, created_by=request.user)
+                changed += 1
+        messages.success(request, _("Saved %(n)d translation(s).") % {"n": changed} if changed else _("Nothing changed."))
+        if request.POST.get("then") == "next":
+            return redirect(reverse("characters:translate_next", args=[lang]))
+        return redirect(reverse("characters:translate", args=[character.code]) + f"?lang={lang}")
+
+    return render(request, "characters/translate.html", {
+        "c": character, "lang": lang, "lang_name": language_name(lang),
+        "languages": [(c, language_name(c)) for c in TRANSLATION_LANGUAGES],
+        "fields": fields, "value_fields": value_fields,
+    })
+
+
+@login_required
+def translate_next(request, lang):
+    """Go to the next character that has no name yet in this language."""
+    if lang not in TRANSLATION_LANGUAGES:
+        raise Http404
+    done = Label.objects.filter(labelable_type=CHARACTER_TYPE, label_type="name", language=lang).values("labelable_id")
+    nxt = visible(Character, request.user).exclude(pk__in=done).order_by("name", "id").first()
+    if nxt is None:
+        messages.success(request, _("Every character has a name in this language. Thank you!"))
+        return redirect("characters:languages")
+    return redirect(reverse("characters:translate", args=[nxt.code]) + f"?lang={lang}")

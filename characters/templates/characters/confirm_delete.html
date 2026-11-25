@@ -1,17 +1,18 @@
 {% extends "characters/base.html" %}
+{% load i18n %}
 {% block content %}
-<h1>Delete {{ label }}: {{ obj }}</h1>
+<h1>{% blocktranslate trimmed %}Delete {{ label }}: {{ obj }}{% endblocktranslate %}</h1>
 {% if blockers %}
-  <p class="warn">This {{ label }} cannot be deleted:</p>
+  <p class="warn">{% blocktranslate trimmed %}This {{ label }} cannot be deleted:{% endblocktranslate %}</p>
   <ul>{% for b in blockers %}<li>{{ b }}</li>{% endfor %}</ul>
-  <p><a href="{{ cancel_url }}">Back</a></p>
+  <p><a href="{{ cancel_url }}">{% translate "Back" %}</a></p>
 {% else %}
-  <p>This removes it from the site. Its edit history stays public, and its code or ID is never reused.</p>
-  {% if extra_values %}<p class="warn">Its {{ extra_values }} value option(s) will be deleted with it.</p>{% endif %}
+  <p>{% translate "This removes it from the site. Its edit history stays public, and its code or ID is never reused." %}</p>
+  {% if extra_values %}<p class="warn">{% blocktranslate trimmed count n=extra_values %}Its {{ n }} value option will be deleted with it.{% plural %}Its {{ n }} value options will be deleted with it.{% endblocktranslate %}</p>{% endif %}
   <form class="form" method="post">
     {% csrf_token %}
     {{ form.as_div }}
-    <div class="actions"><button type="submit">Delete</button> <a href="{{ cancel_url }}">Cancel</a></div>
+    <div class="actions"><button type="submit">{% translate "Delete" %}</button> <a href="{{ cancel_url }}">{% translate "Cancel" %}</a></div>
   </form>
 {% endif %}
 {% endblock %}

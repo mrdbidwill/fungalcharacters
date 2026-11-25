@@ -1,0 +1,44 @@
+{% extends "characters/base.html" %}
+{% load i18n %}
+{% block title %}{% blocktranslate trimmed with name=c.name %}Translate {{ name }}{% endblocktranslate %} · Fungal Characters{% endblock %}
+{% block content %}
+<p><a href="{{ c.get_absolute_url }}">← {{ c.name }}</a> · <a href="{% url 'characters:languages' %}">{% translate "Languages" %}</a></p>
+<h1>{% blocktranslate trimmed with name=c.name %}Translate “{{ name }}”{% endblocktranslate %}</h1>
+
+<form method="get" class="filter">
+  <label for="t-lang">{% translate "Into" %}</label>
+  <select id="t-lang" name="lang">{% for code, name in languages %}<option value="{{ code }}" lang="{{ code }}"{% if code == lang %} selected{% endif %}>{{ name }}</option>{% endfor %}</select>
+  <button type="submit">{% translate "Change language" %}</button>
+</form>
+
+<p class="muted">{% translate "Write the name and definition as they are used in this language. Leave a box empty if you are unsure. Scientific names are not translated." %}</p>
+
+<form method="post" class="form translate-form">
+  {% csrf_token %}
+  <input type="hidden" name="lang" value="{{ lang }}">
+  <h2>{% translate "Character" %} <code>{{ c.code }}</code></h2>
+  {% for f in fields %}{% include "characters/_translate_field.html" %}{% endfor %}
+
+  {% if value_fields %}
+  <h2>{% translate "Value options" %}</h2>
+  {% for v, name_field, def_field in value_fields %}
+    <fieldset class="translate-value">
+      <legend><code>{{ v.code }}</code> <span lang="en">{{ v.name }}</span></legend>
+      {% with f=name_field %}{% include "characters/_translate_field.html" %}{% endwith %}
+      {% with f=def_field %}{% include "characters/_translate_field.html" %}{% endwith %}
+    </fieldset>
+  {% endfor %}
+  {% endif %}
+
+  <div>
+    <label for="t-reason">{% translate "Reason or note (optional)" %}</label>
+    <input id="t-reason" type="text" name="reason" maxlength="200">
+    <span class="helptext">{% translate "Shown in the public edit history." %}</span>
+  </div>
+  <div class="actions">
+    <button type="submit" name="then" value="next">{% translate "Save and go to the next character" %}</button>
+    <button type="submit" name="then" value="stay">{% translate "Save" %}</button>
+    <a href="{{ c.get_absolute_url }}">{% translate "Cancel" %}</a>
+  </div>
+</form>
+{% endblock %}

@@ -6,6 +6,7 @@
 - Be concise.
 - Number any steps Will must do.
 - Commit with clear messages and push after each completed piece of work.
+- Mark every new piece of page text for translation and refresh the translation files (docs/TRANSLATING.md, "For maintainers").
 - When a decision is final, apply it everywhere it affects in the same piece of work (code, data, release files, build scripts, docs, DECISIONS.md). Do not leave follow-ups for later; ask only about things the decision does not settle (Will, 2026-11-25).
 
 ## Character data (2026-11-25)

@@ -1,35 +1,41 @@
 {% extends "characters/base.html" %}
+{% load i18n %}
 {% block content %}
 <div class="prose">
 <h1>Fungal Characters</h1>
-<p class="tagline">A free, publicly maintained list of the characters used to describe and identify fungi.</p>
-<p class="lead">Characters are the features recorded when describing a fungus, such as Cap Width or Gill Attachment. For each one, this site gives its name and scientific name, definition, value type and, where there is a list to choose from, its value options. The goal is data that anyone can use and everyone can help maintain.</p>
+<p class="tagline">{% translate "A free, publicly maintained list of the characters used to describe and identify fungi." %}</p>
+<p class="lead">{% translate "Characters are the features recorded when describing a fungus, such as Cap Width or Gill Attachment. For each one, this site gives its name and scientific name, definition, value type and, where there is a list to choose from, its value options. The goal is data that anyone can use and everyone can help maintain." %}</p>
 </div>
 
 <div class="card-grid">
   <section class="card">
-    <h2>View it here</h2>
-    <p>Browse and search all {{ n_characters }} characters and {{ n_values }} value options, with their sources and the public history of every change.</p>
-    <p><a class="button" href="{% url 'characters:list' %}">Browse characters</a></p>
+    <h2>{% translate "View it here" %}</h2>
+    <p>{% blocktranslate trimmed %}Browse and search all {{ n_characters }} characters and {{ n_values }} value options, with their sources and the public history of every change.{% endblocktranslate %}</p>
+    <p><a class="button" href="{% url 'characters:list' %}">{% translate "Browse characters" %}</a></p>
   </section>
   <section class="card">
-    <h2>Get the data</h2>
-    <p>Download the complete set as a dated release: Excel, CSV, JSON, SQL, SKOS and SDD. Free to use in any way (CC0).</p>
-    <p><a class="button" href="{% url 'characters:downloads' %}">Downloads</a></p>
+    <h2>{% translate "Get the data" %}</h2>
+    <p>{% translate "Download the complete set as a dated release: Excel, CSV, JSON, SQL, SKOS and SDD. Free to use in any way (CC0)." %}</p>
+    <p><a class="button" href="{% url 'characters:downloads' %}">{% translate "Downloads" %}</a></p>
   </section>
   <section class="card">
-    <h2>Add and edit</h2>
-    <p>Sign up and log in to add characters, value options, value types and sources, and to edit what you added. Every change is public, showing who made it and why.</p>
-    <p>{% if user.is_authenticated %}<a class="button" href="{% url 'characters:create' %}">Add a character</a>{% else %}<a class="button" href="{% url 'account_signup' %}">Sign up</a> <a href="{% url 'account_login' %}">Sign in</a>{% endif %}</p>
+    <h2>{% translate "Add and edit" %}</h2>
+    <p>{% translate "Sign up and sign in to add characters, value options, value types and sources, and to edit what you added. Every change is public, showing who made it and why." %}</p>
+    <p>{% if user.is_authenticated %}<a class="button" href="{% url 'characters:create' %}">{% translate "Add a character" %}</a>{% else %}<a class="button" href="{% url 'account_signup' %}">{% translate "Sign up" %}</a> <a href="{% url 'account_login' %}">{% translate "Sign in" %}</a>{% endif %}</p>
+  </section>
+  <section class="card">
+    <h2>{% translate "Translate" %}</h2>
+    <p>{% translate "Help bring the site and its characters into your language." %}</p>
+    <p><a class="button" href="{% url 'characters:languages' %}">{% translate "Help translate" %}</a></p>
   </section>
 </div>
 
 <div class="prose">
-<h2>Where people disagree</h2>
-<p>Mycologists and collectors do not always agree on terms or on values. On fungalcharacters.org, each character and value option shows its source, and every change is kept in a public history that shows who changed what, when and why, so earlier wording is never lost. Ultimately, users decide which characters and values live on. Thanks on the <a href="{% url 'characters:thanks' %}">Thanks</a> page does not mean anyone named there endorses any value on the site.</p>
-<p><strong>Open tools and public data to improve the accuracy of fungal data.</strong></p>
+<h2>{% translate "Where people disagree" %}</h2>
+<p>{% url 'characters:thanks' as thanks_url %}{% blocktranslate trimmed %}Mycologists and collectors do not always agree on terms or on values. On fungalcharacters.org, each character and value option shows its source, and every change is kept in a public history that shows who changed what, when and why, so earlier wording is never lost. Ultimately, users decide which characters and values live on. Thanks on the <a href="{{ thanks_url }}">Thanks</a> page does not mean anyone named there endorses any value on the site.{% endblocktranslate %}</p>
+<p><strong>{% translate "Open tools and public data to improve the accuracy of fungal data." %}</strong></p>
 
-<h2>No advice about consumption</h2>
-<p>fungalcharacters.org records how sources describe fungi. It is not a guide to eating, using or handling any fungus, and nothing here says whether any fungus is safe. Values about chemistry or toxicity are reported only as their source states them.</p>
+<h2>{% translate "No advice about consumption" %}</h2>
+<p>{% translate "fungalcharacters.org records how sources describe fungi. It is not a guide to eating, using or handling any fungus, and nothing here says whether any fungus is safe. Values about chemistry or toxicity are reported only as their source states them." %}</p>
 </div>
 {% endblock %}

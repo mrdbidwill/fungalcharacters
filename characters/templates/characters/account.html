@@ -1,29 +1,33 @@
 {% extends "allauth/layouts/manage.html" %}
-{% block head_title %}Your account{% endblock %}
+{% load i18n %}
+{% block head_title %}{% translate "Your account" %}{% endblock %}
 {% block content %}
 <h1>{{ user.username }}</h1>
-<p class="muted">Member since {{ user.date_joined|date:"j F Y" }}{% if user.is_superuser %} · site admin{% endif %}. Your username is shown on everything you add.</p>
+<p class="muted">{% blocktranslate trimmed with date=user.date_joined|date:"j F Y" %}Member since {{ date }}.{% endblocktranslate %}{% if user.is_superuser %} {% translate "Site admin." %}{% endif %} {% translate "Your username is shown on everything you add." %}</p>
 
-<h2>Settings</h2>
+<h2>{% translate "Settings" %}</h2>
 <dl class="fields">
-  <dt>Email</dt>
-  <dd>{% for e in emails %}{{ e.email }}{% if e.primary %} (main){% endif %}{% if not e.verified %} — <strong>not verified</strong>{% endif %}{% if not forloop.last %}<br>{% endif %}{% empty %}None yet{% endfor %}
-    <br><a href="{% url 'account_email' %}">Manage email addresses</a></dd>
-  <dt>Password</dt><dd><a href="{% url 'account_change_password' %}">Change password</a></dd>
-  <dt>Two-factor sign-in</dt>
-  <dd>{% if mfa_enabled %}On.{% else %}<strong>Off.</strong> Recommended: it protects your account even if your password is stolen.{% endif %}
-    <br><a href="{% url 'mfa_index' %}">{% if mfa_enabled %}Manage two-factor sign-in{% else %}Turn on two-factor sign-in{% endif %}</a></dd>
-  <dt>Signed-in devices</dt><dd><a href="{% url 'usersessions_list' %}">See and sign out other devices</a></dd>
+  <dt>{% translate "Email" %}</dt>
+  <dd>{% for e in emails %}{{ e.email }}{% if e.primary %} ({% translate "main" %}){% endif %}{% if not e.verified %} — <strong>{% translate "not verified" %}</strong>{% endif %}{% if not forloop.last %}<br>{% endif %}{% empty %}{% translate "None yet" %}{% endfor %}
+    <br><a href="{% url 'account_email' %}">{% translate "Manage email addresses" %}</a></dd>
+  <dt>{% translate "Password" %}</dt><dd><a href="{% url 'account_change_password' %}">{% translate "Change password" %}</a></dd>
+  <dt>{% translate "Two-factor sign-in" %}</dt>
+  <dd>{% if mfa_enabled %}{% translate "On." %}{% else %}<strong>{% translate "Off." %}</strong> {% translate "Recommended: it protects your account even if your password is stolen." %}{% endif %}
+    <br><a href="{% url 'mfa_index' %}">{% if mfa_enabled %}{% translate "Manage two-factor sign-in" %}{% else %}{% translate "Turn on two-factor sign-in" %}{% endif %}</a></dd>
+  <dt>{% translate "Signed-in devices" %}</dt><dd><a href="{% url 'usersessions_list' %}">{% translate "See and sign out other devices" %}</a></dd>
+  <dt>{% translate "Language" %}</dt><dd><a href="{% url 'characters:languages' %}">{% translate "Choose the site's language" %}</a></dd>
 </dl>
 
-<h2>Your contributions</h2>
-<p>{{ my_changes }} change{{ my_changes|pluralize }} recorded in the public history.</p>
-<h3>Characters ({{ my_characters|length }})</h3>
-{% if my_characters %}<ul>{% for c in my_characters %}<li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a> <code>{{ c.code }}</code></li>{% endfor %}</ul>{% else %}<p class="muted">None yet. <a href="{% url 'characters:create' %}">Add a character</a>.</p>{% endif %}
-<h3>Value options ({{ my_values|length }})</h3>
-{% if my_values %}<ul>{% for v in my_values %}<li><a href="{{ v.character.get_absolute_url }}#{{ v.code }}">{{ v.name }}</a> on {{ v.character.name }} <code>{{ v.code }}</code></li>{% endfor %}</ul>{% else %}<p class="muted">None yet.</p>{% endif %}
-<h3>Value types ({{ my_value_types|length }})</h3>
-{% if my_value_types %}<ul>{% for o in my_value_types %}<li><a href="{% url 'characters:value_type_detail' o.pk %}">{{ o.name }}</a></li>{% endfor %}</ul>{% else %}<p class="muted">None yet.</p>{% endif %}
-<h3>Sources ({{ my_sources|length }})</h3>
-{% if my_sources %}<ul>{% for o in my_sources %}<li><a href="{% url 'characters:source_detail' o.pk %}">{{ o.title }}</a></li>{% endfor %}</ul>{% else %}<p class="muted">None yet.</p>{% endif %}
+<h2>{% translate "Your contributions" %}</h2>
+<p>{% blocktranslate trimmed count n=my_changes %}{{ n }} change recorded in the public history.{% plural %}{{ n }} changes recorded in the public history.{% endblocktranslate %}</p>
+<h3>{% blocktranslate trimmed with count=my_characters|length %}Characters ({{ count }}){% endblocktranslate %}</h3>
+{% if my_characters %}<ul>{% for c in my_characters %}<li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a> <code>{{ c.code }}</code></li>{% endfor %}</ul>{% else %}<p class="muted">{% translate "None yet." %} <a href="{% url 'characters:create' %}">{% translate "Add a character" %}</a>.</p>{% endif %}
+<h3>{% blocktranslate trimmed with count=my_values|length %}Value options ({{ count }}){% endblocktranslate %}</h3>
+{% if my_values %}<ul>{% for v in my_values %}<li><a href="{{ v.character.get_absolute_url }}#{{ v.code }}">{{ v.name }}</a> — {{ v.character.name }} <code>{{ v.code }}</code></li>{% endfor %}</ul>{% else %}<p class="muted">{% translate "None yet." %}</p>{% endif %}
+<h3>{% blocktranslate trimmed with count=my_value_types|length %}Value types ({{ count }}){% endblocktranslate %}</h3>
+{% if my_value_types %}<ul>{% for o in my_value_types %}<li><a href="{% url 'characters:value_type_detail' o.pk %}">{{ o.name }}</a></li>{% endfor %}</ul>{% else %}<p class="muted">{% translate "None yet." %}</p>{% endif %}
+<h3>{% blocktranslate trimmed with count=my_sources|length %}Sources ({{ count }}){% endblocktranslate %}</h3>
+{% if my_sources %}<ul>{% for o in my_sources %}<li><a href="{% url 'characters:source_detail' o.pk %}">{{ o.title }}</a></li>{% endfor %}</ul>{% else %}<p class="muted">{% translate "None yet." %}</p>{% endif %}
+<h3>{% blocktranslate trimmed with count=my_translations %}Translations ({{ count }}){% endblocktranslate %}</h3>
+<p class="muted">{% if my_translations %}{% translate "Names and definitions you wrote in other languages." %}{% else %}{% translate "None yet." %} <a href="{% url 'characters:languages' %}">{% translate "Help translate" %}</a>.{% endif %}</p>
 {% endblock %}

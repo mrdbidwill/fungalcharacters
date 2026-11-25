@@ -6,6 +6,8 @@
 - Value types and sources still in use cannot be deleted by anyone until the
   items using them are changed.
 """
+from django.utils.translation import gettext as _, ngettext
+
 from .forms import item_type_of
 from .models import Character, DisplayOption, ItemMeta, Source, ValueOption
 
@@ -38,22 +40,22 @@ def delete_blockers(user, obj):
                   .values_list("item_id", flat=True))
         others = len(set(value_ids) - own)
         if others:
-            reasons.append(f"{others} value option(s) on it were added by other users.")
+            reasons.append(ngettext("%(n)d value option on it was added by another user.", "%(n)d value options on it were added by other users.", others) % {"n": others})
         if obj.core_sequences.exists():
-            reasons.append("It is part of a core character order.")
+            reasons.append(_("It is part of a core character order."))
         return reasons
     if isinstance(obj, ValueOption):
         return []
     if isinstance(obj, DisplayOption):
         n = obj.characters.count()
-        return [f"{n} character(s) use this value type. Change them first."] if n else []
+        return [ngettext("%(n)d character uses this value type. Change it first.", "%(n)d characters use this value type. Change them first.", n) % {"n": n}] if n else []
     if isinstance(obj, Source):
         reasons = []
         n = obj.characters.count()
         if n:
-            reasons.append(f"{n} character(s) cite this source. Change them first.")
+            reasons.append(ngettext("%(n)d character cites this source. Change it first.", "%(n)d characters cite this source. Change them first.", n) % {"n": n})
         n = obj.value_options.count()
         if n:
-            reasons.append(f"{n} value option(s) cite this source. Change them first.")
+            reasons.append(ngettext("%(n)d value option cites this source. Change it first.", "%(n)d value options cite this source. Change them first.", n) % {"n": n})
         return reasons
-    return ["This kind of item is managed by the admin."]
+    return [_("This kind of item is managed by the admin.")]

@@ -1,10 +1,11 @@
-{% load static %}<!doctype html>
+{% load static i18n %}<!doctype html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}{% get_language_info for LANGUAGE_CODE as current_lang %}
 <html lang="{{ LANGUAGE_CODE|default:"en" }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}Fungal Characters{% endblock %}</title>
-<meta name="description" content="A free, publicly maintained list of the characters used to describe and identify fungi.">
+<meta name="description" content="{% translate "A free, publicly maintained list of the characters used to describe and identify fungi." %}">
 <link rel="icon" href="{% static 'characters/favicon.ico' %}" sizes="any">
 <link rel="icon" href="{% static 'characters/favicon.svg' %}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{% static 'characters/apple-touch-icon.png' %}">
@@ -13,7 +14,7 @@
 {% block extra_head %}{% endblock %}
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">{% translate "Skip to content" %}</a>
 {% with here=request.resolver_match.url_name %}
 <header class="site-header">
   <div class="wrap bar">
@@ -21,29 +22,30 @@
       <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 34 A24 26 0 0 1 56 34 Z"/><path fill="currentColor" d="M27 37 H37 L39 52 A7 4 0 0 1 25 52 Z"/></svg>
       Fungal Characters
     </a>
-    <nav class="site-nav" aria-label="Main">
+    <nav class="site-nav" aria-label="{% translate "Main" context "navigation" %}">
       <ul>
-        <li><a href="{% url 'characters:home' %}"{% if here == 'home' %} aria-current="page"{% endif %}>Home</a></li>
-        <li><a href="{% url 'characters:list' %}"{% if here == 'list' or here == 'by_code' or here == 'create' %} aria-current="page"{% endif %}>Characters</a></li>
-        <li><a href="{% url 'characters:value_type_list' %}"{% if here == 'value_type_list' or here == 'value_type_detail' %} aria-current="page"{% endif %}>Value types</a></li>
-        <li><a href="{% url 'characters:source_list' %}"{% if here == 'source_list' or here == 'source_detail' %} aria-current="page"{% endif %}>Sources</a></li>
-        <li><a href="{% url 'characters:downloads' %}"{% if here == 'downloads' %} aria-current="page"{% endif %}>Downloads</a></li>
-        <li><a href="{% url 'characters:recent_changes' %}"{% if here == 'recent_changes' %} aria-current="page"{% endif %}>Recent changes</a></li>
-        <li><a href="{% url 'characters:thanks' %}"{% if here == 'thanks' %} aria-current="page"{% endif %}>Thanks</a></li>
+        <li><a href="{% url 'characters:home' %}"{% if here == 'home' %} aria-current="page"{% endif %}>{% translate "Home" %}</a></li>
+        <li><a href="{% url 'characters:list' %}"{% if here == 'list' or here == 'by_code' or here == 'create' %} aria-current="page"{% endif %}>{% translate "Characters" %}</a></li>
+        <li><a href="{% url 'characters:value_type_list' %}"{% if here == 'value_type_list' or here == 'value_type_detail' %} aria-current="page"{% endif %}>{% translate "Value types" %}</a></li>
+        <li><a href="{% url 'characters:source_list' %}"{% if here == 'source_list' or here == 'source_detail' %} aria-current="page"{% endif %}>{% translate "Sources" %}</a></li>
+        <li><a href="{% url 'characters:downloads' %}"{% if here == 'downloads' %} aria-current="page"{% endif %}>{% translate "Downloads" %}</a></li>
+        <li><a href="{% url 'characters:recent_changes' %}"{% if here == 'recent_changes' %} aria-current="page"{% endif %}>{% translate "Recent changes" %}</a></li>
+        <li><a href="{% url 'characters:thanks' %}"{% if here == 'thanks' %} aria-current="page"{% endif %}>{% translate "Thanks" %}</a></li>
       </ul>
     </nav>
     <div class="tools">
-      <span>Names:
-        {% if scientific_names %}<a href="{% url 'characters:set_name_mode' 'english' %}?next={{ request.get_full_path|urlencode }}">English</a> · <strong>Scientific</strong>
-        {% else %}<strong>English</strong> · <a href="{% url 'characters:set_name_mode' 'scientific' %}?next={{ request.get_full_path|urlencode }}">Scientific</a>{% endif %}
+      <a href="{% url 'characters:languages' %}"{% if here == 'languages' %} aria-current="page"{% endif %}><span aria-hidden="true">🌐</span> {{ current_lang.name_local|capfirst }}<span class="visually-hidden"> — {% translate "language and translation" %}</span></a>
+      <span>{% translate "Names:" %}
+        {% if scientific_names %}<a href="{% url 'characters:set_name_mode' 'english' %}?next={{ request.get_full_path|urlencode }}">{% translate "Common" context "names" %}</a> · <strong>{% translate "Scientific" context "names" %}</strong>
+        {% else %}<strong>{% translate "Common" context "names" %}</strong> · <a href="{% url 'characters:set_name_mode' 'scientific' %}?next={{ request.get_full_path|urlencode }}">{% translate "Scientific" context "names" %}</a>{% endif %}
       </span>
       {% if user.is_authenticated %}
-        <a href="{% url 'characters:account' %}" title="Your account"{% if here == 'account' %} aria-current="page"{% endif %}><strong>{{ user.username }}</strong></a>
-        {% if user.is_superuser %}<a href="{% url 'admin:index' %}">Admin</a>{% endif %}
-        <form class="inline" method="post" action="{% url 'account_logout' %}">{% csrf_token %}<button class="link" type="submit">Sign out</button></form>
+        <a href="{% url 'characters:account' %}" title="{% translate "Your account" %}"{% if here == 'account' %} aria-current="page"{% endif %}><strong>{{ user.username }}</strong></a>
+        {% if user.is_superuser %}<a href="{% url 'admin:index' %}">{% translate "Admin" %}</a>{% endif %}
+        <form class="inline" method="post" action="{% url 'account_logout' %}">{% csrf_token %}<button class="link" type="submit">{% translate "Sign out" %}</button></form>
       {% else %}
-        <a href="{% url 'account_login' %}?next={{ request.get_full_path|urlencode }}">Sign in</a>
-        <a href="{% url 'account_signup' %}">Sign up</a>
+        <a href="{% url 'account_login' %}?next={{ request.get_full_path|urlencode }}">{% translate "Sign in" %}</a>
+        <a href="{% url 'account_signup' %}">{% translate "Sign up" %}</a>
       {% endif %}
     </div>
   </div>
@@ -57,9 +59,10 @@
 </main>
 <footer class="site-footer">
   <div class="wrap">
-    <p>Character data{% if data_release %}: Fungal Characters release {{ data_release.version }} ({{ data_release.released_at|date:"Y-m-d" }}){% endif %}.
-    Dedicated to the public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>: free to use in any way. Code: MIT.</p>
-    <p>Please cite as: Fungal Characters{% if data_release %}, release {{ data_release.version }}{% endif %}, https://fungalcharacters.org/</p>
+    <p>{% if data_release %}{% blocktranslate trimmed with version=data_release.version date=data_release.released_at|date:"Y-m-d" %}Character data: Fungal Characters release {{ version }} ({{ date }}).{% endblocktranslate %}{% else %}{% translate "Character data." %}{% endif %}
+    {% blocktranslate trimmed %}Dedicated to the public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>: free to use in any way. Code: MIT.{% endblocktranslate %}</p>
+    <p>{% if data_release %}{% blocktranslate trimmed with version=data_release.version %}Please cite as: Fungal Characters, release {{ version }}, https://fungalcharacters.org/{% endblocktranslate %}{% else %}{% translate "Please cite as: Fungal Characters, https://fungalcharacters.org/" %}{% endif %}</p>
+    <p><a href="{% url 'characters:languages' %}">{% translate "Help translate this site" %}</a></p>
   </div>
 </footer>
 {% block extra_body %}{% endblock %}

@@ -1,13 +1,14 @@
 {% extends "characters/base.html" %}
-{% load charperms %}
+{% load i18n charperms %}
+{% block title %}{% translate "Sources" %} · Fungal Characters{% endblock %}
 {% block content %}
-<h1>Sources</h1>
-<p class="muted">Published sources anyone can cite or add to.</p>
-{% if user.is_authenticated %}<p><a href="{% url 'characters:source_create' %}">+ Add a source</a></p>{% endif %}
+<h1>{% translate "Sources" %}</h1>
+<p class="muted">{% translate "Published sources anyone can cite or add to." %}</p>
+{% if user.is_authenticated %}<p><a href="{% url 'characters:source_create' %}">+ {% translate "Add a source" %}</a></p>{% endif %}
 <div class="table-wrap">
 <table>
-  <thead><tr><th>ID</th><th>Title</th><th>Author</th><th>Type</th><th>Characters</th><th>By</th></tr></thead>
-  <tbody>{% for o in items %}<tr><td>{{ o.id }}</td><td><a href="{% url 'characters:source_detail' o.pk %}">{{ o.title }}</a>{% if o|consumption_note %}{% include "characters/_disclaimer_near.html" %}{% endif %}</td><td>{{ o.author }}</td><td>{{ o.source_type|default:"" }}</td><td>{{ o.n }}</td><td>{{ o.created_by_name|default:"release" }}</td></tr>{% endfor %}</tbody>
+  <thead><tr><th>ID</th><th>{% translate "Title" %}</th><th>{% translate "Author" %}</th><th>{% translate "Type" %}</th><th>{% translate "Characters" %}</th><th>{% translate "By" %}</th></tr></thead>
+  <tbody>{% for o in items %}<tr><td>{{ o.id }}</td><td><a href="{% url 'characters:source_detail' o.pk %}">{{ o.title }}</a>{% if o|consumption_note %}{% include "characters/_disclaimer_near.html" %}{% endif %}</td><td>{{ o.author }}</td><td>{{ o.source_type|default:"" }}</td><td>{{ o.n }}</td><td>{% if o.created_by_name %}{{ o.created_by_name }}{% else %}{% translate "release" %}{% endif %}</td></tr>{% endfor %}</tbody>
 </table>
 </div>
 {% endblock %}

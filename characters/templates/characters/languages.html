@@ -1,0 +1,50 @@
+{% extends "characters/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Languages" %} · Fungal Characters{% endblock %}
+{% block content %}
+<div class="prose">
+<h1>{% translate "Languages" %}</h1>
+
+<h2>{% translate "Choose the site's language" %}</h2>
+<form action="{% url 'set_language' %}" method="post" class="filter">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{% url 'characters:languages' %}">
+  <label class="visually-hidden" for="lang-choice">{% translate "Language" %}</label>
+  <select id="lang-choice" name="language">
+    {% for code, name in published %}<option value="{{ code }}" lang="{{ code }}"{% if code == current %} selected{% endif %}>{{ name }}</option>{% endfor %}
+  </select>
+  <button type="submit">{% translate "Change" %}</button>
+</form>
+{% if published|length == 1 %}<p class="muted">{% translate "Other languages appear here once their translation is ready. You can help below." %}</p>{% endif %}
+
+<h2>{% translate "Help translate" %}</h2>
+<p>{% translate "Fungal Characters is maintained by volunteers. There are two things to translate, and you can help with either:" %}</p>
+<ol>
+  <li><strong>{% translate "The character data" %}</strong> — {% translate "names and definitions of characters and their value options. Sign in, then use “Translate characters” below, or the “Translate” link on any character page. Your translations are credited to you and kept in the public history." %}</li>
+  <li><strong>{% translate "The website's own words" %}</strong> — {% translate "menus, buttons and page text." %}
+    {% if platform_url %}<a href="{{ platform_url }}">{% translate "Translate them on our translation platform." %}</a>{% else %}{% blocktranslate trimmed %}These are translated in files kept in the public GitHub repository; the <a href="https://github.com/mrdbidwill/fungalcharacters/blob/main/docs/TRANSLATING.md">translation guide</a> explains how.{% endblocktranslate %}{% endif %}</li>
+</ol>
+<p>{% translate "Scientific (Latin) names are shared by every language and are not translated." %}</p>
+</div>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th scope="col">{% translate "Language" %}</th><th scope="col">{% translate "Website words" %}</th><th scope="col">{% translate "Characters with a name" %}</th><th scope="col">{% translate "Status" %}</th><th scope="col"><span class="visually-hidden">{% translate "Actions" %}</span></th></tr></thead>
+  <tbody>
+  {% for r in rows %}
+    <tr>
+      <td><strong lang="{{ r.code }}">{{ r.name }}</strong></td>
+      <td>{{ r.words_pct }}% <span class="muted small">({{ r.words_done }}/{{ r.words_total }})</span></td>
+      <td>{{ r.chars_pct }}% <span class="muted small">({{ r.chars_done }}/{{ total_characters }})</span></td>
+      <td>{% if r.published %}{% translate "Published" %}{% else %}{% translate "In progress" %}{% endif %}</td>
+      <td><div class="actions">
+        <form class="inline" action="{% url 'set_language' %}" method="post">{% csrf_token %}<input type="hidden" name="language" value="{{ r.code }}"><input type="hidden" name="next" value="{% url 'characters:languages' %}"><button class="link" type="submit">{% if r.published %}{% translate "Use" %}{% else %}{% translate "Preview" %}{% endif %}</button></form>
+        {% if user.is_authenticated %}<a href="{% url 'characters:translate_next' r.code %}">{% translate "Translate characters" %}</a>{% else %}<a href="{% url 'account_login' %}?next={% url 'characters:translate_next' r.code %}">{% translate "Sign in to translate" %}</a>{% endif %}
+      </div></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<p class="muted">{% translate "Preview shows the site in that language as far as it is translated; untranslated text stays in English. Choose English above to switch back." %}</p>
+{% endblock %}

@@ -1,4 +1,5 @@
 {% extends "characters/base.html" %}
+{% load i18n %}
 {% block title %}{{ title }} · Fungal Characters{% endblock %}
 {% block content %}
 <h1>{{ title }}</h1>
@@ -7,7 +8,7 @@
   {{ form.non_field_errors }}
   {% if form.similar %}
   <div class="warn">
-    <strong>Similar names already exist:</strong>
+    <strong>{% translate "Similar names already exist:" %}</strong>
     <ul>{% for o in form.similar %}<li>{% if o.get_absolute_url %}<a href="{{ o.get_absolute_url }}" target="_blank">{{ o }}</a>{% else %}{{ o }}{% endif %} ({% if o.code %}{{ o.code }}{% else %}ID {{ o.pk }}{% endif %})</li>{% endfor %}</ul>
     {{ form.confirm_similar }} {{ form.confirm_similar.label_tag }}
   </div>
@@ -24,8 +25,8 @@
   {% endfor %}
   {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
   <div class="actions">
-    <button type="submit">{{ submit|default:"Save" }}</button>
-    {% if cancel_url %}<a href="{{ cancel_url }}">Cancel</a>{% endif %}
+    <button type="submit">{% if submit %}{{ submit }}{% else %}{% translate "Save" %}{% endif %}</button>
+    {% if cancel_url %}<a href="{{ cancel_url }}">{% translate "Cancel" %}</a>{% endif %}
   </div>
 </form>
 {% endblock %}

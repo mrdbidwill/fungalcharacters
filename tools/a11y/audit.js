@@ -8,6 +8,7 @@ const [,, port, base, sessionid, ...paths] = process.argv;
   const { Page, Runtime, Network, Emulation } = client;
   await Promise.all([Page.enable(), Runtime.enable(), Network.enable()]);
   if (sessionid && sessionid !== '-') await Network.setCookie({ name: 'sessionid', value: sessionid, url: base });
+  if (process.env.SITE_LANG) await Network.setCookie({ name: 'django_language', value: process.env.SITE_LANG, url: base });  // e.g. SITE_LANG=es
   const results = {};
   for (const scheme of ['light', 'dark']) {
     await Emulation.setEmulatedMedia({ features: [{ name: 'prefers-color-scheme', value: scheme }] });

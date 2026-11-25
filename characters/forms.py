@@ -1,6 +1,7 @@
 from difflib import SequenceMatcher
 
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from django.db import transaction
 
 from .models import (
@@ -33,7 +34,7 @@ def ensure_history_baseline(obj):
 
 
 def set_label(item_type, item_id, label_type, text, reason, language="en"):
-    """Create, update or remove one label so it matches `text`."""
+    """Create, update or remove one label so it matches `text`. Returns (label or None, created)."""
     text = (text or "").strip()
     label = Label.objects.filter(
         labelable_type=item_type, labelable_id=item_id, language=language, label_type=label_type
@@ -52,13 +53,15 @@ def set_label(item_type, item_id, label_type, text, reason, language="en"):
                       label_type=label_type, text=text)
         label._change_reason = reason
         label.save()
+        return label, True
+    return label if text else None, False
 
 
 class ReasonForm(forms.Form):
     reason = forms.CharField(
-        label="Reason for this change", required=False,
+        label=_("Reason for this change"), required=False,
         widget=forms.Textarea(attrs={"rows": 2}),
-        help_text="Optional. Shown in the public edit history.",
+        help_text=_("Optional. Shown in the public edit history."),
     )
 
 
@@ -68,7 +71,7 @@ class TrackedForm(forms.ModelForm):
     dup_field = "name"
     reason = ReasonForm.base_fields["reason"]
     confirm_similar = forms.BooleanField(
-        required=False, label="Save anyway: this is not the same as the similar names listed above",
+        required=False, label=_("Save anyway: this is not the same as the similar names listed above"),
     )
 
     def __init__(self, *args, user=None, **kwargs):
@@ -87,7 +90,7 @@ class TrackedForm(forms.ModelForm):
             return cleaned
         norm = normalize_name(value)
         if not norm:
-            self.add_error(self.dup_field, "Must contain at least one letter or number.")
+            self.add_error(self.dup_field, _("Must contain at least one letter or number."))
             return cleaned
         # The instance still holds the old value here, so we can tell whether the name changed.
         changed = self.instance.pk is None or normalize_name(getattr(self.instance, self.dup_field)) != norm
@@ -105,9 +108,9 @@ class TrackedForm(forms.ModelForm):
                 self.similar.append(obj)
         if exact:
             listed = "; ".join(f"“{getattr(o, self.dup_field)}” ({getattr(o, 'code', None) or 'ID ' + str(o.pk)})" for o in exact)
-            self.add_error(self.dup_field, f"Already exists, ignoring case, spacing and punctuation: {listed}.")
+            self.add_error(self.dup_field, _("Already exists, ignoring case, spacing and punctuation: %(listed)s.") % {"listed": listed})
         elif self.similar and not cleaned.get("confirm_similar"):
-            self.add_error(None, "Similar names already exist (listed below). Check they are not the same, then tick “Save anyway”.")
+            self.add_error(None, _("Similar names already exist (listed below). Check they are not the same, then tick “Save anyway”."))
         return cleaned
 
     def change_reason(self):
@@ -134,13 +137,13 @@ class TrackedForm(forms.ModelForm):
 
 
 class CharacterForm(TrackedForm):
-    name_scientific = forms.CharField(label="Scientific name", max_length=255, required=False,
-                                      help_text="e.g. Pileus Width for Cap Width.")
-    unit = forms.CharField(max_length=30, required=False, help_text="e.g. mm, µm. Leave blank if none.")
+    name_scientific = forms.CharField(label=_("Scientific name"), max_length=255, required=False,
+                                      help_text=_("e.g. Pileus Width for Cap Width."))
+    unit = forms.CharField(label=_("Unit"), max_length=30, required=False, help_text=_("e.g. mm, µm. Leave blank if none."))
     applies_to = forms.ModelMultipleChoiceField(
         queryset=FungusType.objects.order_by("name"), required=False,
         widget=forms.CheckboxSelectMultiple,
-        help_text="Leave all unticked if the character applies to all fungi.",
+        label=_("Applies to"), help_text=_("Leave all unticked if the character applies to all fungi."),
     )
 
     class Meta:
@@ -149,10 +152,12 @@ class CharacterForm(TrackedForm):
             "name", "name_scientific", "description", "unit", "part", "observation_method",
             "display_option", "applies_to", "source", "comments",
         ]
-        labels = {"display_option": "Value type", "description": "Definition"}
+        labels = {"name": _("Name"), "description": _("Definition"), "part": _("Part"),
+                  "observation_method": _("Observation method"), "display_option": _("Value type"),
+                  "source": _("Source"), "comments": _("Comments")}
         help_texts = {
-            "display_option": "The kind of value: a number in mm, text, color, a list of value options, …",
-            "comments": "Notes kept with the character.",
+            "display_option": _("The kind of value: a number in mm, text, color, a list of value options, …"),
+            "comments": _("Notes kept with the character."),
         }
 
     def __init__(self, *args, **kwargs):
@@ -202,7 +207,7 @@ class ValueOptionForm(TrackedForm):
     class Meta:
         model = ValueOption
         fields = ["name", "description", "source", "comments"]
-        labels = {"name": "Value option", "description": "Definition"}
+        labels = {"name": _("Value option"), "description": _("Definition"), "source": _("Source"), "comments": _("Comments")}
 
     def candidates(self):
         return ValueOption.objects.filter(character=self.instance.character)
@@ -220,7 +225,7 @@ class DisplayOptionForm(TrackedForm):
     class Meta:
         model = DisplayOption
         fields = ["name", "description", "comments"]
-        labels = {"name": "Value type"}
+        labels = {"name": _("Value type"), "description": _("Description"), "comments": _("Comments")}
 
 
 class SourceForm(TrackedForm):
@@ -229,3 +234,5 @@ class SourceForm(TrackedForm):
     class Meta:
         model = Source
         fields = ["title", "author", "ref", "item_code", "source_type", "comments"]
+        labels = {"title": _("Title"), "author": _("Author"), "ref": _("Reference / URL"), "item_code": _("Item code"),
+                  "source_type": _("Type"), "comments": _("Comments")}

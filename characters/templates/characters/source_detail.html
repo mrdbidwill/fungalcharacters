@@ -1,22 +1,22 @@
 {% extends "characters/base.html" %}
-{% load charperms %}
+{% load i18n charperms %}
 {% block content %}
-<p><a href="{% url 'characters:source_list' %}">← All sources</a></p>
+<p><a href="{% url 'characters:source_list' %}">← {% translate "All sources" %}</a></p>
 <h1>{{ obj.title }}</h1>
-<p class="muted">ID {{ obj.id }} · {% if created_by_name %}added by {{ created_by_name }}{% else %}from release {{ data_release.version }}{% endif %}{% if hidden %} · <strong>HIDDEN</strong>{% endif %}</p>
+<p class="muted">ID {{ obj.id }} · {% if created_by_name %}{% blocktranslate trimmed %}added by {{ created_by_name }}{% endblocktranslate %}{% else %}{% blocktranslate trimmed with version=data_release.version %}from release {{ version }}{% endblocktranslate %}{% endif %}{% if hidden %} · <strong>{% translate "HIDDEN" %}</strong>{% endif %}</p>
 <p class="actions">
-  {% if obj|editable_by:user %}<a href="{% url 'characters:source_edit' obj.pk %}">Edit</a> <a href="{% url 'characters:source_delete' obj.pk %}">Delete</a>{% endif %}
+  {% if obj|editable_by:user %}<a href="{% url 'characters:source_edit' obj.pk %}">{% translate "Edit" %}</a> <a href="{% url 'characters:source_delete' obj.pk %}">{% translate "Delete" %}</a>{% endif %}
   {% include "characters/_admin_hide.html" with kind="source" obj_pk=obj.pk %}
-  <a href="{% url 'characters:history' 'source' obj.pk %}">Edit history</a>
+  <a href="{% url 'characters:history' 'source' obj.pk %}">{% translate "Edit history" %}</a>
 </p>
 {% if obj|consumption_note %}{% include "characters/_disclaimer_near.html" %}{% endif %}
 <dl class="fields">
-  <dt>Author</dt><dd>{{ obj.author|default:"—" }}</dd>
-  <dt>Reference / URL</dt><dd>{{ obj.ref|default:"—" }}</dd>
-  <dt>Item code</dt><dd>{{ obj.item_code|default:"—" }}</dd>
-  <dt>Type</dt><dd>{{ obj.source_type|default:"—" }}</dd>
-  <dt>Comments</dt><dd>{{ obj.comments|default:"—" }}</dd>
+  <dt>{% translate "Author" %}</dt><dd>{{ obj.author|default:"—" }}</dd>
+  <dt>{% translate "Reference / URL" %}</dt><dd>{{ obj.ref|default:"—" }}</dd>
+  <dt>{% translate "Item code" %}</dt><dd>{{ obj.item_code|default:"—" }}</dd>
+  <dt>{% translate "Type" %}</dt><dd>{{ obj.source_type|default:"—" }}</dd>
+  <dt>{% translate "Comments" %}</dt><dd>{{ obj.comments|default:"—" }}</dd>
 </dl>
-<h2>Characters citing this source ({{ characters|length }})</h2>
-<ul>{% for c in characters %}<li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>{% empty %}<li class="muted">None.</li>{% endfor %}</ul>
+<h2>{% blocktranslate trimmed with count=characters|length %}Characters citing this source ({{ count }}){% endblocktranslate %}</h2>
+<ul>{% for c in characters %}<li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>{% empty %}<li class="muted">{% translate "None." %}</li>{% endfor %}</ul>
 {% endblock %}

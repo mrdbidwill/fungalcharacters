@@ -1,1 +1,1 @@
-{% if user.is_superuser %}<form class="inline" method="post" action="{% url 'characters:toggle_hidden' kind obj_pk %}">{% csrf_token %}<button class="link" type="submit">{% if hidden %}Unhide{% else %}Hide{% endif %}</button></form>{% endif %}
+{% load i18n %}{% if user.is_superuser %}<form class="inline" method="post" action="{% url 'characters:toggle_hidden' kind obj_pk %}">{% csrf_token %}<button class="link" type="submit">{% if hidden %}{% translate "Unhide" %}{% else %}{% translate "Hide" %}{% endif %}</button></form>{% endif %}

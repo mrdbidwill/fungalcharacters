@@ -1,6 +1,7 @@
 {% extends "characters/base.html" %}
+{% load i18n %}
 {% block content %}
-<h1><code>{{ code }}</code> has been retired</h1>
-<p>This permanent code belonged to “{{ rec.name }}”, which was deleted on {{ rec.history_date|date:"Y-m-d" }}{% if rec.history_user %} by {{ rec.history_user.username }}{% endif %}. Codes are never reused.</p>
-<p><a href="{% url 'characters:history_by_code' code %}">Edit history</a></p>
+<h1>{% blocktranslate trimmed %}<code>{{ code }}</code> has been retired{% endblocktranslate %}</h1>
+<p>{% blocktranslate trimmed with name=rec.name date=rec.history_date|date:"Y-m-d" %}This permanent code belonged to “{{ name }}”, which was deleted on {{ date }}.{% endblocktranslate %} {% translate "Codes are never reused." %}</p>
+<p><a href="{% url 'characters:history_by_code' code %}">{% translate "Edit history" %}</a></p>
 {% endblock %}

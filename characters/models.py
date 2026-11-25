@@ -19,6 +19,7 @@ from django.conf import settings
 from django.db import models, transaction
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from simple_history.models import HistoricalRecords
 
 # labels.labelable_type values used by the release.
@@ -65,9 +66,9 @@ class ReleaseTable(models.Model):
 
 
 class NamedReleaseTable(ReleaseTable):
-    name = models.CharField(max_length=255, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-    comments = models.TextField(null=True, blank=True)
+    name = models.CharField(_("name"), max_length=255, null=True, blank=True)
+    description = models.TextField(_("description"), null=True, blank=True)
+    comments = models.TextField(_("comments"), null=True, blank=True)
 
     class Meta(ReleaseTable.Meta):
         abstract = True
@@ -94,7 +95,7 @@ class DisplayOption(NamedReleaseTable):
 
     class Meta(NamedReleaseTable.Meta):
         db_table = "display_options"
-        verbose_name = "value type"
+        verbose_name = _("value type")
 
 
 class SourceType(NamedReleaseTable):
@@ -110,41 +111,45 @@ class FungusType(NamedReleaseTable):
 class Source(ReleaseTable):
     """A published source. A shared list anyone can cite or add to."""
 
-    title = models.CharField(max_length=255, null=True, blank=True)
-    author = models.CharField(max_length=255, null=True, blank=True)
-    ref = models.CharField("reference / URL", max_length=255, null=True, blank=True)
-    item_code = models.CharField(max_length=255, null=True, blank=True)
+    title = models.CharField(_("title"), max_length=255, null=True, blank=True)
+    author = models.CharField(_("author"), max_length=255, null=True, blank=True)
+    ref = models.CharField(_("reference / URL"), max_length=255, null=True, blank=True)
+    item_code = models.CharField(_("item code"), max_length=255, null=True, blank=True)
     source_type = models.ForeignKey(
         SourceType, on_delete=models.PROTECT, null=True, blank=True,
-        db_column="source_data_type_id", related_name="sources",
+        db_column="source_data_type_id", related_name="sources", verbose_name=_("type"),
     )
-    comments = models.TextField(null=True, blank=True)
+    comments = models.TextField(_("comments"), null=True, blank=True)
     user_id = models.BigIntegerField(null=True, blank=True, editable=False)
     history = HistoricalRecords(table_name="characters_history_source_data")
 
     class Meta(ReleaseTable.Meta):
         db_table = "source_data"
         ordering = ["title"]
+        verbose_name = _("source")
 
     def __str__(self):
         return self.title or ""
 
 
 class Character(ReleaseTable):
-    code = models.CharField(max_length=16, unique=True, editable=False)
-    name = models.CharField(max_length=255, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-    comments = models.TextField(null=True, blank=True)
-    part = models.ForeignKey(Part, on_delete=models.PROTECT, null=True, blank=True, related_name="characters")
+    code = models.CharField(_("code"), max_length=16, unique=True, editable=False)
+    name = models.CharField(_("name"), max_length=255, null=True, blank=True)
+    description = models.TextField(_("definition"), null=True, blank=True)
+    comments = models.TextField(_("comments"), null=True, blank=True)
+    part = models.ForeignKey(Part, on_delete=models.PROTECT, null=True, blank=True, related_name="characters",
+                             verbose_name=_("part"))
     observation_method = models.ForeignKey(
-        ObservationMethod, on_delete=models.PROTECT, null=True, blank=True, related_name="characters"
+        ObservationMethod, on_delete=models.PROTECT, null=True, blank=True, related_name="characters",
+        verbose_name=_("observation method"),
     )
     display_option = models.ForeignKey(
         DisplayOption, on_delete=models.PROTECT, null=True, blank=True, related_name="characters",
-        verbose_name="value type",
+        verbose_name=_("value type"),
     )
     source = models.ForeignKey(
-        Source, on_delete=models.PROTECT, null=True, blank=True, db_column="source_data_id", related_name="characters"
+        Source, on_delete=models.PROTECT, null=True, blank=True, db_column="source_data_id", related_name="characters",
+        verbose_name=_("source"),
     )
     fungus_type = models.ForeignKey(
         FungusType, on_delete=models.PROTECT, null=True, blank=True, related_name="primary_characters"
@@ -157,6 +162,7 @@ class Character(ReleaseTable):
     class Meta(ReleaseTable.Meta):
         db_table = "mr_characters"
         ordering = ["name", "id"]
+        verbose_name = _("character")
 
     def __str__(self):
         return self.name or self.code
@@ -190,7 +196,7 @@ class ValueOption(ReleaseTable):
     class Meta(ReleaseTable.Meta):
         db_table = "lookup_items"
         ordering = ["character", "id"]
-        verbose_name = "value option"
+        verbose_name = _("value option")
 
     def __str__(self):
         return self.name or self.code
