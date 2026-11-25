@@ -219,3 +219,19 @@ class SitePagesTests(TestCase):
         for asset in ["site.css", "favicon.ico", "favicon.svg", "apple-touch-icon.png"]:
             self.assertContains(r, asset)
         self.assertContains(r, 'class="skip" href="#main"')
+
+
+class CoreOrderHistoryTests(TestCase):
+    def test_removed_core_order_entry_appears_in_history(self):
+        from .forms import ensure_history_baseline
+        from .models import CoreSequence
+        admin = User.objects.create_superuser("will", password="pw-admin-123")
+        seq = CoreSequence.objects.filter(character__code="FCC00082").order_by("-sequence").first()
+        ensure_history_baseline(seq)
+        seq._history_user = admin
+        seq._change_reason = "kept the lower number"
+        n = seq.sequence
+        seq.delete()
+        r = self.client.get(reverse("characters:history_by_code", args=["FCC00082"]))
+        self.assertContains(r, f"Boletes #{n} removed")
+        self.assertContains(r, "kept the lower number")

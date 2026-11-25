@@ -205,6 +205,7 @@ class CoreSequence(ReleaseTable):
         Character, on_delete=models.PROTECT, db_column="mr_character_id", related_name="core_sequences"
     )
     sequence = models.IntegerField(null=True, blank=True)
+    history = HistoricalRecords(table_name="characters_history_core_character_sequences", excluded_fields=["updated_at"])
 
     class Meta(ReleaseTable.Meta):
         db_table = "core_character_sequences"

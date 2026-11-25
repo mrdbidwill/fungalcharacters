@@ -18,6 +18,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - Colors appear only as characters ("cap color", "stem color", "spore color"). A fuller color design is a separate later discussion.
 - Every term can be shown in English or in scientific/Latin form, switched by a site-wide toggle.
 - A "Thanks" page (2026-11-25): first draft from Will is on the site; Will edits it later. Facts checked: Gastón Guzmán 1932–2016; Flora Agaricina Neerlandica vol. 1 (1988, eds Bas, Kuyper, Noordeloos & Vellinga) with Vellinga's glossary section; nolo_mode's iNaturalist guide "Intro To Identifying Fungi". Not checkable online: nolo_mode's permission (Nov 2026), myceliome.com, the 2019 Mushroom Observer date.
+- "Where people disagree" wording (2026-11-25) describes what the site does now: each item shows its source, and every change is kept in the public history. Side-by-side competing statements are not built.
 - Home page (2026-11-25): says what the site is for, how to view the data here, how to download it, and that registered users can add and edit; plus Will's "Where people disagree" and "No advice about consumption" texts. The character list moved to /characters/ (menu: Characters).
 
 ## Users and editing
@@ -50,6 +51,8 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - Source of the data (2026-11-25): the `fungal_characters` release, starting with 1.0.0 (747 characters, 590 value options, 2681 labels). Release files on the Mac: `~/Desktop/XDE_conversion/fungal_characters/release_v1.0.0/`; the PostgreSQL file is also in the repository at `data/releases/1.0.0/`. Built from XDE's character list, Mushroom Observer list 1417 and the old mrdbid_development data.
 - Where data is edited (2026-11-25): on the website. Release 1.0.0 is the starting point; the community edits on the site; future releases are produced from the site.
 - Release tables are used exactly as released (`mr_characters`, `lookup_items`, `labels`, `character_fungus_types`, `releases`, …). Django never creates or alters them; a reset or deploy loads them from the release file. Website-only data (creator, hidden flag, edit history, code counters) lives in separate tables.
+- Core order fix (Will, 2026-11-25): five characters listed twice in the Boletes core order keep the lower number (Cap Surface Texture #11, Gill Breadth #17, Gill Attachment #16, Stem Length #36, Stem Surface Texture #39); the higher entries were removed on the site and the removals are in the public history. Release 1.0.0 files are unchanged; the next release, produced from the site, will carry the fix.
+- Going live (2026-11-25): because edits are made on the site, the live site starts from a copy of the local database, not a fresh load of release 1.0.0.
 - Names, scientific names and definitions live in `labels` by language; the English / scientific toggle uses them.
 - Provenance: every character, value type and value option added on the site records its creator (user account, automatic) and optionally a cited published source. Published sources are a shared list anyone can cite or add to.
 - Old character system removed (2026-11-25): the stage-1 import from MRDBID (767 characters, MRDBID IDs as permanent IDs, `mrdbid-import` account, import tools) was fully replaced. Backup: `~/Developer/fungalcharacters_backups/`. The MySQL databases `fungal_characters` (reference copy) and `mrdbid_development` are not used by the site and are left unchanged.
@@ -73,8 +76,6 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires.
 
 ## Open
-- "Where people disagree" (2026-11-25) says the site "keeps every sourced statement side by side and never lets one replace another". The site does not yet do this: each character and value option has one definition and one source, and an edit replaces the text (the old text stays in the public history). Will to decide: build side-by-side sourced statements, or adjust the wording.
-- Core order (2026-11-25): in release 1.0.0, five characters appear twice in the Boletes core order (Cap Surface Texture #11/#12, Gill Breadth #17/#20, Gill Attachment #16/#26, Stem Length #36/#44, Stem Surface Texture #39/#41), left over from merging old duplicate characters. Will to decide which position each keeps.
 - Email (2026-11-25): to be added soon, for password resets. Provider and sending address not yet chosen.
 - Deployment: own nginx entry, certificate, containers, database and port (gulfcoastfungi uses 8010); own deploy user or extended rights (current `gcf` user is limited to gulfcoastfungi); mrdbid.com's nginx entry changed to redirect.
 - Old shared WORKSPACE.md and DECISIONS.md stay in place: they still govern other projects (gulfcoastfungi, Website Admin). fungalcharacters ignores them. Cleanup is a separate decision for those projects.

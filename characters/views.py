@@ -17,7 +17,7 @@ from .forms import (
     ensure_history_baseline, item_type_of,
 )
 from .models import (
-    CHARACTER_TYPE, VALUE_TYPE, Character, CharacterFungusType, DisplayOption, FungusType, ItemMeta,
+    CHARACTER_TYPE, VALUE_TYPE, Character, CharacterFungusType, CoreSequence, DisplayOption, FungusType, ItemMeta,
     Label, Part, Release, Source, ValueOption,
 )
 from .permissions import can_edit, delete_blockers, is_admin
@@ -136,7 +136,10 @@ def _delete(request, obj, label, after_url):
                     ensure_history_baseline(tag)
                     tag._change_reason = child_reason
                     tag.delete()
-                obj.core_sequences.all().delete()
+                for seq in obj.core_sequences.all():
+                    ensure_history_baseline(seq)
+                    seq._change_reason = child_reason
+                    seq.delete()
                 _delete_with_labels(obj, CHARACTER_TYPE, reason)
             elif isinstance(obj, ValueOption):
                 _delete_with_labels(obj, VALUE_TYPE, reason)
@@ -467,6 +470,12 @@ def _history_page(request, model, pk, current):
             ft = FungusType.objects.filter(pk=rec.fungus_type_id).first()
             sign = "added" if rec.history_type == "+" else "removed" if rec.history_type == "-" else "changed"
             rows.append({"rec": rec, "changes": [("Applies to", "", f"{ft} {sign}")]})
+        for rec in CoreSequence.history.filter(character_id=pk).select_related("history_user"):
+            if rec.history_change_reason == "As released":
+                continue
+            ft = FungusType.objects.filter(pk=rec.fungus_type_id).first()
+            sign = "added" if rec.history_type == "+" else "removed" if rec.history_type == "-" else "changed"
+            rows.append({"rec": rec, "changes": [("Core order", "", f"{ft} #{rec.sequence} {sign}")]})
     if not rows and current is None:
         raise Http404
     rows.sort(key=lambda r: (r["rec"].history_date, r["rec"].history_id), reverse=True)
