@@ -88,6 +88,9 @@ a:hover { text-decoration-thickness: 3px; }
 code, .code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .88em;
   background: var(--stripe); padding: .05em .35em; border-radius: 4px; white-space: nowrap; }
 .lead { font-size: 1.2rem; }
+/* Thanks page: names stand out — bold, slightly larger, in the theme green (9.3:1 light, 11:1 dark). */
+.thanks-list li { margin-bottom: .6rem; }
+.thanks-name { font-size: 1.12em; color: var(--primary); }
 .tagline { font-size: 1.15rem; color: var(--muted); margin-top: -.25rem; }
 
 .note, .warn { background: var(--warn-bg); color: var(--text); border-left: 6px solid var(--focus);
