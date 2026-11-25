@@ -69,7 +69,13 @@ class FungusType(Named):
 
 
 class DisplayOption(Named):
-    """How a character's value is entered or shown (radio, drop-down, number in mm, ...)."""
+    """Value type: the kind of value a character takes (radio, drop-down, number in mm, ...).
+
+    Named DisplayOption after the old MRDBID table; shown on the site as "value type".
+    """
+
+    class Meta(Named.Meta):
+        verbose_name = "value type"
 
 
 class SourceType(Named):
@@ -106,7 +112,8 @@ class Character(Named):
         ObservationMethod, on_delete=models.PROTECT, null=True, blank=True, related_name="characters"
     )
     display_option = models.ForeignKey(
-        DisplayOption, on_delete=models.PROTECT, null=True, blank=True, related_name="characters"
+        DisplayOption, on_delete=models.PROTECT, null=True, blank=True, related_name="characters",
+        verbose_name="value type",
     )
     fungus_type = models.ForeignKey(
         FungusType, on_delete=models.PROTECT, null=True, blank=True, related_name="characters"

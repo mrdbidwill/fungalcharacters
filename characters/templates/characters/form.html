@@ -1,0 +1,32 @@
+{% extends "characters/base.html" %}
+{% block title %}{{ title }} · Fungal Characters{% endblock %}
+{% block content %}
+<h1>{{ title }}</h1>
+<form class="form" method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  {% if form.similar %}
+  <div class="warn">
+    <strong>Similar names already exist:</strong>
+    <ul>{% for o in form.similar %}<li>{% if o.get_absolute_url %}<a href="{{ o.get_absolute_url }}" target="_blank">{{ o }}</a>{% else %}{{ o }}{% endif %} (ID {{ o.pk }})</li>{% endfor %}</ul>
+    {{ form.confirm_similar }} {{ form.confirm_similar.label_tag }}
+  </div>
+  {% endif %}
+  {% for field in form %}
+    {% if field.name != "confirm_similar" %}
+    <div>
+      {{ field.label_tag }}
+      {{ field.errors }}
+      {{ field }}
+      {% if field.help_text %}<span class="helptext">{{ field.help_text|safe }}</span>{% endif %}
+    </div>
+    {% endif %}
+  {% endfor %}
+  {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+  <div class="actions">
+    <button type="submit">{{ submit|default:"Save" }}</button>
+    {% if cancel_url %}<a href="{{ cancel_url }}">Cancel</a>{% endif %}
+  </div>
+</form>
+{% if title == "Log in" %}<p class="muted">No account? <a href="{% url 'characters:signup' %}">Sign up</a>.</p>{% endif %}
+{% endblock %}

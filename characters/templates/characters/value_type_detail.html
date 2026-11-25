@@ -1,0 +1,14 @@
+{% extends "characters/base.html" %}
+{% load charperms %}
+{% block content %}
+<p><a href="{% url 'characters:value_type_list' %}">← All value types</a></p>
+<h1>Value type: {{ obj.name }}</h1>
+<p class="muted">Permanent ID {{ obj.id }} · created by {{ obj.created_by.username }}</p>
+<p class="actions">
+  {% if obj|editable_by:user %}<a href="{% url 'characters:value_type_edit' obj.pk %}">Edit</a> <a href="{% url 'characters:value_type_delete' obj.pk %}">Delete</a>{% endif %}
+  <a href="{% url 'characters:history' 'value-type' obj.pk %}">Edit history</a>
+</p>
+<dl><dt>Description</dt><dd>{{ obj.description|default:"—" }}</dd><dt>Comments</dt><dd>{{ obj.comments|default:"—" }}</dd></dl>
+<h2>Characters with this value type ({{ characters|length }})</h2>
+<ul>{% for c in characters %}<li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>{% empty %}<li class="muted">None.</li>{% endfor %}</ul>
+{% endblock %}

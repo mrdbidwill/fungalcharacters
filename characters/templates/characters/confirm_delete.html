@@ -1,0 +1,17 @@
+{% extends "characters/base.html" %}
+{% block content %}
+<h1>Delete {{ label }}: {{ obj }}</h1>
+{% if blockers %}
+  <p class="warn">This {{ label }} cannot be deleted:</p>
+  <ul>{% for b in blockers %}<li>{{ b }}</li>{% endfor %}</ul>
+  <p><a href="{{ cancel_url }}">Back</a></p>
+{% else %}
+  <p>This removes it from the site. Its edit history stays public, and its ID is never reused.</p>
+  {% if extra_options %}<p class="warn">Its {{ extra_options }} value option(s) will be deleted with it.</p>{% endif %}
+  <form class="form" method="post">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <div class="actions"><button type="submit">Delete</button> <a href="{{ cancel_url }}">Cancel</a></div>
+  </form>
+{% endif %}
+{% endblock %}

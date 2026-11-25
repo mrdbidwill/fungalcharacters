@@ -1,0 +1,20 @@
+{% extends "characters/base.html" %}
+{% load charperms %}
+{% block content %}
+<p><a href="{% url 'characters:source_list' %}">← All sources</a></p>
+<h1>{{ obj.title }}</h1>
+<p class="muted">Permanent ID {{ obj.id }} · created by {{ obj.created_by.username }}</p>
+<p class="actions">
+  {% if obj|editable_by:user %}<a href="{% url 'characters:source_edit' obj.pk %}">Edit</a> <a href="{% url 'characters:source_delete' obj.pk %}">Delete</a>{% endif %}
+  <a href="{% url 'characters:history' 'source' obj.pk %}">Edit history</a>
+</p>
+<dl>
+  <dt>Author</dt><dd>{{ obj.author|default:"—" }}</dd>
+  <dt>Reference / URL</dt><dd>{{ obj.ref|default:"—" }}</dd>
+  <dt>Item code</dt><dd>{{ obj.item_code|default:"—" }}</dd>
+  <dt>Type</dt><dd>{{ obj.source_type|default:"—" }}</dd>
+  <dt>Comments</dt><dd>{{ obj.comments|default:"—" }}</dd>
+</dl>
+<h2>Characters citing this source ({{ characters|length }})</h2>
+<ul>{% for c in characters %}<li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>{% empty %}<li class="muted">None.</li>{% endfor %}</ul>
+{% endblock %}

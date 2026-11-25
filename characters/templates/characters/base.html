@@ -10,7 +10,21 @@
   body { font: 16px/1.5 system-ui, sans-serif; color:var(--fg); background:var(--bg); margin:0 auto; max-width:72rem; padding:1rem; }
   a { color:var(--accent); }
   header { border-bottom:1px solid var(--line); margin-bottom:1rem; padding-bottom:.5rem; }
-  header a { text-decoration:none; font-weight:600; font-size:1.2rem; }
+  header .brand { text-decoration:none; font-weight:600; font-size:1.2rem; }
+  nav { display:flex; flex-wrap:wrap; gap:.25rem 1rem; margin-top:.25rem; }
+  nav .account { margin-left:auto; }
+  form.inline { display:inline; }
+  button.link { background:none; border:0; padding:0; color:var(--accent); text-decoration:underline; cursor:pointer; }
+  .note { background:var(--warn); padding:.5rem .75rem; border-radius:4px; }
+  .actions { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; }
+  .errorlist { color:#b00020; margin:.25rem 0; padding-left:1.2rem; }
+  @media (prefers-color-scheme: dark) { .errorlist { color:#ff8a80; } }
+  .form div { margin-bottom:.75rem; }
+  .form label { display:block; font-weight:600; }
+  .form input[type=text], .form input[type=password], .form input[type=number], .form textarea, .form select { width:100%; max-width:40rem; box-sizing:border-box; }
+  .form input[type=checkbox] + label, .form label:has(input[type=checkbox]) { display:inline; }
+  .helptext { color:var(--muted); font-size:.85rem; display:block; }
+  del { color:var(--muted); }
   table { border-collapse:collapse; width:100%; }
   th, td { text-align:left; padding:.35rem .5rem; border-bottom:1px solid var(--line); vertical-align:top; }
   th { font-weight:600; }
@@ -26,7 +40,25 @@
 </style>
 </head>
 <body>
-<header><a href="{% url 'characters:list' %}">Fungal Characters</a> <span class="muted">· local development</span></header>
+<header>
+  <a class="brand" href="{% url 'characters:list' %}">Fungal Characters</a> <span class="muted">· local development</span>
+  <nav>
+    <a href="{% url 'characters:list' %}">Characters</a>
+    <a href="{% url 'characters:value_type_list' %}">Value types</a>
+    <a href="{% url 'characters:source_list' %}">Sources</a>
+    <a href="{% url 'characters:recent_changes' %}">Recent changes</a>
+    <span class="account">
+    {% if user.is_authenticated %}
+      Signed in as <strong>{{ user.username }}</strong>{% if user.is_superuser %} (admin) · <a href="{% url 'admin:index' %}">Admin</a>{% endif %}
+      · <a href="{% url 'password_change' %}">Password</a>
+      · <form class="inline" method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="link" type="submit">Log out</button></form>
+    {% else %}
+      <a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">Log in</a> · <a href="{% url 'characters:signup' %}">Sign up</a>
+    {% endif %}
+    </span>
+  </nav>
+</header>
+{% if messages %}{% for m in messages %}<p class="note">{{ m }}</p>{% endfor %}{% endif %}
 {% block content %}{% endblock %}
 <footer class="muted">Character data: CC0, free to use in any way. Code: MIT.</footer>
 </body>

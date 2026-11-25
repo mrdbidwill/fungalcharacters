@@ -1,6 +1,7 @@
 {% extends "characters/base.html" %}
 {% block content %}
 <h1>Characters</h1>
+{% if user.is_authenticated %}<p><a href="{% url 'characters:create' %}">+ Add a character</a></p>{% endif %}
 <form class="filter" method="get">
   <input type="search" name="q" value="{{ q }}" placeholder="Search name or description">
   <select name="part">
@@ -12,7 +13,7 @@
 <p class="muted">Showing {{ page.paginator.count }} of {{ total }} characters.</p>
 <div class="table-wrap">
 <table>
-  <thead><tr><th>ID</th><th>Name</th><th>Part</th><th>Observation</th><th>Display</th><th>Options</th></tr></thead>
+  <thead><tr><th>ID</th><th>Name</th><th>Part</th><th>Observation</th><th>Value type</th><th>Options</th><th>By</th></tr></thead>
   <tbody>
   {% for c in page %}
     <tr>
@@ -22,9 +23,10 @@
       <td>{{ c.observation_method|default:"" }}</td>
       <td>{{ c.display_option|default:"" }}</td>
       <td>{{ c.n_options|default:"" }}</td>
+      <td>{{ c.created_by.username }}</td>
     </tr>
   {% empty %}
-    <tr><td colspan="6">No characters found.</td></tr>
+    <tr><td colspan="7">No characters found.</td></tr>
   {% endfor %}
   </tbody>
 </table>

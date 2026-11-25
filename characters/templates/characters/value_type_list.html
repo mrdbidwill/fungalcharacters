@@ -1,0 +1,10 @@
+{% extends "characters/base.html" %}
+{% block content %}
+<h1>Value types</h1>
+<p class="muted">The kind of value a character takes: a number in mm, text, color, a list of value options, …</p>
+{% if user.is_authenticated %}<p><a href="{% url 'characters:value_type_create' %}">+ Add a value type</a></p>{% endif %}
+<table>
+  <thead><tr><th>ID</th><th>Value type</th><th>Description</th><th>Characters</th><th>By</th></tr></thead>
+  <tbody>{% for o in items %}<tr><td>{{ o.id }}</td><td><a href="{% url 'characters:value_type_detail' o.pk %}">{{ o.name }}</a></td><td>{{ o.description }}</td><td>{{ o.n }}</td><td>{{ o.created_by.username }}</td></tr>{% endfor %}</tbody>
+</table>
+{% endblock %}

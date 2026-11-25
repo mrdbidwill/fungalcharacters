@@ -60,5 +60,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires.
 
 ## Open
+- Parts, observation methods, fungus types and source types (2026-11-24, stage 2): only the admin changes these for now (Django admin pages); users pick from them. DECISIONS lists characters, value types, value options and sources as what users add. Will to confirm or open them to users.
+- Forgotten passwords (2026-11-24): the site sends no email, so the admin makes a one-time "set password" link on request. Revisit if email is wanted.
 - Deployment: own nginx entry, certificate, containers, database and port (gulfcoastfungi uses 8010); own deploy user or extended rights (current `gcf` user is limited to gulfcoastfungi); mrdbid.com's nginx entry changed to redirect.
 - Old shared WORKSPACE.md and DECISIONS.md stay in place: they still govern other projects (gulfcoastfungi, Website Admin). fungalcharacters ignores them. Cleanup is a separate decision for those projects.

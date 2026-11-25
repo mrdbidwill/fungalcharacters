@@ -1,9 +1,14 @@
 {% extends "characters/base.html" %}
+{% load charperms %}
 {% block title %}{{ c.name }} · Fungal Characters{% endblock %}
 {% block content %}
 <p><a href="{% url 'characters:list' %}">← All characters</a></p>
 <h1>{{ c.name }}</h1>
-<p class="muted">Permanent ID {{ c.id }} · created by {{ c.created_by.username }} · {{ c.created_at|date:"Y-m-d" }}, updated {{ c.updated_at|date:"Y-m-d" }}</p>
+<p class="muted">Permanent ID {{ c.id }} · created by {{ c.created_by.username }} · {{ c.created_at|date:"Y-m-d" }}, updated {{ c.updated_at|date:"Y-m-d" }}{% if c.is_hidden %} · <strong>HIDDEN</strong>{% endif %}</p>
+<p class="actions">
+  {% if c|editable_by:user %}<a href="{% url 'characters:edit' c.pk %}">Edit</a> <a href="{% url 'characters:delete' c.pk %}">Delete</a>{% endif %}
+  <a href="{% url 'characters:history' 'character' c.pk %}">Edit history</a>
+</p>
 {% if duplicates %}
 <p class="warn">Possible duplicate of:
   {% for d in duplicates %}<a href="{{ d.get_absolute_url }}">{{ d.name }} (ID {{ d.id }})</a>{% if not forloop.last %}, {% endif %}{% endfor %}
@@ -14,22 +19,30 @@
   <dt>Scientific / Latin name</dt><dd>{{ c.name_scientific|default:"—" }}</dd>
   <dt>Part</dt><dd>{{ c.part|default:"—" }}</dd>
   <dt>Observation method</dt><dd>{{ c.observation_method|default:"—" }}</dd>
-  <dt>Display option</dt><dd>{{ c.display_option|default:"—" }}</dd>
+  <dt>Value type</dt><dd>{% if c.display_option %}<a href="{% url 'characters:value_type_detail' c.display_option.pk %}">{{ c.display_option }}</a>{% else %}—{% endif %}</dd>
   <dt>Fungus type</dt><dd>{{ c.fungus_type|default:"—" }}</dd>
   <dt>Core</dt><dd>{{ c.is_core|yesno:"Yes,No" }}</dd>
-  <dt>Source</dt><dd>{% if c.source %}{{ c.source.title }}{% if c.source.author %} — {{ c.source.author }}{% endif %}{% else %}—{% endif %}</dd>
+  <dt>Source</dt><dd>{% if c.source %}<a href="{% url 'characters:source_detail' c.source.pk %}">{{ c.source.title }}</a>{% if c.source.author %} — {{ c.source.author }}{% endif %}{% else %}—{% endif %}</dd>
   <dt>Comments</dt><dd>{{ c.comments|default:"—" }}</dd>
   {% for s in core_sequences %}<dt>Core order</dt><dd>{{ s.fungus_type }}: #{{ s.sequence }}</dd>{% endfor %}
 </dl>
 
 <h2>Value options ({{ options|length }})</h2>
+{% if user.is_authenticated %}<p><a href="{% url 'characters:option_create' c.pk %}">+ Add a value option</a></p>{% endif %}
 {% if options %}
 <div class="table-wrap">
 <table>
-  <thead><tr><th>#</th><th>Value</th><th>Description</th><th>Comments</th><th>Source</th></tr></thead>
+  <thead><tr><th>#</th><th>Value option</th><th>Description</th><th>Comments</th><th>Source</th><th>By</th><th></th></tr></thead>
   <tbody>
   {% for o in options %}
-    <tr><td>{{ o.sort_order }}</td><td>{{ o.name }}</td><td>{{ o.description }}</td><td>{{ o.comments }}</td><td>{{ o.source|default:"" }}</td></tr>
+    <tr>
+      <td>{{ o.sort_order }}</td><td>{{ o.name }}{% if o.is_hidden %} <strong>(hidden)</strong>{% endif %}</td><td>{{ o.description }}</td><td>{{ o.comments }}</td><td>{{ o.source|default:"" }}</td>
+      <td>{{ o.created_by.username }}</td>
+      <td class="actions">
+        {% if o|editable_by:user %}<a href="{% url 'characters:option_edit' o.pk %}">Edit</a> <a href="{% url 'characters:option_delete' o.pk %}">Delete</a>{% endif %}
+        <a href="{% url 'characters:history' 'option' o.pk %}">History</a>
+      </td>
+    </tr>
   {% endfor %}
   </tbody>
 </table>
@@ -37,14 +50,5 @@
 {% else %}
 <p class="muted">None.</p>
 {% endif %}
-
-<h2>Edit history</h2>
-<table>
-  <thead><tr><th>When (UTC)</th><th>Who</th><th>Change</th><th>Reason</th></tr></thead>
-  <tbody>
-  {% for h in history %}
-    <tr><td>{{ h.history_date|date:"Y-m-d H:i" }}</td><td>{{ h.history_user.username|default:"—" }}</td><td>{{ h.get_history_type_display }}</td><td>{{ h.history_change_reason|default:"" }}</td></tr>
-  {% endfor %}
-  </tbody>
-</table>
+{% if last_change %}<p class="muted">Last change: {{ last_change.history_date|date:"Y-m-d H:i" }} UTC by {{ last_change.history_user.username|default:"—" }}. <a href="{% url 'characters:history' 'character' c.pk %}">Full edit history</a></p>{% endif %}
 {% endblock %}

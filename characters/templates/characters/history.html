@@ -1,0 +1,22 @@
+{% extends "characters/base.html" %}
+{% block title %}History: {{ title }} · Fungal Characters{% endblock %}
+{% block content %}
+<h1>Edit history: {{ title }}</h1>
+<p class="muted">{{ kind_label|capfirst }}{% if current_url %} · <a href="{{ current_url }}">Current version</a>{% else %} · deleted{% endif %}</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>When (UTC)</th><th>Who</th><th>Change</th><th>Details</th><th>Reason</th></tr></thead>
+  <tbody>
+  {% for row in rows %}
+    <tr>
+      <td>{{ row.rec.history_date|date:"Y-m-d H:i" }}</td>
+      <td>{{ row.rec.history_user.username|default:"—" }}</td>
+      <td>{{ row.rec.get_history_type_display }}</td>
+      <td>{% for label, old, new in row.changes %}<div><strong>{{ label|capfirst }}:</strong> <del>{{ old }}</del> → {{ new }}</div>{% empty %}{% if row.rec.history_type == "~" %}<span class="muted">No visible field changed</span>{% endif %}{% endfor %}</td>
+      <td>{{ row.rec.history_change_reason|default:"" }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
