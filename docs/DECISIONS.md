@@ -40,6 +40,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 ## Starting data
 - Initial set drawn from sources Will selects, seeded from the old MRDBID database: MySQL 8.0 (Homebrew) on the Mac, `127.0.0.1:3306`, database `mrdbid_development`. Read through MySQL (export to a `.sql` file); never copy its data folder by hand.
 - Starting set (2026-11-24): all ~790 characters in old `mr_characters`. Will reviews and edits them once editing works on the new site.
+- Imported (2026-11-24, stage 1): `mr_characters` actually holds 767 rows (IDs run to 793; 26 were deleted in MRDBID). All 767 imported with their MRDBID IDs as permanent IDs; new IDs start at 794 so deleted IDs are never reused. Imported records are credited to the account `mrdbid-import` and keep their original created/updated times. Six near-duplicate name pairs came across as they were, for Will's review: 233/784 Substrate, 316/782 Aroma, 5/781 Taste, 73/783 Spore Color, 747/777 margin color, 610/618 α-Amanitin Present.
 - Provenance: every character, value and option records its creator (user account, automatic) and optionally a cited published source. Published sources are a shared list anyone can cite or add to, seeded from old `source_data` / `source_data_types`.
 - Old MRDBID tables used as a guide: mr_characters, parts, source_data, source_data_types, observation_methods, lookup_items, fungus_types, display_options.
 - The local MRDBID app (`~/Documents/Development/www/public_html/mrdbid`, http://localhost:3000/) is used only to understand the character flow: create, edit, delete, store.
@@ -57,5 +58,6 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires.
 
 ## Open
+- "Values" vs "value options" (2026-11-24): stage 1 models one thing, a character's allowed values (from old `lookup_items`), each with a description, shown as radio buttons or select-menu entries; the value type (radio, number in mm, color, …) is the character's display option. Will to confirm, or define "values" separately.
 - Deployment: own nginx entry, certificate, containers, database and port (gulfcoastfungi uses 8010); own deploy user or extended rights (current `gcf` user is limited to gulfcoastfungi); mrdbid.com's nginx entry changed to redirect.
 - Old shared WORKSPACE.md and DECISIONS.md stay in place: they still govern other projects (gulfcoastfungi, Website Admin). fungalcharacters ignores them. Cleanup is a separate decision for those projects.

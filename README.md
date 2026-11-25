@@ -17,4 +17,9 @@ See [docs/DECISIONS.md](docs/DECISIONS.md), the authority for this project.
 
 ## Status
 
-Setup only. The Django + PostgreSQL app (in Docker) is not built yet.
+Stage 1 (local only): Django + PostgreSQL in Docker, data model, import from the old MRDBID database, read-only list and detail pages.
+
+## Running locally
+
+- `docker compose up -d`, then open http://localhost:8000/
+- Import from MRDBID: `scripts/export_mrdbid.sh` (on the Mac; reads MySQL through the client only, writes `import_data/`), then `docker compose exec web python manage.py import_mrdbid` (add `--replace` to re-import).

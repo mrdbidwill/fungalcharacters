@@ -1,0 +1,35 @@
+# Local development. Open http://localhost:8000/
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: fungalcharacters
+      POSTGRES_USER: fungalcharacters
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-localdev}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fungalcharacters -d fungalcharacters"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  web:
+    build: .
+    command: sh -c "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
+    environment:
+      DJANGO_DEBUG: "1"
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-local-dev-only-not-secret}
+      DATABASE_HOST: db
+      DATABASE_NAME: fungalcharacters
+      DATABASE_USER: fungalcharacters
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-localdev}
+    volumes:
+      - .:/app
+      - ./import_data:/import_data:ro
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  pgdata:

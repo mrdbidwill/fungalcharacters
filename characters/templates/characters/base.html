@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Fungal Characters{% endblock %}</title>
+<style>
+  :root { --fg:#1d1d1b; --muted:#666; --line:#ddd; --bg:#fff; --accent:#7a4b1e; --warn:#fff4e0; }
+  @media (prefers-color-scheme: dark) { :root { --fg:#e8e6e1; --muted:#9a978f; --line:#3a3a38; --bg:#181817; --accent:#d9a56b; --warn:#3a2e1a; } }
+  body { font: 16px/1.5 system-ui, sans-serif; color:var(--fg); background:var(--bg); margin:0 auto; max-width:72rem; padding:1rem; }
+  a { color:var(--accent); }
+  header { border-bottom:1px solid var(--line); margin-bottom:1rem; padding-bottom:.5rem; }
+  header a { text-decoration:none; font-weight:600; font-size:1.2rem; }
+  table { border-collapse:collapse; width:100%; }
+  th, td { text-align:left; padding:.35rem .5rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-weight:600; }
+  .muted { color:var(--muted); font-size:.9rem; }
+  .warn { background:var(--warn); padding:.5rem .75rem; border-radius:4px; }
+  dl { display:grid; grid-template-columns:max-content 1fr; gap:.25rem 1rem; }
+  dt { font-weight:600; }
+  dd { margin:0; white-space:pre-line; }
+  form.filter { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1rem; }
+  input, select, button { font:inherit; padding:.25rem .5rem; }
+  .table-wrap { overflow-x:auto; }
+  footer { margin-top:2rem; border-top:1px solid var(--line); padding-top:.5rem; }
+</style>
+</head>
+<body>
+<header><a href="{% url 'characters:list' %}">Fungal Characters</a> <span class="muted">· local development</span></header>
+{% block content %}{% endblock %}
+<footer class="muted">Character data: CC0, free to use in any way. Code: MIT.</footer>
+</body>
+</html>

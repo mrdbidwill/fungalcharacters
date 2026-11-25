@@ -1,0 +1,39 @@
+{% extends "characters/base.html" %}
+{% block content %}
+<h1>Characters</h1>
+<form class="filter" method="get">
+  <input type="search" name="q" value="{{ q }}" placeholder="Search name or description">
+  <select name="part">
+    <option value="">All parts</option>
+    {% for p in parts %}<option value="{{ p.id }}"{% if part == p.id|stringformat:"s" %} selected{% endif %}>{{ p.name }}</option>{% endfor %}
+  </select>
+  <button type="submit">Filter</button>
+</form>
+<p class="muted">Showing {{ page.paginator.count }} of {{ total }} characters.</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>ID</th><th>Name</th><th>Part</th><th>Observation</th><th>Display</th><th>Options</th></tr></thead>
+  <tbody>
+  {% for c in page %}
+    <tr>
+      <td>{{ c.id }}</td>
+      <td><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></td>
+      <td>{{ c.part|default:"" }}</td>
+      <td>{{ c.observation_method|default:"" }}</td>
+      <td>{{ c.display_option|default:"" }}</td>
+      <td>{{ c.n_options|default:"" }}</td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="6">No characters found.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% if page.has_other_pages %}
+<p>
+  {% if page.has_previous %}<a href="?q={{ q|urlencode }}&part={{ part }}&page={{ page.previous_page_number }}">← Previous</a>{% endif %}
+  Page {{ page.number }} of {{ page.paginator.num_pages }}
+  {% if page.has_next %}<a href="?q={{ q|urlencode }}&part={{ part }}&page={{ page.next_page_number }}">Next →</a>{% endif %}
+</p>
+{% endif %}
+{% endblock %}

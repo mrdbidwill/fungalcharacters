@@ -49,3 +49,6 @@ pgdata/
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Local exports from the old MRDBID database
+/import_data/
