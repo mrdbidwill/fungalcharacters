@@ -103,7 +103,8 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False
 ACCOUNT_EMAIL_NOTIFICATIONS = True          # tell users when their password or email changes
-ACCOUNT_SIGNUP_FORM_HONEYPOT_FIELD = "website"  # hidden field that only bots fill in
+# No hidden "honeypot" anti-bot field: screen readers can reach it and blind users would be rejected.
+# Email confirmation and allauth's rate limits stop automated sign-ups instead.
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Fungal Characters] "
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = os.environ.get("SITE_PROTOCOL", "http")
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = False

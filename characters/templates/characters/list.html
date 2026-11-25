@@ -3,12 +3,15 @@
 <h1>Characters</h1>
 {% if user.is_authenticated %}<p><a href="{% url 'characters:create' %}">+ Add a character</a></p>{% endif %}
 <form class="filter" method="get">
-  <input type="search" name="q" value="{{ q }}" placeholder="Search name, scientific name, definition or code">
-  <select name="part">
+  <label class="visually-hidden" for="f-q">Search characters</label>
+  <input id="f-q" type="search" name="q" value="{{ q }}" placeholder="Search name, scientific name, definition or code">
+  <label class="visually-hidden" for="f-part">Part</label>
+  <select id="f-part" name="part">
     <option value="">All parts</option>
     {% for p in parts %}<option value="{{ p.id }}"{% if part == p.id|stringformat:"s" %} selected{% endif %}>{{ p.name }}</option>{% endfor %}
   </select>
-  <select name="fungus">
+  <label class="visually-hidden" for="f-fungus">Fungus type</label>
+  <select id="f-fungus" name="fungus">
     <option value="">Any fungus type</option>
     <option value="all"{% if fungus == "all" %} selected{% endif %}>Applies to all fungi</option>
     {% for f in fungus_types %}<option value="{{ f.id }}"{% if fungus == f.id|stringformat:"s" %} selected{% endif %}>{{ f.name }}</option>{% endfor %}

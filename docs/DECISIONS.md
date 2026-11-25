@@ -23,7 +23,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 
 ## Users and editing
 - Sign-up open to anyone. Everything public.
-- Accounts (2026-11-25, django-allauth): sign-up needs an email address, confirmed by a link before the first sign-in; sign in with username or email; password reset, email changes and security notices by email; sign-up has a hidden anti-bot field and rate limits. Two-factor sign-in (authenticator app plus one-time recovery codes) is available to everyone and required for the admin, including on the admin pages. Clicking your name in the menu opens your account page: email addresses, password, two-factor sign-in, signed-in devices, and everything you added.
+- Accounts (2026-11-25, django-allauth): sign-up needs an email address, confirmed by a link before the first sign-in; sign in with username or email; password reset, email changes and security notices by email; sign-ups are rate-limited (no hidden anti-bot field: it would trap screen-reader users). Two-factor sign-in (authenticator app plus one-time recovery codes) is available to everyone and required for the admin, including on the admin pages. Clicking your name in the menu opens your account page: email addresses, password, two-factor sign-in, signed-in devices, and everything you added.
 - Any logged-in user can add characters, value types and value options, and add value options to characters others created. A comment explaining the reasoning can accompany each create or edit.
 - Users edit only their own work. Once others have added to an item, its creator can no longer delete it.
 - All items listed equally, with the creator's username shown.

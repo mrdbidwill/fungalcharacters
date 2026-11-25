@@ -1,0 +1,6 @@
+{
+  "name": "fungalcharacters-a11y-audit",
+  "private": true,
+  "description": "Runs axe-core (WCAG 2.0-2.2 A, AA, AAA and best practices) on the site's pages in light and dark mode. See docs/ACCESSIBILITY.md.",
+  "dependencies": { "axe-core": "4.10.3", "chrome-remote-interface": "0.33.3" }
+}
