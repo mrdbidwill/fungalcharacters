@@ -423,3 +423,28 @@ class LanguageTests(TestCase):
                 continue
             d = {"pt-br": "pt_BR"}.get(code, code)
             self.assertTrue((settings.BASE_DIR / "locale" / d / "LC_MESSAGES" / "django.po").exists(), code)
+
+
+class HostedPageTests(TestCase):
+    """Brian Hunt's page, kept at the same path it had on mrdbid.com (characters/hosted.py)."""
+
+    def test_page_served_unchanged_with_bar_and_disclaimer(self):
+        from django.conf import settings
+        r = self.client.get("/documents/lumen-granuli-praecisi/")
+        self.assertEqual(r.status_code, 200)
+        body = r.content
+        original = (settings.BASE_DIR / "hosted" / "lumen_granuli_praecisi_v1_0" / "lumen_granuli_praecisi_v1_0.html").read_bytes()
+        inner = original[original.index(b">", original.index(b"<body")) + 1:original.rindex(b"</body")]
+        self.assertIn(inner, body)                                  # author's content byte for byte
+        self.assertEqual(body.count(b"No advice about consumption."), 2)  # top and bottom
+
+    def test_images_and_safety(self):
+        self.assertEqual(self.client.get("/documents/lumen-granuli-praecisi/images_web/parts.jpg").status_code, 200)
+        self.assertEqual(self.client.get("/documents/lumen-granuli-praecisi/images_web/missing.jpg").status_code, 404)
+        self.assertEqual(self.client.get("/documents/lumen-granuli-praecisi/images_web/settings.py").status_code, 404)
+        self.assertEqual(self.client.get("/documents/other/").status_code, 404)
+
+    def test_thanks_card_links_to_page(self):
+        r = self.client.get("/thanks/")
+        self.assertContains(r, 'href="/documents/lumen-granuli-praecisi/"')
+        self.assertContains(r, "Brian Hunt")

@@ -16,5 +16,9 @@
   <li>{% blocktranslate trimmed %}<strong class="thanks-name">Mushroom Observer</strong>, where the list was first shared.{% endblocktranslate %}</li>
 </ul>
 <p class="lead">{% translate "And many others. Thank you." %}</p>
+
+<a class="card thanks-card" href="{% url 'characters:hosted' 'lumen-granuli-praecisi' %}">
+  {% blocktranslate trimmed %}Thanks to <strong>Brian Hunt</strong> for the <cite>Lumen Granuli Praecisi (v1.0)</cite>.{% endblocktranslate %} <span aria-hidden="true">→</span>
+</a>
 </div>
 {% endblock %}

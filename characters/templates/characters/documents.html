@@ -1,0 +1,10 @@
+{% extends "characters/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Documents" %} · Fungal Characters{% endblock %}
+{% block content %}
+<div class="prose">
+<h1>{% translate "Documents" %}</h1>
+<p>{% translate "Pages kept here for their authors, shown exactly as they sent them." %}</p>
+<ul>{% for p in pages %}<li><a href="{% url 'characters:hosted' p.slug %}">{{ p.title }}</a> — {{ p.author }}. <span lang="en">{{ p.note }}</span></li>{% endfor %}</ul>
+</div>
+{% endblock %}

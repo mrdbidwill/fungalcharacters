@@ -191,3 +191,10 @@ input[type=checkbox], input[type=radio] { width: 1.25rem; height: 1.25rem; accen
 .translate-form legend { font-weight: 700; padding: 0 .4rem; }
 .translate-form input[type=text], .translate-form textarea { width: 100%; max-width: 40rem; }
 .translate-field { margin-bottom: .9rem; }
+
+/* Thanks page: a highlighted card linking to a hosted page. Text 16:1 on the card in light mode. */
+.thanks-card { display: block; margin: 1.5rem 0; background: var(--stripe); border: 2px solid var(--primary);
+  border-radius: 10px; padding: 1rem 1.25rem; font-size: 1.15rem; color: var(--text); text-decoration: none; }
+.thanks-card:visited { color: var(--text); }
+.thanks-card:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+.thanks-card strong { color: var(--primary); }

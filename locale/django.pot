@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-25 20:54+0000\n"
+"POT-Creation-Date: 2026-11-25 21:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -161,6 +161,29 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
+#: characters/hosted.py:37 characters/templates/characters/documents.html:3
+#: characters/templates/characters/documents.html:6
+msgid "Documents"
+msgstr ""
+
+#: characters/hosted.py:38
+msgid "a page hosted for its author, shown exactly as sent"
+msgstr ""
+
+#. Translators: a required notice. Translate the meaning exactly; keep it short and plain. gettext(u'No advice about consumption.') XXXXXXXXX  gettext(u'fungalcharacters.org reports how sources describe fungi. It is not a guide to eating, using or handling any fungus, and nothing here says whether any fungus is safe. Values about chemistry or toxicity are reported only as their source states them.') XXXX
+#: characters/hosted.py:40
+#: characters/templates/characters/_disclaimer_near.html:1
+msgid "No advice about consumption."
+msgstr ""
+
+#: characters/hosted.py:41
+msgid ""
+"fungalcharacters.org reports how sources describe fungi. It is not a guide "
+"to eating, using or handling any fungus, and nothing here says whether any "
+"fungus is safe. Values about chemistry or toxicity are reported only as "
+"their source states them."
+msgstr ""
+
 #: characters/models.py:69 characters/models.py:137
 msgid "name"
 msgstr ""
@@ -305,11 +328,6 @@ msgstr ""
 
 #: characters/templates/characters/_admin_hide.html:1
 msgid "Hide"
-msgstr ""
-
-#. Translators: a required notice. Translate the meaning exactly; keep it short and plain. gettext(u'No advice about consumption.') XXXXXXXXX  gettext(u'fungalcharacters.org reports how sources describe fungi. It is not a guide to eating, using or handling any fungus, and nothing here says whether any fungus is safe. Values about chemistry or toxicity are reported only as their source states them.') XXXX
-#: characters/templates/characters/_disclaimer_near.html:1
-msgid "No advice about consumption."
 msgstr ""
 
 #: characters/templates/characters/_disclaimer_near.html:1
@@ -745,6 +763,10 @@ msgstr ""
 #: characters/templates/characters/source_detail.html:21
 #: characters/templates/characters/value_type_detail.html:14
 msgid "None."
+msgstr ""
+
+#: characters/templates/characters/documents.html:7
+msgid "Pages kept here for their authors, shown exactly as they sent them."
 msgstr ""
 
 #: characters/templates/characters/downloads.html:8
@@ -1185,6 +1207,12 @@ msgstr ""
 
 #: characters/templates/characters/thanks.html:18
 msgid "And many others. Thank you."
+msgstr ""
+
+#: characters/templates/characters/thanks.html:21
+msgid ""
+"Thanks to <strong>Brian Hunt</strong> for the <cite>Lumen Granuli Praecisi "
+"(v1.0)</cite>."
 msgstr ""
 
 #: characters/templates/characters/translate.html:3

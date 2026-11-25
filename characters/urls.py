@@ -1,6 +1,6 @@
 from django.urls import path, register_converter
 
-from . import views
+from . import hosted, views
 
 
 class CodeConverter:
@@ -21,6 +21,9 @@ urlpatterns = [
     path("characters/", views.character_list, name="list"),
     path("thanks/", views.thanks, name="thanks"),
     path("downloads/", views.downloads, name="downloads"),
+    path("documents/", hosted.index, name="documents"),
+    path("documents/<slug:slug>/", hosted.page, name="hosted"),
+    path("documents/<slug:slug>/images_web/<str:name>", hosted.image, name="hosted_image"),
     path("downloads/<str:version>/<path:name>", views.download_file, name="download_file"),
     path("characters/new/", views.character_create, name="create"),
     path("id/<code:code>", views.by_code, name="by_code"),
