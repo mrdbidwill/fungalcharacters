@@ -20,7 +20,7 @@
   <section class="card">
     <h2>Add and edit</h2>
     <p>Sign up and log in to add characters, value options, value types and sources, and to edit what you added. Every change is public, showing who made it and why.</p>
-    <p>{% if user.is_authenticated %}<a class="button" href="{% url 'characters:create' %}">Add a character</a>{% else %}<a class="button" href="{% url 'characters:signup' %}">Sign up</a> <a href="{% url 'login' %}">Log in</a>{% endif %}</p>
+    <p>{% if user.is_authenticated %}<a class="button" href="{% url 'characters:create' %}">Add a character</a>{% else %}<a class="button" href="{% url 'account_signup' %}">Sign up</a> <a href="{% url 'account_login' %}">Sign in</a>{% endif %}</p>
   </section>
 </div>
 

@@ -1,2 +1,0 @@
-{% extends "characters/base.html" %}
-{% block content %}<h1>{{ title }}</h1><p>{{ text }}</p>{% if title == "Password set" %}<p><a href="{% url 'login' %}">Log in</a></p>{% endif %}{% endblock %}

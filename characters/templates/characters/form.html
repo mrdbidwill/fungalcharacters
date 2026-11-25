@@ -28,5 +28,4 @@
     {% if cancel_url %}<a href="{{ cancel_url }}">Cancel</a>{% endif %}
   </div>
 </form>
-{% if title == "Log in" %}<p class="muted">No account? <a href="{% url 'characters:signup' %}">Sign up</a>.</p>{% endif %}
 {% endblock %}

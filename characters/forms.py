@@ -1,8 +1,6 @@
 from difflib import SequenceMatcher
 
 from django import forms
-from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 
 from .models import (
@@ -231,15 +229,3 @@ class SourceForm(TrackedForm):
     class Meta:
         model = Source
         fields = ["title", "author", "ref", "item_code", "source_type", "comments"]
-
-
-class SignupForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = get_user_model()
-        fields = ("username",)
-
-    def clean_username(self):
-        username = self.cleaned_data["username"]
-        if get_user_model().objects.filter(username__iexact=username).exists():
-            raise forms.ValidationError("That username is taken.")
-        return username

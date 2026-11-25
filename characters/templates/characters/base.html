@@ -10,6 +10,7 @@
 <link rel="apple-touch-icon" href="{% static 'characters/apple-touch-icon.png' %}">
 <meta name="theme-color" content="#1F4D2E">
 <link rel="stylesheet" href="{% static 'characters/site.css' %}">
+{% block extra_head %}{% endblock %}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -37,12 +38,12 @@
         {% else %}<strong>English</strong> · <a href="{% url 'characters:set_name_mode' 'scientific' %}?next={{ request.get_full_path|urlencode }}">Scientific</a>{% endif %}
       </span>
       {% if user.is_authenticated %}
-        <span>Signed in as <strong>{{ user.username }}</strong>{% if user.is_superuser %} (admin) · <a href="{% url 'admin:index' %}">Admin</a>{% endif %}</span>
-        <a href="{% url 'password_change' %}">Password</a>
-        <form class="inline" method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="link" type="submit">Log out</button></form>
+        <a href="{% url 'characters:account' %}" title="Your account"{% if here == 'account' %} aria-current="page"{% endif %}><strong>{{ user.username }}</strong></a>
+        {% if user.is_superuser %}<a href="{% url 'admin:index' %}">Admin</a>{% endif %}
+        <form class="inline" method="post" action="{% url 'account_logout' %}">{% csrf_token %}<button class="link" type="submit">Sign out</button></form>
       {% else %}
-        <a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">Log in</a>
-        <a href="{% url 'characters:signup' %}">Sign up</a>
+        <a href="{% url 'account_login' %}?next={{ request.get_full_path|urlencode }}">Sign in</a>
+        <a href="{% url 'account_signup' %}">Sign up</a>
       {% endif %}
     </div>
   </div>
@@ -50,7 +51,7 @@
 {% endwith %}
 <main id="main" class="wrap">
 {% if messages %}<ul class="messages" role="status">{% for m in messages %}<li class="note">{{ m }}</li>{% endfor %}</ul>{% endif %}
-{% block content %}{% endblock %}
+{% block content_before %}{% endblock %}{% block content %}{% endblock %}{% block content_after %}{% endblock %}
 </main>
 <footer class="site-footer">
   <div class="wrap">
@@ -59,5 +60,6 @@
     <p>Please cite as: Fungal Characters{% if data_release %}, release {{ data_release.version }}{% endif %}, https://fungalcharacters.org/</p>
   </div>
 </footer>
+{% block extra_body %}{% endblock %}
 </body>
 </html>

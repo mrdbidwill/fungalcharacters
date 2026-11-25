@@ -11,6 +11,14 @@ from .models import (
 User = get_user_model()
 
 
+def make_admin(username="will"):
+    """A superuser with two-factor sign-in on (the site requires it for the admin)."""
+    from allauth.mfa.totp.internal.auth import TOTP, generate_totp_secret
+    admin = User.objects.create_superuser(username, email=f"{username}@example.org", password="pw-admin-123")
+    TOTP.activate(admin, generate_totp_secret())
+    return admin
+
+
 def label(c, label_type):
     return Label.objects.filter(labelable_type=CHARACTER_TYPE, labelable_id=c.pk, label_type=label_type,
                                 language="en").values_list("text", flat=True).first()
@@ -50,7 +58,7 @@ class ReleaseDataTests(TestCase):
 
 class EditingRulesTests(TestCase):
     def setUp(self):
-        self.admin = User.objects.create_superuser("will", password="pw-admin-123")
+        self.admin = make_admin()
         self.alice = User.objects.create_user("alice", password="pw-alice-123")
         self.bob = User.objects.create_user("bob", password="pw-bob-123")
         self.cap_width = Character.objects.get(code="FCC00019")
@@ -63,12 +71,7 @@ class EditingRulesTests(TestCase):
 
     def test_anonymous_can_read_but_not_create(self):
         r = self.client.get(reverse("characters:create"))
-        self.assertRedirects(r, reverse("login") + "?next=" + reverse("characters:create"))
-
-    def test_signup_rejects_case_variant_username(self):
-        r = self.client.post(reverse("characters:signup"), {
-            "username": "ALICE", "password1": "a-long-pass-987", "password2": "a-long-pass-987"})
-        self.assertContains(r, "That username is taken.")
+        self.assertRedirects(r, reverse("account_login") + "?next=" + reverse("characters:create"))
 
     def test_new_character_gets_next_code_labels_and_history(self):
         self.login(self.alice)
@@ -226,7 +229,7 @@ class CoreOrderHistoryTests(TestCase):
     def test_removed_core_order_entry_appears_in_history(self):
         from .forms import ensure_history_baseline
         from .models import CoreSequence
-        admin = User.objects.create_superuser("will", password="pw-admin-123")
+        admin = make_admin()
         seq = CoreSequence.objects.filter(character__code="FCC00082").order_by("-sequence").first()
         ensure_history_baseline(seq)
         seq._history_user = admin
@@ -236,3 +239,78 @@ class CoreOrderHistoryTests(TestCase):
         r = self.client.get(reverse("characters:history_by_code", args=["FCC00082"]))
         self.assertContains(r, f"Boletes #{n} removed")
         self.assertContains(r, "kept the lower number")
+
+
+class AccountTests(TestCase):
+    """Sign-up with email verification, password reset by email, two-factor rules, account page."""
+
+    def signup(self, username="carol", email="carol@example.org"):
+        return self.client.post(reverse("account_signup"), {
+            "username": username, "email": email,
+            "password1": "a-long-pass-987", "password2": "a-long-pass-987"})
+
+    def test_signup_requires_email_verification(self):
+        from django.core import mail
+        r = self.signup()
+        self.assertEqual(r.status_code, 302)
+        user = User.objects.get(username="carol")
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn("carol@example.org", mail.outbox[0].to)
+        self.assertTrue(mail.outbox[0].subject.startswith("[Fungal Characters]"))
+        # Not signed in until the email is confirmed.
+        self.assertFalse(self.client.get(reverse("characters:account")).wsgi_request.user.is_authenticated)
+        import re
+        link = re.search(r"https?://[^/]+(/accounts/confirm-email/[^\s]+)", mail.outbox[0].body).group(1)
+        self.client.post(link)
+        from allauth.account.models import EmailAddress
+        self.assertTrue(EmailAddress.objects.get(user=user).verified)
+        r = self.client.get(reverse("characters:account"))
+        self.assertContains(r, "<h1>carol</h1>", html=True)
+
+    def test_signup_rejects_case_variant_username_and_duplicate_email(self):
+        User.objects.create_user("alice", email="alice@example.org", password="pw-alice-123")
+        from allauth.account.models import EmailAddress
+        EmailAddress.objects.create(user=User.objects.get(username="alice"), email="alice@example.org", verified=True, primary=True)
+        r = self.signup(username="ALICE", email="other@example.org")
+        self.assertEqual(r.status_code, 200)
+        self.assertFalse(User.objects.filter(username="ALICE").exists())
+
+    def test_password_reset_sends_email(self):
+        from django.core import mail
+        from allauth.account.models import EmailAddress
+        u = User.objects.create_user("dave", email="dave@example.org", password="pw-dave-12345")
+        EmailAddress.objects.create(user=u, email="dave@example.org", verified=True, primary=True)
+        self.client.post(reverse("account_reset_password"), {"email": "dave@example.org"})
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn("/accounts/password/reset/key/", mail.outbox[0].body)
+
+    def test_admin_without_two_factor_is_sent_to_set_it_up(self):
+        admin = User.objects.create_superuser("boss", email="boss@example.org", password="pw-admin-123")
+        self.client.force_login(admin)
+        self.assertRedirects(self.client.get("/characters/"), reverse("mfa_activate_totp"), fetch_redirect_response=False)
+        # Setting it up first asks for the password again (allauth safeguard); no redirect loop.
+        r = self.client.get(reverse("mfa_activate_totp"), follow=True)
+        self.assertEqual(r.status_code, 200)
+        self.assertTrue(r.wsgi_request.path.startswith("/accounts/"))
+
+    def test_admin_with_two_factor_can_work(self):
+        self.client.force_login(make_admin())
+        self.assertEqual(self.client.get("/characters/").status_code, 200)
+        self.assertEqual(self.client.get("/admin/").status_code, 200)
+
+    def test_admin_login_page_uses_site_sign_in(self):
+        r = self.client.get("/admin/login/")
+        self.assertEqual(r.status_code, 302)
+        self.assertIn(reverse("account_login"), r["Location"])
+
+    def test_username_in_menu_links_to_account_page_listing_contributions(self):
+        u = User.objects.create_user("erin", email="erin@example.org", password="pw-erin-12345")
+        self.client.force_login(u)
+        self.client.post(reverse("characters:create"), {"name": "Erin Test Character"})
+        r = self.client.get("/")
+        self.assertContains(r, '<a href="/account/" title="Your account"><strong>erin</strong></a>', html=True)
+        r = self.client.get(reverse("characters:account"))
+        self.assertContains(r, "Erin Test Character")
+        self.assertContains(r, "Two-factor sign-in")
+        for name in ["account_email", "account_change_password", "mfa_index", "usersessions_list"]:
+            self.assertEqual(self.client.get(reverse(name)).status_code, 200, name)

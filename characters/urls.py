@@ -42,5 +42,5 @@ urlpatterns = [
     path("hide/<slug:kind>/<int:pk>/", views.toggle_hidden, name="toggle_hidden"),
     path("changes/", views.recent_changes, name="recent_changes"),
     path("names/<slug:mode>/", views.set_name_mode, name="set_name_mode"),
-    path("accounts/signup/", views.signup, name="signup"),
+    path("account/", views.account, name="account"),
 ]

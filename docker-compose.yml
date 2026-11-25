@@ -23,6 +23,8 @@ services:
       DATABASE_NAME: fungalcharacters
       DATABASE_USER: fungalcharacters
       DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-localdev}
+      EMAIL_HOST: mail
+      EMAIL_PORT: "1025"
     volumes:
       - .:/app
     ports:
@@ -30,5 +32,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      mail:
+        condition: service_started
+  # Development email: every message the site sends lands here instead of being delivered.
+  # Inbox: http://localhost:8025/
+  mail:
+    image: axllent/mailpit:v1.34.0
+    ports:
+      - "127.0.0.1:8025:8025"
 volumes:
   pgdata:

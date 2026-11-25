@@ -148,3 +148,21 @@ del { color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
 @media (forced-colors: active) { .note, .warn, .card, .table-wrap { border: 2px solid CanvasText; } }
 @media print { .site-header nav, .site-header .tools, .skip, .actions, form.filter { display: none; } a { color: inherit; } }
+
+/* ---------- account pages ---------- */
+.account-layout { display: grid; grid-template-columns: 14rem 1fr; gap: 2rem; align-items: start; }
+@media (max-width: 48rem) { .account-layout { grid-template-columns: 1fr; gap: .5rem; } }
+.account-menu { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: .75rem 1rem; }
+.account-menu h2 { border: 0; margin: 0 0 .5rem; padding: 0; font-size: 1rem; }
+.account-menu ul { list-style: none; margin: 0; padding: 0; }
+.account-menu li { padding: .3rem 0; }
+.account-menu a[aria-current="page"] { font-weight: 700; text-decoration-thickness: 3px; }
+.account-main h1 { margin-top: 0; }
+.account-entrance { max-width: 30rem; }
+.account-entrance input[type=text], .account-entrance input[type=email], .account-entrance input[type=password] { width: 100%; }
+form p, form div { margin-bottom: .9rem; }
+form label { font-weight: 700; display: block; margin-bottom: .2rem; }
+form input[type=checkbox] + label, form label:has(input[type=checkbox]) { display: inline; font-weight: 400; }
+input[type=email], input[type=tel] { background: var(--surface); border: 2px solid var(--border); border-radius: 6px; padding: .45rem .6rem; min-height: 2.75rem; }
+
+input[type=checkbox], input[type=radio] { width: 1.25rem; height: 1.25rem; accent-color: var(--primary); vertical-align: middle; margin-right: .4rem; }

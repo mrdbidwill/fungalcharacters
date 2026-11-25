@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
@@ -13,7 +12,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.http import require_POST
 
 from .forms import (
-    CharacterForm, DisplayOptionForm, ReasonForm, SignupForm, SourceForm, ValueOptionForm,
+    CharacterForm, DisplayOptionForm, ReasonForm, SourceForm, ValueOptionForm,
     ensure_history_baseline, item_type_of,
 )
 from .models import (
@@ -535,13 +534,20 @@ def set_name_mode(request, mode):
     return redirect(back)
 
 
-def signup(request):
-    if request.user.is_authenticated:
-        return redirect("characters:list")
-    form = SignupForm(posted(request))
-    if request.method == "POST" and form.is_valid():
-        user = form.save()
-        login(request, user, backend="django.contrib.auth.backends.ModelBackend")
-        messages.success(request, f"Welcome, {user.username}. You are signed in.")
-        return redirect("characters:list")
-    return render(request, "characters/form.html", {"form": form, "title": "Sign up", "submit": "Sign up"})
+@login_required
+def account(request):
+    """The signed-in user's account page: settings links and everything they added."""
+    from allauth.account.models import EmailAddress
+    from allauth.mfa.utils import is_mfa_enabled
+
+    mine = ItemMeta.objects.filter(created_by=request.user)
+    ids = lambda t: mine.filter(item_type=t).values("item_id")
+    return render(request, "characters/account.html", {
+        "emails": EmailAddress.objects.filter(user=request.user).order_by("-primary", "email"),
+        "mfa_enabled": is_mfa_enabled(request.user),
+        "my_characters": Character.objects.filter(pk__in=ids(CHARACTER_TYPE)).order_by("name"),
+        "my_values": ValueOption.objects.filter(pk__in=ids(VALUE_TYPE)).select_related("character").order_by("character__name", "name"),
+        "my_value_types": DisplayOption.objects.filter(pk__in=ids("DisplayOption")).order_by("name"),
+        "my_sources": Source.objects.filter(pk__in=ids("SourceData")).order_by("title"),
+        "my_changes": sum(model.history.filter(history_user=request.user).count() for model in KINDS.values()),
+    })

@@ -23,6 +23,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 
 ## Users and editing
 - Sign-up open to anyone. Everything public.
+- Accounts (2026-11-25, django-allauth): sign-up needs an email address, confirmed by a link before the first sign-in; sign in with username or email; password reset, email changes and security notices by email; sign-up has a hidden anti-bot field and rate limits. Two-factor sign-in (authenticator app plus one-time recovery codes) is available to everyone and required for the admin, including on the admin pages. Clicking your name in the menu opens your account page: email addresses, password, two-factor sign-in, signed-in devices, and everything you added.
 - Any logged-in user can add characters, value types and value options, and add value options to characters others created. A comment explaining the reasoning can accompany each create or edit.
 - Users edit only their own work. Once others have added to an item, its creator can no longer delete it.
 - All items listed equally, with the creator's username shown.
@@ -36,7 +37,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - Items from a data release (2026-11-25, replaces the 2026-11-24 `mrdbid-import` rule): credited to the release, no user owner. Only Will, as admin, edits or deletes them.
 - "Needs review" button, usable by anyone (logged in or not), adds an entry to a list in the admin section. No email. A hidden per-visitor rate limit stops automated flooding.
 - Parts, observation methods, fungus types and source types (2026-11-25): admin only. Users pick from them; only the admin adds or changes them.
-- Forgotten passwords (2026-11-25): until email is added, the admin makes a one-time "set password" link on request.
+- Forgotten passwords (2026-11-25): reset by email link (replaces the admin-made one-time links).
 
 ## Data access and licensing
 - Permanent codes (2026-11-25): FCC##### for characters, FCV##### for value options, from release 1.0.0. Never changed or reused; new items get the next number. Permanent web address: https://fungalcharacters.org/id/<code>. A deleted item's address says the code is retired.
@@ -76,6 +77,6 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires.
 
 ## Open
-- Email (2026-11-25): to be added soon, for password resets. Provider and sending address not yet chosen.
+- Email (2026-11-25): development uses Mailpit (a local inbox at http://localhost:8025/; nothing is delivered). Production sending service and sending address not yet chosen; the site reads its SMTP settings from the server's environment, so any provider works.
 - Deployment: own nginx entry, certificate, containers, database and port (gulfcoastfungi uses 8010); own deploy user or extended rights (current `gcf` user is limited to gulfcoastfungi); mrdbid.com's nginx entry changed to redirect.
 - Old shared WORKSPACE.md and DECISIONS.md stay in place: they still govern other projects (gulfcoastfungi, Website Admin). fungalcharacters ignores them. Cleanup is a separate decision for those projects.
