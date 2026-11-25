@@ -5,13 +5,14 @@ This project's own decision record. It stands apart from `shared_reference/DECIS
 Started 2026-11-24. Newest changes are dated inline.
 
 ## Purpose
-A universal, free, publicly maintained source of fungal character names, values, value options and descriptions.
+A universal, free, publicly maintained source of fungal character names, value types (e.g. number in mm, text, color, or a list of value options), value options and descriptions. Values recorded for specific mushrooms are out of scope (2026-11-24).
 
 ## Replaces
 Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed when Will is ready. All other projects are unaffected.
 
 ## Scope
-- Characters only: names, values, value options (used as radio buttons or select menus), descriptions, comments.
+- Characters only: names, value types (e.g. number in mm, text, color, or a list of value options), value options (used as radio buttons or select menus), descriptions, comments. Values recorded for specific mushrooms are out of scope.
+- Terms (2026-11-24): a *value* is what one mushroom has for a character (e.g. stem_width = 3 mm, or Abundance = Low); once set, it is a number or text entered, or one of the character's value options. A *value type* is the kind of value a character takes (stored as the character's display option). *Value options* are a character's allowed choices (old `lookup_items`).
 - Not included: user mushrooms, specimens, genera/species (no MBList), images (deferred).
 - Colors appear only as characters ("cap color", "stem color", "spore color"). A fuller color design is a separate later discussion.
 - Every term can be shown in English or in scientific/Latin form, switched by a site-wide toggle.
@@ -19,7 +20,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 
 ## Users and editing
 - Sign-up open to anyone. Everything public.
-- Any logged-in user can add characters, values and value options, and add values/options to characters others created. A comment explaining the reasoning can accompany each create or edit.
+- Any logged-in user can add characters, value types and value options, and add value options to characters others created. A comment explaining the reasoning can accompany each create or edit.
 - Users edit only their own work. Once others have added to an item, its creator can no longer delete it.
 - All items listed equally, with the creator's username shown.
 - No duplicates, including near-matches (case, spacing, punctuation, spelling variants); similar names are shown before saving.
@@ -58,6 +59,5 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires.
 
 ## Open
-- "Values" vs "value options" (2026-11-24): stage 1 models one thing, a character's allowed values (from old `lookup_items`), each with a description, shown as radio buttons or select-menu entries; the value type (radio, number in mm, color, …) is the character's display option. Will to confirm, or define "values" separately.
 - Deployment: own nginx entry, certificate, containers, database and port (gulfcoastfungi uses 8010); own deploy user or extended rights (current `gcf` user is limited to gulfcoastfungi); mrdbid.com's nginx entry changed to redirect.
 - Old shared WORKSPACE.md and DECISIONS.md stay in place: they still govern other projects (gulfcoastfungi, Website Admin). fungalcharacters ignores them. Cleanup is a separate decision for those projects.
