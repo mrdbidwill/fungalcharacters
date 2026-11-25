@@ -15,7 +15,7 @@ $SSH $HOST 'cd /home/fc/app && find . -path ./.env -prune -o -type d -exec chmod
 
 if [ "${1:-}" = "--restore" ]; then
   DUMP="$2"
-  $SSH $HOST "cd /home/fc/app && $COMPOSE up -d db && sleep 5"
+  $SSH $HOST "cd /home/fc/app && $COMPOSE up -d --wait db"   # waits until the database is healthy
   $SSH $HOST "cd /home/fc/app && $COMPOSE exec -T db psql -v ON_ERROR_STOP=1 -q -U fungalcharacters -d fungalcharacters" < "$DUMP"
 fi
 $SSH $HOST "cd /home/fc/app && $COMPOSE up -d --build && $COMPOSE ps"
