@@ -13,6 +13,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 ## Scope
 - Characters only: names, value types (e.g. number in mm, text, color, or a list of value options), value options (used as radio buttons or select menus), descriptions, comments. Values recorded for specific mushrooms are out of scope.
 - Terms (2026-11-24): a *value* is what one mushroom has for a character (e.g. stem_width = 3 mm, or Abundance = Low); once set, it is a number or text entered, or one of the character's value options. A *value type* is the kind of value a character takes (stored as the character's display option). *Value options* are a character's allowed choices (table `lookup_items`). The data release calls value options "values" (codes FCV#####); the site says "value options" (2026-11-25).
+- Example (Will, 2026-11-25): the character "Cap Texture" has a list of value options (Smooth, …) stored in the lookup table (`lookup_items`); a specific mushroom's *value* for it is one chosen value option, recorded by its id/code. A character like "Cap Width" has no options: its value is a measurement (a number in mm). "Characters" means characters in general; a *character name* refers to a specific one.
 - Not included: user mushrooms, specimens, genera/species (no MBList), images (deferred).
 - Colors appear only as characters ("cap color", "stem color", "spore color"). A fuller color design is a separate later discussion.
 - Every term can be shown in English or in scientific/Latin form, switched by a site-wide toggle.
