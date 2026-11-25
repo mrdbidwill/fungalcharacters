@@ -37,6 +37,8 @@
   input, select, button { font:inherit; padding:.25rem .5rem; }
   .table-wrap { overflow-x:auto; }
   footer { margin-top:2rem; border-top:1px solid var(--line); padding-top:.5rem; }
+  footer p { margin:.25rem 0; }
+  code { font-size:.9em; }
 </style>
 </head>
 <body>
@@ -47,6 +49,10 @@
     <a href="{% url 'characters:value_type_list' %}">Value types</a>
     <a href="{% url 'characters:source_list' %}">Sources</a>
     <a href="{% url 'characters:recent_changes' %}">Recent changes</a>
+    <span>Names:
+      {% if scientific_names %}<a href="{% url 'characters:set_name_mode' 'english' %}?next={{ request.get_full_path|urlencode }}">English</a> · <strong>Scientific</strong>
+      {% else %}<strong>English</strong> · <a href="{% url 'characters:set_name_mode' 'scientific' %}?next={{ request.get_full_path|urlencode }}">Scientific</a>{% endif %}
+    </span>
     <span class="account">
     {% if user.is_authenticated %}
       Signed in as <strong>{{ user.username }}</strong>{% if user.is_superuser %} (admin) · <a href="{% url 'admin:index' %}">Admin</a>{% endif %}
@@ -60,6 +66,10 @@
 </header>
 {% if messages %}{% for m in messages %}<p class="note">{{ m }}</p>{% endfor %}{% endif %}
 {% block content %}{% endblock %}
-<footer class="muted">Character data: CC0, free to use in any way. Code: MIT.</footer>
+<footer class="muted">
+  <p>Character data{% if data_release %}: Fungal Characters release {{ data_release.version }} ({{ data_release.released_at|date:"Y-m-d" }}){% endif %}.
+  Dedicated to the public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>: free to use in any way. Code: MIT.</p>
+  <p>Please cite as: Fungal Characters{% if data_release %}, release {{ data_release.version }}{% endif %}, https://fungalcharacters.org/</p>
+</footer>
 </body>
 </html>

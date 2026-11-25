@@ -50,5 +50,6 @@ pgdata/
 # Claude Code local settings
 .claude/settings.local.json
 
-# Local exports from the old MRDBID database
-/import_data/
+
+# Character data releases are part of the code base (loaded by migrations)
+!/data/releases/**/*.sql

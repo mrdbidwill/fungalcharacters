@@ -1,5 +1,4 @@
 .git
-import_data
 .venv
 __pycache__
 *.pyc

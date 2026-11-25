@@ -11,7 +11,7 @@
       <td>{{ r.rec.history_date|date:"Y-m-d H:i" }}</td>
       <td>{{ r.rec.history_user.username|default:"—" }}</td>
       <td>{{ r.rec.get_history_type_display }}</td>
-      <td>{{ r.label|capfirst }}: <a href="{% url 'characters:history' r.kind r.rec.id %}">{{ r.name }}</a></td>
+      <td>{{ r.label|capfirst }}: {% if r.code %}<a href="{% url 'characters:history_by_code' r.code %}">{{ r.name }}</a> <code>{{ r.code }}</code>{% else %}<a href="{% url 'characters:history' r.kind r.rec.id %}">{{ r.name }}</a>{% endif %}</td>
       <td>{{ r.rec.history_change_reason|default:"" }}</td>
     </tr>
   {% endfor %}

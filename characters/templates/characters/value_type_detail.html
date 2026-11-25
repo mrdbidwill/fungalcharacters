@@ -3,9 +3,10 @@
 {% block content %}
 <p><a href="{% url 'characters:value_type_list' %}">← All value types</a></p>
 <h1>Value type: {{ obj.name }}</h1>
-<p class="muted">Permanent ID {{ obj.id }} · created by {{ obj.created_by.username }}</p>
+<p class="muted">ID {{ obj.id }} · {% if created_by_name %}added by {{ created_by_name }}{% else %}from release {{ data_release.version }}{% endif %}{% if hidden %} · <strong>HIDDEN</strong>{% endif %}</p>
 <p class="actions">
   {% if obj|editable_by:user %}<a href="{% url 'characters:value_type_edit' obj.pk %}">Edit</a> <a href="{% url 'characters:value_type_delete' obj.pk %}">Delete</a>{% endif %}
+  {% include "characters/_admin_hide.html" with kind="value-type" obj_pk=obj.pk %}
   <a href="{% url 'characters:history' 'value-type' obj.pk %}">Edit history</a>
 </p>
 <dl><dt>Description</dt><dd>{{ obj.description|default:"—" }}</dd><dt>Comments</dt><dd>{{ obj.comments|default:"—" }}</dd></dl>
