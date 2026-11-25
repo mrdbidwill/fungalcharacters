@@ -3,6 +3,7 @@
 {% block content %}
 <h1>Edit history: {{ title }}</h1>
 <p class="muted">{{ kind_label|capfirst }}{% if current_url %} · <a href="{{ current_url }}">Current version</a>{% else %} · deleted{% endif %}</p>
+{% if from_release %}<p class="muted">Originally from data release {{ data_release.version }}; changes made on this site are listed below.</p>{% endif %}
 <div class="table-wrap">
 <table>
   <thead><tr><th>When (UTC)</th><th>Who</th><th>Change</th><th>Details</th><th>Reason</th></tr></thead>

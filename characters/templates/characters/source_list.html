@@ -6,7 +6,7 @@
 <div class="table-wrap">
 <table>
   <thead><tr><th>ID</th><th>Title</th><th>Author</th><th>Type</th><th>Characters</th><th>By</th></tr></thead>
-  <tbody>{% for o in items %}<tr><td>{{ o.id }}</td><td><a href="{% url 'characters:source_detail' o.pk %}">{{ o.title }}</a></td><td>{{ o.author }}</td><td>{{ o.source_type|default:"" }}</td><td>{{ o.n }}</td><td>{{ o.created_by.username }}</td></tr>{% endfor %}</tbody>
+  <tbody>{% for o in items %}<tr><td>{{ o.id }}</td><td><a href="{% url 'characters:source_detail' o.pk %}">{{ o.title }}</a></td><td>{{ o.author }}</td><td>{{ o.source_type|default:"" }}</td><td>{{ o.n }}</td><td>{{ o.created_by_name|default:"release" }}</td></tr>{% endfor %}</tbody>
 </table>
 </div>
 {% endblock %}

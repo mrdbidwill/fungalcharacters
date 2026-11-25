@@ -1,0 +1,6 @@
+{% extends "characters/base.html" %}
+{% block content %}
+<h1><code>{{ code }}</code> has been retired</h1>
+<p>This permanent code belonged to “{{ rec.name }}”, which was deleted on {{ rec.history_date|date:"Y-m-d" }}{% if rec.history_user %} by {{ rec.history_user.username }}{% endif %}. Codes are never reused.</p>
+<p><a href="{% url 'characters:history_by_code' code %}">Edit history</a></p>
+{% endblock %}

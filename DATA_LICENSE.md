@@ -6,4 +6,6 @@ You may copy, modify, distribute and use the data, including for commercial purp
 
 Full legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
 
+Please cite as (a request, not a requirement): Fungal Characters, release 1.0.0, https://fungalcharacters.org/
+
 The software code in this repository is licensed separately under the MIT License (see LICENSE).

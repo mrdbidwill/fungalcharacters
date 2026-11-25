@@ -25,7 +25,6 @@ services:
       DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-localdev}
     volumes:
       - .:/app
-      - ./import_data:/import_data:ro
     ports:
       - "127.0.0.1:8000:8000"
     depends_on:

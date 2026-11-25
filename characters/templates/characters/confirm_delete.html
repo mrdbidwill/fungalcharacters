@@ -6,8 +6,8 @@
   <ul>{% for b in blockers %}<li>{{ b }}</li>{% endfor %}</ul>
   <p><a href="{{ cancel_url }}">Back</a></p>
 {% else %}
-  <p>This removes it from the site. Its edit history stays public, and its ID is never reused.</p>
-  {% if extra_options %}<p class="warn">Its {{ extra_options }} value option(s) will be deleted with it.</p>{% endif %}
+  <p>This removes it from the site. Its edit history stays public, and its code or ID is never reused.</p>
+  {% if extra_values %}<p class="warn">Its {{ extra_values }} value option(s) will be deleted with it.</p>{% endif %}
   <form class="form" method="post">
     {% csrf_token %}
     {{ form.as_div }}
