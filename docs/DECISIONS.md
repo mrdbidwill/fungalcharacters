@@ -32,7 +32,6 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - Admin acts only on inappropriate material or behavior: hide or delete it, block users.
 - Exception (2026-11-24): characters imported from MRDBID stay credited to the `mrdbid-import` account; owner does not matter. Will, as admin, can edit and delete them as part of his review.
 - "Needs review" button, usable by anyone (logged in or not), adds an entry to a list in the admin section. No email. A hidden per-visitor rate limit stops automated flooding.
-
 - Parts, observation methods, fungus types and source types (2026-11-25): admin only. Users pick from them; only the admin adds or changes them.
 - Forgotten passwords (2026-11-25): until email is added, the admin makes a one-time "set password" link on request.
 
