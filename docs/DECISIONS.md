@@ -21,6 +21,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - A "Thanks" page (2026-11-25): first draft from Will is on the site; Will edits it later. Facts checked: Gastón Guzmán 1932–2016; Flora Agaricina Neerlandica vol. 1 (1988, eds Bas, Kuyper, Noordeloos & Vellinga) with Vellinga's glossary section; nolo_mode's iNaturalist guide "Intro To Identifying Fungi". Not checkable online: nolo_mode's permission (Nov 2026), myceliome.com, the 2019 Mushroom Observer date.
 - "Where people disagree" wording (2026-11-25) describes what the site does now: each item shows its source, and every change is kept in the public history. Side-by-side competing statements are not built.
 - Disclaimer (2026-11-25, Website Administrator; rule in Claude_AI/shared_reference/disclaimer/): "No advice about consumption." at the top and bottom of every page in the shared style, and the short note beside characters about chemistry or toxicity (chemical-test methods, "Toxic") and sources whose titles are about eating or medicinal use.
+- Home page keeps Will's own "No advice about consumption" section as well as the top and bottom notes (Will, 2026-11-25).
 - Home page (2026-11-25): says what the site is for, how to view the data here, how to download it, and that registered users can add and edit; plus Will's "Where people disagree" and "No advice about consumption" texts. The character list moved to /characters/ (menu: Characters).
 
 ## Users and editing
@@ -77,8 +78,8 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 
 ## Domains
 - fungalcharacters.org is the main address; fungalcharacters.com forwards to it.
-- mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires.
+- mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires. Start: now (Will, 2026-11-25); www and new.mrdbid.com too, all to the home page; dna.mrdbid.com is not included. The Website Administrator makes the nginx change (request: Claude_AI/Website_Admin/FC_REQUEST_MRDBID_REDIRECT.md).
 
 ## Open
-- Live (2026-11-25): https://fungalcharacters.org/ (www and .com redirect to it). Website Administrator did the server setup, nginx, DNS and certificate; this project deploys the app with deploy/deploy.sh (docs/DEPLOY.md). App in Docker, Compose project `fungalcharacters`, gunicorn on 127.0.0.1:8030 (8010 gulfcoastfungi, 8020 mrdbid.com). The live database started as a copy of the local one. Email sends through Resend (mail.fungalcharacters.org verified). Nightly private backups on the server (03:15). Admin account `will` (willfh54@protonmail.com) signs in with two-factor; site error reports go to that address. mrdbid.com's redirect is not part of this (mrdbid.com is still live for the MRDBID project); Will to say when.
+- Live (2026-11-25): https://fungalcharacters.org/ (www and .com redirect to it). Website Administrator did the server setup, nginx, DNS and certificate; this project deploys the app with deploy/deploy.sh (docs/DEPLOY.md). App in Docker, Compose project `fungalcharacters`, gunicorn on 127.0.0.1:8030 (8010 gulfcoastfungi, 8020 mrdbid.com). The live database started as a copy of the local one. Email sends through Resend (mail.fungalcharacters.org verified). Nightly private backups on the server (03:15). Admin account `will` (willfh54@protonmail.com) signs in with two-factor; site error reports go to that address. mrdbid.com's redirect: see Domains.
 - Old shared WORKSPACE.md and DECISIONS.md stay in place: they still govern other projects (gulfcoastfungi, Website Admin). fungalcharacters ignores them. Cleanup is a separate decision for those projects.
