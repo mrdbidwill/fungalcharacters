@@ -1,6 +1,7 @@
 #!/bin/bash
 # Nightly database backup on the VPS (fc's crontab: 15 3 * * * /home/fc/app/deploy/backup.sh). Keeps 30 days.
 set -euo pipefail
+umask 077   # backups hold password hashes: readable by fc only
 cd /home/fc/app
 docker compose -f docker-compose.prod.yml exec -T db pg_dump -U fungalcharacters fungalcharacters \
   | gzip > /home/fc/backups/fungalcharacters_$(date +%F).sql.gz
