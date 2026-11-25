@@ -33,6 +33,9 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - Exception (2026-11-24): characters imported from MRDBID stay credited to the `mrdbid-import` account; owner does not matter. Will, as admin, can edit and delete them as part of his review.
 - "Needs review" button, usable by anyone (logged in or not), adds an entry to a list in the admin section. No email. A hidden per-visitor rate limit stops automated flooding.
 
+- Parts, observation methods, fungus types and source types (2026-11-25): admin only. Users pick from them; only the admin adds or changes them.
+- Forgotten passwords (2026-11-25): until email is added, the admin makes a one-time "set password" link on request.
+
 ## Data access and licensing
 - Permanent, never-reused ID and web address for every character.
 - Downloads in CSV and JSON; open read-only API; dated releases in the GitHub repository.
@@ -60,7 +63,6 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires.
 
 ## Open
-- Parts, observation methods, fungus types and source types (2026-11-24, stage 2): only the admin changes these for now (Django admin pages); users pick from them. DECISIONS lists characters, value types, value options and sources as what users add. Will to confirm or open them to users.
-- Forgotten passwords (2026-11-24): the site sends no email, so the admin makes a one-time "set password" link on request. Revisit if email is wanted.
+- Email (2026-11-25): to be added soon, for password resets. Provider and sending address not yet chosen.
 - Deployment: own nginx entry, certificate, containers, database and port (gulfcoastfungi uses 8010); own deploy user or extended rights (current `gcf` user is limited to gulfcoastfungi); mrdbid.com's nginx entry changed to redirect.
 - Old shared WORKSPACE.md and DECISIONS.md stay in place: they still govern other projects (gulfcoastfungi, Website Admin). fungalcharacters ignores them. Cleanup is a separate decision for those projects.
