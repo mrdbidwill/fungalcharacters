@@ -1,4 +1,4 @@
--- fungal_characters release 1.0.0 — PostgreSQL 16/17 version. License CC BY 4.0, https://fungalcharacters.org/
+-- fungal_characters release 1.0.0 — PostgreSQL 16/17 version. License CC0 1.0 (public domain), https://fungalcharacters.org/
 -- Same tables, columns and data as the MySQL release. Load into an empty database or schema.
 BEGIN;
 SET client_encoding = 'UTF8';

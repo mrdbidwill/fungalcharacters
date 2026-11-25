@@ -12,7 +12,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 
 ## Scope
 - Characters only: names, value types (e.g. number in mm, text, color, or a list of value options), value options (used as radio buttons or select menus), descriptions, comments. Values recorded for specific mushrooms are out of scope.
-- Terms (2026-11-24): a *value* is what one mushroom has for a character (e.g. stem_width = 3 mm, or Abundance = Low); once set, it is a number or text entered, or one of the character's value options. A *value type* is the kind of value a character takes (stored as the character's display option). *Value options* are a character's allowed choices (table `lookup_items`). The data release calls value options "values" (codes FCV#####); the site says "value options" (2026-11-25).
+- Terms (2026-11-24): a *value* is what one mushroom has for a character (e.g. stem_width = 3 mm, or Abundance = Low); once set, it is a number or text entered, or one of the character's value options. A *value type* is the kind of value a character takes (stored as the character's display option). *Value options* are a character's allowed choices (table `lookup_items`). Release 1.0.0 calls value options "values" (codes FCV#####); from the next release, downloads say "value options" and "value type" too (columns, Excel sheet, `value_options_flat.csv`), matching the site (2026-11-25).
 - Example (Will, 2026-11-25): the character "Cap Texture" has a list of value options (Smooth, …) stored in the lookup table (`lookup_items`); a specific mushroom's *value* for it is one chosen value option, recorded by its id/code. A character like "Cap Width" has no options: its value is a measurement (a number in mm). "Characters" means characters in general; a *character name* refers to a specific one.
 - Not included: user mushrooms, specimens, genera/species (no MBList), images (deferred).
 - Colors appear only as characters ("cap color", "stem color", "spore color"). A fuller color design is a separate later discussion.
@@ -42,6 +42,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - SDD (TDWG Structured Descriptive Data) export after the core site works.
 - Data: CC0. Code: MIT. Site and repository state plainly that everything is free to use in any way.
 - CC0 confirmed (2026-11-25) over CC BY 4.0, with a request (not a requirement) to cite: "Fungal Characters, release <version>, https://fungalcharacters.org/".
+- Release 1.0.0 files relabelled CC0 (2026-11-25): license wording only, data unchanged; the release build scripts now write CC0. Backups in `~/Developer/fungalcharacters_backups/`.
 
 ## Character data
 - Source of the data (2026-11-25): the `fungal_characters` release, starting with 1.0.0 (747 characters, 590 value options, 2681 labels). Release files on the Mac: `~/Desktop/XDE_conversion/fungal_characters/release_v1.0.0/`; the PostgreSQL file is also in the repository at `data/releases/1.0.0/`. Built from XDE's character list, Mushroom Observer list 1417 and the old mrdbid_development data.
@@ -64,7 +65,6 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires.
 
 ## Open
-- Release 1.0.0 files still say CC BY 4.0 (README, CHANGELOG, header comment of the SQL files). They need regenerating with CC0 wording by the release build scripts (`~/Desktop/XDE_conversion/fungal_characters/build_scripts/`) (2026-11-25).
 - Email (2026-11-25): to be added soon, for password resets. Provider and sending address not yet chosen.
 - Deployment: own nginx entry, certificate, containers, database and port (gulfcoastfungi uses 8010); own deploy user or extended rights (current `gcf` user is limited to gulfcoastfungi); mrdbid.com's nginx entry changed to redirect.
 - Old shared WORKSPACE.md and DECISIONS.md stay in place: they still govern other projects (gulfcoastfungi, Website Admin). fungalcharacters ignores them. Cleanup is a separate decision for those projects.
