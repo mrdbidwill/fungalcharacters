@@ -613,6 +613,8 @@ def account(request):
         "my_sources": Source.objects.filter(pk__in=ids("SourceData")).order_by("title"),
         "my_changes": sum(model.history.filter(history_user=request.user).count() for model in KINDS.values()),
         "my_translations": mine.filter(item_type="Label").count(),
+        "open_reviews": __import__("characters.models", fromlist=["ReviewRequest"]).ReviewRequest.objects.filter(resolved=False).count()
+                        if request.user.is_superuser else None,
     })
 
 
@@ -784,3 +786,45 @@ def delete_account(request):
             return redirect("characters:home")
         return render(request, "characters/delete_account.html")
     return inner(request)
+
+
+# ---------- "Needs review" ----------
+
+REVIEW_KINDS = {"character": Character, "value-type": DisplayOption, "source": Source}
+REVIEW_LIMIT_PER_HOUR = 5
+
+
+def _review_allowed(request):
+    """Hidden per-visitor limit: at most REVIEW_LIMIT_PER_HOUR reports an hour. The visitor's address is only used,
+    hashed with the site's secret, as a one-hour counter; it is not stored with the report."""
+    import hashlib
+    from allauth.core.internal.httpkit import get_client_ip
+    from django.core.cache import cache
+    who = f"user:{request.user.pk}" if request.user.is_authenticated else f"ip:{get_client_ip(request)}"
+    key = "review:" + hashlib.sha256((settings.SECRET_KEY + who).encode()).hexdigest()[:32]
+    cache.add(key, 0, timeout=3600)
+    try:
+        count = cache.incr(key)
+    except ValueError:
+        cache.set(key, 1, timeout=3600)
+        count = 1
+    return count <= REVIEW_LIMIT_PER_HOUR
+
+
+def review_request(request, kind, pk):
+    from .models import ReviewRequest
+    model = REVIEW_KINDS.get(kind)
+    if model is None:
+        raise Http404
+    obj = get_object_or_404(visible(model, request.user), pk=pk)
+    label = f"{obj} ({obj.code})" if isinstance(obj, Character) else f"{obj} ({model._meta.verbose_name} {obj.pk})"
+    if request.method == "POST":
+        note = request.POST.get("note", "").strip()[:1000]
+        if _review_allowed(request):
+            ReviewRequest.objects.create(
+                item_type=item_type_of(obj), item_id=obj.pk, item_label=str(label)[:300], page=item_url(obj)[:300],
+                note=note, reporter=request.user if request.user.is_authenticated else None)
+        # Same answer whether or not the hidden limit was reached.
+        messages.success(request, _("Thank you. Your report has been added to the list for review."))
+        return redirect(item_url(obj))
+    return render(request, "characters/review_request.html", {"obj": obj, "label": label, "cancel_url": item_url(obj)})

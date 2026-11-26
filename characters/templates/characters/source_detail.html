@@ -8,6 +8,7 @@
   {% if obj|editable_by:user %}<a href="{% url 'characters:source_edit' obj.pk %}">{% translate "Edit" %}</a> <a href="{% url 'characters:source_delete' obj.pk %}">{% translate "Delete" %}</a>{% endif %}
   {% include "characters/_admin_hide.html" with kind="source" obj_pk=obj.pk %}
   <a href="{% url 'characters:history' 'source' obj.pk %}">{% translate "Edit history" %}</a>
+  <a rel="nofollow" href="{% url 'characters:review_request' 'source' obj.pk %}">{% translate "Needs review" %}</a>
 </p>
 {% if obj|consumption_note %}{% include "characters/_disclaimer_near.html" %}{% endif %}
 <dl class="fields">

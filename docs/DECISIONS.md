@@ -48,7 +48,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - Will is the only admin. Django's "Groups" (permission bundles for several users) are not used and are hidden from the admin pages (2026-11-25).
 - Admin acts only on inappropriate material or behavior: hide or delete it, block users.
 - Items from a data release (2026-11-25, replaces the 2026-11-24 `mrdbid-import` rule): credited to the release, no user owner. Only Will, as admin, edits or deletes them.
-- "Needs review" button, usable by anyone (logged in or not), adds an entry to a list in the admin section. No email. A hidden per-visitor rate limit stops automated flooding.
+- "Needs review" button, usable by anyone (logged in or not), adds an entry to a list in the admin section. No email. A hidden per-visitor rate limit stops automated flooding. Built 2026-11-26: on character, value type and source pages (value options are reported from their character); optional note; the list is in the admin pages (mark resolved), and the admin's account page shows the open count. Limit: 5 reports an hour per visitor (signed in: per account); beyond that reports are dropped with the same thank-you. The visitor's IP is used only hashed, as a one-hour counter. Rate-limit counters (this and allauth's sign-in limits) live in a database cache shared by all server processes.
 - Parts, observation methods, fungus types and source types (2026-11-25): admin only. Users pick from them; only the admin adds or changes them.
 - Forgotten passwords (2026-11-25): reset by email link (replaces the admin-made one-time links).
 

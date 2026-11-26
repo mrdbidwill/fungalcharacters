@@ -170,6 +170,9 @@ if not DEBUG:
 # Error reports never include passwords, codes or keys from submitted forms (characters/reporting.py).
 DEFAULT_EXCEPTION_REPORTER_FILTER = "characters.reporting.HideSecretsFilter"
 
+# Shared by all server processes: rate limits (allauth sign-in limits, "Needs review" limit) count correctly.
+CACHES = {"default": {"BACKEND": "django.core.cache.backends.db.DatabaseCache", "LOCATION": "cache_table"}}
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,

@@ -325,3 +325,24 @@ class Consent(models.Model):
     @classmethod
     def record(cls, user):
         cls.objects.get_or_create(user=user, kind=cls.CONTRIBUTIONS_CC0, version=cls.CURRENT_VERSION)
+
+
+class ReviewRequest(models.Model):
+    """A "Needs review" report from anyone, listed for the admin (docs/DECISIONS.md, Admin). No email is sent."""
+
+    item_type = models.CharField(max_length=50)          # CHARACTER_TYPE, DISPLAY_OPTION_TYPE or SOURCE_TYPE
+    item_id = models.BigIntegerField()
+    item_label = models.CharField(max_length=300)        # name and code at the time of the report
+    page = models.CharField(max_length=300)              # the page it was sent from
+    note = models.TextField(blank=True, max_length=1000)
+    reporter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
+                                 related_name="+")
+    created_at = models.DateTimeField(default=timezone.now)
+    resolved = models.BooleanField(default=False)
+    resolved_note = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ["resolved", "-created_at"]
+
+    def __str__(self):
+        return f"{self.item_label} ({self.created_at:%Y-%m-%d})"

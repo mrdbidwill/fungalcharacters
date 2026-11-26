@@ -12,6 +12,7 @@
   {% if c|editable_by:user %}<a href="{% url 'characters:edit' c.code %}">{% translate "Edit" %}</a> <a href="{% url 'characters:delete' c.code %}">{% translate "Delete" %}</a>{% endif %}
   {% include "characters/_admin_hide.html" with kind="character" obj_pk=c.pk %}
   <a href="{% url 'characters:history_by_code' c.code %}">{% translate "Edit history" %}</a>
+  <a rel="nofollow" href="{% url 'characters:review_request' 'character' c.pk %}">{% translate "Needs review" %}</a>
   {% if user.is_authenticated %}<a href="{% url 'characters:translate' c.code %}">{% translate "Translate" %}</a>{% endif %}
 </p>
 {% if c|consumption_note %}{% include "characters/_disclaimer_near.html" %}{% endif %}

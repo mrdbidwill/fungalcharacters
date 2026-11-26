@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fungalcharacters\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-26 00:42+0000\n"
+"POT-Creation-Date: 2026-11-26 11:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgid ""
 "then tick “Save anyway”."
 msgstr ""
 
-#: characters/forms.py:146 characters/templates/characters/detail.html:22
+#: characters/forms.py:146 characters/templates/characters/detail.html:23
 #: characters/templates/characters/list.html:26 characters/views.py:31
 msgid "Scientific name"
 msgstr ""
@@ -67,7 +67,7 @@ msgstr ""
 msgid "e.g. Pileus Width for Cap Width."
 msgstr ""
 
-#: characters/forms.py:148 characters/templates/characters/detail.html:25
+#: characters/forms.py:148 characters/templates/characters/detail.html:26
 msgid "Unit"
 msgstr ""
 
@@ -75,7 +75,7 @@ msgstr ""
 msgid "e.g. mm, µm. Leave blank if none."
 msgstr ""
 
-#: characters/forms.py:152 characters/templates/characters/detail.html:29
+#: characters/forms.py:152 characters/templates/characters/detail.html:30
 #: characters/views.py:531
 msgid "Applies to"
 msgstr ""
@@ -86,46 +86,46 @@ msgstr ""
 
 #: characters/forms.py:161
 #: characters/templates/characters/_translate_field.html:2
-#: characters/templates/characters/detail.html:20
+#: characters/templates/characters/detail.html:21
 #: characters/templates/characters/list.html:26 characters/views.py:31
 msgid "Name"
 msgstr ""
 
 #: characters/forms.py:161 characters/forms.py:216
 #: characters/templates/characters/_translate_field.html:2
-#: characters/templates/characters/detail.html:23
-#: characters/templates/characters/detail.html:41 characters/views.py:31
+#: characters/templates/characters/detail.html:24
+#: characters/templates/characters/detail.html:42 characters/views.py:31
 msgid "Definition"
 msgstr ""
 
-#: characters/forms.py:161 characters/templates/characters/detail.html:26
+#: characters/forms.py:161 characters/templates/characters/detail.html:27
 #: characters/templates/characters/list.html:10
 #: characters/templates/characters/list.html:26
 msgid "Part"
 msgstr ""
 
-#: characters/forms.py:162 characters/templates/characters/detail.html:27
+#: characters/forms.py:162 characters/templates/characters/detail.html:28
 msgid "Observation method"
 msgstr ""
 
 #: characters/forms.py:162 characters/forms.py:234
-#: characters/templates/characters/detail.html:28
+#: characters/templates/characters/detail.html:29
 #: characters/templates/characters/list.html:26
 #: characters/templates/characters/value_type_list.html:9
 msgid "Value type"
 msgstr ""
 
 #: characters/forms.py:163 characters/forms.py:216
-#: characters/templates/characters/detail.html:30
-#: characters/templates/characters/detail.html:41
+#: characters/templates/characters/detail.html:31
+#: characters/templates/characters/detail.html:42
 msgid "Source"
 msgstr ""
 
 #: characters/forms.py:163 characters/forms.py:216 characters/forms.py:234
-#: characters/forms.py:244 characters/templates/characters/detail.html:31
-#: characters/templates/characters/detail.html:41
-#: characters/templates/characters/source_detail.html:18
-#: characters/templates/characters/value_type_detail.html:12
+#: characters/forms.py:244 characters/templates/characters/detail.html:32
+#: characters/templates/characters/detail.html:42
+#: characters/templates/characters/source_detail.html:19
+#: characters/templates/characters/value_type_detail.html:13
 msgid "Comments"
 msgstr ""
 
@@ -138,12 +138,12 @@ msgstr ""
 msgid "Notes kept with the character."
 msgstr ""
 
-#: characters/forms.py:216 characters/templates/characters/detail.html:41
+#: characters/forms.py:216 characters/templates/characters/detail.html:42
 msgid "Value option"
 msgstr ""
 
 #: characters/forms.py:234
-#: characters/templates/characters/value_type_detail.html:12
+#: characters/templates/characters/value_type_detail.html:13
 #: characters/templates/characters/value_type_list.html:9
 msgid "Description"
 msgstr ""
@@ -153,23 +153,23 @@ msgid "Title"
 msgstr ""
 
 #: characters/forms.py:243
-#: characters/templates/characters/source_detail.html:14
+#: characters/templates/characters/source_detail.html:15
 #: characters/templates/characters/source_list.html:10
 msgid "Author"
 msgstr ""
 
 #: characters/forms.py:243
-#: characters/templates/characters/source_detail.html:15
+#: characters/templates/characters/source_detail.html:16
 msgid "Reference / URL"
 msgstr ""
 
 #: characters/forms.py:243
-#: characters/templates/characters/source_detail.html:16
+#: characters/templates/characters/source_detail.html:17
 msgid "Item code"
 msgstr ""
 
 #: characters/forms.py:244
-#: characters/templates/characters/source_detail.html:17
+#: characters/templates/characters/source_detail.html:18
 #: characters/templates/characters/source_list.html:10
 msgid "Type"
 msgstr ""
@@ -316,17 +316,17 @@ msgid "Email addresses"
 msgstr ""
 
 #: characters/templates/characters/_account_menu.html:7
-#: characters/templates/characters/account.html:13
+#: characters/templates/characters/account.html:14
 msgid "Password"
 msgstr ""
 
 #: characters/templates/characters/_account_menu.html:8
-#: characters/templates/characters/account.html:14
+#: characters/templates/characters/account.html:15
 msgid "Two-factor sign-in"
 msgstr ""
 
 #: characters/templates/characters/_account_menu.html:9
-#: characters/templates/characters/account.html:17
+#: characters/templates/characters/account.html:18
 msgid "Signed-in devices"
 msgstr ""
 
@@ -371,144 +371,151 @@ msgid "Your username is shown on everything you add."
 msgstr ""
 
 #: characters/templates/characters/account.html:8
+#, python-format
+msgid "%(n)s open “Needs review” report"
+msgid_plural "%(n)s open “Needs review” reports"
+msgstr[0] ""
+msgstr[1] ""
+
+#: characters/templates/characters/account.html:9
 msgid "Settings"
 msgstr ""
 
-#: characters/templates/characters/account.html:10
+#: characters/templates/characters/account.html:11
 msgid "Email"
 msgstr ""
 
-#: characters/templates/characters/account.html:11
+#: characters/templates/characters/account.html:12
 msgid "main"
 msgstr ""
 
-#: characters/templates/characters/account.html:11
+#: characters/templates/characters/account.html:12
 msgid "not verified"
 msgstr ""
 
-#: characters/templates/characters/account.html:11
+#: characters/templates/characters/account.html:12
 msgid "None yet"
 msgstr ""
 
-#: characters/templates/characters/account.html:12
+#: characters/templates/characters/account.html:13
 msgid "Manage email addresses"
 msgstr ""
 
-#: characters/templates/characters/account.html:13
+#: characters/templates/characters/account.html:14
 msgid "Change password"
 msgstr ""
 
-#: characters/templates/characters/account.html:15
+#: characters/templates/characters/account.html:16
 msgid "On."
 msgstr ""
 
-#: characters/templates/characters/account.html:15
+#: characters/templates/characters/account.html:16
 msgid "Off."
 msgstr ""
 
-#: characters/templates/characters/account.html:15
+#: characters/templates/characters/account.html:16
 msgid "Recommended: it protects your account even if your password is stolen."
 msgstr ""
 
-#: characters/templates/characters/account.html:16
+#: characters/templates/characters/account.html:17
 msgid "Manage two-factor sign-in"
 msgstr ""
 
-#: characters/templates/characters/account.html:16
+#: characters/templates/characters/account.html:17
 msgid "Turn on two-factor sign-in"
 msgstr ""
 
-#: characters/templates/characters/account.html:17
+#: characters/templates/characters/account.html:18
 msgid "See and sign out other devices"
 msgstr ""
 
-#: characters/templates/characters/account.html:18
+#: characters/templates/characters/account.html:19
 #: characters/templates/characters/languages.html:12
 #: characters/templates/characters/languages.html:32
 msgid "Language"
 msgstr ""
 
-#: characters/templates/characters/account.html:18
+#: characters/templates/characters/account.html:19
 #: characters/templates/characters/languages.html:8
 msgid "Choose the site's language"
 msgstr ""
 
-#: characters/templates/characters/account.html:19
+#: characters/templates/characters/account.html:20
 msgid "Your data"
 msgstr ""
 
-#: characters/templates/characters/account.html:19
+#: characters/templates/characters/account.html:20
 #: characters/templates/characters/base.html:65
 #: characters/templates/characters/privacy.html:3
 #: characters/templates/characters/privacy.html:6
 msgid "Contributions and privacy"
 msgstr ""
 
-#: characters/templates/characters/account.html:19
+#: characters/templates/characters/account.html:20
 #: characters/templates/characters/delete_account.html:3
 #: characters/templates/characters/delete_account.html:5
 #: characters/templates/characters/delete_account.html:11
 msgid "Delete my account"
 msgstr ""
 
-#: characters/templates/characters/account.html:22
+#: characters/templates/characters/account.html:23
 #: characters/templates/characters/privacy.html:9
 msgid "Your contributions"
 msgstr ""
 
-#: characters/templates/characters/account.html:23
+#: characters/templates/characters/account.html:24
 #, python-format
 msgid "%(n)s change recorded in the public history."
 msgid_plural "%(n)s changes recorded in the public history."
 msgstr[0] ""
 msgstr[1] ""
 
-#: characters/templates/characters/account.html:24
+#: characters/templates/characters/account.html:25
 #, python-format
 msgid "Characters (%(count)s)"
 msgstr ""
 
-#: characters/templates/characters/account.html:25
-#: characters/templates/characters/account.html:27
-#: characters/templates/characters/account.html:29
-#: characters/templates/characters/account.html:31
-#: characters/templates/characters/account.html:33
-#: characters/templates/characters/detail.html:33
+#: characters/templates/characters/account.html:26
+#: characters/templates/characters/account.html:28
+#: characters/templates/characters/account.html:30
+#: characters/templates/characters/account.html:32
+#: characters/templates/characters/account.html:34
+#: characters/templates/characters/detail.html:34
 msgid "None yet."
 msgstr ""
 
-#: characters/templates/characters/account.html:25
+#: characters/templates/characters/account.html:26
 #: characters/templates/characters/home.html:24
 #: characters/templates/characters/list.html:6 characters/views.py:346
 msgid "Add a character"
 msgstr ""
 
-#: characters/templates/characters/account.html:26
-#: characters/templates/characters/detail.html:36
+#: characters/templates/characters/account.html:27
+#: characters/templates/characters/detail.html:37
 #, python-format
 msgid "Value options (%(count)s)"
 msgstr ""
 
-#: characters/templates/characters/account.html:28
+#: characters/templates/characters/account.html:29
 #, python-format
 msgid "Value types (%(count)s)"
 msgstr ""
 
-#: characters/templates/characters/account.html:30
+#: characters/templates/characters/account.html:31
 #, python-format
 msgid "Sources (%(count)s)"
 msgstr ""
 
-#: characters/templates/characters/account.html:32
+#: characters/templates/characters/account.html:33
 #, python-format
 msgid "Translations (%(count)s)"
 msgstr ""
 
-#: characters/templates/characters/account.html:33
+#: characters/templates/characters/account.html:34
 msgid "Names and definitions you wrote in other languages."
 msgstr ""
 
-#: characters/templates/characters/account.html:33
+#: characters/templates/characters/account.html:34
 #: characters/templates/characters/home.html:29
 #: characters/templates/characters/languages.html:20
 msgid "Help translate"
@@ -538,6 +545,7 @@ msgstr ""
 #: characters/templates/characters/confirm_delete.html:15
 #: characters/templates/characters/delete_account.html:11
 #: characters/templates/characters/form.html:30
+#: characters/templates/characters/review_request.html:15
 #: characters/templates/characters/translate.html:42
 msgid "Cancel"
 msgstr ""
@@ -693,7 +701,7 @@ msgstr[1] ""
 
 #: characters/templates/characters/confirm_delete.html:15
 #: characters/templates/characters/detail.html:12
-#: characters/templates/characters/detail.html:50
+#: characters/templates/characters/detail.html:51
 #: characters/templates/characters/source_detail.html:8
 #: characters/templates/characters/value_type_detail.html:8
 msgid "Delete"
@@ -745,7 +753,7 @@ msgid "HIDDEN"
 msgstr ""
 
 #: characters/templates/characters/detail.html:12
-#: characters/templates/characters/detail.html:50
+#: characters/templates/characters/detail.html:51
 #: characters/templates/characters/source_detail.html:8
 #: characters/templates/characters/value_type_detail.html:8
 msgid "Edit"
@@ -759,75 +767,83 @@ msgid "Edit history"
 msgstr ""
 
 #: characters/templates/characters/detail.html:15
+#: characters/templates/characters/review_request.html:3
+#: characters/templates/characters/review_request.html:6
+#: characters/templates/characters/source_detail.html:11
+#: characters/templates/characters/value_type_detail.html:11
+msgid "Needs review"
+msgstr ""
+
+#: characters/templates/characters/detail.html:16
 #: characters/templates/characters/home.html:27
 msgid "Translate"
 msgstr ""
 
-#: characters/templates/characters/detail.html:18
+#: characters/templates/characters/detail.html:19
 msgid "Marked as needing review."
 msgstr ""
 
-#: characters/templates/characters/detail.html:21
+#: characters/templates/characters/detail.html:22
 #, python-format
 msgid "Name in %(language)s"
 msgstr ""
 
-#: characters/templates/characters/detail.html:24
+#: characters/templates/characters/detail.html:25
 #, python-format
 msgid "Definition in %(language)s"
 msgstr ""
 
-#: characters/templates/characters/detail.html:29
+#: characters/templates/characters/detail.html:30
 msgid "All fungi"
 msgstr ""
 
-#: characters/templates/characters/detail.html:32 characters/views.py:537
+#: characters/templates/characters/detail.html:33 characters/views.py:537
 msgid "Core order"
 msgstr ""
 
-#: characters/templates/characters/detail.html:33
+#: characters/templates/characters/detail.html:34
 msgid "Translations"
 msgstr ""
 
-#: characters/templates/characters/detail.html:37
+#: characters/templates/characters/detail.html:38
 msgid "Add a value option"
 msgstr ""
 
-#: characters/templates/characters/detail.html:41
+#: characters/templates/characters/detail.html:42
 #: characters/templates/characters/list.html:26
 msgid "Code"
 msgstr ""
 
-#: characters/templates/characters/detail.html:41
+#: characters/templates/characters/detail.html:42
 #: characters/templates/characters/list.html:26
 #: characters/templates/characters/source_list.html:10
 #: characters/templates/characters/value_type_list.html:9
 msgid "By"
 msgstr ""
 
-#: characters/templates/characters/detail.html:41
+#: characters/templates/characters/detail.html:42
 #: characters/templates/characters/languages.html:32
 msgid "Actions"
 msgstr ""
 
-#: characters/templates/characters/detail.html:46
+#: characters/templates/characters/detail.html:47
 msgid "hidden"
 msgstr ""
 
-#: characters/templates/characters/detail.html:48
+#: characters/templates/characters/detail.html:49
 #: characters/templates/characters/list.html:37
 #: characters/templates/characters/source_list.html:11
 #: characters/templates/characters/value_type_list.html:10
 msgid "release"
 msgstr ""
 
-#: characters/templates/characters/detail.html:52
+#: characters/templates/characters/detail.html:53
 msgid "History"
 msgstr ""
 
-#: characters/templates/characters/detail.html:60
-#: characters/templates/characters/source_detail.html:21
-#: characters/templates/characters/value_type_detail.html:14
+#: characters/templates/characters/detail.html:61
+#: characters/templates/characters/source_detail.html:22
+#: characters/templates/characters/value_type_detail.html:15
 msgid "None."
 msgstr ""
 
@@ -1257,36 +1273,44 @@ msgstr ""
 
 #: characters/templates/characters/privacy.html:24
 msgid ""
+"If you send a “Needs review” report: your note, the page, the time and, if "
+"you are signed in, your username. Your IP address is used only in scrambled "
+"form for one hour, to limit repeated reports; it is not stored with the "
+"report."
+msgstr ""
+
+#: characters/templates/characters/privacy.html:25
+msgid ""
 "Cookies: for signing in and security, for one-time notices on the next page, "
 "and to remember your choice of language and of common or scientific names. "
 "No advertising, analytics or tracking cookies; no scripts or fonts from "
 "other companies."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:27
+#: characters/templates/characters/privacy.html:28
 msgid "Where it is kept"
 msgstr ""
 
-#: characters/templates/characters/privacy.html:29
+#: characters/templates/characters/privacy.html:30
 msgid ""
 "The site runs on a server rented from Hostinger, in the United States. Email "
 "is sent through Resend, in the United States."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:30
+#: characters/templates/characters/privacy.html:31
 msgid ""
 "The server's web logs (IP address, page requested, browser) are kept for 14 "
 "days. The site's own logs (time, page requested, browser) are limited in "
 "size and overwritten as new entries arrive."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:31
+#: characters/templates/characters/privacy.html:32
 msgid ""
 "The database is backed up every night; the server keeps 30 days of backups, "
 "and the administrator keeps a copy off the server."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:32
+#: characters/templates/characters/privacy.html:33
 msgid ""
 "When something goes wrong, the site emails an error report to its "
 "administrator through Resend. It can include your username, IP address, "
@@ -1294,11 +1318,11 @@ msgid ""
 "are hidden)."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:35
+#: characters/templates/characters/privacy.html:36
 msgid "Your choices"
 msgstr ""
 
-#: characters/templates/characters/privacy.html:37
+#: characters/templates/characters/privacy.html:38
 #, python-format
 msgid ""
 "See and change your email addresses and password, turn on two-factor sign-"
@@ -1306,7 +1330,7 @@ msgid ""
 "page</a>."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:38
+#: characters/templates/characters/privacy.html:39
 msgid ""
 "Delete your account from your account page (“Delete my account”; your "
 "password is asked again). Your email addresses, password, two-factor "
@@ -1316,14 +1340,14 @@ msgid ""
 "already sent) are not changed; the server's backups expire after 30 days."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:39
+#: characters/templates/characters/privacy.html:40
 msgid ""
 "Questions about your data: <a "
 "href=\"mailto:contact@fungalcharacters.org\">contact@fungalcharacters.org</"
 "a>."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:41
+#: characters/templates/characters/privacy.html:42
 msgid ""
 "If the contribution terms change, the date above changes and you are asked "
 "to agree again before adding anything."
@@ -1352,11 +1376,33 @@ msgstr ""
 msgid "Codes are never reused."
 msgstr ""
 
+#: characters/templates/characters/review_request.html:7
+#, python-format
+msgid ""
+"Report a problem with <strong>%(label)s</strong>: something wrong, missing, "
+"a duplicate, or anything inappropriate. Your report goes to a list the "
+"site's administrator works through. No account is needed."
+msgstr ""
+
+#: characters/templates/characters/review_request.html:11
+msgid "What needs review? (optional)"
+msgstr ""
+
+#: characters/templates/characters/review_request.html:13
+msgid ""
+"Please say what is wrong and, if you can, what is right and where it comes "
+"from."
+msgstr ""
+
+#: characters/templates/characters/review_request.html:15
+msgid "Send report"
+msgstr ""
+
 #: characters/templates/characters/source_detail.html:4
 msgid "All sources"
 msgstr ""
 
-#: characters/templates/characters/source_detail.html:20
+#: characters/templates/characters/source_detail.html:21
 #, python-format
 msgid "Characters citing this source (%(count)s)"
 msgstr ""
@@ -1481,7 +1527,7 @@ msgstr ""
 msgid "Value type: %(name)s"
 msgstr ""
 
-#: characters/templates/characters/value_type_detail.html:13
+#: characters/templates/characters/value_type_detail.html:14
 #, python-format
 msgid "Characters with this value type (%(count)s)"
 msgstr ""
@@ -1622,27 +1668,31 @@ msgstr ""
 msgid "changed"
 msgstr ""
 
-#: characters/views.py:705
+#: characters/views.py:707
 #, python-format
 msgid "Saved %(n)d translation(s)."
 msgstr ""
 
-#: characters/views.py:705
+#: characters/views.py:707
 msgid "Nothing changed."
 msgstr ""
 
-#: characters/views.py:725
+#: characters/views.py:727
 msgid "Every character has a name in this language. Thank you!"
 msgstr ""
 
-#: characters/views.py:776
+#: characters/views.py:778
 msgid "The admin account cannot be deleted here."
 msgstr ""
 
-#: characters/views.py:783
+#: characters/views.py:785
 msgid ""
 "Your account has been deleted. Your contributions stay on the site, credited "
 "to a former contributor."
+msgstr ""
+
+#: characters/views.py:828
+msgid "Thank you. Your report has been added to the list for review."
 msgstr ""
 
 #: templates/404.html:3 templates/404.html:6

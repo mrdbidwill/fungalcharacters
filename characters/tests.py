@@ -530,3 +530,47 @@ class ErrorReportTests(TestCase):
         self.assertNotEqual(params["password1"], "hunter2")
         self.assertNotEqual(params["code"], "123456")
         self.assertEqual(params["name"], "Cap")
+
+
+class NeedsReviewTests(TestCase):
+    def setUp(self):
+        from django.core.cache import cache
+        cache.clear()
+
+    def report(self, kind="character", pk=None, note="Definition is wrong", **extra):
+        pk = pk or Character.objects.get(code="FCC00019").pk
+        return self.client.post(reverse("characters:review_request", args=[kind, pk]), {"note": note}, **extra)
+
+    def test_anyone_can_report(self):
+        from .models import ReviewRequest
+        r = self.report()
+        self.assertRedirects(r, "/id/FCC00019")
+        rr = ReviewRequest.objects.get()
+        self.assertEqual((rr.note, rr.reporter, rr.resolved, rr.page), ("Definition is wrong", None, False, "/id/FCC00019"))
+        self.assertIn("FCC00019", rr.item_label)
+        self.assertContains(self.client.get("/id/FCC00019"), "Needs review")
+
+    def test_hidden_rate_limit(self):
+        from .models import ReviewRequest
+        for i in range(7):
+            r = self.report(note=f"report {i}", REMOTE_ADDR="198.51.100.9")
+            self.assertEqual(r.status_code, 302)
+        self.assertEqual(ReviewRequest.objects.count(), 5)          # 6th and 7th silently dropped
+        self.report(note="other visitor", REMOTE_ADDR="198.51.100.10")
+        self.assertEqual(ReviewRequest.objects.count(), 6)
+
+    def test_signed_in_report_records_user_and_admin_sees_list(self):
+        from .models import ReviewRequest
+        u = contributor("ivy")
+        self.client.force_login(u)
+        self.report(kind="source", pk=Source.objects.first().pk)
+        self.assertEqual(ReviewRequest.objects.get().reporter, u)
+        self.client.force_login(make_admin())
+        self.assertContains(self.client.get(reverse("characters:account")), "1 open “Needs review” report")
+        r = self.client.get(reverse("admin:characters_reviewrequest_changelist"))
+        self.assertContains(r, "Definition is wrong")
+
+    def test_hidden_items_cannot_be_reported(self):
+        c = Character.objects.get(code="FCC00019")
+        ItemMeta.objects.create(item_type=CHARACTER_TYPE, item_id=c.pk, is_hidden=True)
+        self.assertEqual(self.report().status_code, 404)

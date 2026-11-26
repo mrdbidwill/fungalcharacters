@@ -5,6 +5,7 @@
 <h1>{{ user.username }}</h1>
 <p class="muted">{% blocktranslate trimmed with date=user.date_joined|date:"j F Y" %}Member since {{ date }}.{% endblocktranslate %}{% if user.is_superuser %} {% translate "Site admin." %}{% endif %} {% translate "Your username is shown on everything you add." %}</p>
 
+{% if open_reviews is not None %}<p class="note"><a href="{% url 'admin:characters_reviewrequest_changelist' %}?resolved__exact=0">{% blocktranslate trimmed count n=open_reviews %}{{ n }} open “Needs review” report{% plural %}{{ n }} open “Needs review” reports{% endblocktranslate %}</a></p>{% endif %}
 <h2>{% translate "Settings" %}</h2>
 <dl class="fields">
   <dt>{% translate "Email" %}</dt>

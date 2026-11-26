@@ -46,6 +46,7 @@ urlpatterns = [
     path("sources/<int:pk>/delete/", views.source_delete, name="source_delete"),
     path("history/<slug:kind>/<int:pk>/", views.history, name="history"),
     path("hide/<slug:kind>/<int:pk>/", views.toggle_hidden, name="toggle_hidden"),
+    path("review/<slug:kind>/<int:pk>/", views.review_request, name="review_request"),
     path("changes/", views.recent_changes, name="recent_changes"),
     path("names/<slug:mode>/", views.set_name_mode, name="set_name_mode"),
     path("account/", views.account, name="account"),

@@ -1,0 +1,18 @@
+{% extends "characters/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Needs review" %} · Fungal Characters{% endblock %}
+{% block content %}
+<div class="prose">
+<h1>{% translate "Needs review" %}</h1>
+<p>{% blocktranslate trimmed %}Report a problem with <strong>{{ label }}</strong>: something wrong, missing, a duplicate, or anything inappropriate. Your report goes to a list the site's administrator works through. No account is needed.{% endblocktranslate %}</p>
+<form class="form" method="post">
+  {% csrf_token %}
+  <div>
+    <label for="r-note">{% translate "What needs review? (optional)" %}</label>
+    <textarea id="r-note" name="note" rows="4" maxlength="1000"></textarea>
+    <span class="helptext">{% translate "Please say what is wrong and, if you can, what is right and where it comes from." %}</span>
+  </div>
+  <div class="actions"><button type="submit">{% translate "Send report" %}</button> <a href="{{ cancel_url }}">{% translate "Cancel" %}</a></div>
+</form>
+</div>
+{% endblock %}

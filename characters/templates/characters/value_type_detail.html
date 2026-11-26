@@ -8,6 +8,7 @@
   {% if obj|editable_by:user %}<a href="{% url 'characters:value_type_edit' obj.pk %}">{% translate "Edit" %}</a> <a href="{% url 'characters:value_type_delete' obj.pk %}">{% translate "Delete" %}</a>{% endif %}
   {% include "characters/_admin_hide.html" with kind="value-type" obj_pk=obj.pk %}
   <a href="{% url 'characters:history' 'value-type' obj.pk %}">{% translate "Edit history" %}</a>
+  <a rel="nofollow" href="{% url 'characters:review_request' 'value-type' obj.pk %}">{% translate "Needs review" %}</a>
 </p>
 <dl class="fields"><dt>{% translate "Description" %}</dt><dd>{{ obj.description|default:"—" }}</dd><dt>{% translate "Comments" %}</dt><dd>{{ obj.comments|default:"—" }}</dd></dl>
 <h2>{% blocktranslate trimmed with count=characters|length %}Characters with this value type ({{ count }}){% endblocktranslate %}</h2>
