@@ -36,8 +36,8 @@
     <div class="tools">
       <a href="{% url 'characters:languages' %}"{% if here == 'languages' %} aria-current="page"{% endif %}><span aria-hidden="true">🌐</span> {{ current_lang.name_local|capfirst }}<span class="visually-hidden"> — {% translate "language and translation" %}</span></a>
       <span>{% translate "Names:" %}
-        {% if scientific_names %}<a href="{% url 'characters:set_name_mode' 'english' %}?next={{ request.get_full_path|urlencode }}">{% translate "Common" context "names" %}</a> · <strong>{% translate "Scientific" context "names" %}</strong>
-        {% else %}<strong>{% translate "Common" context "names" %}</strong> · <a href="{% url 'characters:set_name_mode' 'scientific' %}?next={{ request.get_full_path|urlencode }}">{% translate "Scientific" context "names" %}</a>{% endif %}
+        {% if scientific_names %}<a rel="nofollow" href="{% url 'characters:set_name_mode' 'english' %}?next={{ request.get_full_path|urlencode }}">{% translate "Common" context "names" %}</a> · <strong>{% translate "Scientific" context "names" %}</strong>
+        {% else %}<strong>{% translate "Common" context "names" %}</strong> · <a rel="nofollow" href="{% url 'characters:set_name_mode' 'scientific' %}?next={{ request.get_full_path|urlencode }}">{% translate "Scientific" context "names" %}</a>{% endif %}
       </span>
       {% if user.is_authenticated %}
         <a href="{% url 'characters:account' %}" title="{% translate "Your account" %}"{% if here == 'account' %} aria-current="page"{% endif %}><strong>{{ user.username }}</strong></a>
