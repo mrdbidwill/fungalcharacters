@@ -833,3 +833,31 @@ def review_request(request, kind, pk):
 def api_docs(request):
     from .api import API_LIMIT_PER_MINUTE, PAGE_SIZE
     return render(request, "characters/api_docs.html", {"limit": API_LIMIT_PER_MINUTE, "page_size": PAGE_SIZE})
+
+
+ROBOTS_TXT = """# fungalcharacters.org — everything people read is open to crawlers.
+# Please skip sign-in and account pages, edit forms and switches, report forms and the raw API
+# (programs: see https://fungalcharacters.org/api/ ; complete copies: https://fungalcharacters.org/downloads/).
+User-agent: *
+Disallow: /accounts/
+Disallow: /account/
+Disallow: /admin/
+Disallow: /i18n/
+Disallow: /names/
+Disallow: /review/
+Disallow: /hide/
+Disallow: /api/v1/
+Disallow: /characters/new/
+Disallow: /value-types/new/
+Disallow: /sources/new/
+Disallow: /languages/*/next/
+Disallow: /*/edit/
+Disallow: /*/delete/
+Disallow: /*/translate/
+Disallow: /*/values/new/
+"""
+
+
+def robots_txt(request):
+    from django.http import HttpResponse
+    return HttpResponse(ROBOTS_TXT, content_type="text/plain; charset=utf-8")

@@ -719,3 +719,14 @@ class AntiBotTests(TestCase):
     def test_password_reset_rate_limit_per_email(self):
         codes = [self.client.post(reverse("account_reset_password"), {"email": "someone@example.org"}).status_code for _ in range(4)]
         self.assertEqual(codes[3], 429)
+
+
+class RobotsTests(TestCase):
+    def test_robots_txt(self):
+        r = self.client.get("/robots.txt")
+        self.assertEqual(r["Content-Type"], "text/plain; charset=utf-8")
+        body = r.content.decode()
+        for path in ["/accounts/", "/names/", "/review/", "/api/v1/", "/*/edit/"]:
+            self.assertIn(f"Disallow: {path}", body)
+        for open_path in ["/characters/\n", "/id/", "/downloads/", "/api/\n"]:
+            self.assertNotIn(f"Disallow: {open_path}", body)
