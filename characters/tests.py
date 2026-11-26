@@ -574,3 +574,71 @@ class NeedsReviewTests(TestCase):
         c = Character.objects.get(code="FCC00019")
         ItemMeta.objects.create(item_type=CHARACTER_TYPE, item_id=c.pk, is_hidden=True)
         self.assertEqual(self.report().status_code, 404)
+
+
+class ReleaseBuildTests(TestCase):
+    """make_release: dated releases from the live tables (characters/release.py, docs/RELEASING.md)."""
+
+    def build(self, version="9.9.9"):
+        import tempfile
+        from pathlib import Path
+        from .release import build_release
+        out = Path(tempfile.mkdtemp())
+        summary = build_release(version, "2026-11-26", "Test notes.", out_root=out)
+        return out / version, summary
+
+    def test_release_has_every_format_and_the_same_structure(self):
+        import json
+        from django.conf import settings
+        folder, summary = self.build()
+        for name in ["fungal_characters_v9.9.9.xlsx", "fungal_characters_v9.9.9.json", "fungal_characters_v9.9.9.sql",
+                     "fungal_characters_v9.9.9_postgresql.sql", "fungal_characters_v9.9.9_skos.ttl",
+                     "fungal_characters_v9.9.9_sdd.xml", "README.md", "CHANGELOG.md",
+                     "csv/characters_flat.csv", "csv/value_options_flat.csv", "csv/mr_characters.csv"]:
+            self.assertTrue((folder / name).exists(), name)
+        self.assertEqual((summary["characters"], summary["value_options"]), (747, 590))
+        doc = json.loads((folder / "fungal_characters_v9.9.9.json").read_text())
+        self.assertEqual(doc["license"], "CC0 1.0")
+        self.assertIn("value_options", doc["characters"][0])
+        # Table definitions copied word for word from the previous release.
+        old = (settings.BASE_DIR / "data/releases/1.0.0/fungal_characters_v1.0.0_postgresql.sql").read_text()
+        new = (folder / "fungal_characters_v9.9.9_postgresql.sql").read_text()
+        ddl = lambda s: [l for l in s.split("\n") if l.startswith(("CREATE", "COMMENT", "  ", ");")) and not l.startswith("  (")]
+        self.assertEqual(ddl(new), ddl(old))
+        self.assertIn("INSERT INTO releases", new)
+        self.assertIn("'9.9.9'", new)
+        changelog = (folder / "CHANGELOG.md").read_text()
+        self.assertIn("## 9.9.9 — 2026-11-26", changelog)
+        self.assertIn("## 1.0.0", changelog)
+        self.assertIn("value_options_flat.csv (was values_flat.csv)", changelog)
+
+    def test_hidden_items_are_left_out(self):
+        c = Character.objects.get(code="FCC00082")
+        n_values = c.value_options.count()
+        ItemMeta.objects.create(item_type=CHARACTER_TYPE, item_id=c.pk, is_hidden=True)
+        folder, summary = self.build()
+        self.assertEqual(summary["characters"], 746)
+        self.assertEqual(summary["value_options"], 590 - n_values)
+        self.assertNotIn("FCC00082", (folder / "fungal_characters_v9.9.9_postgresql.sql").read_text())
+        self.assertEqual(summary["diff"]["chars_removed"], ["FCC00082"])
+
+    def test_translations_and_new_items_are_included(self):
+        u = contributor("jo")
+        self.client.force_login(u)
+        self.client.post(reverse("characters:create"), {"name": "Release Test Character"})
+        c = Character.objects.get(code="FCC00019")
+        self.client.post(reverse("characters:translate", args=["FCC00019"]), {
+            "lang": "es", f"MrCharacter-{c.pk}-name": "Anchura del sombrero", f"MrCharacter-{c.pk}-definition": "", "then": "stay"})
+        folder, summary = self.build()
+        self.assertEqual(summary["diff"]["chars_added"], ["FCC00748"])
+        self.assertEqual(summary["diff"]["translated_names"], {"es": 1})
+        self.assertIn("Anchura del sombrero", (folder / "fungal_characters_v9.9.9.json").read_text())
+
+    def test_command_records_only_when_asked(self):
+        import tempfile
+        from django.core.management import call_command
+        from .models import Release
+        call_command("make_release", "9.9.8", "--date", "2026-11-26", "--out", tempfile.mkdtemp(), stdout=__import__("io").StringIO())
+        self.assertFalse(Release.objects.filter(version="9.9.8").exists())
+        call_command("make_release", "9.9.8", "--date", "2026-11-26", "--record-only", stdout=__import__("io").StringIO())
+        self.assertTrue(Release.objects.filter(version="9.9.8").exists())
