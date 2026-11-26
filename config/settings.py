@@ -117,6 +117,7 @@ ACCOUNT_LOGIN_METHODS = {"username", "email"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
 # Adds the required agreement to the contribution terms (CC0) and records it.
 ACCOUNT_SIGNUP_FORM_CLASS = "characters.forms.SignupExtraForm"
+ACCOUNT_FORMS = {"signup": "characters.signup_form.SiteSignupForm"}  # agreement checkbox last
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True

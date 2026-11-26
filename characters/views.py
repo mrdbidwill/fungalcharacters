@@ -270,7 +270,7 @@ def character_list(request):
         qs = qs.filter(fungus_type_tags__isnull=True)
     elif fungus.isdigit():
         qs = qs.filter(fungus_type_tags__fungus_type_id=int(fungus))
-    page = Paginator(qs, 100).get_page(request.GET.get("page"))
+    page = Paginator(qs, 50).get_page(request.GET.get("page"))
     ids = [c.pk for c in page]
     sci = labels_for(CHARACTER_TYPE, ids, "scientific_name")
     by = creators(Character, ids)

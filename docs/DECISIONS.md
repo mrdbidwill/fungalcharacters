@@ -23,7 +23,8 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - A "Thanks" page (2026-11-25): first draft from Will is on the site; Will edits it later. Facts checked: Gastón Guzmán 1932–2016; Flora Agaricina Neerlandica vol. 1 (1988, eds Bas, Kuyper, Noordeloos & Vellinga) with Vellinga's glossary section; nolo_mode's iNaturalist guide "Intro To Identifying Fungi". Not checkable online: nolo_mode's permission (Nov 2026), myceliome.com, the 2019 Mushroom Observer date.
 - "Where people disagree" wording (2026-11-25) describes what the site does now: each item shows its source, and every change is kept in the public history. Side-by-side competing statements are not built.
 - Disclaimer (2026-11-25, Website Administrator; rule in Claude_AI/shared_reference/disclaimer/): "No advice about consumption." at the top and bottom of every page in the shared style, and the short note beside characters about chemistry or toxicity (chemical-test methods, "Toxic") and sources whose titles are about eating or medicinal use.
-- Home page keeps Will's own "No advice about consumption" section as well as the top and bottom notes (Will, 2026-11-25).
+- Home page: its own "No advice about consumption" section removed (Will, 2026-11-26; replaces the 2026-11-25 choice to keep it): the same notice is at the top and bottom of every page. "Where people disagree" ends: "Mention on the Thanks page does not mean anyone named there endorses any value on the site." (Will, 2026-11-26).
+- Characters list (Will, 2026-11-26): 50 per page, with a short note under the heading that the list is alphabetical (numbers first) and meant to include everything.
 - Home page (2026-11-25): says what the site is for, how to view the data here, how to download it, and that registered users can add and edit; plus Will's "Where people disagree" and "No advice about consumption" texts. The character list moved to /characters/ (menu: Characters).
 
 ## Users and editing

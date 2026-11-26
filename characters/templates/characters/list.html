@@ -3,6 +3,7 @@
 {% block title %}{% translate "Characters" %} · Fungal Characters{% endblock %}
 {% block content %}
 <h1>{% translate "Characters" %}</h1>
+<p class="muted">{% translate "Characters are listed in alphabetical order, with names that begin with numbers first. Don't be alarmed by the chemical names: the list is meant to include everything, on the understanding that no one will use every character." %}</p>
 {% if user.is_authenticated %}<p><a href="{% url 'characters:create' %}">+ {% translate "Add a character" %}</a></p>{% endif %}
 <form class="filter" method="get">
   <label class="visually-hidden" for="f-q">{% translate "Search characters" %}</label>

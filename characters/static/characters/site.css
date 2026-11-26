@@ -136,6 +136,8 @@ input[type=search] { min-width: min(22rem, 100%); }
 textarea { min-height: 5rem; }
 button, .button { display: inline-block; min-height: 2.75rem; padding: .45rem 1.1rem; border-radius: 6px; cursor: pointer;
   background: var(--primary); color: var(--on-primary); border: 2px solid var(--primary); font-weight: 700; text-decoration: none; }
+/* A link styled as a button keeps its light text after it has been visited (a:visited is more specific than .button). */
+.button:link, .button:visited { color: var(--on-primary); }
 button:hover, .button:hover { filter: brightness(1.12); }
 button.link { background: none; border: 0; padding: 0; min-height: 0; font-weight: 400; color: var(--link);
   text-decoration: underline; text-underline-offset: .18em; }

@@ -730,3 +730,25 @@ class RobotsTests(TestCase):
             self.assertIn(f"Disallow: {path}", body)
         for open_path in ["/characters/\n", "/id/", "/downloads/", "/api/\n"]:
             self.assertNotIn(f"Disallow: {open_path}", body)
+
+
+class HomeAndListTweaksTests(TestCase):
+    def test_home_wording_and_single_disclaimer_pair(self):
+        r = self.client.get("/")
+        self.assertContains(r, "Mention on the")
+        self.assertNotContains(r, "Thanks on the")
+        self.assertEqual(r.content.decode().count("No advice about consumption"), 2)   # top and bottom only
+
+    def test_list_intro_and_page_size(self):
+        r = self.client.get("/characters/")
+        self.assertContains(r, "be alarmed by the chemical names")
+        self.assertContains(r, "Page 1 of 15")
+
+    def test_agreement_checkbox_comes_last(self):
+        body = self.client.get(reverse("account_signup")).content.decode()
+        self.assertGreater(body.index('name="agree"'), body.index('name="password2"'))
+
+    def test_visited_buttons_keep_light_text(self):
+        from django.conf import settings
+        css = (settings.BASE_DIR / "characters/static/characters/site.css").read_text()
+        self.assertIn(".button:link, .button:visited { color: var(--on-primary); }", css)

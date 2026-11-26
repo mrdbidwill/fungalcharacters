@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fungalcharacters\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-26 11:36+0000\n"
+"POT-Creation-Date: 2026-11-26 12:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,7 +59,7 @@ msgid ""
 msgstr ""
 
 #: characters/forms.py:146 characters/templates/characters/detail.html:23
-#: characters/templates/characters/list.html:26 characters/views.py:31
+#: characters/templates/characters/list.html:27 characters/views.py:31
 msgid "Scientific name"
 msgstr ""
 
@@ -87,7 +87,7 @@ msgstr ""
 #: characters/forms.py:161
 #: characters/templates/characters/_translate_field.html:2
 #: characters/templates/characters/detail.html:21
-#: characters/templates/characters/list.html:26 characters/views.py:31
+#: characters/templates/characters/list.html:27 characters/views.py:31
 msgid "Name"
 msgstr ""
 
@@ -99,8 +99,8 @@ msgid "Definition"
 msgstr ""
 
 #: characters/forms.py:161 characters/templates/characters/detail.html:27
-#: characters/templates/characters/list.html:10
-#: characters/templates/characters/list.html:26
+#: characters/templates/characters/list.html:11
+#: characters/templates/characters/list.html:27
 msgid "Part"
 msgstr ""
 
@@ -110,7 +110,7 @@ msgstr ""
 
 #: characters/forms.py:162 characters/forms.py:234
 #: characters/templates/characters/detail.html:29
-#: characters/templates/characters/list.html:26
+#: characters/templates/characters/list.html:27
 #: characters/templates/characters/value_type_list.html:9
 msgid "Value type"
 msgstr ""
@@ -486,7 +486,7 @@ msgstr ""
 
 #: characters/templates/characters/account.html:26
 #: characters/templates/characters/home.html:24
-#: characters/templates/characters/list.html:6 characters/views.py:346
+#: characters/templates/characters/list.html:7 characters/views.py:346
 msgid "Add a character"
 msgstr ""
 
@@ -876,12 +876,12 @@ msgid "Add a value option"
 msgstr ""
 
 #: characters/templates/characters/detail.html:42
-#: characters/templates/characters/list.html:26
+#: characters/templates/characters/list.html:27
 msgid "Code"
 msgstr ""
 
 #: characters/templates/characters/detail.html:42
-#: characters/templates/characters/list.html:26
+#: characters/templates/characters/list.html:27
 #: characters/templates/characters/source_list.html:10
 #: characters/templates/characters/value_type_list.html:9
 msgid "By"
@@ -897,7 +897,7 @@ msgid "hidden"
 msgstr ""
 
 #: characters/templates/characters/detail.html:49
-#: characters/templates/characters/list.html:37
+#: characters/templates/characters/list.html:38
 #: characters/templates/characters/source_list.html:11
 #: characters/templates/characters/value_type_list.html:10
 msgid "release"
@@ -1101,25 +1101,13 @@ msgid ""
 "fungalcharacters.org, each character and value option shows its source, and "
 "every change is kept in a public history that shows who changed what, when "
 "and why, so earlier wording is never lost. Ultimately, users decide which "
-"characters and values live on. Thanks on the <a "
+"characters and values live on. Mention on the <a "
 "href=\"%(thanks_url)s\">Thanks</a> page does not mean anyone named there "
 "endorses any value on the site."
 msgstr ""
 
 #: characters/templates/characters/home.html:36
 msgid "Open tools and public data to improve the accuracy of fungal data."
-msgstr ""
-
-#: characters/templates/characters/home.html:38
-msgid "No advice about consumption"
-msgstr ""
-
-#: characters/templates/characters/home.html:39
-msgid ""
-"fungalcharacters.org records how sources describe fungi. It is not a guide "
-"to eating, using or handling any fungus, and nothing here says whether any "
-"fungus is safe. Values about chemistry or toxicity are reported only as "
-"their source states them."
 msgstr ""
 
 #: characters/templates/characters/languages.html:3
@@ -1217,62 +1205,70 @@ msgid ""
 "untranslated text stays in English. Choose English above to switch back."
 msgstr ""
 
-#: characters/templates/characters/list.html:8
-msgid "Search characters"
+#: characters/templates/characters/list.html:6
+msgid ""
+"Characters are listed in alphabetical order, with names that begin with "
+"numbers first. Don't be alarmed by the chemical names: the list is meant to "
+"include everything, on the understanding that no one will use every "
+"character."
 msgstr ""
 
 #: characters/templates/characters/list.html:9
+msgid "Search characters"
+msgstr ""
+
+#: characters/templates/characters/list.html:10
 msgid "Search name, scientific name, definition or code"
 msgstr ""
 
-#: characters/templates/characters/list.html:12
+#: characters/templates/characters/list.html:13
 msgid "All parts"
 msgstr ""
 
-#: characters/templates/characters/list.html:15
+#: characters/templates/characters/list.html:16
 msgid "Fungus type"
 msgstr ""
 
-#: characters/templates/characters/list.html:17
+#: characters/templates/characters/list.html:18
 msgid "Any fungus type"
 msgstr ""
 
-#: characters/templates/characters/list.html:18
+#: characters/templates/characters/list.html:19
 msgid "Applies to all fungi"
 msgstr ""
 
-#: characters/templates/characters/list.html:21
+#: characters/templates/characters/list.html:22
 msgid "Filter"
 msgstr ""
 
-#: characters/templates/characters/list.html:23
+#: characters/templates/characters/list.html:24
 #, python-format
 msgid "Showing %(shown)s of %(total)s characters."
 msgstr ""
 
-#: characters/templates/characters/list.html:26
+#: characters/templates/characters/list.html:27
 msgid "Observation"
 msgstr ""
 
-#: characters/templates/characters/list.html:26
+#: characters/templates/characters/list.html:27
 #: characters/templates/characters/translate.html:23
 msgid "Value options"
 msgstr ""
 
-#: characters/templates/characters/list.html:40
+#: characters/templates/characters/list.html:41
 msgid "No characters found."
 msgstr ""
 
-#: characters/templates/characters/list.html:47
+#: characters/templates/characters/list.html:48
 msgid "Previous"
 msgstr ""
 
-#: characters/templates/characters/list.html:48
+#: characters/templates/characters/list.html:49
 #, python-format
 msgid "Page %(number)s of %(pages)s"
 msgstr ""
 
-#: characters/templates/characters/list.html:49
+#: characters/templates/characters/list.html:50
 msgid "Next"
 msgstr ""
 

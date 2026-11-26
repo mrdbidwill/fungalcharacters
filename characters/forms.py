@@ -256,3 +256,4 @@ class SignupExtraForm(forms.Form):
 
 class AgreeForm(forms.Form):
     agree = forms.BooleanField(required=True, label=AGREE_LABEL, help_text=AGREE_HELP)
+
