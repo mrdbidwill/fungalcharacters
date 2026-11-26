@@ -23,6 +23,10 @@ SDD 1.1 (XML), README.md and CHANGELOG.md (with what changed since the previous 
 3. Commit and push; `deploy/deploy.sh`.
 4. Record it (footer and Downloads page switch to the new release): the `--record-only` command the script prints.
 5. Dated GitHub release with the files attached (docs/DECISIONS.md: dated releases in the GitHub repository).
+   Tag `data-v<version>` (data releases, not code versions), title "Fungal Characters data release <version> (<date>)",
+   notes from the CHANGELOG, files: xlsx, json, both sql, ttl, sdd.xml, README.md and the csv folder as a zip:
+   `gh release create data-v<version> --repo mrdbidwill/fungalcharacters --target main --title "…" --notes-file notes.md <files>`.
+   First one: data-v1.0.0, published 2026-11-26 (https://github.com/mrdbidwill/fungalcharacters/releases/tag/data-v1.0.0).
 6. Update the hard-coded "release 1.0.0" mentions if any remain (README.md, DATA_LICENSE.md).
 
 ## Why the release file in migration 0001 stays 1.0.0

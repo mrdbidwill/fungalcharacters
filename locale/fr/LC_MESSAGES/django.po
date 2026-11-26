@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fungalcharacters\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-26 11:34+0000\n"
+"POT-Creation-Date: 2026-11-26 11:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -933,7 +933,8 @@ msgstr ""
 #, python-format
 msgid ""
 "Programs can read the current data through the <a href=\"%(api_url)s\">read-"
-"only API</a>."
+"only API</a>. Every release is also on <a href=\"https://github.com/"
+"mrdbidwill/fungalcharacters/releases\">GitHub</a>."
 msgstr ""
 
 #: characters/templates/characters/downloads.html:10
