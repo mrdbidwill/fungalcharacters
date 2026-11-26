@@ -6,10 +6,12 @@ name: fungalcharacters
 services:
   db:
     image: postgres:17
-    env_file: .env
+    # Only the database password comes from .env (Compose reads .env for ${...}), so editing the app's
+    # settings in .env no longer restarts the database.
     environment:
       POSTGRES_DB: fungalcharacters
       POSTGRES_USER: fungalcharacters
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -33,5 +35,10 @@ services:
       db:
         condition: service_healthy
     restart: unless-stopped
+    logging:   # the app's own logs (requests, warnings): capped, then overwritten (privacy page)
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 volumes:
   pgdata:

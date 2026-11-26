@@ -1,6 +1,7 @@
 from difflib import SequenceMatcher
 
 from django import forms
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django.db import transaction
 
@@ -9,6 +10,11 @@ from .models import (
     FungusType, ItemMeta, Label, Source, ValueOption,
 )
 from .normalize import normalize_name
+
+AGREE_LABEL = _("I agree: everything I add to fungalcharacters.org is dedicated to the public domain (CC0 1.0), "
+                "free for anyone to use in any way, and I have the right to share it.")
+AGREE_HELP = mark_safe(_('Do not paste text copied from books or websites unless its license allows it. '
+                         '<a href="/privacy/">Contributions and privacy</a>.'))
 
 SIMILARITY = 0.85  # names at least this similar (after normalizing) are shown before saving
 
@@ -236,3 +242,17 @@ class SourceForm(TrackedForm):
         fields = ["title", "author", "ref", "item_code", "source_type", "comments"]
         labels = {"title": _("Title"), "author": _("Author"), "ref": _("Reference / URL"), "item_code": _("Item code"),
                   "source_type": _("Type"), "comments": _("Comments")}
+
+
+class SignupExtraForm(forms.Form):
+    """Extra sign-up field (allauth ACCOUNT_SIGNUP_FORM_CLASS): agreement to the contribution terms."""
+
+    agree = forms.BooleanField(required=True, label=AGREE_LABEL, help_text=AGREE_HELP)
+
+    def signup(self, request, user):
+        from .models import Consent
+        Consent.record(user)
+
+
+class AgreeForm(forms.Form):
+    agree = forms.BooleanField(required=True, label=AGREE_LABEL, help_text=AGREE_HELP)

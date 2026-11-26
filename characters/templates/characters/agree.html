@@ -1,0 +1,16 @@
+{% extends "characters/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Contribution terms" %} · Fungal Characters{% endblock %}
+{% block content %}
+<div class="prose">
+<h1>{% translate "Before you add something" %}</h1>
+<p>{% url 'characters:privacy' as privacy_url %}{% blocktranslate trimmed %}Everything added to fungalcharacters.org is public and free for anyone to use in any way. Please read <a href="{{ privacy_url }}">Contributions and privacy</a> and agree once.{% endblocktranslate %}</p>
+<form class="form" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}">
+  {{ form.agree.errors }}
+  <div>{{ form.agree }} {{ form.agree.label_tag }}<span class="helptext">{{ form.agree.help_text }}</span></div>
+  <div class="actions"><button type="submit">{% translate "I agree" %}</button> <a href="{% url 'characters:home' %}">{% translate "Cancel" %}</a></div>
+</form>
+</div>
+{% endblock %}

@@ -49,4 +49,7 @@ urlpatterns = [
     path("changes/", views.recent_changes, name="recent_changes"),
     path("names/<slug:mode>/", views.set_name_mode, name="set_name_mode"),
     path("account/", views.account, name="account"),
+    path("account/agree/", views.agree, name="agree"),
+    path("account/delete/", views.delete_account, name="delete_account"),
+    path("privacy/", views.privacy, name="privacy"),
 ]

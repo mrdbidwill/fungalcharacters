@@ -1,0 +1,43 @@
+{% extends "characters/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Contributions and privacy" %} · Fungal Characters{% endblock %}
+{% block content %}
+<div class="prose">
+<h1>{% translate "Contributions and privacy" %}</h1>
+<p class="muted">{% translate "Last updated 25 November 2026." %}</p>
+
+<h2>{% translate "Your contributions" %}</h2>
+<ul>
+  <li>{% blocktranslate trimmed %}Everything added on this site — characters, value types, value options, sources, translations, and the reasons given for changes — is public and dedicated to the public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>: anyone may use it in any way, without asking. You agree to this when you sign up, or the first time you add something.{% endblocktranslate %}</li>
+  <li>{% translate "Only add what you have the right to share. Facts and your own words are fine; do not paste text copied from books or websites unless its license allows it." %}</li>
+  <li>{% translate "Your username is shown with everything you add and in the public edit history. If you delete your account, your contributions stay on the site, credited to “former-contributor” and a number." %}</li>
+</ul>
+
+<h2>{% translate "What is stored about you" %}</h2>
+<ul>
+  <li>{% translate "Your username, which is public." %}</li>
+  <li>{% translate "Your email address, which is not shown publicly and never sold. It is used to sign in (with your username or email), to confirm your account, to reset your password and to tell you about changes to your account's security. It is passed to Resend only so that these emails can be delivered. There are no newsletters." %}</li>
+  <li>{% translate "Your password, stored only in a form that cannot be turned back into the password." %}</li>
+  <li>{% translate "If you turn on two-factor sign-in: its secret key and your recovery codes." %}</li>
+  <li>{% translate "When you joined, when you last signed in, and when you agreed to the contribution terms (and which version)." %}</li>
+  <li>{% translate "For each signed-in device: the browser, IP address and last activity, so you can see and sign out other devices on your account page. Security emails about your account also show the time, IP address and browser of the change." %}</li>
+  <li>{% translate "Cookies: for signing in and security, for one-time notices on the next page, and to remember your choice of language and of common or scientific names. No advertising, analytics or tracking cookies; no scripts or fonts from other companies." %}</li>
+</ul>
+
+<h2>{% translate "Where it is kept" %}</h2>
+<ul>
+  <li>{% translate "The site runs on a server rented from Hostinger, in the United States. Email is sent through Resend, in the United States." %}</li>
+  <li>{% translate "The server's web logs (IP address, page requested, browser) are kept for 14 days. The site's own logs (time, page requested, browser) are limited in size and overwritten as new entries arrive." %}</li>
+  <li>{% translate "The database is backed up every night; the server keeps 30 days of backups, and the administrator keeps a copy off the server." %}</li>
+  <li>{% translate "When something goes wrong, the site emails an error report to its administrator through Resend. It can include your username, IP address, browser, the page and what you had just submitted (passwords, codes and keys are hidden)." %}</li>
+</ul>
+
+<h2>{% translate "Your choices" %}</h2>
+<ul>
+  <li>{% url 'characters:account' as account_url %}{% blocktranslate trimmed %}See and change your email addresses and password, turn on two-factor sign-in, and sign out other devices on <a href="{{ account_url }}">your account page</a>.{% endblocktranslate %}</li>
+  <li>{% translate "Delete your account from your account page (“Delete my account”; your password is asked again). Your email addresses, password, two-factor settings and signed-in sessions are deleted at once, and your username is replaced. The dates you joined, last signed in and agreed to the terms stay with your contributions. Copies made before then (backups, and emails already sent) are not changed; the server's backups expire after 30 days." %}</li>
+  <li>{% blocktranslate trimmed %}Questions about your data: <a href="mailto:contact@fungalcharacters.org">contact@fungalcharacters.org</a>.{% endblocktranslate %}</li>
+</ul>
+<p class="muted">{% translate "If the contribution terms change, the date above changes and you are asked to agree again before adding anything." %}</p>
+</div>
+{% endblock %}

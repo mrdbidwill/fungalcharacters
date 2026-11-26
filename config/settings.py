@@ -115,6 +115,8 @@ AUTHENTICATION_BACKENDS = [
 # Sign-up needs a verified email address (used for password resets and notices).
 ACCOUNT_LOGIN_METHODS = {"username", "email"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
+# Adds the required agreement to the contribution terms (CC0) and records it.
+ACCOUNT_SIGNUP_FORM_CLASS = "characters.forms.SignupExtraForm"
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
@@ -161,6 +163,12 @@ if not DEBUG:
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_REFERRER_POLICY = "same-origin"
     CSRF_TRUSTED_ORIGINS = [o for o in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",") if o]
+    # One proxy (nginx) in front: allauth takes the visitor's address from the last X-Forwarded-For entry,
+    # which nginx appends ($proxy_add_x_forwarded_for). Used for rate limits and the signed-in devices list.
+    ALLAUTH_TRUSTED_PROXY_COUNT = 1
+
+# Error reports never include passwords, codes or keys from submitted forms (characters/reporting.py).
+DEFAULT_EXCEPTION_REPORTER_FILTER = "characters.reporting.HideSecretsFilter"
 
 LOGGING = {
     "version": 1,

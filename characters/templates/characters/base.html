@@ -62,7 +62,7 @@
     <p>{% if data_release %}{% blocktranslate trimmed with version=data_release.version date=data_release.released_at|date:"Y-m-d" %}Character data: Fungal Characters release {{ version }} ({{ date }}).{% endblocktranslate %}{% else %}{% translate "Character data." %}{% endif %}
     {% blocktranslate trimmed %}Dedicated to the public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>: free to use in any way. Code: MIT.{% endblocktranslate %}</p>
     <p>{% if data_release %}{% blocktranslate trimmed with version=data_release.version %}Please cite as: Fungal Characters, release {{ version }}, https://fungalcharacters.org/{% endblocktranslate %}{% else %}{% translate "Please cite as: Fungal Characters, https://fungalcharacters.org/" %}{% endif %}</p>
-    <p><a href="{% url 'characters:languages' %}">{% translate "Help translate this site" %}</a></p>
+    <p><a href="{% url 'characters:privacy' %}">{% translate "Contributions and privacy" %}</a> · <a href="{% url 'characters:languages' %}">{% translate "Help translate this site" %}</a></p>
   </div>
 </footer>
 {% block extra_body %}{% endblock %}

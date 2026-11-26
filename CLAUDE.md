@@ -7,6 +7,7 @@
 - Number any steps Will must do.
 - Commit with clear messages and push after each completed piece of work.
 - Mark every new piece of page text for translation and refresh the translation files (docs/TRANSLATING.md, "For maintainers").
+- Server, DNS, certificates and GitHub settings belong to the Website Administrator project (WORKSPACE.md §5a, kept for this project by Will 2026-11-25). Any change to them beyond deploying the app gets one line in `~/Documents/Claude_AI/Website_Admin/ADMIN.md` under Incoming: `- YYYY-MM-DD — <item> (source: fungalcharacters)`.
 - When a decision is final, apply it everywhere it affects in the same piece of work (code, data, release files, build scripts, docs, DECISIONS.md). Do not leave follow-ups for later; ask only about things the decision does not settle (Will, 2026-11-25).
 
 ## Character data (2026-11-25)

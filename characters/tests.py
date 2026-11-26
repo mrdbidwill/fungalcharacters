@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from .models import (
-    CHARACTER_TYPE, Character, CharacterFungusType, CodeCounter, DisplayOption, ItemMeta, Label,
+    Consent, CHARACTER_TYPE, Character, CharacterFungusType, CodeCounter, DisplayOption, ItemMeta, Label,
     Source, ValueOption,
 )
 
@@ -16,7 +16,15 @@ def make_admin(username="will"):
     from allauth.mfa.totp.internal.auth import TOTP, generate_totp_secret
     admin = User.objects.create_superuser(username, email=f"{username}@example.org", password="pw-admin-123")
     TOTP.activate(admin, generate_totp_secret())
+    Consent.record(admin)
     return admin
+
+
+def contributor(username):
+    """A user who has agreed to the contribution terms."""
+    u = User.objects.create_user(username, email=f"{username}@example.org", password=f"pw-{username}-123")
+    Consent.record(u)
+    return u
 
 
 def label(c, label_type):
@@ -59,8 +67,8 @@ class ReleaseDataTests(TestCase):
 class EditingRulesTests(TestCase):
     def setUp(self):
         self.admin = make_admin()
-        self.alice = User.objects.create_user("alice", password="pw-alice-123")
-        self.bob = User.objects.create_user("bob", password="pw-bob-123")
+        self.alice = contributor("alice")
+        self.bob = contributor("bob")
         self.cap_width = Character.objects.get(code="FCC00019")
 
     def login(self, user):
@@ -247,7 +255,7 @@ class AccountTests(TestCase):
     def signup(self, username="carol", email="carol@example.org"):
         return self.client.post(reverse("account_signup"), {
             "username": username, "email": email,
-            "password1": "a-long-pass-987", "password2": "a-long-pass-987"})
+            "password1": "a-long-pass-987", "password2": "a-long-pass-987", "agree": "on"})
 
     def test_signup_requires_email_verification(self):
         from django.core import mail
@@ -304,7 +312,7 @@ class AccountTests(TestCase):
         self.assertIn(reverse("account_login"), r["Location"])
 
     def test_username_in_menu_links_to_account_page_listing_contributions(self):
-        u = User.objects.create_user("erin", email="erin@example.org", password="pw-erin-12345")
+        u = contributor("erin")
         self.client.force_login(u)
         self.client.post(reverse("characters:create"), {"name": "Erin Test Character"})
         r = self.client.get("/")
@@ -352,8 +360,8 @@ class LanguageTests(TestCase):
     """Interface language choice and translating the character data (docs/I18N_PLAN.md)."""
 
     def setUp(self):
-        self.alice = User.objects.create_user("alice", email="alice@example.org", password="pw-alice-123")
-        self.bob = User.objects.create_user("bob", email="bob@example.org", password="pw-bob-123")
+        self.alice = contributor("alice")
+        self.bob = contributor("bob")
 
     def test_unpublished_language_is_not_picked_from_the_browser(self):
         r = self.client.get("/", HTTP_ACCEPT_LANGUAGE="es")
@@ -448,3 +456,77 @@ class HostedPageTests(TestCase):
         r = self.client.get("/thanks/")
         self.assertContains(r, 'href="/documents/lumen-granuli-praecisi/"')
         self.assertContains(r, "Brian Hunt")
+
+
+def recently_signed_in(client, user):
+    """Mark the session as having just confirmed the password again (allauth requires it before deleting an account)."""
+    import time
+    session = client.session
+    session["account_authentication_methods"] = [{"method": "password", "at": time.time(), "username": user.username,
+                                                   "reauthenticated": True}]
+    session["account_authentication_methods_user"] = str(user.pk)
+    session.save()
+
+
+class ContributionsAndPrivacyTests(TestCase):
+    def test_signup_requires_agreement_and_records_it(self):
+        data = {"username": "fay", "email": "fay@example.org", "password1": "a-long-pass-987", "password2": "a-long-pass-987"}
+        r = self.client.post(reverse("account_signup"), data)
+        self.assertEqual(r.status_code, 200)
+        self.assertFalse(User.objects.filter(username="fay").exists())
+        self.client.post(reverse("account_signup"), {**data, "agree": "on"})
+        fay = User.objects.get(username="fay")
+        self.assertTrue(Consent.has_current(fay))
+
+    def test_existing_user_agrees_once_before_adding(self):
+        u = User.objects.create_user("gus", email="gus@example.org", password="pw-gus-12345")
+        self.client.force_login(u)
+        r = self.client.get(reverse("characters:create"))
+        self.assertRedirects(r, reverse("characters:agree") + "?next=" + reverse("characters:create"))
+        self.assertContains(self.client.post(reverse("characters:agree"), {"next": "/characters/new/"}), "This field is required")
+        r = self.client.post(reverse("characters:agree"), {"agree": "on", "next": "/characters/new/"})
+        self.assertRedirects(r, "/characters/new/")
+        self.assertEqual(self.client.get(reverse("characters:create")).status_code, 200)
+
+    def test_privacy_page_and_links(self):
+        r = self.client.get(reverse("characters:privacy"))
+        self.assertContains(r, "contact@fungalcharacters.org")
+        self.assertContains(r, "14 days")
+        self.assertContains(self.client.get("/"), 'href="/privacy/"')
+
+    def test_delete_account_keeps_contributions(self):
+        from allauth.account.models import EmailAddress
+        u = contributor("hal")
+        EmailAddress.objects.create(user=u, email="hal@example.org", verified=True, primary=True)
+        self.client.force_login(u)
+        self.client.post(reverse("characters:create"), {"name": "Hal Test Character"})
+        c = Character.objects.get(name="Hal Test Character")
+        recently_signed_in(self.client, u)
+        r = self.client.post(reverse("characters:delete_account"), {"confirm": "delete"})
+        self.assertRedirects(r, reverse("characters:home"))
+        u.refresh_from_db()
+        self.assertEqual(u.username, f"former-contributor-{u.pk}")
+        self.assertEqual(u.email, "")
+        self.assertFalse(u.is_active or u.has_usable_password())
+        self.assertFalse(EmailAddress.objects.filter(user=u).exists())
+        self.assertEqual(ItemMeta.objects.get(item_type=CHARACTER_TYPE, item_id=c.pk).created_by, u)
+        self.assertContains(self.client.get(c.get_absolute_url()), f"former-contributor-{u.pk}")
+
+    def test_admin_cannot_delete_own_account_here(self):
+        admin = make_admin("root2")
+        self.client.force_login(admin)
+        recently_signed_in(self.client, admin)
+        self.client.post(reverse("characters:delete_account"), {"confirm": "delete"})
+        admin.refresh_from_db()
+        self.assertEqual(admin.username, "root2")
+
+
+class ErrorReportTests(TestCase):
+    def test_secret_fields_hidden_in_error_reports(self):
+        from django.test import RequestFactory
+        from .reporting import HideSecretsFilter
+        req = RequestFactory().post("/accounts/password/reset/key/x/", {"password1": "hunter2", "code": "123456", "name": "Cap"})
+        params = HideSecretsFilter().get_post_parameters(req)
+        self.assertNotEqual(params["password1"], "hunter2")
+        self.assertNotEqual(params["code"], "123456")
+        self.assertEqual(params["name"], "Cap")

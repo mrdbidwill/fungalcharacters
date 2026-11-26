@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from functools import wraps
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db import transaction
@@ -17,7 +19,7 @@ from .forms import (
     ensure_history_baseline, item_type_of,
 )
 from .models import (
-    CHARACTER_TYPE, VALUE_TYPE, Character, CharacterFungusType, CoreSequence, DisplayOption, FungusType, ItemMeta,
+    Consent, CHARACTER_TYPE, VALUE_TYPE, Character, CharacterFungusType, CoreSequence, DisplayOption, FungusType, ItemMeta,
     Label, Part, Release, Source, ValueOption,
 )
 from .permissions import can_edit, delete_blockers, is_admin
@@ -83,8 +85,11 @@ def language_name(code):
 TRANSLATION_LANGUAGES = [code for code, _name in settings.LANGUAGES if code != "en"]
 
 
+NAMES_COOKIE = "names"  # remembers common or scientific names (a cookie, not a server-side session)
+
+
 def scientific_mode(request):
-    return request.session.get("names") == "scientific"
+    return request.COOKIES.get(NAMES_COOKIE) == "scientific"
 
 
 def item_url(obj):
@@ -98,6 +103,17 @@ def item_url(obj):
 def find_code(code):
     model = Character if code.startswith("FCC") else ValueOption
     return model, model.objects.filter(code=code).first()
+
+
+def contributor_required(view):
+    """Signed in, and agreed to the current contribution terms (asked once, then back to the page)."""
+    @login_required
+    @wraps(view)
+    def wrapper(request, *args, **kwargs):
+        if not Consent.has_current(request.user):
+            return redirect(reverse("characters:agree") + "?next=" + request.get_full_path())
+        return view(request, *args, **kwargs)
+    return wrapper
 
 
 # ---------- generic create / edit / delete ----------
@@ -324,13 +340,13 @@ def character_detail(request, c):
     })
 
 
-@login_required
+@contributor_required
 def character_create(request):
     form = CharacterForm(posted(request), user=request.user)
     return _save(request, form, _("Add a character"), reverse("characters:list"))
 
 
-@login_required
+@contributor_required
 def edit_by_code(request, code):
     model, obj = find_code(code)
     if obj is None:
@@ -340,7 +356,7 @@ def edit_by_code(request, code):
     return _edit(request, obj, ValueOptionForm, "value option")
 
 
-@login_required
+@contributor_required
 def delete_by_code(request, code):
     model, obj = find_code(code)
     if obj is None:
@@ -350,7 +366,7 @@ def delete_by_code(request, code):
     return _delete(request, obj, "value option", lambda o: o.character.get_absolute_url())
 
 
-@login_required
+@contributor_required
 def value_create(request, code):
     character = get_object_or_404(visible(Character, request.user), code=code)
     form = ValueOptionForm(posted(request), instance=ValueOption(character=character), user=request.user)
@@ -375,18 +391,18 @@ def value_type_detail(request, pk):
     })
 
 
-@login_required
+@contributor_required
 def value_type_create(request):
     form = DisplayOptionForm(posted(request), user=request.user)
     return _save(request, form, _("Add a value type"), reverse("characters:value_type_list"))
 
 
-@login_required
+@contributor_required
 def value_type_edit(request, pk):
     return _edit(request, get_object_or_404(DisplayOption, pk=pk), DisplayOptionForm, "value type")
 
 
-@login_required
+@contributor_required
 def value_type_delete(request, pk):
     return _delete(request, get_object_or_404(DisplayOption, pk=pk), "value type",
                    lambda o: reverse("characters:value_type_list"))
@@ -413,18 +429,18 @@ def source_detail(request, pk):
     })
 
 
-@login_required
+@contributor_required
 def source_create(request):
     form = SourceForm(posted(request), user=request.user)
     return _save(request, form, _("Add a source"), reverse("characters:source_list"))
 
 
-@login_required
+@contributor_required
 def source_edit(request, pk):
     return _edit(request, get_object_or_404(Source, pk=pk), SourceForm, "source")
 
 
-@login_required
+@contributor_required
 def source_delete(request, pk):
     return _delete(request, get_object_or_404(Source, pk=pk), "source", lambda o: reverse("characters:source_list"))
 
@@ -571,11 +587,13 @@ def recent_changes(request):
 def set_name_mode(request, mode):
     if mode not in ("english", "scientific"):
         raise Http404
-    request.session["names"] = mode
     back = request.GET.get("next", "/")
     if not url_has_allowed_host_and_scheme(back, allowed_hosts={request.get_host()}):
         back = "/"
-    return redirect(back)
+    response = redirect(back)
+    response.set_cookie(NAMES_COOKIE, mode, max_age=365 * 24 * 3600, samesite="Lax",
+                        secure=not settings.DEBUG, httponly=True)
+    return response
 
 
 @login_required
@@ -644,7 +662,7 @@ def _label_owner_ids(item_type, ids, lang):
     return {(l.labelable_id, l.label_type): (l, owners.get(l.pk)) for l in labels}
 
 
-@login_required
+@contributor_required
 def translate(request, code):
     """Translate one character (name, definition and its value options) into one language."""
     from .forms import set_label
@@ -696,7 +714,7 @@ def translate(request, code):
     })
 
 
-@login_required
+@contributor_required
 def translate_next(request, lang):
     """Go to the next character that has no name yet in this language."""
     if lang not in TRANSLATION_LANGUAGES:
@@ -707,3 +725,62 @@ def translate_next(request, lang):
         messages.success(request, _("Every character has a name in this language. Thank you!"))
         return redirect("characters:languages")
     return redirect(reverse("characters:translate", args=[nxt.code]) + f"?lang={lang}")
+
+
+# ---------- contributions and privacy ----------
+
+def privacy(request):
+    return render(request, "characters/privacy.html", {"current_version": Consent.CURRENT_VERSION})
+
+
+@login_required
+def agree(request):
+    """Existing users agree to the contribution terms once before adding anything."""
+    from .forms import AgreeForm
+    next_url = request.GET.get("next") or request.POST.get("next") or reverse("characters:account")
+    if not url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+        next_url = reverse("characters:account")
+    form = AgreeForm(posted(request))
+    if request.method == "POST" and form.is_valid():
+        Consent.record(request.user)
+        return redirect(next_url)
+    return render(request, "characters/agree.html", {"form": form, "next": next_url})
+
+
+def _anonymize(user):
+    """Delete a person's personal data but keep their contributions (CC0, in the public history)."""
+    from allauth.account.models import EmailAddress
+    from allauth.mfa.models import Authenticator
+    from allauth.usersessions.models import UserSession
+    from django.contrib.sessions.models import Session
+    for us in UserSession.objects.filter(user=user):
+        Session.objects.filter(session_key=us.session_key).delete()
+        us.delete()
+    EmailAddress.objects.filter(user=user).delete()
+    Authenticator.objects.filter(user=user).delete()
+    user.username = f"former-contributor-{user.pk}"
+    user.email = ""
+    user.first_name = user.last_name = ""
+    user.set_unusable_password()
+    user.is_active = False
+    user.save()
+
+
+@login_required
+def delete_account(request):
+    from allauth.account.decorators import reauthentication_required
+
+    @reauthentication_required
+    def inner(request):
+        if request.user.is_superuser:
+            messages.error(request, _("The admin account cannot be deleted here."))
+            return redirect("characters:account")
+        if request.method == "POST" and request.POST.get("confirm") == "delete":
+            user = request.user
+            with transaction.atomic():
+                logout(request)
+                _anonymize(user)
+            messages.success(request, _("Your account has been deleted. Your contributions stay on the site, credited to a former contributor."))
+            return redirect("characters:home")
+        return render(request, "characters/delete_account.html")
+    return inner(request)

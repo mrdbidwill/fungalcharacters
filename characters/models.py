@@ -301,3 +301,27 @@ class CodeCounter(models.Model):
             counter.last_number = max(counter.last_number, highest) + 1
             counter.save()
         return f"{prefix}{counter.last_number:05d}"
+
+
+class Consent(models.Model):
+    """A user's agreement to the contribution terms (docs/DECISIONS.md, "Contributions and privacy")."""
+
+    CONTRIBUTIONS_CC0 = "contributions-cc0"
+    CURRENT_VERSION = "2026-11-25"
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="consents")
+    kind = models.CharField(max_length=40)
+    version = models.CharField(max_length=20)
+    accepted_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["user", "kind", "version"], name="unique_consent")]
+
+    @classmethod
+    def has_current(cls, user):
+        return user.is_authenticated and cls.objects.filter(
+            user=user, kind=cls.CONTRIBUTIONS_CC0, version=cls.CURRENT_VERSION).exists()
+
+    @classmethod
+    def record(cls, user):
+        cls.objects.get_or_create(user=user, kind=cls.CONTRIBUTIONS_CC0, version=cls.CURRENT_VERSION)

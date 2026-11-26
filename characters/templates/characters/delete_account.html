@@ -1,0 +1,13 @@
+{% extends "allauth/layouts/manage.html" %}
+{% load i18n %}
+{% block head_title %}{% translate "Delete my account" %}{% endblock %}
+{% block content %}
+<h1>{% translate "Delete my account" %}</h1>
+<p>{% translate "This deletes your email addresses, password, two-factor settings and signed-in sessions, and signs you out. It cannot be undone." %}</p>
+<p>{% translate "Your contributions stay on the site (they are public and free to use), credited to “former-contributor” and a number instead of your username." %}</p>
+<form class="form" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="confirm" value="delete">
+  <div class="actions"><button type="submit">{% translate "Delete my account" %}</button> <a href="{% url 'characters:account' %}">{% translate "Cancel" %}</a></div>
+</form>
+{% endblock %}

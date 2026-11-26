@@ -35,6 +35,7 @@
     <input id="t-reason" type="text" name="reason" maxlength="200">
     <span class="helptext">{% translate "Shown in the public edit history." %}</span>
   </div>
+  <p class="muted small">{% url 'characters:privacy' as privacy_url %}{% blocktranslate trimmed %}What you save is public and dedicated to the public domain (CC0). <a href="{{ privacy_url }}">Contributions and privacy</a>.{% endblocktranslate %}</p>
   <div class="actions">
     <button type="submit" name="then" value="next">{% translate "Save and go to the next character" %}</button>
     <button type="submit" name="then" value="stay">{% translate "Save" %}</button>

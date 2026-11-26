@@ -37,6 +37,13 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - Full public edit history: who changed what, and when.
 - No censorship of character data. The community decides which characters survive by using them.
 
+## Contributions and privacy (2026-11-25)
+- Contribution terms: everything users add (characters, value types, value options, sources, translations, change reasons) is public and dedicated to CC0 1.0; users confirm they have the right to share it and do not paste others' text unless its license allows. Agreed with a required checkbox at sign-up; accounts that existed before are asked once before they next add anything. Each agreement is recorded (Consent: user, version, date; current version 2026-11-25). A new version of the terms asks everyone again.
+- Privacy page /privacy/ ("Contributions and privacy"), linked from the footer, the account page and every save form: what is stored, where (Hostinger server in the US; email via Resend, US), web logs 14 days, nightly backups (30 days on the server, plus the Website Administrator's off-server copy), no analytics, ads, tracking or third-party scripts.
+- The privacy page was checked against the code by an independent review (2026-11-25); its findings were fixed: the site records visitors' real IP addresses (one trusted proxy, nginx), so rate limits and the signed-in devices list work per visitor; the common/scientific choice is a cookie (no server-side session for anonymous visitors); expired sessions are cleared nightly; the app's own logs are capped (3 × 10 MB); error reports never contain passwords, codes or keys.
+- Contact for privacy questions: contact@fungalcharacters.org, forwarded to Will (Will, 2026-11-25); the Website Administrator sets up the forwarding.
+- "Delete my account" (account page; password asked again): deletes email addresses, password, two-factor settings and sessions, signs out; contributions stay, credited to "former-contributor-<number>". Not available for the admin account.
+
 ## Admin
 - Will is the only admin. Django's "Groups" (permission bundles for several users) are not used and are hidden from the admin pages (2026-11-25).
 - Admin acts only on inappropriate material or behavior: hide or delete it, block users.
@@ -80,8 +87,9 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 
 ## Domains
 - fungalcharacters.org is the main address; fungalcharacters.com forwards to it.
-- mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires. Start: now (Will, 2026-11-25); www and new.mrdbid.com too, all to the home page except /documents/… (same path here, for Brian Hunt's page); dna.mrdbid.com is not included. The Website Administrator makes the nginx change (request: Claude_AI/Website_Admin/FC_REQUEST_MRDBID_REDIRECT.md).
+- mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires. Live since 2026-11-25 15:28 CT (302 for the first week; the Website Administrator switches it to 301 and raises HSTS on 2026-12-02). Start: now (Will, 2026-11-25); www and new.mrdbid.com too, all to the home page except /documents/… (same path here, for Brian Hunt's page); dna.mrdbid.com is not included. The Website Administrator makes the nginx change (request: Claude_AI/Website_Admin/FC_REQUEST_MRDBID_REDIRECT.md).
 
 ## Open
 - Live (2026-11-25): https://fungalcharacters.org/ (www and .com redirect to it). Website Administrator did the server setup, nginx, DNS and certificate; this project deploys the app with deploy/deploy.sh (docs/DEPLOY.md). App in Docker, Compose project `fungalcharacters`, gunicorn on 127.0.0.1:8030 (8010 gulfcoastfungi, 8020 mrdbid.com). The live database started as a copy of the local one. Email sends through Resend (mail.fungalcharacters.org verified). Nightly private backups on the server (03:15). Admin account `will` (willfh54@protonmail.com) signs in with two-factor; site error reports go to that address. mrdbid.com's redirect: see Domains.
-- Old shared WORKSPACE.md and DECISIONS.md stay in place: they still govern other projects (gulfcoastfungi, Website Admin). fungalcharacters ignores them. Cleanup is a separate decision for those projects.
+- Old shared WORKSPACE.md and DECISIONS.md stay in place: they still govern other projects (gulfcoastfungi, Website Admin). fungalcharacters ignores them, except WORKSPACE.md §5a (Will, 2026-11-25): server, DNS, certificates and GitHub settings belong to the Website Administrator; any change to them beyond deploying the app gets one line in Website_Admin/ADMIN.md under Incoming. Cleanup is a separate decision for those projects.
+- Handled by the Website Administrator (Will, 2026-11-25): copies of the nightly database backups (its existing nightly pull; not copied to Will's Mac by this project), the 2026-12-02 items (302 → 301, HSTS one year), MRDBID's sudo rule, gulfcoastfungi.com's link to Brian Hunt's page, and Weblate (set up when this project is ready to add languages). The Resend SMTP key was replaced 2026-11-25 ("fungalcharacters.org SMTP 2026-11-25"; the earlier key deleted); sending checked afterwards.

@@ -24,6 +24,7 @@
     {% endif %}
   {% endfor %}
   {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+  {% if user.is_authenticated %}<p class="muted small">{% url 'characters:privacy' as privacy_url %}{% blocktranslate trimmed %}What you save is public and dedicated to the public domain (CC0). <a href="{{ privacy_url }}">Contributions and privacy</a>.{% endblocktranslate %}</p>{% endif %}
   <div class="actions">
     <button type="submit">{% if submit %}{{ submit }}{% else %}{% translate "Save" %}{% endif %}</button>
     {% if cancel_url %}<a href="{{ cancel_url }}">{% translate "Cancel" %}</a>{% endif %}

@@ -16,6 +16,7 @@
     <br><a href="{% url 'mfa_index' %}">{% if mfa_enabled %}{% translate "Manage two-factor sign-in" %}{% else %}{% translate "Turn on two-factor sign-in" %}{% endif %}</a></dd>
   <dt>{% translate "Signed-in devices" %}</dt><dd><a href="{% url 'usersessions_list' %}">{% translate "See and sign out other devices" %}</a></dd>
   <dt>{% translate "Language" %}</dt><dd><a href="{% url 'characters:languages' %}">{% translate "Choose the site's language" %}</a></dd>
+  <dt>{% translate "Your data" %}</dt><dd><a href="{% url 'characters:privacy' %}">{% translate "Contributions and privacy" %}</a><br>{% if not user.is_superuser %}<a href="{% url 'characters:delete_account' %}">{% translate "Delete my account" %}</a>{% endif %}</dd>
 </dl>
 
 <h2>{% translate "Your contributions" %}</h2>
