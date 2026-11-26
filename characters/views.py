@@ -861,3 +861,41 @@ Disallow: /*/values/new/
 def robots_txt(request):
     from django.http import HttpResponse
     return HttpResponse(ROBOTS_TXT, content_type="text/plain; charset=utf-8")
+
+
+# ---------- accessibility help and reports ----------
+
+ASSISTIVE_TECH = [
+    ("", gettext_lazy("Not saying")),
+    ("screen reader", gettext_lazy("Screen reader")),
+    ("zoom or magnifier", gettext_lazy("Zoom or magnifier")),
+    ("keyboard only", gettext_lazy("Keyboard only")),
+    ("voice control", gettext_lazy("Voice control")),
+    ("high contrast or colours", gettext_lazy("High contrast or my own colours")),
+    ("other", gettext_lazy("Something else")),
+]
+
+
+def accessibility(request):
+    """Accessibility statement, help for using the site, and a form to report a problem or ask for help.
+    No account needed; reports go to the admin's "Needs review" list as item type "Accessibility"."""
+    from .models import ReviewRequest
+    page = request.POST.get("page") or request.GET.get("from") or ""
+    if not url_has_allowed_host_and_scheme(page, allowed_hosts={request.get_host()}) or not page.startswith("/"):
+        page = ""
+    if request.method == "POST":
+        note = request.POST.get("note", "").strip()[:1000]
+        kind = "help" if request.POST.get("kind") == "help" else "problem"
+        tech = request.POST.get("tech", "")
+        tech = tech if tech in {k for k, _v in ASSISTIVE_TECH} else ""
+        if note and _review_allowed(request):
+            ReviewRequest.objects.create(
+                item_type="Accessibility", item_id=0,
+                item_label=f"Accessibility {kind}" + (f" ({tech})" if tech else ""),
+                page=(page or "/")[:300], note=note,
+                reporter=request.user if request.user.is_authenticated else None)
+        if note:
+            messages.success(request, _("Thank you. Your message has been added to the list the site's administrator works through."))
+            return redirect(reverse("characters:accessibility") + "#report")
+        messages.error(request, _("Please write a few words about the problem or what you need."))
+    return render(request, "characters/accessibility.html", {"page": page, "tech_choices": ASSISTIVE_TECH})

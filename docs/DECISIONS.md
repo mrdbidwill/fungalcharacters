@@ -84,6 +84,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - Git/GitHub: Claude Code commits and pushes; Will only signs in to GitHub once. GitHub Desktop stays available for viewing history.
 
 ## Look and accessibility (2026-11-25)
+- Accessibility page and feedback (Will, 2026-11-26): /accessibility/, reachable from every page's footer and by a second skip link ("Accessibility help"); help for using the site with assistive technology and links to official guides; a form (no account, no email) to report a problem or ask for help, listed for the admin with the "Needs review" reports. Pages are audited after every change (CLAUDE.md). The page says plainly that we are not accessibility experts and intend to work with the people who use the site (Will, 2026-11-26). Will is testing with VoiceOver as he learns it.
 - Readability and accessibility come first: WCAG 2.2, with AAA contrast (at least 7:1) for all text in light and dark modes; links always underlined; visible amber focus ring; skip-to-content link; large click targets; follows the reader's light/dark, contrast, motion and text-size settings.
 - Typeface: Atkinson Hyperlegible (Braille Institute, for low-vision readers; SIL Open Font License), served from the site itself.
 - Colours: forest green (#1F4D2E) header and buttons, warm off-white background, near-black text.

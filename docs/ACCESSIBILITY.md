@@ -13,6 +13,14 @@ Readability for people with sight issues comes first (docs/DECISIONS.md, "Look a
 - The sign-up anti-bot honeypot is hidden with `display: none`, so screen readers and keyboards never reach it (an off-screen field would trap blind users). Audited 2026-11-26: 0 violations.
 - Consistent wording: "Sign in", "Sign up", "Sign out" everywhere.
 
+## Accessibility page and feedback (2026-11-26)
+- /accessibility/ ("Accessibility" in every page's footer, and a second skip link, "Accessibility help", right after
+  "Skip to content"): what the site does, known limits, how to use the site with screen readers, keyboard and zoom,
+  links to the official guides (VoiceOver Mac/iPhone, NVDA, Narrator, TalkBack; links checked 2026-11-26).
+- A form to report a problem or ask for help: no account and no email address needed; reports go to the admin's
+  "Needs review" list as item type "Accessibility" (with the page and, optionally, the tool used). Same hidden
+  rate limit as "Needs review". For a reply: contact@fungalcharacters.org.
+
 ## Automated audit (run after any change to pages or styles)
 Tool: `tools/a11y/audit.js` (axe-core 4.10.3 driven through Chrome). It checks every rule tagged WCAG 2.0/2.1/2.2 A, AA,
 AAA and best-practice, in light and dark mode.

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-26 12:52+0000\n"
+"POT-Creation-Date: 2026-11-26 13:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -303,7 +303,7 @@ msgstr ""
 
 #: characters/templates/characters/_account_menu.html:3
 #: characters/templates/characters/account.html:3
-#: characters/templates/characters/base.html:43
+#: characters/templates/characters/base.html:46
 msgid "Your account"
 msgstr ""
 
@@ -331,7 +331,7 @@ msgid "Signed-in devices"
 msgstr ""
 
 #: characters/templates/characters/_account_menu.html:10
-#: characters/templates/characters/base.html:45
+#: characters/templates/characters/base.html:48
 msgid "Sign out"
 msgstr ""
 
@@ -355,6 +355,197 @@ msgstr ""
 
 #: characters/templates/characters/_translate_field.html:8
 msgid "(written by someone else; only they or the admin can change it)"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:3
+#: characters/templates/characters/accessibility.html:6
+#: characters/templates/characters/base.html:68
+msgid "Accessibility"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:7
+msgid ""
+"Fungal Characters is meant to be usable by everyone, including people who "
+"use a screen reader, a keyboard instead of a mouse, zoom, voice control or "
+"their own colours. If something does not work for you, or you are not sure "
+"how to use the site with your tools, please tell us below."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:8
+msgid ""
+"We are not accessibility experts. Our intent is to work with the people who "
+"use this site to give everyone a good experience, and your reports show us "
+"what to fix first."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:10
+msgid "What the site does"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:12
+msgid ""
+"Large, clear text (Atkinson Hyperlegible, a typeface made for readers with "
+"low vision) and very high contrast, in light and dark mode."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:13
+msgid ""
+"Everything works with the keyboard; a clear outline shows where you are."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:14
+msgid ""
+"Every page is organised with headings, has a “Skip to content” link, and "
+"marks the current page in the menu."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:15
+msgid "Tables have column headings; every form field has a label."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:16
+msgid ""
+"The site follows your device's settings for text size, dark mode, higher "
+"contrast and reduced motion."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:17
+msgid ""
+"The aim is the international standard WCAG 2.2, level AA, with the stricter "
+"AAA level for text contrast. Pages are checked with an automated tool after "
+"every change."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:20
+msgid "Known limits"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:22
+msgid "The administrator's own pages are not checked."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:23
+msgid ""
+"Pages kept for their authors under Documents are shown exactly as they sent "
+"them."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:24
+msgid ""
+"Other languages are only partly translated; untranslated text is in English."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:25
+msgid ""
+"Testing with people who use screen readers has only just begun. Your reports "
+"help most."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:28
+msgid "How to use this site with your tools"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:30
+msgid ""
+"At the start of every page: “Skip to content” goes straight to the page's "
+"main part, past the menu."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:31
+msgid ""
+"Screen readers: move by headings to get around quickly (VoiceOver: the "
+"Rotor, Control-Option-U; NVDA and JAWS: the H key). The Characters list is a "
+"table: move by cell to hear each column's heading with its value."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:32
+msgid ""
+"Bigger text: press Command and + (Mac) or Control and + (Windows, Linux) in "
+"your browser; Command or Control and 0 returns to normal size."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:33
+msgid ""
+"Names: the “Names: Common · Scientific” switch at the top shows character "
+"names in your language or their scientific (Latin) form."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:34
+msgid "Free guides from the makers of the tools:"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:36
+msgid "VoiceOver on a Mac (Apple)"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:37
+msgid "VoiceOver on an iPhone (Apple)"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:38
+msgid "NVDA, a free screen reader for Windows (NV Access)"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:38
+msgid "download NVDA"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:39
+msgid "Narrator, built into Windows (Microsoft)"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:40
+msgid "TalkBack on Android (Google)"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:45
+msgid "Report a problem or ask for help"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:46
+msgid ""
+"No account is needed. Your message goes to a list the site's administrator "
+"works through."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:47
+msgid ""
+"This form does not ask for your email address; if you would like a reply, or "
+"if you find forms hard to use, write to <a "
+"href=\"mailto:contact@fungalcharacters.org\">contact@fungalcharacters.org</"
+"a> instead."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:51
+msgid "This is about"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:52
+msgid "Something does not work for me"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:53
+msgid "I need help using the site"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:56
+msgid "Which page? (optional)"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:58
+msgid "Filled in with the page you came from; change it if needed."
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:61
+msgid "What do you use? (optional)"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:65
+msgid "What happened, or what do you need?"
+msgstr ""
+
+#: characters/templates/characters/accessibility.html:68
+msgid "Send"
 msgstr ""
 
 #: characters/templates/characters/account.html:6
@@ -445,7 +636,7 @@ msgid "Your data"
 msgstr ""
 
 #: characters/templates/characters/account.html:20
-#: characters/templates/characters/base.html:65
+#: characters/templates/characters/base.html:68
 #: characters/templates/characters/privacy.html:3
 #: characters/templates/characters/privacy.html:6
 msgid "Contributions and privacy"
@@ -551,7 +742,7 @@ msgid "Cancel"
 msgstr ""
 
 #: characters/templates/characters/api_docs.html:3
-#: characters/templates/characters/base.html:65
+#: characters/templates/characters/base.html:68
 msgid "API"
 msgstr ""
 
@@ -624,19 +815,27 @@ msgid ""
 msgstr ""
 
 #: characters/templates/characters/base.html:17
+msgid "Skip links"
+msgstr ""
+
+#: characters/templates/characters/base.html:18
 msgid "Skip to content"
 msgstr ""
 
-#: characters/templates/characters/base.html:25
+#: characters/templates/characters/base.html:19
+msgid "Accessibility help"
+msgstr ""
+
+#: characters/templates/characters/base.html:28
 msgctxt "navigation"
 msgid "Main"
 msgstr ""
 
-#: characters/templates/characters/base.html:27
+#: characters/templates/characters/base.html:30
 msgid "Home"
 msgstr ""
 
-#: characters/templates/characters/base.html:28
+#: characters/templates/characters/base.html:31
 #: characters/templates/characters/list.html:3
 #: characters/templates/characters/list.html:5
 #: characters/templates/characters/source_list.html:10
@@ -644,97 +843,97 @@ msgstr ""
 msgid "Characters"
 msgstr ""
 
-#: characters/templates/characters/base.html:29
+#: characters/templates/characters/base.html:32
 #: characters/templates/characters/value_type_list.html:3
 #: characters/templates/characters/value_type_list.html:5
 msgid "Value types"
 msgstr ""
 
-#: characters/templates/characters/base.html:30
+#: characters/templates/characters/base.html:33
 #: characters/templates/characters/source_list.html:3
 #: characters/templates/characters/source_list.html:5
 msgid "Sources"
 msgstr ""
 
-#: characters/templates/characters/base.html:31
+#: characters/templates/characters/base.html:34
 #: characters/templates/characters/downloads.html:3
 #: characters/templates/characters/downloads.html:6
 #: characters/templates/characters/home.html:19
 msgid "Downloads"
 msgstr ""
 
-#: characters/templates/characters/base.html:32
+#: characters/templates/characters/base.html:35
 #: characters/templates/characters/recent_changes.html:3
 #: characters/templates/characters/recent_changes.html:5
 msgid "Recent changes"
 msgstr ""
 
-#: characters/templates/characters/base.html:33
+#: characters/templates/characters/base.html:36
 #: characters/templates/characters/thanks.html:3
 msgid "Thanks"
 msgstr ""
 
-#: characters/templates/characters/base.html:37
+#: characters/templates/characters/base.html:40
 msgid "language and translation"
 msgstr ""
 
-#: characters/templates/characters/base.html:38
+#: characters/templates/characters/base.html:41
 msgid "Names:"
 msgstr ""
 
-#: characters/templates/characters/base.html:39
-#: characters/templates/characters/base.html:40
+#: characters/templates/characters/base.html:42
+#: characters/templates/characters/base.html:43
 msgctxt "names"
 msgid "Common"
 msgstr ""
 
-#: characters/templates/characters/base.html:39
-#: characters/templates/characters/base.html:40
+#: characters/templates/characters/base.html:42
+#: characters/templates/characters/base.html:43
 msgctxt "names"
 msgid "Scientific"
 msgstr ""
 
-#: characters/templates/characters/base.html:44
+#: characters/templates/characters/base.html:47
 msgid "Admin"
 msgstr ""
 
-#: characters/templates/characters/base.html:47
+#: characters/templates/characters/base.html:50
 #: characters/templates/characters/home.html:24
 msgid "Sign in"
 msgstr ""
 
-#: characters/templates/characters/base.html:48
+#: characters/templates/characters/base.html:51
 #: characters/templates/characters/home.html:24
 msgid "Sign up"
 msgstr ""
 
-#: characters/templates/characters/base.html:62
+#: characters/templates/characters/base.html:65
 #, python-format
 msgid "Character data: Fungal Characters release %(version)s (%(date)s)."
 msgstr ""
 
-#: characters/templates/characters/base.html:62
+#: characters/templates/characters/base.html:65
 msgid "Character data."
 msgstr ""
 
-#: characters/templates/characters/base.html:63
+#: characters/templates/characters/base.html:66
 msgid ""
 "Dedicated to the public domain under <a href=\"https://creativecommons.org/"
 "publicdomain/zero/1.0/\">CC0 1.0</a>: free to use in any way. Code: MIT."
 msgstr ""
 
-#: characters/templates/characters/base.html:64
+#: characters/templates/characters/base.html:67
 #, python-format
 msgid ""
 "Please cite as: Fungal Characters, release %(version)s, https://"
 "fungalcharacters.org/"
 msgstr ""
 
-#: characters/templates/characters/base.html:64
+#: characters/templates/characters/base.html:67
 msgid "Please cite as: Fungal Characters, https://fungalcharacters.org/"
 msgstr ""
 
-#: characters/templates/characters/base.html:65
+#: characters/templates/characters/base.html:68
 msgid "Help translate this site"
 msgstr ""
 
@@ -1349,11 +1548,18 @@ msgstr ""
 
 #: characters/templates/characters/privacy.html:25
 msgid ""
+"If you use the accessibility form: your message, the page it is about, what "
+"you use (if you say) and, if you are signed in, your username. Nothing else; "
+"no email address is asked for."
+msgstr ""
+
+#: characters/templates/characters/privacy.html:26
+msgid ""
 "To limit heavy use of the report form and the API, your IP address is used "
 "only in scrambled form, as a counter that is deleted after an hour or less."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:26
+#: characters/templates/characters/privacy.html:27
 msgid ""
 "Cookies: for signing in and security, for one-time notices on the next page, "
 "and to remember your choice of language and of common or scientific names. "
@@ -1361,30 +1567,30 @@ msgid ""
 "other companies."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:29
+#: characters/templates/characters/privacy.html:30
 msgid "Where it is kept"
 msgstr ""
 
-#: characters/templates/characters/privacy.html:31
+#: characters/templates/characters/privacy.html:32
 msgid ""
 "The site runs on a server rented from Hostinger, in the United States. Email "
 "is sent through Resend, in the United States."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:32
+#: characters/templates/characters/privacy.html:33
 msgid ""
 "The server's web logs (IP address, page requested, browser) are kept for 14 "
 "days. The site's own logs (time, page requested, browser) are limited in "
 "size and overwritten as new entries arrive."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:33
+#: characters/templates/characters/privacy.html:34
 msgid ""
 "The database is backed up every night; the server keeps 30 days of backups, "
 "and the administrator keeps a copy off the server."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:34
+#: characters/templates/characters/privacy.html:35
 msgid ""
 "When something goes wrong, the site emails an error report to its "
 "administrator through Resend. It can include your username, IP address, "
@@ -1392,11 +1598,11 @@ msgid ""
 "are hidden)."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:37
+#: characters/templates/characters/privacy.html:38
 msgid "Your choices"
 msgstr ""
 
-#: characters/templates/characters/privacy.html:39
+#: characters/templates/characters/privacy.html:40
 #, python-format
 msgid ""
 "See and change your email addresses and password, turn on two-factor sign-"
@@ -1404,7 +1610,7 @@ msgid ""
 "page</a>."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:40
+#: characters/templates/characters/privacy.html:41
 msgid ""
 "Delete your account from your account page (“Delete my account”; your "
 "password is asked again). Your email addresses, password, two-factor "
@@ -1414,14 +1620,14 @@ msgid ""
 "already sent) are not changed; the server's backups expire after 30 days."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:41
+#: characters/templates/characters/privacy.html:42
 msgid ""
 "Questions about your data: <a "
 "href=\"mailto:contact@fungalcharacters.org\">contact@fungalcharacters.org</"
 "a>."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:43
+#: characters/templates/characters/privacy.html:44
 msgid ""
 "If the contribution terms change, the date above changes and you are asked "
 "to agree again before adding anything."
@@ -1767,6 +1973,44 @@ msgstr ""
 
 #: characters/views.py:828
 msgid "Thank you. Your report has been added to the list for review."
+msgstr ""
+
+#: characters/views.py:869
+msgid "Not saying"
+msgstr ""
+
+#: characters/views.py:870
+msgid "Screen reader"
+msgstr ""
+
+#: characters/views.py:871
+msgid "Zoom or magnifier"
+msgstr ""
+
+#: characters/views.py:872
+msgid "Keyboard only"
+msgstr ""
+
+#: characters/views.py:873
+msgid "Voice control"
+msgstr ""
+
+#: characters/views.py:874
+msgid "High contrast or my own colours"
+msgstr ""
+
+#: characters/views.py:875
+msgid "Something else"
+msgstr ""
+
+#: characters/views.py:898
+msgid ""
+"Thank you. Your message has been added to the list the site's administrator "
+"works through."
+msgstr ""
+
+#: characters/views.py:900
+msgid "Please write a few words about the problem or what you need."
 msgstr ""
 
 #: templates/404.html:3 templates/404.html:6

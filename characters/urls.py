@@ -59,4 +59,5 @@ urlpatterns = [
     path("account/agree/", views.agree, name="agree"),
     path("account/delete/", views.delete_account, name="delete_account"),
     path("privacy/", views.privacy, name="privacy"),
+    path("accessibility/", views.accessibility, name="accessibility"),
 ]

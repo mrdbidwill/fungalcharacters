@@ -752,3 +752,36 @@ class HomeAndListTweaksTests(TestCase):
         from django.conf import settings
         css = (settings.BASE_DIR / "characters/static/characters/site.css").read_text()
         self.assertIn(".button:link, .button:visited { color: var(--on-primary); }", css)
+
+
+class AccessibilityPageTests(TestCase):
+    def setUp(self):
+        from django.core.cache import cache
+        cache.clear()
+
+    def test_page_and_links_everywhere(self):
+        r = self.client.get("/accessibility/?from=/characters/")
+        self.assertContains(r, 'value="/characters/"')
+        self.assertContains(r, "contact@fungalcharacters.org")
+        self.assertContains(r, "We are not accessibility experts")
+        for url in ["/", "/characters/", "/id/FCC00019", "/accounts/signup/"]:
+            body = self.client.get(url).content.decode()
+            self.assertIn('class="skip" href="/accessibility/?from=', body, url)
+            self.assertLess(body.index("Skip to content"), body.index("Accessibility help"), url)
+
+    def test_report_saved_without_account(self):
+        from .models import ReviewRequest
+        r = self.client.post("/accessibility/", {"kind": "help", "page": "/id/FCC00082", "tech": "screen reader",
+                                                 "note": "The table is hard to follow."})
+        self.assertRedirects(r, "/accessibility/#report")
+        rr = ReviewRequest.objects.get()
+        self.assertEqual((rr.item_type, rr.item_label, rr.page, rr.reporter),
+                         ("Accessibility", "Accessibility help (screen reader)", "/id/FCC00082", None))
+
+    def test_empty_message_and_foreign_page_refused(self):
+        from .models import ReviewRequest
+        r = self.client.post("/accessibility/", {"kind": "problem", "page": "https://evil.example/", "note": ""})
+        self.assertContains(r, "Please write a few words")
+        self.client.post("/accessibility/", {"kind": "problem", "page": "https://evil.example/", "note": "x", "tech": "bogus"})
+        rr = ReviewRequest.objects.get()
+        self.assertEqual((rr.page, rr.item_label), ("/", "Accessibility problem"))

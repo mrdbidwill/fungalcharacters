@@ -1,0 +1,71 @@
+{% extends "characters/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Accessibility" %} · Fungal Characters{% endblock %}
+{% block content %}
+<div class="prose">
+<h1>{% translate "Accessibility" %}</h1>
+<p class="lead">{% translate "Fungal Characters is meant to be usable by everyone, including people who use a screen reader, a keyboard instead of a mouse, zoom, voice control or their own colours. If something does not work for you, or you are not sure how to use the site with your tools, please tell us below." %}</p>
+<p>{% translate "We are not accessibility experts. Our intent is to work with the people who use this site to give everyone a good experience, and your reports show us what to fix first." %}</p>
+
+<h2>{% translate "What the site does" %}</h2>
+<ul>
+  <li>{% translate "Large, clear text (Atkinson Hyperlegible, a typeface made for readers with low vision) and very high contrast, in light and dark mode." %}</li>
+  <li>{% translate "Everything works with the keyboard; a clear outline shows where you are." %}</li>
+  <li>{% translate "Every page is organised with headings, has a “Skip to content” link, and marks the current page in the menu." %}</li>
+  <li>{% translate "Tables have column headings; every form field has a label." %}</li>
+  <li>{% translate "The site follows your device's settings for text size, dark mode, higher contrast and reduced motion." %}</li>
+  <li>{% translate "The aim is the international standard WCAG 2.2, level AA, with the stricter AAA level for text contrast. Pages are checked with an automated tool after every change." %}</li>
+</ul>
+
+<h2>{% translate "Known limits" %}</h2>
+<ul>
+  <li>{% translate "The administrator's own pages are not checked." %}</li>
+  <li>{% translate "Pages kept for their authors under Documents are shown exactly as they sent them." %}</li>
+  <li>{% translate "Other languages are only partly translated; untranslated text is in English." %}</li>
+  <li>{% translate "Testing with people who use screen readers has only just begun. Your reports help most." %}</li>
+</ul>
+
+<h2 id="how">{% translate "How to use this site with your tools" %}</h2>
+<ul>
+  <li>{% translate "At the start of every page: “Skip to content” goes straight to the page's main part, past the menu." %}</li>
+  <li>{% translate "Screen readers: move by headings to get around quickly (VoiceOver: the Rotor, Control-Option-U; NVDA and JAWS: the H key). The Characters list is a table: move by cell to hear each column's heading with its value." %}</li>
+  <li>{% translate "Bigger text: press Command and + (Mac) or Control and + (Windows, Linux) in your browser; Command or Control and 0 returns to normal size." %}</li>
+  <li>{% translate "Names: the “Names: Common · Scientific” switch at the top shows character names in your language or their scientific (Latin) form." %}</li>
+  <li>{% translate "Free guides from the makers of the tools:" %}
+    <ul>
+      <li><a href="https://support.apple.com/guide/voiceover/welcome/mac">{% translate "VoiceOver on a Mac (Apple)" %}</a></li>
+      <li><a href="https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios">{% translate "VoiceOver on an iPhone (Apple)" %}</a></li>
+      <li><a href="https://download.nvaccess.org/documentation/userGuide.html">{% translate "NVDA, a free screen reader for Windows (NV Access)" %}</a> · <a href="https://www.nvaccess.org/download/">{% translate "download NVDA" %}</a></li>
+      <li><a href="https://support.microsoft.com/en-us/accessibility/windows/narrator/complete-guide-to-narrator">{% translate "Narrator, built into Windows (Microsoft)" %}</a></li>
+      <li><a href="https://support.google.com/accessibility/android/answer/6283677">{% translate "TalkBack on Android (Google)" %}</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="report">{% translate "Report a problem or ask for help" %}</h2>
+<p>{% translate "No account is needed. Your message goes to a list the site's administrator works through." %}
+  {% blocktranslate trimmed %}This form does not ask for your email address; if you would like a reply, or if you find forms hard to use, write to <a href="mailto:contact@fungalcharacters.org">contact@fungalcharacters.org</a> instead.{% endblocktranslate %}</p>
+<form class="form" method="post" action="{% url 'characters:accessibility' %}">
+  {% csrf_token %}
+  <fieldset class="plain">
+    <legend>{% translate "This is about" %}</legend>
+    <div><input type="radio" id="k-problem" name="kind" value="problem" checked> <label for="k-problem">{% translate "Something does not work for me" %}</label></div>
+    <div><input type="radio" id="k-help" name="kind" value="help"> <label for="k-help">{% translate "I need help using the site" %}</label></div>
+  </fieldset>
+  <div>
+    <label for="a-page">{% translate "Which page? (optional)" %}</label>
+    <input id="a-page" type="text" name="page" value="{{ page }}" maxlength="300">
+    <span class="helptext">{% translate "Filled in with the page you came from; change it if needed." %}</span>
+  </div>
+  <div>
+    <label for="a-tech">{% translate "What do you use? (optional)" %}</label>
+    <select id="a-tech" name="tech">{% for value, name in tech_choices %}<option value="{{ value }}">{{ name }}</option>{% endfor %}</select>
+  </div>
+  <div>
+    <label for="a-note">{% translate "What happened, or what do you need?" %}</label>
+    <textarea id="a-note" name="note" rows="5" maxlength="1000" required></textarea>
+  </div>
+  <div class="actions"><button type="submit">{% translate "Send" %}</button></div>
+</form>
+</div>
+{% endblock %}
