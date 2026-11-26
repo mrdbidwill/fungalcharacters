@@ -10,7 +10,7 @@ Readability for people with sight issues comes first (docs/DECISIONS.md, "Look a
 - Large click targets (44px buttons and fields), larger checkboxes.
 - Follows the reader's settings: light/dark, more contrast (`prefers-contrast`), reduced motion, Windows high-contrast (`forced-colors`).
 - Every form field has a label (visually hidden where the purpose is obvious on screen); every table column has a header.
-- No hidden "honeypot" fields: screen readers can reach them and would trap blind users.
+- The sign-up anti-bot honeypot is hidden with `display: none`, so screen readers and keyboards never reach it (an off-screen field would trap blind users). Audited 2026-11-26: 0 violations.
 - Consistent wording: "Sign in", "Sign up", "Sign out" everywhere.
 
 ## Automated audit (run after any change to pages or styles)

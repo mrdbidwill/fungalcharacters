@@ -685,3 +685,37 @@ class ApiTests(TestCase):
 
     def test_api_page(self):
         self.assertContains(self.client.get("/api/"), "/api/v1/characters/FCC00019")
+
+
+class AntiBotTests(TestCase):
+    def setUp(self):
+        from django.core.cache import cache
+        cache.clear()
+
+    def data(self, n, **extra):
+        return {"username": f"user{n}", "email": f"user{n}@example.org", "password1": "a-long-pass-987",
+                "password2": "a-long-pass-987", "agree": "on", **extra}
+
+    def test_honeypot_fakes_success_without_account_or_email(self):
+        from django.core import mail
+        r = self.client.post(reverse("account_signup"), self.data(1, website="http://spam.example"))
+        self.assertEqual(r.status_code, 302)                     # looks like "check your email"
+        self.assertFalse(User.objects.filter(username="user1").exists())
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_honeypot_hidden_from_people(self):
+        r = self.client.get(reverse("account_signup"))
+        self.assertContains(r, 'name="website"')
+        css = (__import__("django.conf", fromlist=["settings"]).settings.BASE_DIR / "characters/static/characters/site.css").read_text()
+        self.assertIn('#id_website, label[for="id_website"], p:has(> #id_website) { display: none !important; }', css)
+        r = self.client.post(reverse("account_signup"), self.data(2))   # a person leaves it empty
+        self.assertTrue(User.objects.filter(username="user2").exists())
+
+    def test_signup_rate_limit(self):
+        codes = [self.client.post(reverse("account_signup"), self.data(10 + i)).status_code for i in range(6)]
+        self.assertEqual(codes[:5], [302] * 5)
+        self.assertEqual(codes[5], 429)
+
+    def test_password_reset_rate_limit_per_email(self):
+        codes = [self.client.post(reverse("account_reset_password"), {"email": "someone@example.org"}).status_code for _ in range(4)]
+        self.assertEqual(codes[3], 429)

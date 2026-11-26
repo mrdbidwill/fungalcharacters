@@ -122,8 +122,16 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False
 ACCOUNT_EMAIL_NOTIFICATIONS = True          # tell users when their password or email changes
-# No hidden "honeypot" anti-bot field: screen readers can reach it and blind users would be rejected.
-# Email confirmation and allauth's rate limits stop automated sign-ups instead.
+# Anti-bot (Will, 2026-11-26, after bots signed up with strangers' email addresses):
+# - A honeypot field: bots fill it in and get a fake "check your email" page; no account is made and no email sent.
+#   allauth only moves it off-screen; site.css hides it with display:none, so screen readers and keyboards never meet it.
+# - Tighter rate limits (allauth defaults are per minute); nginx also limits POSTs to these pages
+#   (deploy/nginx_fungalcharacters.conf).
+ACCOUNT_SIGNUP_FORM_HONEYPOT_FIELD = "website"
+ACCOUNT_RATE_LIMITS = {
+    "signup": "5/h/ip",
+    "reset_password": "5/h/ip,3/h/key",
+}
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Fungal Characters] "
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = os.environ.get("SITE_PROTOCOL", "http")
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = False
