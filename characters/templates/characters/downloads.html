@@ -6,7 +6,7 @@
 <h1>{% translate "Downloads" %}</h1>
 {% if release %}
 <p class="lead">{% blocktranslate trimmed with version=release.version date=release.released_at|date:"j F Y" %}Release {{ version }}, {{ date }}. The complete data set in several formats.{% endblocktranslate %}</p>
-<p>{% translate "A release is a dated snapshot. The pages on this site may already include newer additions and edits, which will appear in the next release." %}</p>
+<p>{% translate "A release is a dated snapshot. The pages on this site may already include newer additions and edits, which will appear in the next release." %} {% url 'characters:api_docs' as api_url %}{% blocktranslate trimmed %}Programs can read the current data through the <a href="{{ api_url }}">read-only API</a>.{% endblocktranslate %}</p>
 <p>{% blocktranslate trimmed with version=release.version %}Free to use in any way: dedicated to the public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>. Please cite as: Fungal Characters, release {{ version }}, https://fungalcharacters.org/{% endblocktranslate %}</p>
 {% else %}
 <p>{% translate "No release is available yet." %}</p>

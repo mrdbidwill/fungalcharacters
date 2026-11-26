@@ -1,0 +1,28 @@
+{% extends "characters/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "API" %} · Fungal Characters{% endblock %}
+{% block content %}
+<div class="prose">
+<h1>{% translate "Read-only API" %}</h1>
+<p class="lead">{% translate "Programs can read the live data directly. No account or key is needed. Answers are JSON; the data is CC0 (free to use in any way)." %}</p>
+<p>{% translate "For a complete copy, a dated release from the Downloads page is usually easier. The API always shows the current data, including edits made since the last release." %}</p>
+
+<h2>{% translate "Addresses" %}</h2>
+<dl class="fields">
+  <dt><code>/api/v1/characters/</code></dt>
+  <dd>{% blocktranslate trimmed %}All characters, {{ page_size }} per page (follow <code>next</code>). Optional: <code>q</code> (search names in every language, definitions and codes), <code>part</code>, <code>fungus_type</code>, <code>updated_since</code> (a date such as 2026-11-26), <code>page</code>.{% endblocktranslate %}</dd>
+  <dt><code>/api/v1/characters/FCC00019</code></dt>
+  <dd>{% translate "One character with its value options, scientific name, definition and every translation." %}</dd>
+  <dt><code>/api/v1/value-options/FCV00001</code></dt>
+  <dd>{% translate "One value option and the character it belongs to." %}</dd>
+  <dt><code>/api/v1/releases/</code></dt>
+  <dd>{% translate "The dated releases." %}</dd>
+</dl>
+
+<h2>{% translate "Example" %}</h2>
+<p><a href="{% url 'characters:api_character' 'FCC00019' %}"><code>https://fungalcharacters.org/api/v1/characters/FCC00019</code></a></p>
+
+<h2>{% translate "Fair use" %}</h2>
+<p>{% blocktranslate trimmed %}Up to {{ limit }} requests a minute from one address; beyond that the answer is 429 (wait a minute). Any website may read the API from a browser. Codes (FCC#####, FCV#####) are permanent: use them to link your data. Please cite as: Fungal Characters, https://fungalcharacters.org/{% endblocktranslate %}</p>
+</div>
+{% endblock %}

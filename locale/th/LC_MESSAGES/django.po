@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fungalcharacters\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-26 11:25+0000\n"
+"POT-Creation-Date: 2026-11-26 11:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -549,6 +549,72 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+#: characters/templates/characters/api_docs.html:3
+#: characters/templates/characters/base.html:65
+msgid "API"
+msgstr ""
+
+#: characters/templates/characters/api_docs.html:6
+msgid "Read-only API"
+msgstr ""
+
+#: characters/templates/characters/api_docs.html:7
+msgid ""
+"Programs can read the live data directly. No account or key is needed. "
+"Answers are JSON; the data is CC0 (free to use in any way)."
+msgstr ""
+
+#: characters/templates/characters/api_docs.html:8
+msgid ""
+"For a complete copy, a dated release from the Downloads page is usually "
+"easier. The API always shows the current data, including edits made since "
+"the last release."
+msgstr ""
+
+#: characters/templates/characters/api_docs.html:10
+msgid "Addresses"
+msgstr ""
+
+#: characters/templates/characters/api_docs.html:13
+#, python-format
+msgid ""
+"All characters, %(page_size)s per page (follow <code>next</code>). Optional: "
+"<code>q</code> (search names in every language, definitions and codes), "
+"<code>part</code>, <code>fungus_type</code>, <code>updated_since</code> (a "
+"date such as 2026-11-26), <code>page</code>."
+msgstr ""
+
+#: characters/templates/characters/api_docs.html:15
+msgid ""
+"One character with its value options, scientific name, definition and every "
+"translation."
+msgstr ""
+
+#: characters/templates/characters/api_docs.html:17
+msgid "One value option and the character it belongs to."
+msgstr ""
+
+#: characters/templates/characters/api_docs.html:19
+msgid "The dated releases."
+msgstr ""
+
+#: characters/templates/characters/api_docs.html:22
+msgid "Example"
+msgstr ""
+
+#: characters/templates/characters/api_docs.html:25
+msgid "Fair use"
+msgstr ""
+
+#: characters/templates/characters/api_docs.html:26
+#, python-format
+msgid ""
+"Up to %(limit)s requests a minute from one address; beyond that the answer "
+"is 429 (wait a minute). Any website may read the API from a browser. Codes "
+"(FCC#####, FCV#####) are permanent: use them to link your data. Please cite "
+"as: Fungal Characters, https://fungalcharacters.org/"
+msgstr ""
+
 #: characters/templates/characters/base.html:8
 #: characters/templates/characters/home.html:6
 msgid ""
@@ -860,6 +926,13 @@ msgstr ""
 msgid ""
 "A release is a dated snapshot. The pages on this site may already include "
 "newer additions and edits, which will appear in the next release."
+msgstr ""
+
+#: characters/templates/characters/downloads.html:9
+#, python-format
+msgid ""
+"Programs can read the current data through the <a href=\"%(api_url)s\">read-"
+"only API</a>."
 msgstr ""
 
 #: characters/templates/characters/downloads.html:10
@@ -1273,12 +1346,16 @@ msgstr ""
 #: characters/templates/characters/privacy.html:24
 msgid ""
 "If you send a “Needs review” report: your note, the page, the time and, if "
-"you are signed in, your username. Your IP address is used only in scrambled "
-"form for one hour, to limit repeated reports; it is not stored with the "
-"report."
+"you are signed in, your username. It is not stored with your IP address."
 msgstr ""
 
 #: characters/templates/characters/privacy.html:25
+msgid ""
+"To limit heavy use of the report form and the API, your IP address is used "
+"only in scrambled form, as a counter that is deleted after an hour or less."
+msgstr ""
+
+#: characters/templates/characters/privacy.html:26
 msgid ""
 "Cookies: for signing in and security, for one-time notices on the next page, "
 "and to remember your choice of language and of common or scientific names. "
@@ -1286,30 +1363,30 @@ msgid ""
 "other companies."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:28
+#: characters/templates/characters/privacy.html:29
 msgid "Where it is kept"
 msgstr ""
 
-#: characters/templates/characters/privacy.html:30
+#: characters/templates/characters/privacy.html:31
 msgid ""
 "The site runs on a server rented from Hostinger, in the United States. Email "
 "is sent through Resend, in the United States."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:31
+#: characters/templates/characters/privacy.html:32
 msgid ""
 "The server's web logs (IP address, page requested, browser) are kept for 14 "
 "days. The site's own logs (time, page requested, browser) are limited in "
 "size and overwritten as new entries arrive."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:32
+#: characters/templates/characters/privacy.html:33
 msgid ""
 "The database is backed up every night; the server keeps 30 days of backups, "
 "and the administrator keeps a copy off the server."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:33
+#: characters/templates/characters/privacy.html:34
 msgid ""
 "When something goes wrong, the site emails an error report to its "
 "administrator through Resend. It can include your username, IP address, "
@@ -1317,11 +1394,11 @@ msgid ""
 "are hidden)."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:36
+#: characters/templates/characters/privacy.html:37
 msgid "Your choices"
 msgstr ""
 
-#: characters/templates/characters/privacy.html:38
+#: characters/templates/characters/privacy.html:39
 #, python-format
 msgid ""
 "See and change your email addresses and password, turn on two-factor sign-"
@@ -1329,7 +1406,7 @@ msgid ""
 "page</a>."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:39
+#: characters/templates/characters/privacy.html:40
 msgid ""
 "Delete your account from your account page (“Delete my account”; your "
 "password is asked again). Your email addresses, password, two-factor "
@@ -1339,14 +1416,14 @@ msgid ""
 "already sent) are not changed; the server's backups expire after 30 days."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:40
+#: characters/templates/characters/privacy.html:41
 msgid ""
 "Questions about your data: <a "
 "href=\"mailto:contact@fungalcharacters.org\">contact@fungalcharacters.org</"
 "a>."
 msgstr ""
 
-#: characters/templates/characters/privacy.html:42
+#: characters/templates/characters/privacy.html:43
 msgid ""
 "If the contribution terms change, the date above changes and you are asked "
 "to agree again before adding anything."

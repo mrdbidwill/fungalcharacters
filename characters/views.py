@@ -828,3 +828,8 @@ def review_request(request, kind, pk):
         messages.success(request, _("Thank you. Your report has been added to the list for review."))
         return redirect(item_url(obj))
     return render(request, "characters/review_request.html", {"obj": obj, "label": label, "cancel_url": item_url(obj)})
+
+
+def api_docs(request):
+    from .api import API_LIMIT_PER_MINUTE, PAGE_SIZE
+    return render(request, "characters/api_docs.html", {"limit": API_LIMIT_PER_MINUTE, "page_size": PAGE_SIZE})

@@ -1,6 +1,6 @@
 from django.urls import path, register_converter
 
-from . import hosted, views
+from . import api, hosted, views
 
 
 class CodeConverter:
@@ -48,6 +48,11 @@ urlpatterns = [
     path("hide/<slug:kind>/<int:pk>/", views.toggle_hidden, name="toggle_hidden"),
     path("review/<slug:kind>/<int:pk>/", views.review_request, name="review_request"),
     path("changes/", views.recent_changes, name="recent_changes"),
+    path("api/", views.api_docs, name="api_docs"),
+    path("api/v1/characters/", api.characters, name="api_characters"),
+    path("api/v1/characters/<code:code>", api.character, name="api_character"),
+    path("api/v1/value-options/<code:code>", api.value_option, name="api_value_option"),
+    path("api/v1/releases/", api.releases, name="api_releases"),
     path("names/<slug:mode>/", views.set_name_mode, name="set_name_mode"),
     path("account/", views.account, name="account"),
     path("account/agree/", views.agree, name="agree"),

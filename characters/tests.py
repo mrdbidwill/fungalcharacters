@@ -642,3 +642,46 @@ class ReleaseBuildTests(TestCase):
         self.assertFalse(Release.objects.filter(version="9.9.8").exists())
         call_command("make_release", "9.9.8", "--date", "2026-11-26", "--record-only", stdout=__import__("io").StringIO())
         self.assertTrue(Release.objects.filter(version="9.9.8").exists())
+
+
+class ApiTests(TestCase):
+    def setUp(self):
+        from django.core.cache import cache
+        cache.clear()
+
+    def test_character_list_and_paging(self):
+        r = self.client.get("/api/v1/characters/")
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r["Access-Control-Allow-Origin"], "*")
+        d = r.json()
+        self.assertEqual((d["count"], d["license"], len(d["results"])), (747, "CC0 1.0", 100))
+        self.assertIn("page=2", d["next"])
+        self.assertEqual(self.client.get("/api/v1/characters/?q=pileus width").json()["results"][0]["code"], "FCC00019")
+
+    def test_one_character_with_value_options(self):
+        d = self.client.get("/api/v1/characters/FCC00082").json()
+        self.assertEqual((d["name"], d["scientific_name"], len(d["value_options"])), ("Gill Attachment", "Lamellae Attachment", 16))
+        self.assertTrue(d["value_options"][0]["code"].startswith("FCV"))
+        v = self.client.get(f"/api/v1/value-options/{d['value_options'][0]['code']}").json()
+        self.assertEqual(v["character"]["code"], "FCC00082")
+
+    def test_hidden_items_absent_and_errors(self):
+        c = Character.objects.get(code="FCC00019")
+        ItemMeta.objects.create(item_type=CHARACTER_TYPE, item_id=c.pk, is_hidden=True)
+        self.assertEqual(self.client.get("/api/v1/characters/FCC00019").status_code, 404)
+        self.assertEqual(self.client.get("/api/v1/characters/").json()["count"], 746)
+        self.assertEqual(self.client.get("/api/v1/characters/?updated_since=yesterday").status_code, 400)
+        self.assertEqual(self.client.post("/api/v1/characters/").status_code, 405)
+
+    def test_fair_use_limit(self):
+        from . import api
+        old = api.API_LIMIT_PER_MINUTE
+        api.API_LIMIT_PER_MINUTE = 3
+        try:
+            codes = [self.client.get("/api/v1/releases/").status_code for _ in range(5)]
+        finally:
+            api.API_LIMIT_PER_MINUTE = old
+        self.assertEqual(codes, [200, 200, 200, 429, 429])
+
+    def test_api_page(self):
+        self.assertContains(self.client.get("/api/"), "/api/v1/characters/FCC00019")
