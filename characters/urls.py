@@ -19,6 +19,7 @@ app_name = "characters"
 urlpatterns = [
     path("", views.home, name="home"),
     path("robots.txt", views.robots_txt, name="robots_txt"),
+    path("BingSiteAuth.xml", views.bing_site_auth, name="bing_site_auth"),
     path("characters/", views.character_list, name="list"),
     path("thanks/", views.thanks, name="thanks"),
     path("downloads/", views.downloads, name="downloads"),

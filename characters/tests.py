@@ -878,3 +878,8 @@ class ValueTypeNameTests(TestCase):
 class SiteVerificationTests(TestCase):
     def test_bing_meta_tag_on_home_page(self):
         self.assertContains(self.client.get("/"), '<meta name="msvalidate.01" content="0C05660B5F5CD5F88D6752F9599D14B0">', html=True)
+
+    def test_bing_xml_file(self):
+        r = self.client.get("/BingSiteAuth.xml")
+        self.assertEqual(r["Content-Type"], "application/xml; charset=utf-8")
+        self.assertIn("<user>0C05660B5F5CD5F88D6752F9599D14B0</user>", r.content.decode())

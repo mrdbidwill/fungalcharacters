@@ -960,3 +960,10 @@ def accessibility(request):
             return redirect(reverse("characters:accessibility") + "#report")
         messages.error(request, _("Please write a few words about the problem or what you need."))
     return render(request, "characters/accessibility.html", {"page": page, "tech_choices": ASSISTIVE_TECH})
+
+
+def bing_site_auth(request):
+    """Bing Webmaster Tools ownership file (Will, 2026-11-27). Same code as the msvalidate.01 meta tag. Keep it."""
+    from django.http import HttpResponse
+    body = ('<?xml version="1.0"?>\n<users>\n\t<user>%s</user>\n</users>\n' % settings.BING_SITE_VERIFICATION)
+    return HttpResponse(body, content_type="application/xml; charset=utf-8")
