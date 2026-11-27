@@ -95,6 +95,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - Traffic should come from being useful and honest; no-cost, honest search-engine work only (no keyword stuffing, paid links or filler pages).
 - Built: sitemap.xml (pages, characters, value types, sources, documents; hidden items left out) named in robots.txt; per-page titles and descriptions from each item's own data; one canonical address per page (official https://fungalcharacters.org); search and filter pages ask not to be indexed; structured data (schema.org): WebSite and DefinedTermSet on the home page, DefinedTerm with permanent code on each character, Dataset with CC0 license and files on Downloads (for Google Dataset Search); link previews (Open Graph, share image); "More characters for this part" on character pages. Language tags (hreflang) when a language is published.
 - For Will (free, outside the site): Google Search Console and Bing Webmaster Tools (DNS record by the Website Administrator), Zenodo DOIs for releases, links from iNaturalist, Mushroom Observer and MycoMap.
+- Order (Will, 2026-11-27): Will sets up Search Console, Bing and Zenodo now and watches the results for a while before announcing the site. His review of the characters and his VoiceOver testing are ongoing and block nothing.
 
 ## Domains
 - fungalcharacters.org is the main address; fungalcharacters.com forwards to it.
