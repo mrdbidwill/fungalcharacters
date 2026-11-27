@@ -873,3 +873,8 @@ class ValueTypeNameTests(TestCase):
         self.assertIn("Value type keys renamed: drop-down → drop_down.", changelog)
         self.assertIn("Value types now have display names", changelog)
         self.assertIn("value_type_label", (out / "9.9.7/csv/characters_flat.csv").read_text(encoding="utf-8-sig").split("\n")[0])
+
+
+class SiteVerificationTests(TestCase):
+    def test_bing_meta_tag_on_home_page(self):
+        self.assertContains(self.client.get("/"), '<meta name="msvalidate.01" content="0C05660B5F5CD5F88D6752F9599D14B0">', html=True)

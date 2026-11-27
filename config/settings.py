@@ -96,6 +96,8 @@ PUBLISHED_LANGUAGES = [c for c in os.environ.get("PUBLISHED_LANGUAGES", "en").sp
 TRANSLATION_PLATFORM_URL = os.environ.get("TRANSLATION_PLATFORM_URL", "")
 # The one official address, used for canonical links, the sitemap and structured data.
 SITE_URL = "https://fungalcharacters.org"
+# Bing Webmaster Tools ownership check (meta tag on every page; Will, 2026-11-27). Keep: Bing re-checks it.
+BING_SITE_VERIFICATION = "0C05660B5F5CD5F88D6752F9599D14B0"
 LOCALE_PATHS = [BASE_DIR / "locale"]
 TIME_ZONE = "UTC"
 USE_I18N = True

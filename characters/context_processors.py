@@ -8,5 +8,6 @@ def data_release(request):
         "data_release": release,
         "scientific_names": request.COOKIES.get("names") == "scientific",
         "canonical_url": __import__("characters.seo", fromlist=["absolute"]).absolute(request.path),
+        "bing_site_verification": settings.BING_SITE_VERIFICATION,
         "published_languages": [(c, n) for c, n in settings.LANGUAGES if c in settings.PUBLISHED_LANGUAGES],
     }
