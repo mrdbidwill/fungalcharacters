@@ -883,3 +883,13 @@ class SiteVerificationTests(TestCase):
         r = self.client.get("/BingSiteAuth.xml")
         self.assertEqual(r["Content-Type"], "application/xml; charset=utf-8")
         self.assertIn("<user>0C05660B5F5CD5F88D6752F9599D14B0</user>", r.content.decode())
+
+
+class ReleaseDoiTests(TestCase):
+    def test_doi_shown_when_known(self):
+        from django.test import override_settings
+        self.assertNotContains(self.client.get("/downloads/"), "doi.org")
+        with override_settings(RELEASE_DOIS={"1.0.0": "10.5281/zenodo.123"}):
+            r = self.client.get("/downloads/")
+            self.assertContains(r, "https://doi.org/10.5281/zenodo.123")
+            self.assertContains(r, '"identifier":"https://doi.org/10.5281/zenodo.123"')

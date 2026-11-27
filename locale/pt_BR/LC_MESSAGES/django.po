@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fungalcharacters\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-27 13:26+0000\n"
+"POT-Creation-Date: 2026-11-27 14:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,7 @@ msgid "e.g. mm, µm. Leave blank if none."
 msgstr ""
 
 #: characters/forms.py:162 characters/templates/characters/detail.html:35
-#: characters/views.py:590
+#: characters/views.py:593
 msgid "Applies to"
 msgstr ""
 
@@ -313,7 +313,7 @@ msgstr ""
 
 #: characters/templates/characters/_account_menu.html:3
 #: characters/templates/characters/account.html:3
-#: characters/templates/characters/base.html:58
+#: characters/templates/characters/base.html:59
 msgid "Your account"
 msgstr ""
 
@@ -341,7 +341,7 @@ msgid "Signed-in devices"
 msgstr ""
 
 #: characters/templates/characters/_account_menu.html:10
-#: characters/templates/characters/base.html:60
+#: characters/templates/characters/base.html:61
 msgid "Sign out"
 msgstr ""
 
@@ -369,7 +369,7 @@ msgstr ""
 
 #: characters/templates/characters/accessibility.html:3
 #: characters/templates/characters/accessibility.html:6
-#: characters/templates/characters/base.html:80
+#: characters/templates/characters/base.html:81
 msgid "Accessibility"
 msgstr ""
 
@@ -646,7 +646,7 @@ msgid "Your data"
 msgstr ""
 
 #: characters/templates/characters/account.html:20
-#: characters/templates/characters/base.html:80
+#: characters/templates/characters/base.html:81
 #: characters/templates/characters/privacy.html:3
 #: characters/templates/characters/privacy.html:6
 msgid "Contributions and privacy"
@@ -687,7 +687,7 @@ msgstr ""
 
 #: characters/templates/characters/account.html:26
 #: characters/templates/characters/home.html:25
-#: characters/templates/characters/list.html:11 characters/views.py:403
+#: characters/templates/characters/list.html:11 characters/views.py:406
 msgid "Add a character"
 msgstr ""
 
@@ -752,7 +752,7 @@ msgid "Cancel"
 msgstr ""
 
 #: characters/templates/characters/api_docs.html:3
-#: characters/templates/characters/base.html:80
+#: characters/templates/characters/base.html:81
 msgid "API"
 msgstr ""
 
@@ -829,28 +829,28 @@ msgstr ""
 msgid "Fungal Characters logo: a mushroom outline"
 msgstr ""
 
-#: characters/templates/characters/base.html:29
+#: characters/templates/characters/base.html:30
 msgid "Skip links"
 msgstr ""
 
-#: characters/templates/characters/base.html:30
+#: characters/templates/characters/base.html:31
 msgid "Skip to content"
 msgstr ""
 
-#: characters/templates/characters/base.html:31
+#: characters/templates/characters/base.html:32
 msgid "Accessibility help"
 msgstr ""
 
-#: characters/templates/characters/base.html:40
+#: characters/templates/characters/base.html:41
 msgctxt "navigation"
 msgid "Main"
 msgstr ""
 
-#: characters/templates/characters/base.html:42
+#: characters/templates/characters/base.html:43
 msgid "Home"
 msgstr ""
 
-#: characters/templates/characters/base.html:43
+#: characters/templates/characters/base.html:44
 #: characters/templates/characters/list.html:3
 #: characters/templates/characters/list.html:5
 #: characters/templates/characters/list.html:9
@@ -859,19 +859,19 @@ msgstr ""
 msgid "Characters"
 msgstr ""
 
-#: characters/templates/characters/base.html:44
+#: characters/templates/characters/base.html:45
 #: characters/templates/characters/value_type_list.html:3
 #: characters/templates/characters/value_type_list.html:5
 msgid "Value types"
 msgstr ""
 
-#: characters/templates/characters/base.html:45
+#: characters/templates/characters/base.html:46
 #: characters/templates/characters/source_list.html:3
 #: characters/templates/characters/source_list.html:5
 msgid "Sources"
 msgstr ""
 
-#: characters/templates/characters/base.html:46
+#: characters/templates/characters/base.html:47
 #: characters/templates/characters/downloads.html:3
 #: characters/templates/characters/downloads.html:5
 #: characters/templates/characters/downloads.html:9
@@ -879,78 +879,78 @@ msgstr ""
 msgid "Downloads"
 msgstr ""
 
-#: characters/templates/characters/base.html:47
+#: characters/templates/characters/base.html:48
 #: characters/templates/characters/recent_changes.html:3
 #: characters/templates/characters/recent_changes.html:5
 msgid "Recent changes"
 msgstr ""
 
-#: characters/templates/characters/base.html:48
+#: characters/templates/characters/base.html:49
 #: characters/templates/characters/thanks.html:3
 msgid "Thanks"
 msgstr ""
 
-#: characters/templates/characters/base.html:52
+#: characters/templates/characters/base.html:53
 msgid "language and translation"
 msgstr ""
 
-#: characters/templates/characters/base.html:53
+#: characters/templates/characters/base.html:54
 msgid "Names:"
 msgstr ""
 
-#: characters/templates/characters/base.html:54
 #: characters/templates/characters/base.html:55
+#: characters/templates/characters/base.html:56
 msgctxt "names"
 msgid "Common"
 msgstr ""
 
-#: characters/templates/characters/base.html:54
 #: characters/templates/characters/base.html:55
+#: characters/templates/characters/base.html:56
 msgctxt "names"
 msgid "Scientific"
 msgstr ""
 
-#: characters/templates/characters/base.html:59
+#: characters/templates/characters/base.html:60
 msgid "Admin"
-msgstr ""
-
-#: characters/templates/characters/base.html:62
-#: characters/templates/characters/home.html:25
-msgid "Sign in"
 msgstr ""
 
 #: characters/templates/characters/base.html:63
 #: characters/templates/characters/home.html:25
+msgid "Sign in"
+msgstr ""
+
+#: characters/templates/characters/base.html:64
+#: characters/templates/characters/home.html:25
 msgid "Sign up"
 msgstr ""
 
-#: characters/templates/characters/base.html:77
+#: characters/templates/characters/base.html:78
 #, python-format
 msgid "Character data: Fungal Characters release %(version)s (%(date)s)."
 msgstr ""
 
-#: characters/templates/characters/base.html:77
+#: characters/templates/characters/base.html:78
 msgid "Character data."
 msgstr ""
 
-#: characters/templates/characters/base.html:78
+#: characters/templates/characters/base.html:79
 msgid ""
 "Dedicated to the public domain under <a href=\"https://creativecommons.org/"
 "publicdomain/zero/1.0/\">CC0 1.0</a>: free to use in any way. Code: MIT."
 msgstr ""
 
-#: characters/templates/characters/base.html:79
+#: characters/templates/characters/base.html:80
 #, python-format
 msgid ""
 "Please cite as: Fungal Characters, release %(version)s, https://"
 "fungalcharacters.org/"
 msgstr ""
 
-#: characters/templates/characters/base.html:79
+#: characters/templates/characters/base.html:80
 msgid "Please cite as: Fungal Characters, https://fungalcharacters.org/"
 msgstr ""
 
-#: characters/templates/characters/base.html:80
+#: characters/templates/characters/base.html:81
 msgid "Help translate this site"
 msgstr ""
 
@@ -1079,7 +1079,7 @@ msgstr ""
 msgid "All fungi"
 msgstr ""
 
-#: characters/templates/characters/detail.html:38 characters/views.py:596
+#: characters/templates/characters/detail.html:38 characters/views.py:599
 msgid "Core order"
 msgstr ""
 
@@ -1178,27 +1178,31 @@ msgid ""
 "fungalcharacters.org/"
 msgstr ""
 
-#: characters/templates/characters/downloads.html:15
+#: characters/templates/characters/downloads.html:14
+msgid "Permanent DOI for this release:"
+msgstr ""
+
+#: characters/templates/characters/downloads.html:16
 msgid "No release is available yet."
 msgstr ""
 
-#: characters/templates/characters/downloads.html:21
+#: characters/templates/characters/downloads.html:22
 msgid "Format"
 msgstr ""
 
-#: characters/templates/characters/downloads.html:21
+#: characters/templates/characters/downloads.html:22
 msgid "For"
 msgstr ""
 
-#: characters/templates/characters/downloads.html:21
+#: characters/templates/characters/downloads.html:22
 msgid "File"
 msgstr ""
 
-#: characters/templates/characters/downloads.html:21
+#: characters/templates/characters/downloads.html:22
 msgid "Size"
 msgstr ""
 
-#: characters/templates/characters/downloads.html:33
+#: characters/templates/characters/downloads.html:34
 msgid "One CSV file per database table"
 msgstr ""
 
@@ -1742,7 +1746,7 @@ msgstr ""
 msgid "Published sources anyone can cite or add to."
 msgstr ""
 
-#: characters/templates/characters/source_list.html:7 characters/views.py:494
+#: characters/templates/characters/source_list.html:7 characters/views.py:497
 msgid "Add a source"
 msgstr ""
 
@@ -1881,7 +1885,7 @@ msgid ""
 msgstr ""
 
 #: characters/templates/characters/value_type_list.html:7
-#: characters/views.py:456
+#: characters/views.py:459
 msgid "Add a value type"
 msgstr ""
 
@@ -1983,109 +1987,109 @@ msgstr ""
 msgid "What changed in each release."
 msgstr ""
 
-#: characters/views.py:372
+#: characters/views.py:375
 msgid "A character used to describe fungi."
 msgstr ""
 
-#: characters/views.py:373
+#: characters/views.py:376
 #, python-format
 msgid "Part: %(part)s."
 msgstr ""
 
-#: characters/views.py:374
+#: characters/views.py:377
 #, python-format
 msgid "Value type: %(type)s."
 msgstr ""
 
-#: characters/views.py:430
+#: characters/views.py:433
 #, python-format
 msgid "Add a value option to “%(name)s”"
 msgstr ""
 
-#: characters/views.py:520
+#: characters/views.py:523
 #, python-format
 msgid "Hidden: %(name)s."
 msgstr ""
 
-#: characters/views.py:520
+#: characters/views.py:523
 #, python-format
 msgid "Shown again: %(name)s."
 msgstr ""
 
-#: characters/views.py:589 characters/views.py:595
+#: characters/views.py:592 characters/views.py:598
 msgid "added"
 msgstr ""
 
-#: characters/views.py:589 characters/views.py:595
+#: characters/views.py:592 characters/views.py:598
 msgid "removed"
 msgstr ""
 
-#: characters/views.py:589 characters/views.py:595
+#: characters/views.py:592 characters/views.py:598
 msgid "changed"
 msgstr ""
 
-#: characters/views.py:766
+#: characters/views.py:769
 #, python-format
 msgid "Saved %(n)d translation(s)."
 msgstr ""
 
-#: characters/views.py:766
+#: characters/views.py:769
 msgid "Nothing changed."
 msgstr ""
 
-#: characters/views.py:786
+#: characters/views.py:789
 msgid "Every character has a name in this language. Thank you!"
 msgstr ""
 
-#: characters/views.py:837
+#: characters/views.py:840
 msgid "The admin account cannot be deleted here."
 msgstr ""
 
-#: characters/views.py:844
+#: characters/views.py:847
 msgid ""
 "Your account has been deleted. Your contributions stay on the site, credited "
 "to a former contributor."
 msgstr ""
 
-#: characters/views.py:887
+#: characters/views.py:890
 msgid "Thank you. Your report has been added to the list for review."
 msgstr ""
 
-#: characters/views.py:930
+#: characters/views.py:933
 msgid "Not saying"
 msgstr ""
 
-#: characters/views.py:931
+#: characters/views.py:934
 msgid "Screen reader"
 msgstr ""
 
-#: characters/views.py:932
+#: characters/views.py:935
 msgid "Zoom or magnifier"
 msgstr ""
 
-#: characters/views.py:933
+#: characters/views.py:936
 msgid "Keyboard only"
 msgstr ""
 
-#: characters/views.py:934
+#: characters/views.py:937
 msgid "Voice control"
 msgstr ""
 
-#: characters/views.py:935
+#: characters/views.py:938
 msgid "High contrast or my own colours"
 msgstr ""
 
-#: characters/views.py:936
+#: characters/views.py:939
 msgid "Something else"
 msgstr ""
 
-#: characters/views.py:959
+#: characters/views.py:962
 msgid ""
 "Thank you. Your message has been added to the list the site's administrator "
 "works through."
 msgstr ""
 
-#: characters/views.py:961
+#: characters/views.py:964
 msgid "Please write a few words about the problem or what you need."
 msgstr ""
 

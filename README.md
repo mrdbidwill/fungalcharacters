@@ -9,7 +9,7 @@ Main site (planned): fungalcharacters.org
 Everything here is free to use in any way.
 
 - **Character data** (names, value types, value options, descriptions, comments): [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), public domain dedication. No permission or attribution required.
-  Please cite as: Fungal Characters, release 1.0.0, https://fungalcharacters.org/
+  Please cite as: Fungal Characters, release <version>, https://fungalcharacters.org/ (each release also has a DOI on Zenodo)
 - **Code**: MIT License. See [LICENSE](LICENSE).
 
 ## Project decisions
@@ -18,7 +18,7 @@ See [docs/DECISIONS.md](docs/DECISIONS.md), the authority for this project.
 
 ## Character data
 
-The data is the `fungal_characters` release 1.0.0 (747 characters, 590 value options), loaded exactly as released from [data/releases/1.0.0/](data/releases/1.0.0/). Every character has a permanent code (FCC#####) and every value option one too (FCV#####); codes are never changed or reused. Permanent address: https://fungalcharacters.org/id/FCC00019
+The data is maintained on https://fungalcharacters.org and published as dated releases (latest: 1.1.0, 747 characters, 590 value options) in [data/releases/](data/releases/), on the Downloads page, as GitHub releases and on Zenodo with a DOI. Every character has a permanent code (FCC#####) and every value option one too (FCV#####); codes are never changed or reused. Permanent address: https://fungalcharacters.org/id/FCC00019
 
 ## Translating
 

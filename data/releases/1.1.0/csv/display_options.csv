@@ -1,0 +1,24 @@
+﻿id,name,description,comments,created_at,updated_at
+1,Do Not Display,For admin and support,,2024-06-02T00:05:27,2026-11-25T00:00:00
+2,text_box_number_mm,"A measurement in millimetres, such as cap width.",,2024-06-02T00:05:27,2026-11-27T13:27:51.837702
+3,text_box_number_um,"A measurement in micrometres (µm), usually made under the microscope, such as spore length.",,2024-06-02T00:05:27,2026-11-27T13:27:51.849073
+4,text_box_number,"A number without a unit, such as a count.",,2024-06-02T00:05:27,2026-11-27T13:27:51.861768
+5,text_box_string,Free text.,,2024-06-02T00:05:27,2026-11-27T13:27:51.881716
+6,color,"A color, described in words or with a color chart.",,2024-06-02T00:05:27,2026-11-27T13:27:51.892444
+7,taste,"A taste, recorded as the source describes it.",,2024-06-02T00:05:27,2026-11-27T13:27:51.911661
+8,odor,"An odor, recorded as the source describes it.",,2024-06-02T00:05:27,2026-11-27T13:27:51.921079
+9,radio,"One choice from the character's value options, shown as a list.",,2024-06-02T00:05:27,2026-11-27T13:27:51.953450
+10,drop_down,"One choice from the character's value options, shown as a drop-down menu.",,2024-06-02T00:05:27,2026-11-27T13:27:51.963485
+11,state,A state or province.,,2024-06-02T00:05:27,2026-11-27T13:27:52.030643
+12,country,A country.,,2024-06-02T00:05:27,2026-11-27T13:27:52.044481
+13,texture,"A texture, described in words.",,2024-06-02T00:05:27,2026-11-27T13:27:51.930777
+14,boolean_yes_no,Yes or no.,,2025-10-18T07:55:07,2026-11-27T13:27:51.993187
+15,boolean_true_false,True or false.,,2025-10-18T07:55:07,2026-11-27T13:27:52.003953
+16,boolean_present_absent,Whether something is present or absent.,,2025-10-18T07:55:07,2026-11-27T13:27:52.015893
+17,checkbox,Any number of choices from the character's value options.,,2025-10-18T07:55:07,2026-11-27T13:27:51.974259
+18,switch,On or off.,,2025-10-18T07:55:07,2026-11-27T13:27:51.983701
+19,abundance,"How many or how much, such as few or many.",,2025-10-18T08:39:21,2026-11-27T13:27:51.940979
+20,media,Photo or video upload,,2026-11-25T00:00:00,2026-11-25T00:00:00
+21,dna_sequence,Sequence text or link to DNA tables,,2026-11-25T00:00:00,2026-11-25T00:00:00
+22,color_reaction,"Reagent color reaction: tissue, color before/after, time",,2026-11-25T00:00:00,2026-11-25T00:00:00
+23,text_box_range_um,"Range in µm: min–max, optional mean in parentheses, e.g. 8.0–10.5 (9.2)",,2026-11-25T00:00:00,2026-11-25T00:00:00

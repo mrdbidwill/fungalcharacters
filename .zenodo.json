@@ -1,0 +1,18 @@
+{
+  "title": "Fungal Characters: data release",
+  "upload_type": "dataset",
+  "description": "<p>A free, publicly maintained list of the characters (observable features) used to describe and identify fungi: names, scientific names, definitions, value types and value options, each with a permanent code (FCC##### for characters, FCV##### for value options). Translations included where volunteers have written them.</p><p>Files: Excel, CSV, JSON, SQL for PostgreSQL 16/17 and MySQL 8, SKOS (Turtle) and SDD 1.1 (XML), in data/releases/&lt;version&gt;/. Current data and the read-only API: <a href=\"https://fungalcharacters.org/\">https://fungalcharacters.org/</a>.</p><p>License: the character data is dedicated to the public domain under CC0 1.0; the website code in this archive is MIT-licensed. Please cite as: Fungal Characters, release &lt;version&gt;, https://fungalcharacters.org/</p>",
+  "creators": [
+    {"name": "Johnston, Will", "affiliation": "fungalcharacters.org"},
+    {"name": "Fungal Characters contributors"}
+  ],
+  "contributors": [
+    {"name": "nolo_mode (XDE)", "type": "DataCollector"}
+  ],
+  "license": "cc0-1.0",
+  "language": "eng",
+  "keywords": ["fungi", "mycology", "mushrooms", "morphological characters", "controlled vocabulary", "identification", "biodiversity data"],
+  "related_identifiers": [
+    {"identifier": "https://fungalcharacters.org/", "relation": "isDocumentedBy", "resource_type": "other"}
+  ]
+}

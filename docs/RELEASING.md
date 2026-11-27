@@ -27,7 +27,11 @@ SDD 1.1 (XML), README.md and CHANGELOG.md (with what changed since the previous 
    notes from the CHANGELOG, files: xlsx, json, both sql, ttl, sdd.xml, README.md and the csv folder as a zip:
    `gh release create data-v<version> --repo mrdbidwill/fungalcharacters --target main --title "…" --notes-file notes.md <files>`.
    First one: data-v1.0.0, published 2026-11-26 (https://github.com/mrdbidwill/fungalcharacters/releases/tag/data-v1.0.0).
-6. Update the hard-coded "release 1.0.0" mentions if any remain (README.md, DATA_LICENSE.md).
+6. Zenodo (switched on 2026-11-27) archives the GitHub release automatically and gives it a DOI, using `.zenodo.json`
+   (creators: Johnston, Will and Fungal Characters contributors; contributor: nolo_mode (XDE); CC0 for the data,
+   MIT for code). Find the DOI (Zenodo › Upload or https://zenodo.org/search?q=fungalcharacters), add it to
+   `RELEASE_DOIS` in config/settings.py, deploy, and check the Downloads page shows it.
+7. Update "latest" mentions (README.md).
 
 ## Why the release file in migration 0001 stays 1.0.0
 Migration `characters/0001_initial` loads `data/releases/1.0.0/` into an empty database (a reset or a fresh server).

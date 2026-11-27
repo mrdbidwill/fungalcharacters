@@ -266,7 +266,9 @@ def downloads(request):
             "creator": {"@type": "Organization", "name": "Fungal Characters", "url": f"{SITE_URL}/"},
             "keywords": ["fungi", "mycology", "mushrooms", "morphological characters", "character matrix",
                          "identification", "controlled vocabulary", "biodiversity data"],
-            "sameAs": f"https://github.com/mrdbidwill/fungalcharacters/releases/tag/data-v{release.version}",
+            "sameAs": [f"https://github.com/mrdbidwill/fungalcharacters/releases/tag/data-v{release.version}"]
+                      + ([f"https://doi.org/{settings.RELEASE_DOIS[release.version]}"] if release.version in settings.RELEASE_DOIS else []),
+            **({"identifier": f"https://doi.org/{settings.RELEASE_DOIS[release.version]}"} if release.version in settings.RELEASE_DOIS else {}),
             "about": {"@id": TERM_SET_ID},
             "distribution": [{"@type": "DataDownload", "name": f["title"] if isinstance(f["title"], str) else str(f["title"]),
                               "contentUrl": f"{SITE_URL}/downloads/{release.version}/{f['name']}",
@@ -274,7 +276,8 @@ def downloads(request):
                              for f in main],
         })
     return render(request, "characters/downloads.html", {"release": release, "main": main, "other": other,
-                                                         "structured_data": structured})
+                                                         "structured_data": structured,
+                                                         "doi": settings.RELEASE_DOIS.get(release.version) if release else None})
 
 
 def download_file(request, version, name):
