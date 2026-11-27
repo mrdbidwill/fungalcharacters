@@ -57,7 +57,7 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 ## Data access and licensing
 - Permanent codes (2026-11-25): FCC##### for characters, FCV##### for value options, from release 1.0.0. Never changed or reused; new items get the next number. Permanent web address: https://fungalcharacters.org/id/<code>. A deleted item's address says the code is retired.
 - Downloads in CSV and JSON; open read-only API; dated releases in the GitHub repository.
-- GitHub releases (2026-11-26): each data release is also a GitHub release, tag `data-v<version>`, with its files attached; data-v1.0.0 published.
+- GitHub releases (2026-11-26): each data release is also a GitHub release, tag `data-v<version>`, with its files attached; data-v1.0.0 published. Zenodo integration switched on by Will (2026-11-27): each new GitHub release is archived on Zenodo with a DOI (data-v1.0.0 predates it and has none).
 - Read-only API (2026-11-26): /api/v1/ characters (search, filters, paging), one character with value options and translations, value options, releases; JSON, no key, open to any website (CORS), CC0; hidden items never appear; fair-use limit 120 requests a minute per address (429 beyond). Explained at /api/.
 - Downloads page (2026-11-25): serves the files of the latest release from `data/releases/<version>/` in the repository (Excel, CSV, JSON, SQL for MySQL and PostgreSQL, SKOS, SDD, README, CHANGELOG). The site may hold newer edits than the latest release. The read-only API is not built yet.
 - SDD (TDWG Structured Descriptive Data) export after the core site works.
