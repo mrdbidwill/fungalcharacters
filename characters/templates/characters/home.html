@@ -2,6 +2,10 @@
 {% load i18n %}
 {% block structured_data %}{{ structured_data }}{% endblock %}
 {% block content %}
+<aside class="pointer-card" aria-labelledby="pointer-title">
+  <p><strong id="pointer-title">{% translate "Looking for general mushroom information?" %}</strong>
+  {% blocktranslate trimmed %}This site is a technical list of the features used to describe fungi. For help with mushrooms you find, including getting them DNA-sequenced on the U.S. Gulf Coast, visit <a href="https://gulfcoastfungi.com/">Gulf Coast Fungi (gulfcoastfungi.com)</a>.{% endblocktranslate %} <span aria-hidden="true">→</span></p>
+</aside>
 <div class="prose">
 <h1>Fungal Characters</h1>
 <p class="tagline">{% translate "A free, publicly maintained list of the characters used to describe and identify fungi." %}</p>

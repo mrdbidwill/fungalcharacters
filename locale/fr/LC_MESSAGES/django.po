@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fungalcharacters\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-27 14:35+0000\n"
+"POT-Creation-Date: 2026-11-27 14:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -686,7 +686,7 @@ msgid "None yet."
 msgstr ""
 
 #: characters/templates/characters/account.html:26
-#: characters/templates/characters/home.html:25
+#: characters/templates/characters/home.html:29
 #: characters/templates/characters/list.html:11 characters/views.py:407
 msgid "Add a character"
 msgstr ""
@@ -717,7 +717,7 @@ msgid "Names and definitions you wrote in other languages."
 msgstr ""
 
 #: characters/templates/characters/account.html:34
-#: characters/templates/characters/home.html:30
+#: characters/templates/characters/home.html:34
 #: characters/templates/characters/languages.html:20
 msgid "Help translate"
 msgstr ""
@@ -819,7 +819,7 @@ msgstr ""
 
 #: characters/templates/characters/base.html:8
 #: characters/templates/characters/base.html:14
-#: characters/templates/characters/home.html:7
+#: characters/templates/characters/home.html:11
 msgid ""
 "A free, publicly maintained list of the characters used to describe and "
 "identify fungi."
@@ -875,7 +875,7 @@ msgstr ""
 #: characters/templates/characters/downloads.html:3
 #: characters/templates/characters/downloads.html:5
 #: characters/templates/characters/downloads.html:9
-#: characters/templates/characters/home.html:20
+#: characters/templates/characters/home.html:24
 msgid "Downloads"
 msgstr ""
 
@@ -915,12 +915,12 @@ msgid "Admin"
 msgstr ""
 
 #: characters/templates/characters/base.html:63
-#: characters/templates/characters/home.html:25
+#: characters/templates/characters/home.html:29
 msgid "Sign in"
 msgstr ""
 
 #: characters/templates/characters/base.html:64
-#: characters/templates/characters/home.html:25
+#: characters/templates/characters/home.html:29
 msgid "Sign up"
 msgstr ""
 
@@ -1057,7 +1057,7 @@ msgid "Needs review"
 msgstr ""
 
 #: characters/templates/characters/detail.html:21
-#: characters/templates/characters/home.html:28
+#: characters/templates/characters/home.html:32
 msgid "Translate"
 msgstr ""
 
@@ -1281,7 +1281,19 @@ msgstr ""
 msgid "No visible field changed"
 msgstr ""
 
-#: characters/templates/characters/home.html:8
+#: characters/templates/characters/home.html:6
+msgid "Looking for general mushroom information?"
+msgstr ""
+
+#: characters/templates/characters/home.html:7
+msgid ""
+"This site is a technical list of the features used to describe fungi. For "
+"help with mushrooms you find, including getting them DNA-sequenced on the "
+"U.S. Gulf Coast, visit <a href=\"https://gulfcoastfungi.com/\">Gulf Coast "
+"Fungi (gulfcoastfungi.com)</a>."
+msgstr ""
+
+#: characters/templates/characters/home.html:12
 msgid ""
 "Characters are the features recorded when describing a fungus, such as Cap "
 "Width or Gill Attachment. For each one, this site gives its name and "
@@ -1290,51 +1302,51 @@ msgid ""
 "can help maintain."
 msgstr ""
 
-#: characters/templates/characters/home.html:13
+#: characters/templates/characters/home.html:17
 msgid "View it here"
 msgstr ""
 
-#: characters/templates/characters/home.html:14
+#: characters/templates/characters/home.html:18
 #, python-format
 msgid ""
 "Browse and search all %(n_characters)s characters and %(n_values)s value "
 "options, with their sources and the public history of every change."
 msgstr ""
 
-#: characters/templates/characters/home.html:15
+#: characters/templates/characters/home.html:19
 msgid "Browse characters"
 msgstr ""
 
-#: characters/templates/characters/home.html:18
+#: characters/templates/characters/home.html:22
 msgid "Get the data"
 msgstr ""
 
-#: characters/templates/characters/home.html:19
+#: characters/templates/characters/home.html:23
 msgid ""
 "Download the complete set as a dated release: Excel, CSV, JSON, SQL, SKOS "
 "and SDD. Free to use in any way (CC0)."
 msgstr ""
 
-#: characters/templates/characters/home.html:23
+#: characters/templates/characters/home.html:27
 msgid "Add and edit"
 msgstr ""
 
-#: characters/templates/characters/home.html:24
+#: characters/templates/characters/home.html:28
 msgid ""
 "Sign up and sign in to add characters, value options, value types and "
 "sources, and to edit what you added. Every change is public, showing who "
 "made it and why."
 msgstr ""
 
-#: characters/templates/characters/home.html:29
+#: characters/templates/characters/home.html:33
 msgid "Help bring the site and its characters into your language."
 msgstr ""
 
-#: characters/templates/characters/home.html:35
+#: characters/templates/characters/home.html:39
 msgid "Where people disagree"
 msgstr ""
 
-#: characters/templates/characters/home.html:36
+#: characters/templates/characters/home.html:40
 #, python-format
 msgid ""
 "Mycologists and collectors do not always agree on terms or on values. On "
@@ -1346,7 +1358,7 @@ msgid ""
 "endorses any value on the site."
 msgstr ""
 
-#: characters/templates/characters/home.html:37
+#: characters/templates/characters/home.html:41
 msgid "Open tools and public data to improve the accuracy of fungal data."
 msgstr ""
 

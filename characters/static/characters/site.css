@@ -214,3 +214,8 @@ fieldset.plain label { display: inline; font-weight: 400; }
 /* "More characters for this part" on character pages. */
 .related { columns: 2 16rem; padding-inline-start: 1.2rem; }
 .related li { break-inside: avoid; margin-bottom: .25rem; }
+
+/* Home page: friendly pointer for visitors who wanted general mushroom information (Will, 2026-11-27). */
+.pointer-card { max-width: 42rem; background: var(--stripe); border: 2px solid var(--primary); border-radius: 10px;
+  padding: .75rem 1.1rem; margin: .5rem 0 1rem; }
+.pointer-card p { margin: 0; }

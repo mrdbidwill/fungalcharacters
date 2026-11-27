@@ -898,3 +898,10 @@ class ReleaseDoiTests(TestCase):
         from django.test import override_settings
         with override_settings(RELEASE_DOIS={"1.0.0": "10.5281/zenodo.1"}, DATA_CONCEPT_DOI="10.5281/zenodo.2"):
             self.assertContains(self.client.get("/downloads/"), "https://doi.org/10.5281/zenodo.2")
+
+
+class HomePointerTests(TestCase):
+    def test_pointer_to_gulf_coast_fungi_at_top(self):
+        body = self.client.get("/").content.decode()
+        self.assertIn('href="https://gulfcoastfungi.com/"', body)
+        self.assertLess(body.index("Looking for general mushroom information?"), body.index("<h1>Fungal Characters</h1>"))
