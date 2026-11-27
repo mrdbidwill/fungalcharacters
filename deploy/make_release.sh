@@ -13,6 +13,8 @@ $SSH $HOST "cd /home/fc/app && $COMPOSE exec -T web sh -c 'rm -rf /tmp/release_b
   && rm -rf /home/fc/release_build && $COMPOSE cp web:/tmp/release_build /home/fc/release_build"
 # 2. Copy it into the repository on this Mac.
 rsync -az -e "$SSH" $HOST:/home/fc/release_build/$VERSION/ data/releases/$VERSION/
+# Zenodo shows this version number (otherwise it takes the tag name, data-v<version>).
+python3 -c "import json,sys; p='.zenodo.json'; d=json.load(open(p)); d['version']=sys.argv[1]; open(p,'w').write(json.dumps(d, indent=2, ensure_ascii=False)+'\n')" "$VERSION"
 find data/releases/$VERSION -type f -exec chmod 644 {} +
 echo "Release $VERSION built into data/releases/$VERSION. Next: tests, commit, push, deploy/deploy.sh, then:"
 echo "  $SSH $HOST \"cd /home/fc/app && $COMPOSE exec -T web python manage.py make_release $VERSION --date $DATE --notes '...' --record-only\""

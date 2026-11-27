@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-27 14:27+0000\n"
+"POT-Creation-Date: 2026-11-27 14:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,7 @@ msgid "e.g. mm, µm. Leave blank if none."
 msgstr ""
 
 #: characters/forms.py:162 characters/templates/characters/detail.html:35
-#: characters/views.py:593
+#: characters/views.py:594
 msgid "Applies to"
 msgstr ""
 
@@ -687,7 +687,7 @@ msgstr ""
 
 #: characters/templates/characters/account.html:26
 #: characters/templates/characters/home.html:25
-#: characters/templates/characters/list.html:11 characters/views.py:406
+#: characters/templates/characters/list.html:11 characters/views.py:407
 msgid "Add a character"
 msgstr ""
 
@@ -1079,7 +1079,7 @@ msgstr ""
 msgid "All fungi"
 msgstr ""
 
-#: characters/templates/characters/detail.html:38 characters/views.py:599
+#: characters/templates/characters/detail.html:38 characters/views.py:600
 msgid "Core order"
 msgstr ""
 
@@ -1180,6 +1180,10 @@ msgstr ""
 
 #: characters/templates/characters/downloads.html:14
 msgid "Permanent DOI for this release:"
+msgstr ""
+
+#: characters/templates/characters/downloads.html:14
+msgid "DOI for all releases (always the newest):"
 msgstr ""
 
 #: characters/templates/characters/downloads.html:16
@@ -1746,7 +1750,7 @@ msgstr ""
 msgid "Published sources anyone can cite or add to."
 msgstr ""
 
-#: characters/templates/characters/source_list.html:7 characters/views.py:497
+#: characters/templates/characters/source_list.html:7 characters/views.py:498
 msgid "Add a source"
 msgstr ""
 
@@ -1885,7 +1889,7 @@ msgid ""
 msgstr ""
 
 #: characters/templates/characters/value_type_list.html:7
-#: characters/views.py:459
+#: characters/views.py:460
 msgid "Add a value type"
 msgstr ""
 
@@ -1987,109 +1991,109 @@ msgstr ""
 msgid "What changed in each release."
 msgstr ""
 
-#: characters/views.py:375
-msgid "A character used to describe fungi."
-msgstr ""
-
 #: characters/views.py:376
-#, python-format
-msgid "Part: %(part)s."
+msgid "A character used to describe fungi."
 msgstr ""
 
 #: characters/views.py:377
 #, python-format
+msgid "Part: %(part)s."
+msgstr ""
+
+#: characters/views.py:378
+#, python-format
 msgid "Value type: %(type)s."
 msgstr ""
 
-#: characters/views.py:433
+#: characters/views.py:434
 #, python-format
 msgid "Add a value option to “%(name)s”"
 msgstr ""
 
-#: characters/views.py:523
+#: characters/views.py:524
 #, python-format
 msgid "Hidden: %(name)s."
 msgstr ""
 
-#: characters/views.py:523
+#: characters/views.py:524
 #, python-format
 msgid "Shown again: %(name)s."
 msgstr ""
 
-#: characters/views.py:592 characters/views.py:598
+#: characters/views.py:593 characters/views.py:599
 msgid "added"
 msgstr ""
 
-#: characters/views.py:592 characters/views.py:598
+#: characters/views.py:593 characters/views.py:599
 msgid "removed"
 msgstr ""
 
-#: characters/views.py:592 characters/views.py:598
+#: characters/views.py:593 characters/views.py:599
 msgid "changed"
 msgstr ""
 
-#: characters/views.py:769
+#: characters/views.py:770
 #, python-format
 msgid "Saved %(n)d translation(s)."
 msgstr ""
 
-#: characters/views.py:769
+#: characters/views.py:770
 msgid "Nothing changed."
 msgstr ""
 
-#: characters/views.py:789
+#: characters/views.py:790
 msgid "Every character has a name in this language. Thank you!"
 msgstr ""
 
-#: characters/views.py:840
+#: characters/views.py:841
 msgid "The admin account cannot be deleted here."
 msgstr ""
 
-#: characters/views.py:847
+#: characters/views.py:848
 msgid ""
 "Your account has been deleted. Your contributions stay on the site, credited "
 "to a former contributor."
 msgstr ""
 
-#: characters/views.py:890
+#: characters/views.py:891
 msgid "Thank you. Your report has been added to the list for review."
 msgstr ""
 
-#: characters/views.py:933
+#: characters/views.py:934
 msgid "Not saying"
 msgstr ""
 
-#: characters/views.py:934
+#: characters/views.py:935
 msgid "Screen reader"
 msgstr ""
 
-#: characters/views.py:935
+#: characters/views.py:936
 msgid "Zoom or magnifier"
 msgstr ""
 
-#: characters/views.py:936
+#: characters/views.py:937
 msgid "Keyboard only"
 msgstr ""
 
-#: characters/views.py:937
+#: characters/views.py:938
 msgid "Voice control"
 msgstr ""
 
-#: characters/views.py:938
+#: characters/views.py:939
 msgid "High contrast or my own colours"
 msgstr ""
 
-#: characters/views.py:939
+#: characters/views.py:940
 msgid "Something else"
 msgstr ""
 
-#: characters/views.py:962
+#: characters/views.py:963
 msgid ""
 "Thank you. Your message has been added to the list the site's administrator "
 "works through."
 msgstr ""
 
-#: characters/views.py:964
+#: characters/views.py:965
 msgid "Please write a few words about the problem or what you need."
 msgstr ""
 

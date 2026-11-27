@@ -99,7 +99,9 @@ SITE_URL = "https://fungalcharacters.org"
 # Bing Webmaster Tools ownership check (meta tag on every page; Will, 2026-11-27). Keep: Bing re-checks it.
 BING_SITE_VERIFICATION = "0C05660B5F5CD5F88D6752F9599D14B0"
 # Zenodo DOIs of the data releases (docs/RELEASING.md, step 6): version -> DOI.
-RELEASE_DOIS = {}
+RELEASE_DOIS = {"1.1.0": "10.5281/zenodo.24591614"}
+# Zenodo concept DOI: always resolves to the newest release (cite this for "the dataset").
+DATA_CONCEPT_DOI = "10.5281/zenodo.24591613"
 LOCALE_PATHS = [BASE_DIR / "locale"]
 TIME_ZONE = "UTC"
 USE_I18N = True

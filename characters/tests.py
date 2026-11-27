@@ -893,3 +893,8 @@ class ReleaseDoiTests(TestCase):
             r = self.client.get("/downloads/")
             self.assertContains(r, "https://doi.org/10.5281/zenodo.123")
             self.assertContains(r, '"identifier":"https://doi.org/10.5281/zenodo.123"')
+
+    def test_concept_doi_shown_with_release_doi(self):
+        from django.test import override_settings
+        with override_settings(RELEASE_DOIS={"1.0.0": "10.5281/zenodo.1"}, DATA_CONCEPT_DOI="10.5281/zenodo.2"):
+            self.assertContains(self.client.get("/downloads/"), "https://doi.org/10.5281/zenodo.2")

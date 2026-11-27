@@ -9,7 +9,7 @@ Main site (planned): fungalcharacters.org
 Everything here is free to use in any way.
 
 - **Character data** (names, value types, value options, descriptions, comments): [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), public domain dedication. No permission or attribution required.
-  Please cite as: Fungal Characters, release <version>, https://fungalcharacters.org/ (each release also has a DOI on Zenodo)
+  Please cite as: Johnston, W. & Fungal Characters contributors. Fungal Characters (data release <version>). https://doi.org/10.5281/zenodo.24591613 (all releases; each release also has its own DOI)
 - **Code**: MIT License. See [LICENSE](LICENSE).
 
 ## Project decisions

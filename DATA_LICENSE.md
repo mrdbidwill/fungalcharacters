@@ -6,6 +6,6 @@ You may copy, modify, distribute and use the data, including for commercial purp
 
 Full legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
 
-Please cite as (a request, not a requirement): Fungal Characters, release <version>, https://fungalcharacters.org/ (or the release's DOI on Zenodo)
+Please cite as (a request, not a requirement): Johnston, W. & Fungal Characters contributors. Fungal Characters (data release <version>). https://doi.org/10.5281/zenodo.24591613
 
 The software code in this repository is licensed separately under the MIT License (see LICENSE).

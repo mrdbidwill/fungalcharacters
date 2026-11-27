@@ -277,7 +277,8 @@ def downloads(request):
         })
     return render(request, "characters/downloads.html", {"release": release, "main": main, "other": other,
                                                          "structured_data": structured,
-                                                         "doi": settings.RELEASE_DOIS.get(release.version) if release else None})
+                                                         "doi": settings.RELEASE_DOIS.get(release.version) if release else None,
+                                                         "concept_doi": settings.DATA_CONCEPT_DOI})
 
 
 def download_file(request, version, name):

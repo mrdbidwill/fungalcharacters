@@ -30,7 +30,9 @@ SDD 1.1 (XML), README.md and CHANGELOG.md (with what changed since the previous 
 6. Zenodo (switched on 2026-11-27) archives the GitHub release automatically and gives it a DOI, using `.zenodo.json`
    (creators: Johnston, Will and Fungal Characters contributors; contributor: nolo_mode (XDE); CC0 for the data,
    MIT for code). Find the DOI (Zenodo › Upload or https://zenodo.org/search?q=fungalcharacters), add it to
-   `RELEASE_DOIS` in config/settings.py, deploy, and check the Downloads page shows it.
+   `RELEASE_DOIS` in config/settings.py, deploy, and check the Downloads page shows it. `make_release.sh` writes the
+   version number into `.zenodo.json`, so commit that file with the release. Concept DOI (all releases):
+   10.5281/zenodo.24591613 (`DATA_CONCEPT_DOI`).
 7. Update "latest" mentions (README.md).
 
 ## Why the release file in migration 0001 stays 1.0.0
