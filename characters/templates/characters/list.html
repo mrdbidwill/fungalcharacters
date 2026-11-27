@@ -1,6 +1,10 @@
 {% extends "characters/base.html" %}
 {% load i18n %}
-{% block title %}{% translate "Characters" %} · Fungal Characters{% endblock %}
+{% block title %}{% translate "Characters" %}{% if page.number > 1 %} — {% blocktranslate trimmed with number=page.number %}page {{ number }}{% endblocktranslate %}{% endif %} · Fungal Characters{% endblock %}
+{% block meta_description %}{% blocktranslate trimmed %}All {{ total }} characters used to describe and identify fungi, with scientific names, definitions, value types and value options. Free to use (CC0).{% endblocktranslate %}{% endblock %}
+{% block og_title %}{% translate "Characters" %} — Fungal Characters{% endblock %}
+{% block canonical %}{{ canonical_url }}{% if page.number > 1 and not noindex %}?page={{ page.number }}{% endif %}{% endblock %}
+{% block robots %}{% if noindex %}<meta name="robots" content="noindex, follow">{% endif %}{% endblock %}
 {% block content %}
 <h1>{% translate "Characters" %}</h1>
 <p class="muted">{% translate "Characters are listed in alphabetical order, with names that begin with numbers first. Don't be alarmed by the chemical names: the list is meant to include everything, on the understanding that no one will use every character." %}</p>

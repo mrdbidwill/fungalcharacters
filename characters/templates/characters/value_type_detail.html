@@ -1,5 +1,7 @@
 {% extends "characters/base.html" %}
 {% load i18n charperms %}
+{% block title %}{% blocktranslate trimmed with name=obj.name %}Value type: {{ name }}{% endblocktranslate %} · Fungal Characters{% endblock %}
+{% block meta_description %}{% blocktranslate trimmed with name=obj.name count=characters|length %}Value type “{{ name }}”: how the value of {{ count }} fungal characters is given. {% endblocktranslate %}{{ obj.description|default:"" }}{% endblock %}
 {% block content %}
 <p><a href="{% url 'characters:value_type_list' %}">← {% translate "All value types" %}</a></p>
 <h1>{% blocktranslate trimmed with name=obj.name %}Value type: {{ name }}{% endblocktranslate %}</h1>

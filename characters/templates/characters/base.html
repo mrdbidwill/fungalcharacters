@@ -5,7 +5,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}Fungal Characters{% endblock %}</title>
-<meta name="description" content="{% translate "A free, publicly maintained list of the characters used to describe and identify fungi." %}">
+<meta name="description" content="{% block meta_description %}{% translate "A free, publicly maintained list of the characters used to describe and identify fungi." %}{% endblock %}">
+<link rel="canonical" href="{% block canonical %}{{ canonical_url }}{% endblock %}">
+{% block robots %}{% endblock %}
+<meta property="og:site_name" content="Fungal Characters">
+<meta property="og:type" content="{% block og_type %}website{% endblock %}">
+<meta property="og:title" content="{% block og_title %}Fungal Characters{% endblock %}">
+<meta property="og:description" content="{% block og_description %}{% translate "A free, publicly maintained list of the characters used to describe and identify fungi." %}{% endblock %}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:image" content="https://fungalcharacters.org{% static 'characters/og-image.png' %}">
+<meta property="og:image:width" content="512"><meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="{% translate "Fungal Characters logo: a mushroom outline" %}">
+<meta name="twitter:card" content="summary">
+{% block structured_data %}{% endblock %}
 <link rel="icon" href="{% static 'characters/favicon.ico' %}" sizes="any">
 <link rel="icon" href="{% static 'characters/favicon.svg' %}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{% static 'characters/apple-touch-icon.png' %}">

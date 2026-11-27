@@ -193,9 +193,19 @@ def _delete(request, obj, label, after_url):
 # ---------- home, thanks, downloads ----------
 
 def home(request):
+    from .seo import LICENSE_URL, SITE_URL, TERM_SET_ID, jsonld
+    data = {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebSite", "@id": f"{SITE_URL}/#website", "url": f"{SITE_URL}/", "name": "Fungal Characters",
+         "description": "A free, publicly maintained list of the characters used to describe and identify fungi."},
+        {"@type": "DefinedTermSet", "@id": TERM_SET_ID, "url": f"{SITE_URL}/characters/", "name": "Fungal Characters",
+         "description": "Characters (observable features) used to describe and identify fungi, with definitions, "
+                        "scientific names, value types and value options. Each has a permanent code.",
+         "license": LICENSE_URL, "isAccessibleForFree": True},
+    ]}
     return render(request, "characters/home.html", {
         "n_characters": visible(Character, request.user).count(),
         "n_values": visible(ValueOption, request.user).count(),
+        "structured_data": jsonld(data),
     })
 
 
@@ -239,7 +249,32 @@ def downloads(request):
                     used.add(name)
                     main.append({"name": name, "title": title, "note": note, "size": files[name].stat().st_size})
         other = [{"name": n, "size": files[n].stat().st_size} for n in sorted(files) if n not in used]
-    return render(request, "characters/downloads.html", {"release": release, "main": main, "other": other})
+    structured = None
+    if release:
+        from .seo import LICENSE_URL, SITE_URL, TERM_SET_ID, jsonld
+        formats = {".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", ".json": "application/json",
+                   ".sql": "application/sql", ".ttl": "text/turtle", ".xml": "application/xml", ".csv": "text/csv",
+                   ".md": "text/markdown"}
+        structured = jsonld({
+            "@context": "https://schema.org", "@type": "Dataset", "@id": f"{SITE_URL}/downloads/#dataset",
+            "name": "Fungal Characters",
+            "description": ("A free, publicly maintained list of the characters (observable features) used to describe "
+                            "and identify fungi: names, scientific names, definitions, value types and value options, "
+                            "each with a permanent code (FCC#####, FCV#####). Translations included."),
+            "url": f"{SITE_URL}/downloads/", "version": release.version, "datePublished": release.released_at.isoformat(),
+            "license": LICENSE_URL, "isAccessibleForFree": True,
+            "creator": {"@type": "Organization", "name": "Fungal Characters", "url": f"{SITE_URL}/"},
+            "keywords": ["fungi", "mycology", "mushrooms", "morphological characters", "character matrix",
+                         "identification", "controlled vocabulary", "biodiversity data"],
+            "sameAs": f"https://github.com/mrdbidwill/fungalcharacters/releases/tag/data-v{release.version}",
+            "about": {"@id": TERM_SET_ID},
+            "distribution": [{"@type": "DataDownload", "name": f["title"] if isinstance(f["title"], str) else str(f["title"]),
+                              "contentUrl": f"{SITE_URL}/downloads/{release.version}/{f['name']}",
+                              "encodingFormat": next((t for ext, t in formats.items() if f["name"].endswith(ext)), "application/octet-stream")}
+                             for f in main],
+        })
+    return render(request, "characters/downloads.html", {"release": release, "main": main, "other": other,
+                                                         "structured_data": structured})
 
 
 def download_file(request, version, name):
@@ -282,6 +317,7 @@ def character_list(request):
         c.display_name = translated.get(c.pk) or c.name
         c.name_lang = "en" if lang != "en" and c.pk not in translated else ""
     return render(request, "characters/list.html", {
+        "noindex": bool(q or part or fungus),
         "page": page, "q": q, "part": part, "fungus": fungus,
         "parts": Part.objects.order_by("name"), "fungus_types": FungusType.objects.order_by("name"),
         "total": visible(Character, request.user).count(), "scientific": scientific_mode(request),
@@ -327,7 +363,27 @@ def character_detail(request, c):
         heading_lang = "en" if lang != "en" and not translated_name else ""
     langs_with_name = (Label.objects.filter(labelable_type=CHARACTER_TYPE, labelable_id=c.pk, label_type="name")
                        .exclude(language="en").values_list("language", flat=True))
+    from .seo import LICENSE_URL, TERM_SET_ID, absolute, describe, jsonld
+    part_name = str(c.part) if c.part_id else ""
+    value_type = str(c.display_option) if c.display_option_id else ""
+    meta_description = describe(
+        f"{c.name}" + (f" ({sci})" if sci and sci != c.name else "") + ":",
+        c.description or _("A character used to describe fungi."),
+        (_("Part: %(part)s.") % {"part": part_name}) if part_name else "",
+        (_("Value type: %(type)s.") % {"type": value_type}) if value_type else "")
+    term = {"@context": "https://schema.org", "@type": "DefinedTerm", "@id": absolute(c.get_absolute_url()),
+            "url": absolute(c.get_absolute_url()), "name": c.name, "termCode": c.code,
+            "inDefinedTermSet": TERM_SET_ID, "license": LICENSE_URL}
+    if sci and sci != c.name:
+        term["alternateName"] = sci
+    if c.description:
+        term["description"] = c.description
+    related_qs = (visible(Character, request.user).filter(part_id=c.part_id).exclude(pk=c.pk).order_by("name", "id")
+                  if c.part_id else Character.objects.none())
     return render(request, "characters/detail.html", {
+        "meta_description": meta_description, "structured_data": jsonld(term),
+        "page_title": f"{c.name}" + (f" ({sci})" if sci and sci != c.name else "") + f" — {c.code}",
+        "related": related_qs[:12], "related_total": related_qs.count(),
         "c": c, "scientific": sci, "values": values,
         "heading": heading, "heading_lang": heading_lang, "not_english": lang != "en",
         "translated_name": translated_name, "translated_definition": translated_definition,
@@ -855,6 +911,8 @@ Disallow: /*/edit/
 Disallow: /*/delete/
 Disallow: /*/translate/
 Disallow: /*/values/new/
+
+Sitemap: https://fungalcharacters.org/sitemap.xml
 """
 
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-26 13:57+0000\n"
+"POT-Creation-Date: 2026-11-27 11:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,8 +58,8 @@ msgid ""
 "then tick “Save anyway”."
 msgstr ""
 
-#: characters/forms.py:146 characters/templates/characters/detail.html:23
-#: characters/templates/characters/list.html:27 characters/views.py:31
+#: characters/forms.py:146 characters/templates/characters/detail.html:28
+#: characters/templates/characters/list.html:31 characters/views.py:31
 msgid "Scientific name"
 msgstr ""
 
@@ -67,7 +67,7 @@ msgstr ""
 msgid "e.g. Pileus Width for Cap Width."
 msgstr ""
 
-#: characters/forms.py:148 characters/templates/characters/detail.html:26
+#: characters/forms.py:148 characters/templates/characters/detail.html:31
 msgid "Unit"
 msgstr ""
 
@@ -75,8 +75,8 @@ msgstr ""
 msgid "e.g. mm, µm. Leave blank if none."
 msgstr ""
 
-#: characters/forms.py:152 characters/templates/characters/detail.html:30
-#: characters/views.py:531
+#: characters/forms.py:152 characters/templates/characters/detail.html:35
+#: characters/views.py:587
 msgid "Applies to"
 msgstr ""
 
@@ -86,46 +86,46 @@ msgstr ""
 
 #: characters/forms.py:161
 #: characters/templates/characters/_translate_field.html:2
-#: characters/templates/characters/detail.html:21
-#: characters/templates/characters/list.html:27 characters/views.py:31
+#: characters/templates/characters/detail.html:26
+#: characters/templates/characters/list.html:31 characters/views.py:31
 msgid "Name"
 msgstr ""
 
 #: characters/forms.py:161 characters/forms.py:216
 #: characters/templates/characters/_translate_field.html:2
-#: characters/templates/characters/detail.html:24
-#: characters/templates/characters/detail.html:42 characters/views.py:31
+#: characters/templates/characters/detail.html:29
+#: characters/templates/characters/detail.html:47 characters/views.py:31
 msgid "Definition"
 msgstr ""
 
-#: characters/forms.py:161 characters/templates/characters/detail.html:27
-#: characters/templates/characters/list.html:11
-#: characters/templates/characters/list.html:27
+#: characters/forms.py:161 characters/templates/characters/detail.html:32
+#: characters/templates/characters/list.html:15
+#: characters/templates/characters/list.html:31
 msgid "Part"
 msgstr ""
 
-#: characters/forms.py:162 characters/templates/characters/detail.html:28
+#: characters/forms.py:162 characters/templates/characters/detail.html:33
 msgid "Observation method"
 msgstr ""
 
 #: characters/forms.py:162 characters/forms.py:234
-#: characters/templates/characters/detail.html:29
-#: characters/templates/characters/list.html:27
+#: characters/templates/characters/detail.html:34
+#: characters/templates/characters/list.html:31
 #: characters/templates/characters/value_type_list.html:9
 msgid "Value type"
 msgstr ""
 
 #: characters/forms.py:163 characters/forms.py:216
-#: characters/templates/characters/detail.html:31
-#: characters/templates/characters/detail.html:42
+#: characters/templates/characters/detail.html:36
+#: characters/templates/characters/detail.html:47
 msgid "Source"
 msgstr ""
 
 #: characters/forms.py:163 characters/forms.py:216 characters/forms.py:234
-#: characters/forms.py:244 characters/templates/characters/detail.html:32
-#: characters/templates/characters/detail.html:42
-#: characters/templates/characters/source_detail.html:19
-#: characters/templates/characters/value_type_detail.html:13
+#: characters/forms.py:244 characters/templates/characters/detail.html:37
+#: characters/templates/characters/detail.html:47
+#: characters/templates/characters/source_detail.html:21
+#: characters/templates/characters/value_type_detail.html:15
 msgid "Comments"
 msgstr ""
 
@@ -138,12 +138,12 @@ msgstr ""
 msgid "Notes kept with the character."
 msgstr ""
 
-#: characters/forms.py:216 characters/templates/characters/detail.html:42
+#: characters/forms.py:216 characters/templates/characters/detail.html:47
 msgid "Value option"
 msgstr ""
 
 #: characters/forms.py:234
-#: characters/templates/characters/value_type_detail.html:13
+#: characters/templates/characters/value_type_detail.html:15
 #: characters/templates/characters/value_type_list.html:9
 msgid "Description"
 msgstr ""
@@ -153,23 +153,23 @@ msgid "Title"
 msgstr ""
 
 #: characters/forms.py:243
-#: characters/templates/characters/source_detail.html:15
+#: characters/templates/characters/source_detail.html:17
 #: characters/templates/characters/source_list.html:10
 msgid "Author"
 msgstr ""
 
 #: characters/forms.py:243
-#: characters/templates/characters/source_detail.html:16
+#: characters/templates/characters/source_detail.html:18
 msgid "Reference / URL"
 msgstr ""
 
 #: characters/forms.py:243
-#: characters/templates/characters/source_detail.html:17
+#: characters/templates/characters/source_detail.html:19
 msgid "Item code"
 msgstr ""
 
 #: characters/forms.py:244
-#: characters/templates/characters/source_detail.html:18
+#: characters/templates/characters/source_detail.html:20
 #: characters/templates/characters/source_list.html:10
 msgid "Type"
 msgstr ""
@@ -303,7 +303,7 @@ msgstr ""
 
 #: characters/templates/characters/_account_menu.html:3
 #: characters/templates/characters/account.html:3
-#: characters/templates/characters/base.html:46
+#: characters/templates/characters/base.html:58
 msgid "Your account"
 msgstr ""
 
@@ -331,7 +331,7 @@ msgid "Signed-in devices"
 msgstr ""
 
 #: characters/templates/characters/_account_menu.html:10
-#: characters/templates/characters/base.html:48
+#: characters/templates/characters/base.html:60
 msgid "Sign out"
 msgstr ""
 
@@ -359,7 +359,7 @@ msgstr ""
 
 #: characters/templates/characters/accessibility.html:3
 #: characters/templates/characters/accessibility.html:6
-#: characters/templates/characters/base.html:68
+#: characters/templates/characters/base.html:80
 msgid "Accessibility"
 msgstr ""
 
@@ -636,7 +636,7 @@ msgid "Your data"
 msgstr ""
 
 #: characters/templates/characters/account.html:20
-#: characters/templates/characters/base.html:68
+#: characters/templates/characters/base.html:80
 #: characters/templates/characters/privacy.html:3
 #: characters/templates/characters/privacy.html:6
 msgid "Contributions and privacy"
@@ -671,18 +671,18 @@ msgstr ""
 #: characters/templates/characters/account.html:30
 #: characters/templates/characters/account.html:32
 #: characters/templates/characters/account.html:34
-#: characters/templates/characters/detail.html:34
+#: characters/templates/characters/detail.html:39
 msgid "None yet."
 msgstr ""
 
 #: characters/templates/characters/account.html:26
-#: characters/templates/characters/home.html:24
-#: characters/templates/characters/list.html:7 characters/views.py:346
+#: characters/templates/characters/home.html:25
+#: characters/templates/characters/list.html:11 characters/views.py:402
 msgid "Add a character"
 msgstr ""
 
 #: characters/templates/characters/account.html:27
-#: characters/templates/characters/detail.html:37
+#: characters/templates/characters/detail.html:42
 #, python-format
 msgid "Value options (%(count)s)"
 msgstr ""
@@ -707,7 +707,7 @@ msgid "Names and definitions you wrote in other languages."
 msgstr ""
 
 #: characters/templates/characters/account.html:34
-#: characters/templates/characters/home.html:29
+#: characters/templates/characters/home.html:30
 #: characters/templates/characters/languages.html:20
 msgid "Help translate"
 msgstr ""
@@ -742,7 +742,7 @@ msgid "Cancel"
 msgstr ""
 
 #: characters/templates/characters/api_docs.html:3
-#: characters/templates/characters/base.html:68
+#: characters/templates/characters/base.html:80
 msgid "API"
 msgstr ""
 
@@ -808,132 +808,139 @@ msgid ""
 msgstr ""
 
 #: characters/templates/characters/base.html:8
-#: characters/templates/characters/home.html:6
+#: characters/templates/characters/base.html:14
+#: characters/templates/characters/home.html:7
 msgid ""
 "A free, publicly maintained list of the characters used to describe and "
 "identify fungi."
 msgstr ""
 
-#: characters/templates/characters/base.html:17
+#: characters/templates/characters/base.html:18
+msgid "Fungal Characters logo: a mushroom outline"
+msgstr ""
+
+#: characters/templates/characters/base.html:29
 msgid "Skip links"
 msgstr ""
 
-#: characters/templates/characters/base.html:18
+#: characters/templates/characters/base.html:30
 msgid "Skip to content"
 msgstr ""
 
-#: characters/templates/characters/base.html:19
+#: characters/templates/characters/base.html:31
 msgid "Accessibility help"
 msgstr ""
 
-#: characters/templates/characters/base.html:28
+#: characters/templates/characters/base.html:40
 msgctxt "navigation"
 msgid "Main"
 msgstr ""
 
-#: characters/templates/characters/base.html:30
+#: characters/templates/characters/base.html:42
 msgid "Home"
 msgstr ""
 
-#: characters/templates/characters/base.html:31
+#: characters/templates/characters/base.html:43
 #: characters/templates/characters/list.html:3
 #: characters/templates/characters/list.html:5
+#: characters/templates/characters/list.html:9
 #: characters/templates/characters/source_list.html:10
 #: characters/templates/characters/value_type_list.html:9
 msgid "Characters"
 msgstr ""
 
-#: characters/templates/characters/base.html:32
+#: characters/templates/characters/base.html:44
 #: characters/templates/characters/value_type_list.html:3
 #: characters/templates/characters/value_type_list.html:5
 msgid "Value types"
 msgstr ""
 
-#: characters/templates/characters/base.html:33
+#: characters/templates/characters/base.html:45
 #: characters/templates/characters/source_list.html:3
 #: characters/templates/characters/source_list.html:5
 msgid "Sources"
 msgstr ""
 
-#: characters/templates/characters/base.html:34
+#: characters/templates/characters/base.html:46
 #: characters/templates/characters/downloads.html:3
-#: characters/templates/characters/downloads.html:6
-#: characters/templates/characters/home.html:19
+#: characters/templates/characters/downloads.html:5
+#: characters/templates/characters/downloads.html:9
+#: characters/templates/characters/home.html:20
 msgid "Downloads"
 msgstr ""
 
-#: characters/templates/characters/base.html:35
+#: characters/templates/characters/base.html:47
 #: characters/templates/characters/recent_changes.html:3
 #: characters/templates/characters/recent_changes.html:5
 msgid "Recent changes"
 msgstr ""
 
-#: characters/templates/characters/base.html:36
+#: characters/templates/characters/base.html:48
 #: characters/templates/characters/thanks.html:3
 msgid "Thanks"
 msgstr ""
 
-#: characters/templates/characters/base.html:40
+#: characters/templates/characters/base.html:52
 msgid "language and translation"
 msgstr ""
 
-#: characters/templates/characters/base.html:41
+#: characters/templates/characters/base.html:53
 msgid "Names:"
 msgstr ""
 
-#: characters/templates/characters/base.html:42
-#: characters/templates/characters/base.html:43
+#: characters/templates/characters/base.html:54
+#: characters/templates/characters/base.html:55
 msgctxt "names"
 msgid "Common"
 msgstr ""
 
-#: characters/templates/characters/base.html:42
-#: characters/templates/characters/base.html:43
+#: characters/templates/characters/base.html:54
+#: characters/templates/characters/base.html:55
 msgctxt "names"
 msgid "Scientific"
 msgstr ""
 
-#: characters/templates/characters/base.html:47
+#: characters/templates/characters/base.html:59
 msgid "Admin"
 msgstr ""
 
-#: characters/templates/characters/base.html:50
-#: characters/templates/characters/home.html:24
+#: characters/templates/characters/base.html:62
+#: characters/templates/characters/home.html:25
 msgid "Sign in"
 msgstr ""
 
-#: characters/templates/characters/base.html:51
-#: characters/templates/characters/home.html:24
+#: characters/templates/characters/base.html:63
+#: characters/templates/characters/home.html:25
 msgid "Sign up"
 msgstr ""
 
-#: characters/templates/characters/base.html:65
+#: characters/templates/characters/base.html:77
 #, python-format
 msgid "Character data: Fungal Characters release %(version)s (%(date)s)."
 msgstr ""
 
-#: characters/templates/characters/base.html:65
+#: characters/templates/characters/base.html:77
 msgid "Character data."
 msgstr ""
 
-#: characters/templates/characters/base.html:66
+#: characters/templates/characters/base.html:78
 msgid ""
 "Dedicated to the public domain under <a href=\"https://creativecommons.org/"
 "publicdomain/zero/1.0/\">CC0 1.0</a>: free to use in any way. Code: MIT."
 msgstr ""
 
-#: characters/templates/characters/base.html:67
+#: characters/templates/characters/base.html:79
 #, python-format
 msgid ""
 "Please cite as: Fungal Characters, release %(version)s, https://"
 "fungalcharacters.org/"
 msgstr ""
 
-#: characters/templates/characters/base.html:67
+#: characters/templates/characters/base.html:79
 msgid "Please cite as: Fungal Characters, https://fungalcharacters.org/"
 msgstr ""
 
-#: characters/templates/characters/base.html:68
+#: characters/templates/characters/base.html:80
 msgid "Help translate this site"
 msgstr ""
 
@@ -965,10 +972,10 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: characters/templates/characters/confirm_delete.html:15
-#: characters/templates/characters/detail.html:12
-#: characters/templates/characters/detail.html:51
-#: characters/templates/characters/source_detail.html:8
-#: characters/templates/characters/value_type_detail.html:8
+#: characters/templates/characters/detail.html:17
+#: characters/templates/characters/detail.html:56
+#: characters/templates/characters/source_detail.html:10
+#: characters/templates/characters/value_type_detail.html:10
 msgid "Delete"
 msgstr ""
 
@@ -984,151 +991,167 @@ msgid ""
 "credited to “former-contributor” and a number instead of your username."
 msgstr ""
 
-#: characters/templates/characters/detail.html:5
+#: characters/templates/characters/detail.html:10
 msgid "All characters"
 msgstr ""
 
-#: characters/templates/characters/detail.html:8
+#: characters/templates/characters/detail.html:13
 msgid "permanent address"
 msgstr ""
 
-#: characters/templates/characters/detail.html:9
-#: characters/templates/characters/source_detail.html:6
-#: characters/templates/characters/value_type_detail.html:6
+#: characters/templates/characters/detail.html:14
+#: characters/templates/characters/source_detail.html:8
+#: characters/templates/characters/value_type_detail.html:8
 #, python-format
 msgid "added by %(created_by_name)s"
 msgstr ""
 
-#: characters/templates/characters/detail.html:9
-#: characters/templates/characters/source_detail.html:6
-#: characters/templates/characters/value_type_detail.html:6
+#: characters/templates/characters/detail.html:14
+#: characters/templates/characters/source_detail.html:8
+#: characters/templates/characters/value_type_detail.html:8
 #, python-format
 msgid "from release %(version)s"
 msgstr ""
 
-#: characters/templates/characters/detail.html:10
+#: characters/templates/characters/detail.html:15
 #, python-format
 msgid "updated %(date)s"
 msgstr ""
 
-#: characters/templates/characters/detail.html:10
-#: characters/templates/characters/source_detail.html:6
-#: characters/templates/characters/value_type_detail.html:6
+#: characters/templates/characters/detail.html:15
+#: characters/templates/characters/source_detail.html:8
+#: characters/templates/characters/value_type_detail.html:8
 msgid "HIDDEN"
 msgstr ""
 
-#: characters/templates/characters/detail.html:12
-#: characters/templates/characters/detail.html:51
-#: characters/templates/characters/source_detail.html:8
-#: characters/templates/characters/value_type_detail.html:8
+#: characters/templates/characters/detail.html:17
+#: characters/templates/characters/detail.html:56
+#: characters/templates/characters/source_detail.html:10
+#: characters/templates/characters/value_type_detail.html:10
 msgid "Edit"
 msgstr ""
 
-#: characters/templates/characters/detail.html:14
+#: characters/templates/characters/detail.html:19
 #: characters/templates/characters/retired.html:6
-#: characters/templates/characters/source_detail.html:10
-#: characters/templates/characters/value_type_detail.html:10
+#: characters/templates/characters/source_detail.html:12
+#: characters/templates/characters/value_type_detail.html:12
 msgid "Edit history"
 msgstr ""
 
-#: characters/templates/characters/detail.html:15
+#: characters/templates/characters/detail.html:20
 #: characters/templates/characters/review_request.html:3
 #: characters/templates/characters/review_request.html:6
-#: characters/templates/characters/source_detail.html:11
-#: characters/templates/characters/value_type_detail.html:11
+#: characters/templates/characters/source_detail.html:13
+#: characters/templates/characters/value_type_detail.html:13
 msgid "Needs review"
 msgstr ""
 
-#: characters/templates/characters/detail.html:16
-#: characters/templates/characters/home.html:27
+#: characters/templates/characters/detail.html:21
+#: characters/templates/characters/home.html:28
 msgid "Translate"
 msgstr ""
 
-#: characters/templates/characters/detail.html:19
+#: characters/templates/characters/detail.html:24
 msgid "Marked as needing review."
 msgstr ""
 
-#: characters/templates/characters/detail.html:22
+#: characters/templates/characters/detail.html:27
 #, python-format
 msgid "Name in %(language)s"
 msgstr ""
 
-#: characters/templates/characters/detail.html:25
+#: characters/templates/characters/detail.html:30
 #, python-format
 msgid "Definition in %(language)s"
 msgstr ""
 
-#: characters/templates/characters/detail.html:30
+#: characters/templates/characters/detail.html:35
 msgid "All fungi"
 msgstr ""
 
-#: characters/templates/characters/detail.html:33 characters/views.py:537
+#: characters/templates/characters/detail.html:38 characters/views.py:593
 msgid "Core order"
 msgstr ""
 
-#: characters/templates/characters/detail.html:34
+#: characters/templates/characters/detail.html:39
 msgid "Translations"
 msgstr ""
 
-#: characters/templates/characters/detail.html:38
+#: characters/templates/characters/detail.html:43
 msgid "Add a value option"
 msgstr ""
 
-#: characters/templates/characters/detail.html:42
-#: characters/templates/characters/list.html:27
+#: characters/templates/characters/detail.html:47
+#: characters/templates/characters/list.html:31
 msgid "Code"
 msgstr ""
 
-#: characters/templates/characters/detail.html:42
-#: characters/templates/characters/list.html:27
+#: characters/templates/characters/detail.html:47
+#: characters/templates/characters/list.html:31
 #: characters/templates/characters/source_list.html:10
 #: characters/templates/characters/value_type_list.html:9
 msgid "By"
 msgstr ""
 
-#: characters/templates/characters/detail.html:42
+#: characters/templates/characters/detail.html:47
 #: characters/templates/characters/languages.html:32
 msgid "Actions"
 msgstr ""
 
-#: characters/templates/characters/detail.html:47
+#: characters/templates/characters/detail.html:52
 msgid "hidden"
 msgstr ""
 
-#: characters/templates/characters/detail.html:49
-#: characters/templates/characters/list.html:38
+#: characters/templates/characters/detail.html:54
+#: characters/templates/characters/list.html:42
 #: characters/templates/characters/source_list.html:11
 #: characters/templates/characters/value_type_list.html:10
 msgid "release"
 msgstr ""
 
-#: characters/templates/characters/detail.html:53
+#: characters/templates/characters/detail.html:58
 msgid "History"
 msgstr ""
 
-#: characters/templates/characters/detail.html:61
-#: characters/templates/characters/source_detail.html:22
-#: characters/templates/characters/value_type_detail.html:15
+#: characters/templates/characters/detail.html:66
+#: characters/templates/characters/source_detail.html:24
+#: characters/templates/characters/value_type_detail.html:17
 msgid "None."
+msgstr ""
+
+#: characters/templates/characters/detail.html:70
+#, python-format
+msgid "More characters for %(part)s"
+msgstr ""
+
+#: characters/templates/characters/detail.html:72
+#, python-format
+msgid "All %(n)s other characters for %(part)s"
 msgstr ""
 
 #: characters/templates/characters/documents.html:7
 msgid "Pages kept here for their authors, shown exactly as they sent them."
 msgstr ""
 
-#: characters/templates/characters/downloads.html:8
+#: characters/templates/characters/downloads.html:4
+msgid ""
+"Download the complete Fungal Characters data set: Excel, CSV, JSON, SQL, "
+"SKOS and SDD. Free to use in any way (CC0)."
+msgstr ""
+
+#: characters/templates/characters/downloads.html:11
 #, python-format
 msgid ""
 "Release %(version)s, %(date)s. The complete data set in several formats."
 msgstr ""
 
-#: characters/templates/characters/downloads.html:9
+#: characters/templates/characters/downloads.html:12
 msgid ""
 "A release is a dated snapshot. The pages on this site may already include "
 "newer additions and edits, which will appear in the next release."
 msgstr ""
 
-#: characters/templates/characters/downloads.html:9
+#: characters/templates/characters/downloads.html:12
 #, python-format
 msgid ""
 "Programs can read the current data through the <a href=\"%(api_url)s\">read-"
@@ -1136,7 +1159,7 @@ msgid ""
 "mrdbidwill/fungalcharacters/releases\">GitHub</a>."
 msgstr ""
 
-#: characters/templates/characters/downloads.html:10
+#: characters/templates/characters/downloads.html:13
 #, python-format
 msgid ""
 "Free to use in any way: dedicated to the public domain under <a "
@@ -1145,27 +1168,27 @@ msgid ""
 "fungalcharacters.org/"
 msgstr ""
 
-#: characters/templates/characters/downloads.html:12
+#: characters/templates/characters/downloads.html:15
 msgid "No release is available yet."
 msgstr ""
 
-#: characters/templates/characters/downloads.html:18
+#: characters/templates/characters/downloads.html:21
 msgid "Format"
 msgstr ""
 
-#: characters/templates/characters/downloads.html:18
+#: characters/templates/characters/downloads.html:21
 msgid "For"
 msgstr ""
 
-#: characters/templates/characters/downloads.html:18
+#: characters/templates/characters/downloads.html:21
 msgid "File"
 msgstr ""
 
-#: characters/templates/characters/downloads.html:18
+#: characters/templates/characters/downloads.html:21
 msgid "Size"
 msgstr ""
 
-#: characters/templates/characters/downloads.html:30
+#: characters/templates/characters/downloads.html:33
 msgid "One CSV file per database table"
 msgstr ""
 
@@ -1240,7 +1263,7 @@ msgstr ""
 msgid "No visible field changed"
 msgstr ""
 
-#: characters/templates/characters/home.html:7
+#: characters/templates/characters/home.html:8
 msgid ""
 "Characters are the features recorded when describing a fungus, such as Cap "
 "Width or Gill Attachment. For each one, this site gives its name and "
@@ -1249,51 +1272,51 @@ msgid ""
 "can help maintain."
 msgstr ""
 
-#: characters/templates/characters/home.html:12
+#: characters/templates/characters/home.html:13
 msgid "View it here"
 msgstr ""
 
-#: characters/templates/characters/home.html:13
+#: characters/templates/characters/home.html:14
 #, python-format
 msgid ""
 "Browse and search all %(n_characters)s characters and %(n_values)s value "
 "options, with their sources and the public history of every change."
 msgstr ""
 
-#: characters/templates/characters/home.html:14
+#: characters/templates/characters/home.html:15
 msgid "Browse characters"
 msgstr ""
 
-#: characters/templates/characters/home.html:17
+#: characters/templates/characters/home.html:18
 msgid "Get the data"
 msgstr ""
 
-#: characters/templates/characters/home.html:18
+#: characters/templates/characters/home.html:19
 msgid ""
 "Download the complete set as a dated release: Excel, CSV, JSON, SQL, SKOS "
 "and SDD. Free to use in any way (CC0)."
 msgstr ""
 
-#: characters/templates/characters/home.html:22
+#: characters/templates/characters/home.html:23
 msgid "Add and edit"
 msgstr ""
 
-#: characters/templates/characters/home.html:23
+#: characters/templates/characters/home.html:24
 msgid ""
 "Sign up and sign in to add characters, value options, value types and "
 "sources, and to edit what you added. Every change is public, showing who "
 "made it and why."
 msgstr ""
 
-#: characters/templates/characters/home.html:28
+#: characters/templates/characters/home.html:29
 msgid "Help bring the site and its characters into your language."
 msgstr ""
 
-#: characters/templates/characters/home.html:34
+#: characters/templates/characters/home.html:35
 msgid "Where people disagree"
 msgstr ""
 
-#: characters/templates/characters/home.html:35
+#: characters/templates/characters/home.html:36
 #, python-format
 msgid ""
 "Mycologists and collectors do not always agree on terms or on values. On "
@@ -1305,7 +1328,7 @@ msgid ""
 "endorses any value on the site."
 msgstr ""
 
-#: characters/templates/characters/home.html:36
+#: characters/templates/characters/home.html:37
 msgid "Open tools and public data to improve the accuracy of fungal data."
 msgstr ""
 
@@ -1404,7 +1427,20 @@ msgid ""
 "untranslated text stays in English. Choose English above to switch back."
 msgstr ""
 
-#: characters/templates/characters/list.html:6
+#: characters/templates/characters/list.html:3
+#, python-format
+msgid "page %(number)s"
+msgstr ""
+
+#: characters/templates/characters/list.html:4
+#, python-format
+msgid ""
+"All %(total)s characters used to describe and identify fungi, with "
+"scientific names, definitions, value types and value options. Free to use "
+"(CC0)."
+msgstr ""
+
+#: characters/templates/characters/list.html:10
 msgid ""
 "Characters are listed in alphabetical order, with names that begin with "
 "numbers first. Don't be alarmed by the chemical names: the list is meant to "
@@ -1412,62 +1448,62 @@ msgid ""
 "character."
 msgstr ""
 
-#: characters/templates/characters/list.html:9
+#: characters/templates/characters/list.html:13
 msgid "Search characters"
 msgstr ""
 
-#: characters/templates/characters/list.html:10
+#: characters/templates/characters/list.html:14
 msgid "Search name, scientific name, definition or code"
 msgstr ""
 
-#: characters/templates/characters/list.html:13
+#: characters/templates/characters/list.html:17
 msgid "All parts"
 msgstr ""
 
-#: characters/templates/characters/list.html:16
+#: characters/templates/characters/list.html:20
 msgid "Fungus type"
 msgstr ""
 
-#: characters/templates/characters/list.html:18
+#: characters/templates/characters/list.html:22
 msgid "Any fungus type"
 msgstr ""
 
-#: characters/templates/characters/list.html:19
+#: characters/templates/characters/list.html:23
 msgid "Applies to all fungi"
 msgstr ""
 
-#: characters/templates/characters/list.html:22
+#: characters/templates/characters/list.html:26
 msgid "Filter"
 msgstr ""
 
-#: characters/templates/characters/list.html:24
+#: characters/templates/characters/list.html:28
 #, python-format
 msgid "Showing %(shown)s of %(total)s characters."
 msgstr ""
 
-#: characters/templates/characters/list.html:27
+#: characters/templates/characters/list.html:31
 msgid "Observation"
 msgstr ""
 
-#: characters/templates/characters/list.html:27
+#: characters/templates/characters/list.html:31
 #: characters/templates/characters/translate.html:23
 msgid "Value options"
 msgstr ""
 
-#: characters/templates/characters/list.html:41
+#: characters/templates/characters/list.html:45
 msgid "No characters found."
 msgstr ""
 
-#: characters/templates/characters/list.html:48
+#: characters/templates/characters/list.html:52
 msgid "Previous"
 msgstr ""
 
-#: characters/templates/characters/list.html:49
+#: characters/templates/characters/list.html:53
 #, python-format
 msgid "Page %(number)s of %(pages)s"
 msgstr ""
 
-#: characters/templates/characters/list.html:50
+#: characters/templates/characters/list.html:54
 msgid "Next"
 msgstr ""
 
@@ -1679,10 +1715,15 @@ msgid "Send report"
 msgstr ""
 
 #: characters/templates/characters/source_detail.html:4
+#, python-format
+msgid "“%(title)s”, a published source cited by %(count)s fungal characters."
+msgstr ""
+
+#: characters/templates/characters/source_detail.html:6
 msgid "All sources"
 msgstr ""
 
-#: characters/templates/characters/source_detail.html:21
+#: characters/templates/characters/source_detail.html:23
 #, python-format
 msgid "Characters citing this source (%(count)s)"
 msgstr ""
@@ -1691,7 +1732,7 @@ msgstr ""
 msgid "Published sources anyone can cite or add to."
 msgstr ""
 
-#: characters/templates/characters/source_list.html:7 characters/views.py:435
+#: characters/templates/characters/source_list.html:7 characters/views.py:491
 msgid "Add a source"
 msgstr ""
 
@@ -1798,16 +1839,23 @@ msgstr ""
 msgid "Save and go to the next character"
 msgstr ""
 
-#: characters/templates/characters/value_type_detail.html:4
-msgid "All value types"
-msgstr ""
-
-#: characters/templates/characters/value_type_detail.html:5
+#: characters/templates/characters/value_type_detail.html:3
+#: characters/templates/characters/value_type_detail.html:7
 #, python-format
 msgid "Value type: %(name)s"
 msgstr ""
 
-#: characters/templates/characters/value_type_detail.html:14
+#: characters/templates/characters/value_type_detail.html:4
+#, python-format
+msgid ""
+"Value type “%(name)s”: how the value of %(count)s fungal characters is given."
+msgstr ""
+
+#: characters/templates/characters/value_type_detail.html:6
+msgid "All value types"
+msgstr ""
+
+#: characters/templates/characters/value_type_detail.html:16
 #, python-format
 msgid "Characters with this value type (%(count)s)"
 msgstr ""
@@ -1819,7 +1867,7 @@ msgid ""
 msgstr ""
 
 #: characters/templates/characters/value_type_list.html:7
-#: characters/views.py:397
+#: characters/views.py:453
 msgid "Add a value type"
 msgstr ""
 
@@ -1845,171 +1893,185 @@ msgstr ""
 msgid "Deleted %(kind)s “%(name)s”."
 msgstr ""
 
-#: characters/views.py:209
+#: characters/views.py:219
 msgid "Excel workbook"
 msgstr ""
 
-#: characters/views.py:209
+#: characters/views.py:219
 msgid "Browse in Excel or Numbers."
 msgstr ""
 
-#: characters/views.py:210
+#: characters/views.py:220
 msgid "CSV: characters"
 msgstr ""
 
-#: characters/views.py:210
+#: characters/views.py:220
 msgid "One row per character."
 msgstr ""
 
-#: characters/views.py:211 characters/views.py:212
+#: characters/views.py:221 characters/views.py:222
 msgid "CSV: value options"
 msgstr ""
 
-#: characters/views.py:211
+#: characters/views.py:221
 msgid "One row per value option."
 msgstr ""
 
-#: characters/views.py:212
+#: characters/views.py:222
 msgid "One row per value option (called “values” in this release)."
 msgstr ""
 
-#: characters/views.py:213
+#: characters/views.py:223
 msgid "For programmers."
 msgstr ""
 
-#: characters/views.py:214
+#: characters/views.py:224
 msgid "SQL for PostgreSQL 16/17"
 msgstr ""
 
-#: characters/views.py:214 characters/views.py:215
+#: characters/views.py:224 characters/views.py:225
 msgid "Creates the tables and loads all data."
 msgstr ""
 
-#: characters/views.py:215
+#: characters/views.py:225
 msgid "SQL for MySQL 8"
 msgstr ""
 
-#: characters/views.py:216
+#: characters/views.py:226
 msgid "SKOS vocabulary (Turtle)"
 msgstr ""
 
-#: characters/views.py:216
+#: characters/views.py:226
 msgid "For vocabulary tools (W3C SKOS)."
 msgstr ""
 
-#: characters/views.py:217
+#: characters/views.py:227
 msgid "SDD 1.1 (TDWG XML)"
 msgstr ""
 
-#: characters/views.py:217
+#: characters/views.py:227
 msgid "For identification-key tools."
 msgstr ""
 
-#: characters/views.py:218
+#: characters/views.py:228
 msgid "Release notes"
 msgstr ""
 
-#: characters/views.py:218
+#: characters/views.py:228
 msgid "What is in the release, and how to cite it."
 msgstr ""
 
-#: characters/views.py:219
+#: characters/views.py:229
 msgid "Changelog"
 msgstr ""
 
-#: characters/views.py:219
+#: characters/views.py:229
 msgid "What changed in each release."
+msgstr ""
+
+#: characters/views.py:371
+msgid "A character used to describe fungi."
+msgstr ""
+
+#: characters/views.py:372
+#, python-format
+msgid "Part: %(part)s."
 msgstr ""
 
 #: characters/views.py:373
 #, python-format
+msgid "Value type: %(type)s."
+msgstr ""
+
+#: characters/views.py:429
+#, python-format
 msgid "Add a value option to “%(name)s”"
 msgstr ""
 
-#: characters/views.py:461
+#: characters/views.py:517
 #, python-format
 msgid "Hidden: %(name)s."
 msgstr ""
 
-#: characters/views.py:461
+#: characters/views.py:517
 #, python-format
 msgid "Shown again: %(name)s."
 msgstr ""
 
-#: characters/views.py:530 characters/views.py:536
+#: characters/views.py:586 characters/views.py:592
 msgid "added"
 msgstr ""
 
-#: characters/views.py:530 characters/views.py:536
+#: characters/views.py:586 characters/views.py:592
 msgid "removed"
 msgstr ""
 
-#: characters/views.py:530 characters/views.py:536
+#: characters/views.py:586 characters/views.py:592
 msgid "changed"
 msgstr ""
 
-#: characters/views.py:707
+#: characters/views.py:763
 #, python-format
 msgid "Saved %(n)d translation(s)."
 msgstr ""
 
-#: characters/views.py:707
+#: characters/views.py:763
 msgid "Nothing changed."
 msgstr ""
 
-#: characters/views.py:727
+#: characters/views.py:783
 msgid "Every character has a name in this language. Thank you!"
 msgstr ""
 
-#: characters/views.py:778
+#: characters/views.py:834
 msgid "The admin account cannot be deleted here."
 msgstr ""
 
-#: characters/views.py:785
+#: characters/views.py:841
 msgid ""
 "Your account has been deleted. Your contributions stay on the site, credited "
 "to a former contributor."
 msgstr ""
 
-#: characters/views.py:828
+#: characters/views.py:884
 msgid "Thank you. Your report has been added to the list for review."
 msgstr ""
 
-#: characters/views.py:869
+#: characters/views.py:927
 msgid "Not saying"
 msgstr ""
 
-#: characters/views.py:870
+#: characters/views.py:928
 msgid "Screen reader"
 msgstr ""
 
-#: characters/views.py:871
+#: characters/views.py:929
 msgid "Zoom or magnifier"
 msgstr ""
 
-#: characters/views.py:872
+#: characters/views.py:930
 msgid "Keyboard only"
 msgstr ""
 
-#: characters/views.py:873
+#: characters/views.py:931
 msgid "Voice control"
 msgstr ""
 
-#: characters/views.py:874
+#: characters/views.py:932
 msgid "High contrast or my own colours"
 msgstr ""
 
-#: characters/views.py:875
+#: characters/views.py:933
 msgid "Something else"
 msgstr ""
 
-#: characters/views.py:898
+#: characters/views.py:956
 msgid ""
 "Thank you. Your message has been added to the list the site's administrator "
 "works through."
 msgstr ""
 
-#: characters/views.py:900
+#: characters/views.py:958
 msgid "Please write a few words about the problem or what you need."
 msgstr ""
 

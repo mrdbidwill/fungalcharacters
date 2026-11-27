@@ -90,6 +90,11 @@ Mushroom Character Vocabulary and Revive MRDBID. Those two projects are removed 
 - Colours: forest green (#1F4D2E) header and buttons, warm off-white background, near-black text.
 - Logo and browser icon: a plain mushroom outline (domed cap, short stem); the icon is cream on a dark-green rounded square.
 
+## Search engines (Will, 2026-11-27)
+- Traffic should come from being useful and honest; no-cost, honest search-engine work only (no keyword stuffing, paid links or filler pages).
+- Built: sitemap.xml (pages, characters, value types, sources, documents; hidden items left out) named in robots.txt; per-page titles and descriptions from each item's own data; one canonical address per page (official https://fungalcharacters.org); search and filter pages ask not to be indexed; structured data (schema.org): WebSite and DefinedTermSet on the home page, DefinedTerm with permanent code on each character, Dataset with CC0 license and files on Downloads (for Google Dataset Search); link previews (Open Graph, share image); "More characters for this part" on character pages. Language tags (hreflang) when a language is published.
+- For Will (free, outside the site): Google Search Console and Bing Webmaster Tools (DNS record by the Website Administrator), Zenodo DOIs for releases, links from iNaturalist, Mushroom Observer and MycoMap.
+
 ## Domains
 - fungalcharacters.org is the main address; fungalcharacters.com forwards to it.
 - mrdbid.com forwards to fungalcharacters.org until mrdbid.com expires. Live since 2026-11-25 15:28 CT (302 for the first week; the Website Administrator switches it to 301 and raises HSTS on 2026-12-02). Start: now (Will, 2026-11-25); www and new.mrdbid.com too, all to the home page except /documents/… (same path here, for Brian Hunt's page); dna.mrdbid.com is not included. The Website Administrator makes the nginx change (request: Claude_AI/Website_Admin/FC_REQUEST_MRDBID_REDIRECT.md).

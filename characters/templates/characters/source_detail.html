@@ -1,5 +1,7 @@
 {% extends "characters/base.html" %}
 {% load i18n charperms %}
+{% block title %}{{ obj.title }} · Fungal Characters{% endblock %}
+{% block meta_description %}{% blocktranslate trimmed with title=obj.title count=characters|length %}“{{ title }}”, a published source cited by {{ count }} fungal characters.{% endblocktranslate %}{% if obj.author %} {{ obj.author }}.{% endif %}{% endblock %}
 {% block content %}
 <p><a href="{% url 'characters:source_list' %}">← {% translate "All sources" %}</a></p>
 <h1>{{ obj.title }}</h1>

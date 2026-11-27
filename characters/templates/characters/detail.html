@@ -1,6 +1,11 @@
 {% extends "characters/base.html" %}
 {% load i18n charperms %}
-{% block title %}{{ c.name }} · Fungal Characters{% endblock %}
+{% block title %}{{ page_title }} · Fungal Characters{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ page_title }}{% endblock %}
+{% block og_description %}{{ meta_description }}{% endblock %}
+{% block structured_data %}{{ structured_data }}{% endblock %}
 {% block content %}
 <p><a href="{% url 'characters:list' %}">← {% translate "All characters" %}</a></p>
 <h1{% if heading_lang %} lang="{{ heading_lang }}"{% endif %}>{{ heading }}</h1>
@@ -59,5 +64,11 @@
 </div>
 {% else %}
 <p class="muted">{% translate "None." %}</p>
+{% endif %}
+
+{% if related %}
+<h2>{% blocktranslate trimmed with part=c.part %}More characters for {{ part }}{% endblocktranslate %}</h2>
+<ul class="related">{% for r in related %}<li><a href="{{ r.get_absolute_url }}">{{ r.name }}</a></li>{% endfor %}</ul>
+{% if related_total > related|length %}<p><a href="{% url 'characters:list' %}?part={{ c.part_id }}">{% blocktranslate trimmed with n=related_total part=c.part %}All {{ n }} other characters for {{ part }}{% endblocktranslate %}</a></p>{% endif %}
 {% endif %}
 {% endblock %}

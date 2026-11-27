@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "django.contrib.sitemaps",
     "allauth",
     "allauth.account",
     "allauth.mfa",
@@ -93,6 +94,8 @@ LANGUAGES = [
 PUBLISHED_LANGUAGES = [c for c in os.environ.get("PUBLISHED_LANGUAGES", "en").split(",") if c]
 # Where volunteers translate the website's words (e.g. a Weblate project). Empty until it is set up.
 TRANSLATION_PLATFORM_URL = os.environ.get("TRANSLATION_PLATFORM_URL", "")
+# The one official address, used for canonical links, the sitemap and structured data.
+SITE_URL = "https://fungalcharacters.org"
 LOCALE_PATHS = [BASE_DIR / "locale"]
 TIME_ZONE = "UTC"
 USE_I18N = True

@@ -7,5 +7,6 @@ def data_release(request):
     return {
         "data_release": release,
         "scientific_names": request.COOKIES.get("names") == "scientific",
+        "canonical_url": __import__("characters.seo", fromlist=["absolute"]).absolute(request.path),
         "published_languages": [(c, n) for c, n in settings.LANGUAGES if c in settings.PUBLISHED_LANGUAGES],
     }

@@ -1,6 +1,9 @@
 {% extends "characters/base.html" %}
 {% load i18n %}
 {% block title %}{% translate "Downloads" %} · Fungal Characters{% endblock %}
+{% block meta_description %}{% translate "Download the complete Fungal Characters data set: Excel, CSV, JSON, SQL, SKOS and SDD. Free to use in any way (CC0)." %}{% endblock %}
+{% block og_title %}{% translate "Downloads" %} — Fungal Characters{% endblock %}
+{% block structured_data %}{{ structured_data|default:"" }}{% endblock %}
 {% block content %}
 <div class="prose">
 <h1>{% translate "Downloads" %}</h1>

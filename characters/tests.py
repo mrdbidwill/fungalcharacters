@@ -785,3 +785,42 @@ class AccessibilityPageTests(TestCase):
         self.client.post("/accessibility/", {"kind": "problem", "page": "https://evil.example/", "note": "x", "tech": "bogus"})
         rr = ReviewRequest.objects.get()
         self.assertEqual((rr.page, rr.item_label), ("/", "Accessibility problem"))
+
+
+class SearchEngineTests(TestCase):
+    def test_sitemap_and_robots(self):
+        r = self.client.get("/sitemap.xml")
+        body = r.content.decode()
+        self.assertIn("<loc>https://fungalcharacters.org/id/FCC00019</loc>", body)
+        self.assertIn("<loc>https://fungalcharacters.org/downloads/</loc>", body)
+        self.assertNotIn("/accounts/", body)
+        c = Character.objects.get(code="FCC00082")
+        ItemMeta.objects.create(item_type=CHARACTER_TYPE, item_id=c.pk, is_hidden=True)
+        self.assertNotIn("/id/FCC00082<", self.client.get("/sitemap.xml").content.decode())
+        self.assertIn("Sitemap: https://fungalcharacters.org/sitemap.xml", self.client.get("/robots.txt").content.decode())
+
+    def test_character_page_head(self):
+        import json, re
+        body = self.client.get("/id/FCC00019").content.decode()
+        self.assertIn("<title>Cap Width (Pileus Width) — FCC00019 · Fungal Characters</title>", body)
+        self.assertIn('<link rel="canonical" href="https://fungalcharacters.org/id/FCC00019">', body)
+        desc = re.search(r'<meta name="description" content="(.*?)">', body).group(1)
+        self.assertIn("pileus/pilei. Part: Cap.", desc)
+        self.assertLessEqual(len(desc), 200)
+        data = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', body, re.S).group(1))
+        self.assertEqual((data["@type"], data["termCode"], data["alternateName"]), ("DefinedTerm", "FCC00019", "Pileus Width"))
+        self.assertIn('property="og:image"', body)
+        self.assertIn("More characters for Cap", body)
+
+    def test_dataset_on_downloads_and_noindex_searches(self):
+        import json, re
+        body = self.client.get("/downloads/").content.decode()
+        data = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', body, re.S).group(1))
+        self.assertEqual((data["@type"], data["license"]), ("Dataset", "https://creativecommons.org/publicdomain/zero/1.0/"))
+        self.assertTrue(data["distribution"])
+        self.assertIn('content="noindex, follow"', self.client.get("/characters/?q=cap").content.decode())
+        self.assertNotIn('name="robots"', self.client.get("/characters/").content.decode())
+
+    def test_structured_data_cannot_break_out_of_script(self):
+        from .seo import jsonld
+        self.assertNotIn("</script><", str(jsonld({"x": "</script><script>alert(1)</script>"}))[:-9])

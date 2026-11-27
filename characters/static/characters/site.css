@@ -210,3 +210,7 @@ fieldset.plain { border: 0; padding: 0; margin: 0 0 1rem; }
 fieldset.plain legend { font-weight: 700; margin-bottom: .3rem; }
 fieldset.plain div { margin-bottom: .3rem; }
 fieldset.plain label { display: inline; font-weight: 400; }
+
+/* "More characters for this part" on character pages. */
+.related { columns: 2 16rem; padding-inline-start: 1.2rem; }
+.related li { break-inside: avoid; margin-bottom: .25rem; }
