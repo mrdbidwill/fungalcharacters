@@ -311,6 +311,7 @@ def character_list(request):
     by = creators(Character, ids)
     lang = data_language()
     translated = labels_for(CHARACTER_TYPE, ids, "name", lang) if lang != "en" else {}
+    DisplayOption.attach_names([c.display_option for c in page])
     for c in page:
         c.scientific = sci.get(c.pk, "")
         c.created_by_name = by.get(c.pk)
@@ -432,7 +433,9 @@ def value_create(request, code):
 # ---------- value types ----------
 
 def value_type_list(request):
-    items = list(visible(DisplayOption, request.user).annotate(n=Count("characters")).order_by("name"))
+    items = list(visible(DisplayOption, request.user).annotate(n=Count("characters")))
+    DisplayOption.attach_names(items)
+    items.sort(key=lambda o: str(o).lower())
     by = creators(DisplayOption, [o.pk for o in items])
     for o in items:
         o.created_by_name = by.get(o.pk)
@@ -575,9 +578,9 @@ def _label_rows(item_type, item_id):
 def _history_page(request, model, pk, current):
     records = list(model.history.filter(id=pk).select_related("history_user").order_by("history_date", "history_id"))
     rows = _rows_for(model, records)
-    if model in (Character, ValueOption):
-        # Name, scientific name and definition changes are stored as labels.
-        label_rows = _label_rows(CHARACTER_TYPE if model is Character else VALUE_TYPE, pk)
+    if model in (Character, ValueOption, DisplayOption):
+        # Names (and scientific names, definitions) are stored as labels.
+        label_rows = _label_rows({Character: CHARACTER_TYPE, ValueOption: VALUE_TYPE, DisplayOption: "DisplayOption"}[model], pk)
         # A label written in the same save as the item itself is shown as part of that change.
         rows += label_rows
     if model is Character:

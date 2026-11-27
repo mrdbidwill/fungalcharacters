@@ -1,11 +1,11 @@
 {% extends "characters/base.html" %}
 {% load i18n charperms %}
-{% block title %}{% blocktranslate trimmed with name=obj.name %}Value type: {{ name }}{% endblocktranslate %} · Fungal Characters{% endblock %}
-{% block meta_description %}{% blocktranslate trimmed with name=obj.name count=characters|length %}Value type “{{ name }}”: how the value of {{ count }} fungal characters is given. {% endblocktranslate %}{{ obj.description|default:"" }}{% endblock %}
+{% block title %}{% blocktranslate trimmed with name=obj %}Value type: {{ name }}{% endblocktranslate %} · Fungal Characters{% endblock %}
+{% block meta_description %}{% blocktranslate trimmed with name=obj count=characters|length %}Value type “{{ name }}”: how the value of {{ count }} fungal characters is given. {% endblocktranslate %}{{ obj.description|default:"" }}{% endblock %}
 {% block content %}
 <p><a href="{% url 'characters:value_type_list' %}">← {% translate "All value types" %}</a></p>
-<h1>{% blocktranslate trimmed with name=obj.name %}Value type: {{ name }}{% endblocktranslate %}</h1>
-<p class="muted">ID {{ obj.id }} · {% if created_by_name %}{% blocktranslate trimmed %}added by {{ created_by_name }}{% endblocktranslate %}{% else %}{% blocktranslate trimmed with version=data_release.version %}from release {{ version }}{% endblocktranslate %}{% endif %}{% if hidden %} · <strong>{% translate "HIDDEN" %}</strong>{% endif %}</p>
+<h1>{% blocktranslate trimmed with name=obj %}Value type: {{ name }}{% endblocktranslate %}</h1>
+<p class="muted">{% translate "Key (for programs; never changes):" %} <code>{{ obj.name }}</code> · ID {{ obj.id }} · {% if created_by_name %}{% blocktranslate trimmed %}added by {{ created_by_name }}{% endblocktranslate %}{% else %}{% blocktranslate trimmed with version=data_release.version %}from release {{ version }}{% endblocktranslate %}{% endif %}{% if hidden %} · <strong>{% translate "HIDDEN" %}</strong>{% endif %}</p>
 <p class="actions">
   {% if obj|editable_by:user %}<a href="{% url 'characters:value_type_edit' obj.pk %}">{% translate "Edit" %}</a> <a href="{% url 'characters:value_type_delete' obj.pk %}">{% translate "Delete" %}</a>{% endif %}
   {% include "characters/_admin_hide.html" with kind="value-type" obj_pk=obj.pk %}

@@ -27,7 +27,7 @@
 <h3>{% blocktranslate trimmed with count=my_values|length %}Value options ({{ count }}){% endblocktranslate %}</h3>
 {% if my_values %}<ul>{% for v in my_values %}<li><a href="{{ v.character.get_absolute_url }}#{{ v.code }}">{{ v.name }}</a> — {{ v.character.name }} <code>{{ v.code }}</code></li>{% endfor %}</ul>{% else %}<p class="muted">{% translate "None yet." %}</p>{% endif %}
 <h3>{% blocktranslate trimmed with count=my_value_types|length %}Value types ({{ count }}){% endblocktranslate %}</h3>
-{% if my_value_types %}<ul>{% for o in my_value_types %}<li><a href="{% url 'characters:value_type_detail' o.pk %}">{{ o.name }}</a></li>{% endfor %}</ul>{% else %}<p class="muted">{% translate "None yet." %}</p>{% endif %}
+{% if my_value_types %}<ul>{% for o in my_value_types %}<li><a href="{% url 'characters:value_type_detail' o.pk %}">{{ o }}</a></li>{% endfor %}</ul>{% else %}<p class="muted">{% translate "None yet." %}</p>{% endif %}
 <h3>{% blocktranslate trimmed with count=my_sources|length %}Sources ({{ count }}){% endblocktranslate %}</h3>
 {% if my_sources %}<ul>{% for o in my_sources %}<li><a href="{% url 'characters:source_detail' o.pk %}">{{ o.title }}</a></li>{% endfor %}</ul>{% else %}<p class="muted">{% translate "None yet." %}</p>{% endif %}
 <h3>{% blocktranslate trimmed with count=my_translations %}Translations ({{ count }}){% endblocktranslate %}</h3>

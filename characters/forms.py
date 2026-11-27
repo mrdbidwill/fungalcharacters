@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db import transaction
 
 from .models import (
-    CHARACTER_TYPE, VALUE_TYPE, Character, CharacterFungusType, CodeCounter, DisplayOption,
+    DISPLAY_OPTION_TYPE, CHARACTER_TYPE, VALUE_TYPE, Character, CharacterFungusType, CodeCounter, DisplayOption,
     FungusType, ItemMeta, Label, Source, ValueOption,
 )
 from .normalize import normalize_name
@@ -24,6 +24,16 @@ def item_type_of(obj):
         Character: CHARACTER_TYPE, ValueOption: VALUE_TYPE,
         Source: "SourceData", DisplayOption: "DisplayOption",
     }[type(obj)]
+
+
+def make_value_type_key(text):
+    """A permanent key in the existing style: lower case words joined by underscores; unique."""
+    import re
+    base = re.sub(r"[^a-z0-9]+", "_", (text or "").lower().replace("µ", "u")).strip("_") or "value_type"
+    key, n = base, 2
+    while DisplayOption.objects.filter(name=key).exists():
+        key, n = f"{base}_{n}", n + 1
+    return key
 
 
 def ensure_history_baseline(obj):
@@ -228,10 +238,30 @@ class ValueOptionForm(TrackedForm):
 
 
 class DisplayOptionForm(TrackedForm):
+    """People type a display name; a new value type gets a permanent key made from it (never changed later)."""
+    dup_field = "label_text"
+    label_text = forms.CharField(label=_("Value type"), max_length=255,
+                                 help_text=_("The name people see, for example “Number (mm)”."))
+
     class Meta:
         model = DisplayOption
-        fields = ["name", "description", "comments"]
-        labels = {"name": _("Value type"), "description": _("Description"), "comments": _("Comments")}
+        fields = ["description", "comments"]
+        labels = {"description": _("Description"), "comments": _("Comments")}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.order_fields(["label_text", "description", "comments", "reason", "confirm_similar"])
+        if self.instance.pk:
+            self.initial.setdefault("label_text", self.instance.display_name("en"))
+            self.fields["label_text"].help_text = _("The name people see. Its permanent key, used by programs, stays “%(key)s”.") % {"key": self.instance.name}
+
+    def before_save(self, obj, is_new):
+        if is_new:
+            obj.name = make_value_type_key(self.cleaned_data["label_text"])
+
+    def after_save(self, obj):
+        set_label(DISPLAY_OPTION_TYPE, obj.pk, "name", self.cleaned_data["label_text"], self.change_reason())
+        obj._display_names = None
 
 
 class SourceForm(TrackedForm):

@@ -88,10 +88,49 @@ class ObservationMethod(NamedReleaseTable):
         db_table = "observation_methods"
 
 
+def humanize_key(key):
+    return (key or "").replace("_", " ").replace("-", " ").strip().capitalize()
+
+
 class DisplayOption(NamedReleaseTable):
-    """Value type: the kind of value a character takes (radio list, number in mm, ...)."""
+    """Value type: the kind of value a character takes (radio list, number in mm, ...).
+
+    `name` is the permanent KEY (e.g. text_box_number_mm): code and data users match on it, so it never changes
+    once made. People see the display name, kept in the labels table (labelable_type "DisplayOption",
+    label_type "name", by language) like other names; without one, the key is shown tidied up.
+    (docs/DECISIONS.md, "Value type keys and display names", 2026-11-27.)
+    """
 
     history = HistoricalRecords(table_name="characters_history_display_options")
+
+    def display_name(self, language=None):
+        cache = getattr(self, "_display_names", None)
+        if cache is None:
+            cache = dict(Label.objects.filter(labelable_type=DISPLAY_OPTION_TYPE, labelable_id=self.pk, label_type="name")
+                         .values_list("language", "text")) if self.pk else {}
+            self._display_names = cache
+        from django.utils.translation import get_language
+        lang = (language or get_language() or "en").lower()
+        return cache.get(lang) or cache.get("en") or humanize_key(self.name)
+
+    @property
+    def label_text(self):
+        return self.display_name("en")
+
+    def __str__(self):
+        return self.display_name()
+
+    @classmethod
+    def attach_names(cls, objects):
+        """Load display names for many value types in one query (lists)."""
+        objects = [o for o in objects if o is not None]
+        found = {}
+        for item_id, lang, text in Label.objects.filter(labelable_type=DISPLAY_OPTION_TYPE, label_type="name",
+                                                        labelable_id__in={o.pk for o in objects}).values_list(
+                "labelable_id", "language", "text"):
+            found.setdefault(item_id, {})[lang] = text
+        for o in objects:
+            o._display_names = found.get(o.pk, {})
 
     class Meta(NamedReleaseTable.Meta):
         db_table = "display_options"

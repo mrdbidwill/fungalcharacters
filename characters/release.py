@@ -154,6 +154,8 @@ def build_views(data):
         vals.setdefault(v["mr_character_id"], []).append(v)
     for t in data["character_fungus_types"]:
         tags.setdefault(t["mr_character_id"], []).append(fts[t["fungus_type_id"]]["name"])
+    vt_labels = {l["labelable_id"]: l["text"] for l in data["labels"]
+                 if l["labelable_type"] == "DisplayOption" and l["label_type"] == "name" and l["language"] == "en"}
     flat = []
     for c in data["mr_characters"]:
         p = c["properties"] or {}
@@ -162,6 +164,7 @@ def build_views(data):
             "definition": c["description"], "part": (parts.get(c["part_id"]) or {}).get("name"),
             "observation_method": (meths.get(c["observation_method_id"]) or {}).get("name"),
             "value_type": (disps.get(c["display_option_id"]) or {}).get("name"), "unit": p.get("unit"),
+            "value_type_label": vt_labels.get(c["display_option_id"]),
             "value_options": " | ".join(v["name"] or "" for v in vals.get(c["id"], [])),
             "applies_to_fungus_types": ", ".join(tags.get(c["id"], [])) or "All",
             "starter_set": "Yes" if p.get("common") else "", "xde_lines": ", ".join(map(str, p.get("xde_lines", []))),
@@ -175,7 +178,7 @@ def build_views(data):
     for l in data["labels"]:
         labels.setdefault((l["labelable_type"], l["labelable_id"]), []).append(
             {"language": l["language"], "type": l["label_type"], "text": l["text"]})
-    return {"vals": vals, "tags": tags, "flat": flat, "flat_vals": flat_vals, "labels": labels}
+    return {"vals": vals, "tags": tags, "flat": flat, "flat_vals": flat_vals, "labels": labels, "vt_labels": vt_labels}
 
 
 def jsonable(v):
@@ -203,12 +206,15 @@ def write_json(data, v, version, released, path):
            "parts": [{"id": r["id"], "name": r["name"], "description": r["description"]} for r in data["parts"]],
            "observation_methods": [{"id": r["id"], "name": r["name"], "description": r["description"]} for r in data["observation_methods"]],
            "fungus_types": [{"id": r["id"], "name": r["name"], "description": r["description"]} for r in data["fungus_types"]],
+           "value_types": [{"id": r["id"], "key": r["name"], "name": v["vt_labels"].get(r["id"]), "description": r["description"],
+                            "labels": v["labels"].get(("DisplayOption", r["id"]), [])} for r in data["display_options"]],
            "characters": []}
     for c, f in zip(data["mr_characters"], v["flat"]):
         p = c["properties"] or {}
         doc["characters"].append({
             "code": c["code"], "name": c["name"], "scientific_name": f["scientific_name"], "definition": c["description"],
-            "part": f["part"], "observation_method": f["observation_method"], "value_type": f["value_type"], "unit": f["unit"],
+            "part": f["part"], "observation_method": f["observation_method"], "value_type": f["value_type"],
+            "value_type_label": f["value_type_label"], "unit": f["unit"],
             "applies_to_fungus_types": v["tags"].get(c["id"], []), "starter_set": bool(p.get("common")),
             "xde_lines": p.get("xde_lines", []), "source": f["source"], "comments": c["comments"],
             "labels": v["labels"].get(("MrCharacter", c["id"]), []),
@@ -242,7 +248,7 @@ def write_skos(data, v, version, path):
             g.add((u, prop, Literal(l["text"], lang=l["language"])))
         if f["unit"]:
             g.add((u, SKOS.scopeNote, Literal(f"Unit: {f['unit']}", lang="en")))
-        g.add((u, SKOS.scopeNote, Literal(f"Part: {f['part']}. Method: {f['observation_method']}. Value type: {f['value_type']}.", lang="en")))
+        g.add((u, SKOS.scopeNote, Literal(f"Part: {f['part']}. Method: {f['observation_method']}. Value type: {f['value_type_label'] or f['value_type']}.", lang="en")))
         if c["part_id"]:
             g.add((FC[f"part-{c['part_id']}"], SKOS.member, u))
         if v["vals"].get(c["id"]):
@@ -281,7 +287,7 @@ def write_sdd(data, v, version, released, path):
     rep(ds, f"Fungal Characters v{version}", f"Character definitions for describing fungi. Codes are permanent identifiers "
         f"({BASE}<code>). License: {LICENSE} ({LICENSE_URL}), free to use in any way. {cite(version)}")
     chars_el = E("Characters", ds)
-    CATEG = {"radio", "drop-down", "checkbox", "abundance", "taste", "odor", "texture"}
+    CATEG = {"radio", "drop_down", "drop-down", "checkbox", "abundance", "taste", "odor", "texture"}   # keys; drop-down until 1.0.0
     QUANT = {"text_box_number_mm", "text_box_number_um", "text_box_number", "text_box_range_um"}
     BOOL = {"boolean_yes_no": ["Yes", "No"], "boolean_true_false": ["True", "False"], "boolean_present_absent": ["Present", "Absent"]}
     for c, f in zip(data["mr_characters"], v["flat"]):
@@ -397,7 +403,7 @@ volunteers on fungalcharacters.org are included in the labels table, by language
 """, encoding="utf-8")
 
 
-def write_changelog(version, released, notes, diff, prev_changelog, path, renamed_downloads=False):
+def write_changelog(version, released, notes, diff, prev_changelog, path, renamed_downloads=False, vt_notes=None):
     lines = [f"# Changelog", "", f"## {version} — {released}"]
     if notes:
         lines.append(notes)
@@ -415,10 +421,31 @@ def write_changelog(version, released, notes, diff, prev_changelog, path, rename
             lines.append("- Translated character names: " + ", ".join(f"{k} {n}" for k, n in sorted(diff["translated_names"].items())) + ".")
     lines.append("- Downloads now say \"value options\" and \"value type\": columns value_options, value_option_code, value_option, "
                  "value_type; Excel sheet \"Value options\"; file csv/value_options_flat.csv (was values_flat.csv).") if renamed_downloads else None
+    for note in (vt_notes or []):
+        lines.append(note)
     previous = ""
     if prev_changelog and prev_changelog.exists():
         previous = prev_changelog.read_text(encoding="utf-8").split("\n", 1)[1].lstrip("\n")
     path.write_text("\n".join(l for l in lines if l is not None) + "\n\n" + previous, encoding="utf-8")
+
+
+def value_type_notes(prev_dir, data):
+    """Changelog lines about value types: renamed keys, and display names added (compared with the previous release)."""
+    notes = []
+    old = {}
+    path = prev_dir / "csv" / "display_options.csv"
+    if path.exists():
+        with open(path, encoding="utf-8-sig") as f:
+            old = {int(r["id"]): r["name"] for r in csv.DictReader(f)}
+    renamed = [f"{old[r['id']]} → {r['name']}" for r in data["display_options"] if r["id"] in old and old[r["id"]] != r["name"]]
+    if renamed:
+        notes.append("- Value type keys renamed: " + ", ".join(renamed) + ".")
+    prev_labels = prev_dir / "csv" / "labels.csv"
+    had_names = prev_labels.exists() and "DisplayOption" in prev_labels.read_text(encoding="utf-8-sig")
+    if not had_names and any(l["labelable_type"] == "DisplayOption" for l in data["labels"]):
+        notes.append("- Value types now have display names (labels table, type DisplayOption; new column value_type_label "
+                     "next to value_type). The keys in value_type stay permanent.")
+    return notes
 
 
 # ---------- the whole release ----------
@@ -461,6 +488,7 @@ def build_release(version, released, notes="", out_root=None, previous=None):
     diff = compare(prev_dir / f"fungal_characters_v{previous}.json", doc)
     write_readme(version, released, doc, len(v["flat_vals"]), out / "README.md")
     write_changelog(version, released, notes, diff, prev_dir / "CHANGELOG.md", out / "CHANGELOG.md",
-                    renamed_downloads=(prev_dir / "csv" / "values_flat.csv").exists())
+                    renamed_downloads=(prev_dir / "csv" / "values_flat.csv").exists(),
+                    vt_notes=value_type_notes(prev_dir, data))
     return {"out": str(out), "previous": previous, "characters": len(data["mr_characters"]),
             "value_options": len(data["lookup_items"]), "labels": len(data["labels"]), "left_out_hidden": left_out, "diff": diff}

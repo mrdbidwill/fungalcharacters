@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-27 11:48+0000\n"
+"POT-Creation-Date: 2026-11-27 13:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,144 +31,154 @@ msgid ""
 "it. <a href=\"/privacy/\">Contributions and privacy</a>."
 msgstr ""
 
-#: characters/forms.py:68
+#: characters/forms.py:78
 msgid "Reason for this change"
 msgstr ""
 
-#: characters/forms.py:70
+#: characters/forms.py:80
 msgid "Optional. Shown in the public edit history."
 msgstr ""
 
-#: characters/forms.py:80
+#: characters/forms.py:90
 msgid "Save anyway: this is not the same as the similar names listed above"
 msgstr ""
 
-#: characters/forms.py:99
+#: characters/forms.py:109
 msgid "Must contain at least one letter or number."
 msgstr ""
 
-#: characters/forms.py:117
+#: characters/forms.py:127
 #, python-format
 msgid "Already exists, ignoring case, spacing and punctuation: %(listed)s."
 msgstr ""
 
-#: characters/forms.py:119
+#: characters/forms.py:129
 msgid ""
 "Similar names already exist (listed below). Check they are not the same, "
 "then tick “Save anyway”."
 msgstr ""
 
-#: characters/forms.py:146 characters/templates/characters/detail.html:28
+#: characters/forms.py:156 characters/templates/characters/detail.html:28
 #: characters/templates/characters/list.html:31 characters/views.py:31
 msgid "Scientific name"
 msgstr ""
 
-#: characters/forms.py:147
+#: characters/forms.py:157
 msgid "e.g. Pileus Width for Cap Width."
 msgstr ""
 
-#: characters/forms.py:148 characters/templates/characters/detail.html:31
+#: characters/forms.py:158 characters/templates/characters/detail.html:31
 msgid "Unit"
 msgstr ""
 
-#: characters/forms.py:148
+#: characters/forms.py:158
 msgid "e.g. mm, µm. Leave blank if none."
 msgstr ""
 
-#: characters/forms.py:152 characters/templates/characters/detail.html:35
-#: characters/views.py:587
+#: characters/forms.py:162 characters/templates/characters/detail.html:35
+#: characters/views.py:590
 msgid "Applies to"
 msgstr ""
 
-#: characters/forms.py:152
+#: characters/forms.py:162
 msgid "Leave all unticked if the character applies to all fungi."
 msgstr ""
 
-#: characters/forms.py:161
+#: characters/forms.py:171
 #: characters/templates/characters/_translate_field.html:2
 #: characters/templates/characters/detail.html:26
 #: characters/templates/characters/list.html:31 characters/views.py:31
 msgid "Name"
 msgstr ""
 
-#: characters/forms.py:161 characters/forms.py:216
+#: characters/forms.py:171 characters/forms.py:226
 #: characters/templates/characters/_translate_field.html:2
 #: characters/templates/characters/detail.html:29
 #: characters/templates/characters/detail.html:47 characters/views.py:31
 msgid "Definition"
 msgstr ""
 
-#: characters/forms.py:161 characters/templates/characters/detail.html:32
+#: characters/forms.py:171 characters/templates/characters/detail.html:32
 #: characters/templates/characters/list.html:15
 #: characters/templates/characters/list.html:31
 msgid "Part"
 msgstr ""
 
-#: characters/forms.py:162 characters/templates/characters/detail.html:33
+#: characters/forms.py:172 characters/templates/characters/detail.html:33
 msgid "Observation method"
 msgstr ""
 
-#: characters/forms.py:162 characters/forms.py:234
+#: characters/forms.py:172 characters/forms.py:243
 #: characters/templates/characters/detail.html:34
 #: characters/templates/characters/list.html:31
 #: characters/templates/characters/value_type_list.html:9
 msgid "Value type"
 msgstr ""
 
-#: characters/forms.py:163 characters/forms.py:216
+#: characters/forms.py:173 characters/forms.py:226
 #: characters/templates/characters/detail.html:36
 #: characters/templates/characters/detail.html:47
 msgid "Source"
 msgstr ""
 
-#: characters/forms.py:163 characters/forms.py:216 characters/forms.py:234
-#: characters/forms.py:244 characters/templates/characters/detail.html:37
+#: characters/forms.py:173 characters/forms.py:226 characters/forms.py:249
+#: characters/forms.py:274 characters/templates/characters/detail.html:37
 #: characters/templates/characters/detail.html:47
 #: characters/templates/characters/source_detail.html:21
 #: characters/templates/characters/value_type_detail.html:15
 msgid "Comments"
 msgstr ""
 
-#: characters/forms.py:165
+#: characters/forms.py:175
 msgid ""
 "The kind of value: a number in mm, text, color, a list of value options, …"
 msgstr ""
 
-#: characters/forms.py:166
+#: characters/forms.py:176
 msgid "Notes kept with the character."
 msgstr ""
 
-#: characters/forms.py:216 characters/templates/characters/detail.html:47
+#: characters/forms.py:226 characters/templates/characters/detail.html:47
 msgid "Value option"
 msgstr ""
 
-#: characters/forms.py:234
+#: characters/forms.py:244
+msgid "The name people see, for example “Number (mm)”."
+msgstr ""
+
+#: characters/forms.py:249
 #: characters/templates/characters/value_type_detail.html:15
 #: characters/templates/characters/value_type_list.html:9
 msgid "Description"
 msgstr ""
 
-#: characters/forms.py:243 characters/templates/characters/source_list.html:10
+#: characters/forms.py:256
+#, python-format
+msgid ""
+"The name people see. Its permanent key, used by programs, stays “%(key)s”."
+msgstr ""
+
+#: characters/forms.py:273 characters/templates/characters/source_list.html:10
 msgid "Title"
 msgstr ""
 
-#: characters/forms.py:243
+#: characters/forms.py:273
 #: characters/templates/characters/source_detail.html:17
 #: characters/templates/characters/source_list.html:10
 msgid "Author"
 msgstr ""
 
-#: characters/forms.py:243
+#: characters/forms.py:273
 #: characters/templates/characters/source_detail.html:18
 msgid "Reference / URL"
 msgstr ""
 
-#: characters/forms.py:243
+#: characters/forms.py:273
 #: characters/templates/characters/source_detail.html:19
 msgid "Item code"
 msgstr ""
 
-#: characters/forms.py:244
+#: characters/forms.py:274
 #: characters/templates/characters/source_detail.html:20
 #: characters/templates/characters/source_list.html:10
 msgid "Type"
@@ -197,7 +207,7 @@ msgid ""
 "their source states them."
 msgstr ""
 
-#: characters/models.py:69 characters/models.py:137
+#: characters/models.py:69 characters/models.py:176
 msgid "name"
 msgstr ""
 
@@ -205,59 +215,59 @@ msgstr ""
 msgid "description"
 msgstr ""
 
-#: characters/models.py:71 characters/models.py:122 characters/models.py:139
+#: characters/models.py:71 characters/models.py:161 characters/models.py:178
 msgid "comments"
 msgstr ""
 
-#: characters/models.py:98 characters/models.py:148 characters/views.py:34
+#: characters/models.py:137 characters/models.py:187 characters/views.py:34
 msgid "value type"
 msgstr ""
 
-#: characters/models.py:114
+#: characters/models.py:153
 msgid "title"
 msgstr ""
 
-#: characters/models.py:115
+#: characters/models.py:154
 msgid "author"
 msgstr ""
 
-#: characters/models.py:116
+#: characters/models.py:155
 msgid "reference / URL"
 msgstr ""
 
-#: characters/models.py:117
+#: characters/models.py:156
 msgid "item code"
 msgstr ""
 
-#: characters/models.py:120
+#: characters/models.py:159
 msgid "type"
 msgstr ""
 
-#: characters/models.py:129 characters/models.py:152 characters/views.py:34
+#: characters/models.py:168 characters/models.py:191 characters/views.py:34
 msgid "source"
 msgstr ""
 
-#: characters/models.py:136
+#: characters/models.py:175
 msgid "code"
 msgstr ""
 
-#: characters/models.py:138
+#: characters/models.py:177
 msgid "definition"
 msgstr ""
 
-#: characters/models.py:141
+#: characters/models.py:180
 msgid "part"
 msgstr ""
 
-#: characters/models.py:144
+#: characters/models.py:183
 msgid "observation method"
 msgstr ""
 
-#: characters/models.py:165 characters/views.py:33
+#: characters/models.py:204 characters/views.py:33
 msgid "character"
 msgstr ""
 
-#: characters/models.py:199 characters/views.py:33
+#: characters/models.py:238 characters/views.py:33
 msgid "value option"
 msgstr ""
 
@@ -677,7 +687,7 @@ msgstr ""
 
 #: characters/templates/characters/account.html:26
 #: characters/templates/characters/home.html:25
-#: characters/templates/characters/list.html:11 characters/views.py:402
+#: characters/templates/characters/list.html:11 characters/views.py:403
 msgid "Add a character"
 msgstr ""
 
@@ -1069,7 +1079,7 @@ msgstr ""
 msgid "All fungi"
 msgstr ""
 
-#: characters/templates/characters/detail.html:38 characters/views.py:593
+#: characters/templates/characters/detail.html:38 characters/views.py:596
 msgid "Core order"
 msgstr ""
 
@@ -1732,7 +1742,7 @@ msgstr ""
 msgid "Published sources anyone can cite or add to."
 msgstr ""
 
-#: characters/templates/characters/source_list.html:7 characters/views.py:491
+#: characters/templates/characters/source_list.html:7 characters/views.py:494
 msgid "Add a source"
 msgstr ""
 
@@ -1855,6 +1865,10 @@ msgstr ""
 msgid "All value types"
 msgstr ""
 
+#: characters/templates/characters/value_type_detail.html:8
+msgid "Key (for programs; never changes):"
+msgstr ""
+
 #: characters/templates/characters/value_type_detail.html:16
 #, python-format
 msgid "Characters with this value type (%(count)s)"
@@ -1867,7 +1881,7 @@ msgid ""
 msgstr ""
 
 #: characters/templates/characters/value_type_list.html:7
-#: characters/views.py:453
+#: characters/views.py:456
 msgid "Add a value type"
 msgstr ""
 
@@ -1969,109 +1983,109 @@ msgstr ""
 msgid "What changed in each release."
 msgstr ""
 
-#: characters/views.py:371
-msgid "A character used to describe fungi."
-msgstr ""
-
 #: characters/views.py:372
-#, python-format
-msgid "Part: %(part)s."
+msgid "A character used to describe fungi."
 msgstr ""
 
 #: characters/views.py:373
 #, python-format
+msgid "Part: %(part)s."
+msgstr ""
+
+#: characters/views.py:374
+#, python-format
 msgid "Value type: %(type)s."
 msgstr ""
 
-#: characters/views.py:429
+#: characters/views.py:430
 #, python-format
 msgid "Add a value option to “%(name)s”"
 msgstr ""
 
-#: characters/views.py:517
+#: characters/views.py:520
 #, python-format
 msgid "Hidden: %(name)s."
 msgstr ""
 
-#: characters/views.py:517
+#: characters/views.py:520
 #, python-format
 msgid "Shown again: %(name)s."
 msgstr ""
 
-#: characters/views.py:586 characters/views.py:592
+#: characters/views.py:589 characters/views.py:595
 msgid "added"
 msgstr ""
 
-#: characters/views.py:586 characters/views.py:592
+#: characters/views.py:589 characters/views.py:595
 msgid "removed"
 msgstr ""
 
-#: characters/views.py:586 characters/views.py:592
+#: characters/views.py:589 characters/views.py:595
 msgid "changed"
 msgstr ""
 
-#: characters/views.py:763
+#: characters/views.py:766
 #, python-format
 msgid "Saved %(n)d translation(s)."
 msgstr ""
 
-#: characters/views.py:763
+#: characters/views.py:766
 msgid "Nothing changed."
 msgstr ""
 
-#: characters/views.py:783
+#: characters/views.py:786
 msgid "Every character has a name in this language. Thank you!"
 msgstr ""
 
-#: characters/views.py:834
+#: characters/views.py:837
 msgid "The admin account cannot be deleted here."
 msgstr ""
 
-#: characters/views.py:841
+#: characters/views.py:844
 msgid ""
 "Your account has been deleted. Your contributions stay on the site, credited "
 "to a former contributor."
 msgstr ""
 
-#: characters/views.py:884
+#: characters/views.py:887
 msgid "Thank you. Your report has been added to the list for review."
 msgstr ""
 
-#: characters/views.py:927
+#: characters/views.py:930
 msgid "Not saying"
 msgstr ""
 
-#: characters/views.py:928
+#: characters/views.py:931
 msgid "Screen reader"
 msgstr ""
 
-#: characters/views.py:929
+#: characters/views.py:932
 msgid "Zoom or magnifier"
 msgstr ""
 
-#: characters/views.py:930
+#: characters/views.py:933
 msgid "Keyboard only"
 msgstr ""
 
-#: characters/views.py:931
+#: characters/views.py:934
 msgid "Voice control"
 msgstr ""
 
-#: characters/views.py:932
+#: characters/views.py:935
 msgid "High contrast or my own colours"
 msgstr ""
 
-#: characters/views.py:933
+#: characters/views.py:936
 msgid "Something else"
 msgstr ""
 
-#: characters/views.py:956
+#: characters/views.py:959
 msgid ""
 "Thank you. Your message has been added to the list the site's administrator "
 "works through."
 msgstr ""
 
-#: characters/views.py:958
+#: characters/views.py:961
 msgid "Please write a few words about the problem or what you need."
 msgstr ""
 

@@ -824,3 +824,52 @@ class SearchEngineTests(TestCase):
     def test_structured_data_cannot_break_out_of_script(self):
         from .seo import jsonld
         self.assertNotIn("</script><", str(jsonld({"x": "</script><script>alert(1)</script>"}))[:-9])
+
+
+class ValueTypeNameTests(TestCase):
+    def setUp(self):
+        from django.core.management import call_command
+        self.admin = make_admin()
+        call_command("name_value_types", "--as", "will", stdout=__import__("io").StringIO())
+
+    def test_display_names_shown_keys_kept(self):
+        vt = DisplayOption.objects.get(name="text_box_number_mm")
+        self.assertEqual(str(vt), "Number (mm)")
+        self.assertTrue(DisplayOption.objects.filter(name="drop_down").exists())
+        self.assertFalse(DisplayOption.objects.filter(name="drop-down").exists())
+        body = self.client.get("/id/FCC00019").content.decode()
+        self.assertIn(">Number (mm)</a>", body)
+        self.assertIn("Value type: Number (mm).", body)
+        r = self.client.get(f"/value-types/{vt.pk}/")
+        self.assertContains(r, "<code>text_box_number_mm</code>", html=True)
+        self.assertEqual(self.client.get("/api/v1/characters/FCC00019").json()["value_type_label"], "Number (mm)")
+        h = Label.history.filter(labelable_type="DisplayOption", labelable_id=vt.pk).first()
+        self.assertEqual((h.history_user, h.history_change_reason), (self.admin, "Readable value type names (Will, 2026-11-27)"))
+
+    def test_new_value_type_gets_key_and_edits_keep_it(self):
+        u = contributor("kim")
+        self.client.force_login(u)
+        self.client.post(reverse("characters:value_type_create"), {"label_text": "Length range (mm)"})
+        vt = DisplayOption.objects.get(name="length_range_mm")
+        self.assertEqual(str(vt), "Length range (mm)")
+        r = self.client.post(reverse("characters:value_type_edit", args=[vt.pk]), {"label_text": "Range (mm)"})
+        self.assertContains(r, "Similar names already exist")          # close to "Range (µm)"
+        self.client.post(reverse("characters:value_type_edit", args=[vt.pk]), {"label_text": "Range (mm)", "confirm_similar": "on"})
+        vt = DisplayOption.objects.get(pk=vt.pk)
+        self.assertEqual((vt.name, str(vt)), ("length_range_mm", "Range (mm)"))
+        self.assertContains(self.client.post(reverse("characters:value_type_create"), {"label_text": "number (MM)"}), "Already exists")
+
+    def test_release_carries_key_and_display_name(self):
+        import json, tempfile
+        from pathlib import Path
+        from .release import build_release
+        out = Path(tempfile.mkdtemp())
+        build_release("9.9.7", "2026-11-27", "", out_root=out)
+        doc = json.loads((out / "9.9.7/fungal_characters_v9.9.7.json").read_text())
+        cap = next(c for c in doc["characters"] if c["code"] == "FCC00019")
+        self.assertEqual((cap["value_type"], cap["value_type_label"]), ("text_box_number_mm", "Number (mm)"))
+        self.assertIn({"id": DisplayOption.objects.get(name="radio").pk, "key": "radio"}.items() <= next(v for v in doc["value_types"] if v["key"] == "radio").items(), [True])
+        changelog = (out / "9.9.7/CHANGELOG.md").read_text()
+        self.assertIn("Value type keys renamed: drop-down → drop_down.", changelog)
+        self.assertIn("Value types now have display names", changelog)
+        self.assertIn("value_type_label", (out / "9.9.7/csv/characters_flat.csv").read_text(encoding="utf-8-sig").split("\n")[0])

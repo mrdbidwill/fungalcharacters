@@ -50,6 +50,7 @@ Plan:
 - Done: searching finds characters by any language's name.
 - Downloads and releases include every language (they already carry the `language` column).
 - Scientific (Latin) names are shared by all languages and are not translated.
+- Value type display names are labels too (type DisplayOption, 2026-11-27), so they can be translated the same way; the on-site translate page covers characters and value options so far. Value type names: later, with the first published language.
 
 ## Which languages first — decided (Will, 2026-11-25)
 

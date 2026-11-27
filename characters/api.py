@@ -85,7 +85,8 @@ def _character(c, labels, applies, values=None, value_labels=None):
          "scientific_name": p.get("name_scientific"), "definition": c.description or None, "unit": p.get("unit"),
          "part": str(c.part) if c.part_id else None,
          "observation_method": str(c.observation_method) if c.observation_method_id else None,
-         "value_type": str(c.display_option) if c.display_option_id else None,
+         "value_type": c.display_option.name if c.display_option_id else None,          # permanent key
+         "value_type_label": c.display_option.display_name("en") if c.display_option_id else None,
          "applies_to_fungus_types": applies.get(c.pk, []), "source": c.source.title if c.source_id and c.source else None,
          "labels": labels.get(c.pk, []), "updated_at": c.updated_at.isoformat()}
     if values is not None:

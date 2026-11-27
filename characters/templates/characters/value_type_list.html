@@ -7,6 +7,6 @@
 {% if user.is_authenticated %}<p><a href="{% url 'characters:value_type_create' %}">+ {% translate "Add a value type" %}</a></p>{% endif %}
 <table>
   <thead><tr><th>ID</th><th>{% translate "Value type" %}</th><th>{% translate "Description" %}</th><th>{% translate "Characters" %}</th><th>{% translate "By" %}</th></tr></thead>
-  <tbody>{% for o in items %}<tr><td>{{ o.id }}</td><td><a href="{% url 'characters:value_type_detail' o.pk %}">{{ o.name }}</a></td><td>{{ o.description }}</td><td>{{ o.n }}</td><td>{% if o.created_by_name %}{{ o.created_by_name }}{% else %}{% translate "release" %}{% endif %}</td></tr>{% endfor %}</tbody>
+  <tbody>{% for o in items %}<tr><td>{{ o.id }}</td><td><a href="{% url 'characters:value_type_detail' o.pk %}">{{ o }}</a><br><code class="small">{{ o.name }}</code></td><td>{{ o.description }}</td><td>{{ o.n }}</td><td>{% if o.created_by_name %}{{ o.created_by_name }}{% else %}{% translate "release" %}{% endif %}</td></tr>{% endfor %}</tbody>
 </table>
 {% endblock %}
